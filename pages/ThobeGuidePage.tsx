@@ -1,9 +1,9 @@
 
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { SEOMetadata } from '../components/SEOMetadata';
 import { StyledText } from '../components/StyledText';
+import { ContentBlock } from '../components/ContentBlock';
 
 const GuideTable: React.FC<{ caption: string; headersJSON: string; rowsJSON:string }> = ({ caption, headersJSON, rowsJSON }) => {
     try {
@@ -84,7 +84,7 @@ const useScrollSpy = (ids: string[], options?: IntersectionObserverInit): string
 
 const ArticleCard: React.FC<{id: string; children: React.ReactNode;}> = ({ id, children }) => {
     return (
-         <section id={id} className="scroll-mt-28 bg-white/50 backdrop-blur-xl p-8 md:p-12 rounded-lg shadow-lg">
+         <section id={id} className="scroll-mt-28 p-8 md:p-12 rounded-lg">
             <article className="prose prose-stone lg:prose-lg max-w-none 
                 text-deep-chocolate 
                 prose-headings:text-warm-terracotta prose-h1:text-muted-gold 
@@ -103,7 +103,6 @@ export const ThobeGuidePage: React.FC = () => {
     const { translate } = useLanguage();
     
     const sections = [
-        { id: 'introduction', titleKey: 'title' },
         { id: 'colors', titleKey: 'color_title' },
         { id: 'artistry', titleKey: 'artistry_title' },
         { id: 'trends', titleKey: 'trends_title' },
@@ -120,7 +119,7 @@ export const ThobeGuidePage: React.FC = () => {
         if (element) {
             element.scrollIntoView({
                 behavior: 'smooth',
-                block: 'start'
+                block: 'center'
             });
         }
     };
@@ -133,110 +132,111 @@ export const ThobeGuidePage: React.FC = () => {
                 keywordsKey="page_thobeGuide_keywords"
                 pagePath="/thobe-guide"
             />
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-                <div className="lg:grid lg:grid-cols-12 lg:gap-12">
-                    <aside className="hidden lg:block lg:col-span-3">
-                        <nav className="sticky top-28">
-                            <h3 className="text-sm font-semibold text-stone-500 uppercase tracking-wider mb-4">
-                                {translate('thobeGuide_pageTitle')}
-                            </h3>
-                            <ul className="space-y-1">
-                                {sections.map(section => (
-                                    <li key={section.id}>
-                                        <a
-                                            href={`#${section.id}`}
-                                            onClick={(e) => handleNavClick(e, section.id)}
-                                            className={`block rounded-md py-2 px-3 transition-all duration-200 ease-in-out text-sm font-medium
-                                                ${activeId === section.id 
-                                                    ? 'bg-creamy-beige text-warm-terracotta' 
-                                                    : 'text-stone-600 hover:bg-stone-100/80 hover:text-stone-800'
-                                                }`
-                                            }
-                                            aria-current={activeId === section.id ? 'page' : undefined}
-                                        >
-                                            {translate('thobeGuide_full', section.titleKey)}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </nav>
-                    </aside>
 
-                    <main className="lg:col-span-9 space-y-16">
-                        <ArticleCard id="introduction">
-                            <header className="not-prose text-center mb-12">
-                                <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-muted-gold section-title-underline">
-                                    {translate('thobeGuide_full', 'title')}
-                                </h1>
-                                <div className="mt-8 text-lg text-deep-chocolate leading-relaxed max-w-3xl mx-auto">
-                                    <StyledText text={translate('thobeGuide_full', 'intro')} />
-                                </div>
-                            </header>
-                        </ArticleCard>
-
-                        <ArticleCard id="colors">
-                            <h2>{translate('thobeGuide_full', 'color_title')}</h2>
-                            <StyledText text={translate('thobeGuide_full', 'color_intro')} />
-                            <h3>{translate('thobeGuide_full', 'color_palette_title')}</h3>
-                            <h4>{translate('thobeGuide_full', 'color_white_title')}</h4>
-                            <StyledText text={translate('thobeGuide_full', 'color_white_content')} />
-                            <h4>{translate('thobeGuide_full', 'color_black_title')}</h4>
-                            <StyledText text={translate('thobeGuide_full', 'color_black_content')} />
-                            <img src="https://i.postimg.cc/5N18qDML/article-sundus-casa.webp" alt="Thobes in classic white and black colors" className="my-8 rounded-lg shadow-xl w-full h-auto object-cover not-prose"/>
-                            <h3>{translate('thobeGuide_full', 'color_expressive_title')}</h3>
-                            <h4>{translate('thobeGuide_full', 'color_brown_title')}</h4>
-                            <StyledText text={translate('thobeGuide_full', 'color_brown_content')} />
-                            <h4>{translate('thobeGuide_full', 'color_grey_title')}</h4>
-                            <StyledText text={translate('thobeGuide_full', 'color_grey_content')} />
-                            <h4>{translate('thobeGuide_full', 'color_blue_title')}</h4>
-                            <StyledText text={translate('thobeGuide_full', 'color_blue_content')} />
-                            <h4>{translate('thobeGuide_full', 'color_green_title')}</h4>
-                            <StyledText text={translate('thobeGuide_full', 'color_green_content')} />
-                            <h4>{translate('thobeGuide_full', 'color_red_title')}</h4>
-                            <StyledText text={translate('thobeGuide_full', 'color_red_content')} />
-                            <GuideTable caption={translate('thobeGuide_full', 'color_table_caption')} headersJSON={translate('thobeGuide_full', 'color_table_headers')} rowsJSON={translate('thobeGuide_full', 'color_table_rows')} />
-                        </ArticleCard>
-
-                        <ArticleCard id="artistry">
-                            <h2>{translate('thobeGuide_full', 'artistry_title')}</h2>
-                            <StyledText text={translate('thobeGuide_full', 'artistry_intro')} />
-                            <h3>{translate('thobeGuide_full', 'artistry_minimalism_title')}</h3>
-                            <StyledText text={translate('thobeGuide_full', 'artistry_minimalism_content')} />
-                            <img src="https://i.postimg.cc/q7x2D1rD/article-regional-styles.webp" alt="Examples of minimalist and embroidered thobes" className="my-8 rounded-lg shadow-xl w-full h-auto object-cover not-prose"/>
-                            <h3>{translate('thobeGuide_full', 'artistry_embroidery_title')}</h3>
-                            <StyledText text={translate('thobeGuide_full', 'artistry_embroidery_content')} />
-                            <h4>{translate('thobeGuide_full', 'artistry_tatreez_title')}</h4>
-                            <StyledText text={translate('thobeGuide_full', 'artistry_tatreez_content')} />
-                            <GuideTable caption={translate('thobeGuide_full', 'artistry_table_caption')} headersJSON={translate('thobeGuide_full', 'artistry_table_headers')} rowsJSON={translate('thobeGuide_full', 'artistry_table_rows')} />
-                        </ArticleCard>
-
-                        <ArticleCard id="trends">
-                            <h2>{translate('thobeGuide_full', 'trends_title')}</h2>
-                            <StyledText text={translate('thobeGuide_full', 'trends_intro')} />
-                            <h3>{translate('thobeGuide_full', 'trends_slimfit_title')}</h3>
-                            <StyledText text={translate('thobeGuide_full', 'trends_slimfit_content')} />
-                            <h3>{translate('thobeGuide_full', 'trends_fabric_title')}</h3>
-                            <StyledText text={translate('thobeGuide_full', 'trends_fabric_content')} />
-                            <img src="https://i.postimg.cc/9Q2w0h1G/article-fabric-science.webp" alt="Innovative fabric textures" className="my-8 rounded-lg shadow-xl w-full h-auto object-cover not-prose"/>
-                            <h3>{translate('thobeGuide_full', 'trends_fusion_title')}</h3>
-                            <StyledText text={translate('thobeGuide_full', 'trends_fusion_content')} />
-                            <h3>{translate('thobeGuide_full', 'trends_custom_title')}</h3>
-                            <StyledText text={translate('thobeGuide_full', 'trends_custom_content')} />
-                            <GuideTable caption={translate('thobeGuide_full', 'trends_table_caption')} headersJSON={translate('thobeGuide_full', 'trends_table_headers')} rowsJSON={translate('thobeGuide_full', 'trends_table_rows')} />
-                        </ArticleCard>
-                        
-                        <ArticleCard id="conclusion">
-                            <h2>{translate('thobeGuide_full', 'conclusion_title')}</h2>
-                            <StyledText text={translate('thobeGuide_full', 'conclusion_content')} />
-                        </ArticleCard>
-                        
-                        <ArticleCard id="visuals">
-                            <h2>{translate('thobeGuide_full', 'visuals_title')}</h2>
-                            <StyledText text={translate('thobeGuide_full', 'visuals_content')} />
-                        </ArticleCard>
-                    </main>
+            <ContentBlock isHero>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-display font-bold text-stone-800 mb-8 md:mb-10 text-center section-title-underline">
+                    {translate('thobeGuide_full', 'title')}
+                </h1>
+                <div className="text-lg text-deep-chocolate leading-relaxed max-w-3xl mx-auto">
+                    <StyledText text={translate('thobeGuide_full', 'intro')} />
                 </div>
-            </div>
+            </ContentBlock>
+
+            <section className="relative w-full py-12 md:py-16">
+                <div className="max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="lg:grid lg:grid-cols-12 lg:gap-12">
+                        <aside className="hidden lg:block lg:col-span-3">
+                            <nav className="sticky top-28 bg-[rgba(255,255,255,0.70)] backdrop-blur-sm rounded-2xl shadow-lg p-6">
+                                <h3 className="text-sm font-semibold text-stone-500 uppercase tracking-wider mb-4">
+                                    {translate('thobeGuide_pageTitle')}
+                                </h3>
+                                <ul className="space-y-1">
+                                    {sections.map(section => (
+                                        <li key={section.id}>
+                                            <a
+                                                href={`#${section.id}`}
+                                                onClick={(e) => handleNavClick(e, section.id)}
+                                                className={`block rounded-md py-2 px-3 transition-all duration-200 ease-in-out text-sm font-medium
+                                                    ${activeId === section.id 
+                                                        ? 'bg-creamy-beige text-warm-terracotta' 
+                                                        : 'text-stone-600 hover:bg-stone-100/80 hover:text-stone-800'
+                                                    }`
+                                                }
+                                                aria-current={activeId === section.id ? 'page' : undefined}
+                                            >
+                                                {translate('thobeGuide_full', section.titleKey)}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </nav>
+                        </aside>
+
+                        <main className="lg:col-span-9 space-y-16 bg-[rgba(255,255,255,0.70)] backdrop-blur-sm rounded-2xl shadow-2xl p-4 md:p-0">
+                            <ArticleCard id="colors">
+                                <h2>{translate('thobeGuide_full', 'color_title')}</h2>
+                                <StyledText text={translate('thobeGuide_full', 'color_intro')} />
+                                <h3>{translate('thobeGuide_full', 'color_palette_title')}</h3>
+                                <h4>{translate('thobeGuide_full', 'color_white_title')}</h4>
+                                <StyledText text={translate('thobeGuide_full', 'color_white_content')} />
+                                <h4>{translate('thobeGuide_full', 'color_black_title')}</h4>
+                                <StyledText text={translate('thobeGuide_full', 'color_black_content')} />
+                                <img src="https://i.postimg.cc/5N18qDML/article-sundus-casa.webp" alt="Thobes in classic white and black colors" className="my-8 rounded-lg shadow-xl w-full h-auto object-cover not-prose"/>
+                                <h3>{translate('thobeGuide_full', 'color_expressive_title')}</h3>
+                                <h4>{translate('thobeGuide_full', 'color_brown_title')}</h4>
+                                <StyledText text={translate('thobeGuide_full', 'color_brown_content')} />
+                                <h4>{translate('thobeGuide_full', 'color_grey_title')}</h4>
+                                <StyledText text={translate('thobeGuide_full', 'color_grey_content')} />
+                                <h4>{translate('thobeGuide_full', 'color_blue_title')}</h4>
+                                <StyledText text={translate('thobeGuide_full', 'color_blue_content')} />
+                                <h4>{translate('thobeGuide_full', 'color_green_title')}</h4>
+                                <StyledText text={translate('thobeGuide_full', 'color_green_content')} />
+                                <h4>{translate('thobeGuide_full', 'color_red_title')}</h4>
+                                <StyledText text={translate('thobeGuide_full', 'color_red_content')} />
+                                <GuideTable caption={translate('thobeGuide_full', 'color_table_caption')} headersJSON={translate('thobeGuide_full', 'color_table_headers')} rowsJSON={translate('thobeGuide_full', 'color_table_rows')} />
+                            </ArticleCard>
+
+                            <ArticleCard id="artistry">
+                                <h2>{translate('thobeGuide_full', 'artistry_title')}</h2>
+                                <StyledText text={translate('thobeGuide_full', 'artistry_intro')} />
+                                <h3>{translate('thobeGuide_full', 'artistry_minimalism_title')}</h3>
+                                <StyledText text={translate('thobeGuide_full', 'artistry_minimalism_content')} />
+                                <img src="https://i.postimg.cc/q7x2D1rD/article-regional-styles.webp" alt="Examples of minimalist and embroidered thobes" className="my-8 rounded-lg shadow-xl w-full h-auto object-cover not-prose"/>
+                                <h3>{translate('thobeGuide_full', 'artistry_embroidery_title')}</h3>
+                                <StyledText text={translate('thobeGuide_full', 'artistry_embroidery_content')} />
+                                <h4>{translate('thobeGuide_full', 'artistry_tatreez_title')}</h4>
+                                <StyledText text={translate('thobeGuide_full', 'artistry_tatreez_content')} />
+                                <GuideTable caption={translate('thobeGuide_full', 'artistry_table_caption')} headersJSON={translate('thobeGuide_full', 'artistry_table_headers')} rowsJSON={translate('thobeGuide_full', 'artistry_table_rows')} />
+                            </ArticleCard>
+
+                            <ArticleCard id="trends">
+                                <h2>{translate('thobeGuide_full', 'trends_title')}</h2>
+                                <StyledText text={translate('thobeGuide_full', 'trends_intro')} />
+                                <h3>{translate('thobeGuide_full', 'trends_slimfit_title')}</h3>
+                                <StyledText text={translate('thobeGuide_full', 'trends_slimfit_content')} />
+                                <h3>{translate('thobeGuide_full', 'trends_fabric_title')}</h3>
+                                <StyledText text={translate('thobeGuide_full', 'trends_fabric_content')} />
+                                <img src="https://i.postimg.cc/9Q2w0h1G/article-fabric-science.webp" alt="Innovative fabric textures" className="my-8 rounded-lg shadow-xl w-full h-auto object-cover not-prose"/>
+                                <h3>{translate('thobeGuide_full', 'trends_fusion_title')}</h3>
+                                <StyledText text={translate('thobeGuide_full', 'trends_fusion_content')} />
+                                <h3>{translate('thobeGuide_full', 'trends_custom_title')}</h3>
+                                <StyledText text={translate('thobeGuide_full', 'trends_custom_content')} />
+                                <GuideTable caption={translate('thobeGuide_full', 'trends_table_caption')} headersJSON={translate('thobeGuide_full', 'trends_table_headers')} rowsJSON={translate('thobeGuide_full', 'trends_table_rows')} />
+                            </ArticleCard>
+                            
+                            <ArticleCard id="conclusion">
+                                <h2>{translate('thobeGuide_full', 'conclusion_title')}</h2>
+                                <StyledText text={translate('thobeGuide_full', 'conclusion_content')} />
+                            </ArticleCard>
+                            
+                            <ArticleCard id="visuals">
+                                <h2>{translate('thobeGuide_full', 'visuals_title')}</h2>
+                                <StyledText text={translate('thobeGuide_full', 'visuals_content')} />
+                            </ArticleCard>
+                        </main>
+                    </div>
+                </div>
+            </section>
         </>
     );
 };

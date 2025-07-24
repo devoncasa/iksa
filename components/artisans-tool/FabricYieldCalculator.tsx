@@ -1,11 +1,10 @@
 
-
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useLanguage } from '../../hooks/useLanguage';
 import { Button } from '../Button';
 import { MOCK_FABRICS, GARMENT_CATEGORIES, GARMENT_SIZES } from '../../constants';
 import { Fabric, GarmentStyle, GarmentSize } from '../../types';
-import * as ReactRouterDOM from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { LightbulbIcon } from '../icons';
 
 interface TipRuleParams {
@@ -217,7 +216,7 @@ const determineNumTips = (garmentStyle: GarmentStyle, translate: (key: string, s
 
 export const FabricYieldCalculator: React.FC = () => {
   const { translate } = useLanguage();
-  const [searchParams] = ReactRouterDOM.useSearchParams();
+  const [searchParams] = useSearchParams();
   const allGarmentStyles = useMemo(() => GARMENT_CATEGORIES.flatMap(category => category.styles), []);
 
 
@@ -397,7 +396,7 @@ export const FabricYieldCalculator: React.FC = () => {
   const selectOptionClassName = "bg-white text-stone-800 font-medium";
 
   return (
-    <div className="bg-white/50 backdrop-blur-xl p-6 md:p-8 rounded-lg shadow-xl border border-stone-200/50 transition-all duration-700 ease-in-out delay-300">
+    <>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             {/* Step 1 & 2 */}
             <div>
@@ -533,14 +532,14 @@ export const FabricYieldCalculator: React.FC = () => {
             ))}
           </ul>
            <div className="mt-6 text-center">
-                <ReactRouterDOM.Link to="/for-artisans">
+                <Link to="/for-artisans">
                     <Button variant="outline" size="sm">
                         {translate('forArtisans_pageTitle')}
                     </Button>
-                </ReactRouterDOM.Link>
+                </Link>
             </div>
         </div>
       )}
-    </div>
+    </>
   );
 };

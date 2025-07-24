@@ -1,57 +1,37 @@
 
-
-import React, { useState, useEffect, useCallback } from 'react';
-import * as ReactRouterDOM from 'react-router-dom';
-import { BACKGROUND_IMAGES, THOBE_GUIDE_BACKGROUND_IMAGES, getRandomImage } from '../constants';
+import React, { useState, useEffect } from 'react';
+import { SECTION_BACKGROUND_IMAGES } from '../constants';
 
 export const GlobalBackground: React.FC = () => {
-  const location = ReactRouterDOM.useLocation();
-  
-  const getImageSourceArray = useCallback(() => {
-    if (location.pathname === '/thobe-guide') {
-      return THOBE_GUIDE_BACKGROUND_IMAGES;
-    }
-    return BACKGROUND_IMAGES;
-  }, [location.pathname]);
+  const [backgroundImage, setBackgroundImage] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const [backgroundImage, setBackgroundImage] = useState(() => getRandomImage(getImageSourceArray()));
-  const [loading, setLoading] = useState(true);
-
-  // Effect to change background image when route changes
   useEffect(() => {
-    const newSourceArray = getImageSourceArray();
-    setBackgroundImage(prev => getRandomImage(newSourceArray, prev));
-  }, [location.pathname, getImageSourceArray]);
-
-  // Effect to preload the image and handle loading state
-  useEffect(() => {
-    if (backgroundImage) {
-      setLoading(true);
-      const img = new Image();
-      img.src = backgroundImage;
-      img.onload = () => setLoading(false);
-      img.onerror = () => {
-        console.error(`Failed to load background image: ${backgroundImage}`);
-        setLoading(false);
-      }
+    const randomImage = SECTION_BACKGROUND_IMAGES[Math.floor(Math.random() * SECTION_BACKGROUND_IMAGES.length)];
+    const img = new Image();
+    img.src = randomImage;
+    img.onload = () => {
+      setBackgroundImage(randomImage);
+      setIsLoaded(true);
+    };
+    img.onerror = () => {
+        // Fallback or error handling
+        setIsLoaded(true); // Allow content to show even if image fails
     }
-  }, [backgroundImage]);
+  }, []);
 
   return (
-    <div 
-        className="fixed inset-0 z-[-1] w-full h-screen transition-opacity duration-1000 ease-in-out"
-        style={{ opacity: loading ? 0 : 1 }}
-    >
+    <div className="fixed inset-0 -z-10 overflow-hidden bg-creamy-beige">
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
         style={{
-          backgroundImage: `url('${backgroundImage}')`,
-          backgroundAttachment: 'fixed', // This creates the classic "still parallax" effect
-          filter: 'blur(4px)',
-          transform: 'scale(1.05)',
+          backgroundImage: `url(${backgroundImage})`,
+          filter: 'blur(8px)',
+          transform: 'scale(1.15)', // To hide blurred edges
+          opacity: isLoaded ? 1 : 0,
         }}
       ></div>
-      <div className="absolute inset-0 bg-white/20"></div>
+      <div className="absolute inset-0 bg-white/30"></div> {/* 30% white overlay */}
     </div>
   );
 };

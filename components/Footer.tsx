@@ -1,23 +1,14 @@
 
 
+
 import React from 'react';
-import * as ReactRouterDOM from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
-import { NAV_LINKS } from '../constants';
+import { NAV_LINKS, SOCIAL_MEDIA_LINKS } from '../constants';
 import { PhoneIcon, EmailIcon, BuildingIcon } from './icons';
 
 export const Footer: React.FC = () => {
   const { translate } = useLanguage();
-  const accountId = "iksatextile";
-  const socialMedia = [
-    { name: 'Facebook', icon: 'https://i.postimg.cc/YCMfNbVb/facebook.webp', url: `https://facebook.com/${accountId}` },
-    { name: 'Instagram', icon: 'https://i.postimg.cc/P5ybS1nh/instagram.webp', url: `https://instagram.com/${accountId}` },
-    { name: 'TikTok', icon: 'https://i.postimg.cc/cJJR26d3/tiktok.webp', url: `https://tiktok.com/@${accountId}` },
-    { name: 'YouTube', icon: 'https://i.postimg.cc/hG3LBgG5/youtube.webp', url: `https://youtube.com/@${accountId}` },
-    { name: 'LinkedIn', icon: 'https://i.postimg.cc/bNXRrzRX/linkedin.webp', url: `https://linkedin.com/company/${accountId}` },
-    { name: 'Twitter', icon: 'https://i.postimg.cc/632d6S25/twitter.webp', url: `https://twitter.com/${accountId}` },
-    { name: 'Pinterest', icon: 'https://i.postimg.cc/JnfjsqZ3/pinterest.webp', url: `https://pinterest.com/${accountId}` },
-  ];
 
   return (
     <footer className="bg-stone-900/40 backdrop-blur-xl border-t border-stone-700/50">
@@ -29,12 +20,12 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5">
               {NAV_LINKS.map(link => (
                 <li key={link.path}>
-                  <ReactRouterDOM.Link 
+                  <Link 
                     to={link.path} 
                     className="text-stone-400 hover:text-brandAccent-500 hover:underline transition-colors"
                   >
                     {translate('nav', link.labelKey)}
-                  </ReactRouterDOM.Link>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -65,8 +56,8 @@ export const Footer: React.FC = () => {
             <div className="flex items-start text-stone-400">
               <BuildingIcon className="w-4 h-4 mr-2.5 mt-0.5 text-brandAccent-500 flex-shrink-0" />
               <address className="not-italic leading-relaxed">
-                {translate('acquire_addressLine1')}<br />
-                {translate('acquire_addressLine2')}
+                {translate('contact_addressLine1')}<br />
+                {translate('contact_addressLine2')}
               </address>
             </div>
           </div>
@@ -75,7 +66,7 @@ export const Footer: React.FC = () => {
           <div>
             <h5 className="font-semibold text-base text-stone-300 mb-4 uppercase tracking-wider">{translate('footer_followUsTitle')}</h5>
             <div className="flex flex-wrap gap-3">
-              {socialMedia.map(social => (
+              {SOCIAL_MEDIA_LINKS.map(social => (
                 <a 
                   key={social.name} 
                   href={social.url} 

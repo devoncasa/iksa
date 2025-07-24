@@ -1,12 +1,13 @@
 
 
 import React, { useState, useMemo } from 'react';
-import * as ReactRouterDOM from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { Button } from '../components/Button';
 import { MOCK_FABRICS, FABRIC_FILTERS, FEATURE_ICONS, COLOR_MARKUPS } from '../constants';
 import { Fabric } from '../types';
 import { SEOMetadata } from '../components/SEOMetadata';
+import { ContentBlock } from '../components/ContentBlock';
 
 interface FabricFiltersState {
   useCase: string;
@@ -33,7 +34,7 @@ const FabricCard: React.FC<{ fabric: Fabric; }> = ({ fabric }) => {
 
   return (
     <div 
-      className="bg-white/50 backdrop-blur-xl rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 ease-in-out transform hover:shadow-xl hover:-translate-y-1 border border-stone-200/50 group h-full" 
+      className="bg-white/70 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 ease-in-out transform hover:shadow-xl hover:-translate-y-1 border border-stone-200/50 group h-full" 
       id={fabric.id} 
     >
       <div className="relative overflow-hidden">
@@ -70,7 +71,7 @@ const FabricCard: React.FC<{ fabric: Fabric; }> = ({ fabric }) => {
         </div>
         
         <div className="mt-auto"> 
-          <ReactRouterDOM.Link to={`/collections/${fabric.id}`} className="block">
+          <Link to={`/collections/${fabric.id}`} className="block">
               <Button 
                 variant="primary" 
                 size="sm" 
@@ -80,7 +81,7 @@ const FabricCard: React.FC<{ fabric: Fabric; }> = ({ fabric }) => {
               >
                 {translate('viewDetails')}
               </Button>
-          </ReactRouterDOM.Link>
+          </Link>
         </div>
       </div>
     </div>
@@ -114,7 +115,7 @@ const FabricFilter: React.FC<{
   );
 
   return (
-    <div className="bg-white/50 backdrop-blur-xl p-6 md:p-8 rounded-lg shadow-lg mb-10 md:mb-16 border border-stone-200/50 transition-all duration-700 ease-in-out"> 
+    <div className="p-0"> 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"> 
         {renderSelect('useCase', FABRIC_FILTERS.useCases)}
         {renderSelect('feel', FABRIC_FILTERS.feel)}
@@ -151,43 +152,44 @@ export const CollectionsPage: React.FC = () => {
   }, [filters]); 
 
   return (
-    <div className="bg-transparent">
+    <>
       <SEOMetadata
         titleKey="page_collections_title"
         descriptionKey="page_collections_description"
         keywordsKey="page_collections_keywords"
         pagePath="/collections"
       />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12"> 
-        <div className="text-center mb-10 md:mb-12 bg-stone-50/50 backdrop-blur-xl p-8 rounded-lg">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-display font-bold text-stone-800 mb-4">{translate('collections_heroTitle')}</h1>
-            <p className="text-lg text-stone-700 max-w-3xl mx-auto">{translate('collections_heroSubtitle')}</p>
-            <ReactRouterDOM.Link to="/price-structure" className="mt-6 inline-block">
-              <Button variant="outline">{translate('collections_viewPricing')}</Button>
-            </ReactRouterDOM.Link>
-        </div>
+      <ContentBlock isHero>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-display font-bold text-stone-800 mb-4">{translate('collections_heroTitle')}</h1>
+          <p className="text-lg text-stone-700 max-w-3xl mx-auto">{translate('collections_heroSubtitle')}</p>
+          <Link to="/price-structure" className="mt-6 inline-block">
+            <Button variant="outline">{translate('collections_viewPricing')}</Button>
+          </Link>
+      </ContentBlock>
 
-        <div className="bg-white/50 backdrop-blur-xl p-6 md:p-8 rounded-lg shadow-lg mb-10 md:mb-16 border border-stone-200/50">
-          <FabricFilter filters={filters} onFilterChange={handleFilterChange} />
-        </div>
-        
-        {filteredFabrics.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"> 
-            {filteredFabrics.map((fabric, index) => (
-               <div key={fabric.id} className="transition-all duration-700 ease-in-out h-full" style={{transitionDelay: `${index*100}ms`}}> 
+      <ContentBlock>
+        <FabricFilter filters={filters} onFilterChange={handleFilterChange} />
+      </ContentBlock>
+
+      <section className="relative w-full py-12 md:py-16">
+        <div className="max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8">
+            {filteredFabrics.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"> 
+                {filteredFabrics.map((fabric) => (
                 <FabricCard 
-                  fabric={fabric} 
+                    key={fabric.id} 
+                    fabric={fabric} 
                 />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center bg-white/50 backdrop-blur-xl rounded-lg p-16">
-            <p className="text-stone-500 text-xl">{translate('noResultsFound')}</p> 
-          </div>
-        )}
-        
-      </div>
-    </div>
+                ))}
+            </div>
+            ) : (
+            <div className="text-center bg-[rgba(255,255,255,0.70)] backdrop-blur-sm rounded-2xl p-16 shadow-2xl">
+                <p className="text-stone-500 text-xl">{translate('noResultsFound')}</p> 
+            </div>
+            )}
+        </div>
+      </section>
+      
+    </>
   );
 };

@@ -1,11 +1,14 @@
 
+
+
 import React, { useState } from 'react';
-import * as ReactRouterDOM from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import { useLanguage } from '../hooks/useLanguage';
 import { MOCK_FABRICS } from '../constants';
 import { Button } from '../components/Button';
 import { SEOMetadata } from '../components/SEOMetadata';
+import { ContentBlock } from '../components/ContentBlock';
 
 export const CheckoutPage: React.FC = () => {
   const { cart, getCartTotal, clearCart } = useCart();
@@ -23,29 +26,25 @@ export const CheckoutPage: React.FC = () => {
 
   if (isOrderPlaced) {
     return (
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
-        <div className="bg-white/50 backdrop-blur-xl p-8 rounded-lg max-w-2xl mx-auto">
+      <ContentBlock isHero>
           <h1 className="text-3xl md:text-4xl font-serif-display font-bold text-brandAccent-700 mb-4">{translate('thankYouForYourOrder')}</h1>
           <p className="text-lg text-stone-700 mb-8">{translate('orderConfirmationMsg')}</p>
-          <ReactRouterDOM.Link to="/collections">
+          <Link to="/collections">
             <Button variant="primary">{translate('continueShopping')}</Button>
-          </ReactRouterDOM.Link>
-        </div>
-      </div>
+          </Link>
+      </ContentBlock>
     );
   }
 
   if (cart.length === 0 && !isOrderPlaced) {
     return (
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
-          <div className="bg-white/50 backdrop-blur-xl p-8 rounded-lg max-w-2xl mx-auto">
-              <h1 className="text-3xl md:text-4xl font-serif-display font-bold text-stone-800 mb-4">{translate('yourCartIsEmpty')}</h1>
-              <p className="text-lg text-stone-700 mb-8">{translate('checkout_emptyCartMessage') || 'Add some fabric rolls to your cart to proceed.'}</p>
-              <ReactRouterDOM.Link to="/collections">
-                  <Button variant="primary">{translate('discoverCollections')}</Button>
-              </ReactRouterDOM.Link>
-            </div>
-      </div>
+        <ContentBlock isHero>
+            <h1 className="text-3xl md:text-4xl font-serif-display font-bold text-stone-800 mb-4">{translate('yourCartIsEmpty')}</h1>
+            <p className="text-lg text-stone-700 mb-8">{translate('checkout_emptyCartMessage') || 'Add some fabric rolls to your cart to proceed.'}</p>
+            <Link to="/collections">
+                <Button variant="primary">{translate('discoverCollections')}</Button>
+            </Link>
+      </ContentBlock>
     );
   }
 
@@ -57,11 +56,11 @@ export const CheckoutPage: React.FC = () => {
         keywordsKey="page_checkout_keywords"
         pagePath="/checkout"
       />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <ContentBlock isHero>
         <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-stone-800 mb-12 text-center section-title-underline">
           {translate('checkout')}
         </h1>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 text-left">
           {/* Shipping Form */}
           <div className="bg-white/50 backdrop-blur-xl p-8 rounded-lg shadow-lg border border-stone-200/50">
             <h2 className="text-2xl font-semibold font-serif-display text-brandAccent-700 mb-6">{translate('shippingAddress')}</h2>
@@ -127,7 +126,7 @@ export const CheckoutPage: React.FC = () => {
             </Button>
           </div>
         </div>
-      </div>
+      </ContentBlock>
     </>
   );
 };

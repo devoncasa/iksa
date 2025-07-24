@@ -1,6 +1,7 @@
 
+
 import React from 'react';
-import * as ReactRouterDOM from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import { useLanguage } from '../hooks/useLanguage';
 import { MOCK_FABRICS } from '../constants';
@@ -15,7 +16,7 @@ interface CartModalProps {
 export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
   const { cart, updateQuantity, removeFromCart, getCartTotal } = useCart();
   const { translate } = useLanguage();
-  const navigate = ReactRouterDOM.useNavigate();
+  const navigate = useNavigate();
 
   const { totalPrice } = getCartTotal();
 

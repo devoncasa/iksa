@@ -23,6 +23,7 @@ export const translations: Record<LanguageCode, Translations> = {
     sendMessage: "Send Message",
     pieces: "Garments",
     ok: "OK",
+    subject: "Subject",
     
     // B2B E-commerce
     rolls: "Roll(s)",
@@ -80,7 +81,7 @@ export const translations: Record<LanguageCode, Translations> = {
       thobeGuide: "The Thobe Guide",
       forArtisans: "For Artisans",
       artisansTool: "Artisan's Tool",
-      acquire: "Acquire",
+      contact: "Contact",
       checkout: "Checkout",
     },
     
@@ -303,21 +304,24 @@ export const translations: Record<LanguageCode, Translations> = {
     forArtisans_conclusion_text2: "Today, you may just be ordering fabric — but tomorrow, we can be a team, growing together.",
     forArtisans_cta_button: "Inquire About Partnership",
 
-    // Acquire Page
-    acquire_pageTitle: "Acquire & Inquire",
-    acquire_intro: "We're here to assist with inquiries, sample requests, and partnership opportunities. Reach out to discover the IKSA difference.",
-    acquire_addressTitle: "Our Office",
-    acquire_addressLine1: "IKSA Textiles Co., Ltd.", 
-    acquire_addressLine2: "919/1 JTC Tower, B1-BB038, Silom Road, Silom, Bangrak, Bangkok 10500, THAILAND",
+    // Contact Page
+    contact_pageTitle: "Contact Us",
+    contact_intro: "We're here to assist with inquiries, sample requests, and partnership opportunities. Reach out to discover the IKSA difference.",
+    contact_addressTitle: "Our Office",
+    contact_addressLine1: "IKSA Textiles Co., Ltd.", 
+    contact_addressLine2: "919/1 JTC Tower, B1-BB038, Silom Road, Silom, Bangrak, Bangkok 10500, THAILAND",
     contact_whatsapp: "WhatsApp (English/Arabic): +66 81 851 9922",
-    acquire_hoursTitle: "Business Hours",
-    acquire_hoursLine1: "Monday - Friday: 9:00 AM - 6:00 PM (ICT)",
-    acquire_hoursLine2: "Saturday: 10:00 AM - 4:00 PM (ICT)",
-    acquire_hoursLine3: "Sunday: Closed",
-    acquire_mapTitle: "Find Us Here",
-    acquire_getDirections: "Get Directions",
-    acquire_formTitle: "Send Us a Message",
-    acquire_form_success: "Thank you for your message. We will get back to you shortly.",
+    contact_hoursTitle: "Business Hours",
+    contact_hoursLine1: "Monday - Friday: 9:00 AM - 6:00 PM (ICT)",
+    contact_hoursLine2: "Saturday: 10:00 AM - 4:00 PM (ICT)",
+    contact_hoursLine3: "Sunday: Closed",
+    contact_mapTitle: "Find Us Here",
+    contact_getDirections: "Get Directions",
+    contact_formTitle: "Send Us a Message",
+    contact_form_success: "Thank you for your message. We will get back to you shortly.",
+    form_error_email: "Please enter a valid email address.",
+    form_error_required: "This field is required.",
+
 
     // Artisan's Tool Page
     artisansTool_pageTitle: "Fabric Yield Calculator",
@@ -510,9 +514,9 @@ export const translations: Record<LanguageCode, Translations> = {
     page_artisansTool_description: "Calculate fabric yield for Thobes and Abayas with IKSA's Artisan Tool. Optimize your fabric usage with helpful pro-tips for tailors and manufacturers.",
     page_artisansTool_keywords: "fabric calculator, yield calculator, artisan tool, thobe cutting, abaya fabric, IKSA, textile advice, fabric optimization, tailoring calculator",
 
-    page_acquire_title: "Contact IKSA - Inquire & Order Premium Fabrics",
-    page_acquire_description: "Connect with IKSA for inquiries, fabric samples, and partnership opportunities. Find our address, WhatsApp, email, and business hours. We supply premium textiles globally.",
-    page_acquire_keywords: "contact IKSA, order fabric, fabric samples, textile supplier, fabrics Thailand, fabric wholesale, IKSA email, IKSA phone",
+    page_contact_title: "Contact IKSA | Inquiries & Premium Fabric Orders",
+    page_contact_description: "Connect with IKSA for inquiries, fabric samples, and partnership opportunities. Find our address, WhatsApp, email, and business hours. We supply premium textiles globally.",
+    page_contact_keywords: "contact IKSA, order fabric, fabric samples, textile supplier, fabrics Thailand, fabric wholesale, IKSA email, IKSA phone",
     
     page_checkout_title: "Checkout | IKSA Secure B2B Order",
     page_checkout_description: "Complete your B2B fabric roll order with IKSA. Enter your shipping details and review your order summary for a secure and professional transaction.",

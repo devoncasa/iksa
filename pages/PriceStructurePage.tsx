@@ -1,11 +1,14 @@
 
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { SEOMetadata } from '../components/SEOMetadata';
 import { Button } from '../components/Button';
 import { StyledText } from '../components/StyledText';
 import { MOCK_FABRICS } from '../constants';
 import { PricingSettings, CountrySettings } from '../types';
+import { ContentBlock } from '../components/ContentBlock';
+import { ChevronDownIcon } from '../components/icons';
+import { PolicySubsection } from '../components/PolicySubsection';
 
 interface Product {
     id: string;
@@ -40,22 +43,22 @@ const initialCountrySettings: Record<string, CountrySettings> = {
 };
 
 const initialPricingSettings: PricingSettings = {
-    baseDeliveryChargeTH: 50, // Legacy, kept for admin panel mapping
-    perKgDeliveryChargeTH: 20, // Legacy, kept for admin panel mapping
+    baseDeliveryChargeTH: 50,
+    perKgDeliveryChargeTH: 20,
     internationalSurchargePercentageDefault: 0.15,
     currencyExchangeRateTHB_USD: 36.5,
     countries: initialCountrySettings
 };
 
 const products: Product[] = [
-    { id: 'product1', nameKey: 'priceStructure_premiumThobe', basePriceUSD: 50.00, weightKg: 0.5, image: 'https://placehold.co/300x200/E0E7FF/4F46E5?text=Premium+Thobe', hsCode: '6211.33.10', category: 'apparel' },
-    { id: 'product2', nameKey: 'priceStructure_deluxeFabric', basePriceUSD: 120.00, weightKg: 1.2, image: 'https://placehold.co/300x200/E0E7FF/4F46E5?text=Deluxe+Fabric', hsCode: '5407.52', category: 'textile' }
+    { id: 'product1', nameKey: 'priceStructure_premiumThobe', basePriceUSD: 50.00, weightKg: 0.5, image: 'https://i.postimg.cc/SNvBZVXb/IKSA-section-background-00111.webp', hsCode: '6211.33.10', category: 'apparel' },
+    { id: 'product2', nameKey: 'priceStructure_deluxeFabric', basePriceUSD: 120.00, weightKg: 1.2, image: 'https://i.postimg.cc/TP8Zxwqk/IKSA-section-background-00112.webp', hsCode: '5407.52', category: 'textile' }
 ];
 
 const StaticPriceTable: React.FC = () => {
     const { translate } = useLanguage();
     return (
-        <div className="bg-white/50 backdrop-blur-xl p-6 md:p-8 rounded-lg shadow-xl border border-stone-200/50 mb-12">
+        <div className="mb-12">
             <h2 className="text-3xl font-serif-display font-semibold text-brandAccent-700 mb-2">{translate('priceStructure_pageTitle')}</h2>
             <p className="text-stone-600 mb-6">{translate('priceStructure_intro')}</p>
             <div className="overflow-x-auto">
@@ -98,16 +101,19 @@ const formatCurrency = (amount: number, currencyCode: string) => {
 
 export const PriceStructurePage: React.FC = () => {
     const { translate } = useLanguage();
+    const mainPolicyRef = useRef<HTMLDetailsElement | null>(null);
+    const subsectionRefs = useRef<(HTMLDetailsElement | null)[]>([]);
 
     const [settings, setSettings] = useState<PricingSettings>(initialPricingSettings);
-    const [tempSettings, setTempSettings] = useState<PricingSettings>(initialPricingSettings);
+    const [tempSettings, setTempSettings] = useState<Omit<PricingSettings, 'countries'>>(initialPricingSettings);
+    const [tempSurcharge, setTempSurcharge] = useState<string>('');
     const [selectedCountry, setSelectedCountry] = useState('US');
     const [isAdmin, setIsAdmin] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState<{ show: boolean, text: string }>({ show: false, text: '' });
     const [calculatedPrices, setCalculatedPrices] = useState<Record<string, CalculatedPrice>>({});
-
+    
     const calculateTotalPrice = useCallback((product: Product, countryCode: string): CalculatedPrice => {
         const countrySettings = settings.countries[countryCode];
         let basePriceInUSD = product.basePriceUSD;
@@ -133,13 +139,12 @@ export const PriceStructurePage: React.FC = () => {
              return { totalPrice: totalTHB, breakdown: breakdownParts.join(' + ') + `. ${finalNotes}`, currency: finalCurrency };
         } 
         
-        // International Calculation
         if (countrySettings) {
             shippingCostUSD = countrySettings.shipping.base + (product.weightKg * countrySettings.shipping.perKg);
             totalUSD += shippingCostUSD;
             breakdownParts.push(`Ship: ${formatCurrency(shippingCostUSD, 'USD')}`);
             
-            let valueForDutiesAndTaxes = totalUSD; // CIF approx.
+            let valueForDutiesAndTaxes = totalUSD;
             
             const productDutyRate = countrySettings.duties.rates[product.category] || 0;
             if (productDutyRate > 0 && basePriceInUSD > countrySettings.duties.deMinimisUSD) {
@@ -165,7 +170,7 @@ export const PriceStructurePage: React.FC = () => {
             totalUSD += dutyAmountUSD + taxAmountUSD;
             finalNotes = countrySettings.notes;
             finalCurrency = countrySettings.currency;
-        } else { // Fallback
+        } else {
             shippingCostUSD = settings.countries['US'].shipping.base + (product.weightKg * settings.countries['US'].shipping.perKg);
             totalUSD += shippingCostUSD;
             const surcharge = totalUSD * settings.internationalSurchargePercentageDefault;
@@ -188,31 +193,77 @@ export const PriceStructurePage: React.FC = () => {
         setCalculatedPrices(newPrices);
     }, [selectedCountry, settings, calculateTotalPrice]);
 
+    useEffect(() => {
+        let lastScrollTop = 0;
+        const handleScroll = () => {
+            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (mainPolicyRef.current && mainPolicyRef.current.open && currentScrollTop < (window.innerHeight * 0.05)) {
+                mainPolicyRef.current.open = false;
+            }
+
+            if (Math.abs(currentScrollTop - lastScrollTop) < 10) return;
+
+            subsectionRefs.current.forEach(detailsEl => {
+                if (!detailsEl) return;
+                const rect = detailsEl.getBoundingClientRect();
+                if (detailsEl.open && rect.bottom < 50) {
+                    detailsEl.open = false;
+                }
+            });
+            lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     const handleLogin = () => {
         if (password === '0007') {
-            setIsAdmin(true); setShowLogin(false); setTempSettings(settings); setPassword('');
+            setIsAdmin(true);
+            setShowLogin(false);
+            setTempSettings({
+                baseDeliveryChargeTH: settings.countries.TH.shipping.base,
+                perKgDeliveryChargeTH: settings.countries.TH.shipping.perKg,
+                currencyExchangeRateTHB_USD: settings.currencyExchangeRateTHB_USD,
+                internationalSurchargePercentageDefault: settings.internationalSurchargePercentageDefault
+            });
+            setTempSurcharge((settings.internationalSurchargePercentageDefault * 100).toFixed(1));
+            setPassword('');
         } else {
-            setMessage({ show: true, text: translate('admin_incorrectPassword') }); setPassword('');
+            setMessage({ show: true, text: translate('admin_incorrectPassword') });
+            setPassword('');
         }
     };
     
     const handleSave = () => {
-        if (Object.values(tempSettings).some(v => typeof v === 'number' && isNaN(v))) {
-             setMessage({ show: true, text: translate('admin_settingsError') }); return;
+        const newBaseDelivery = tempSettings.baseDeliveryChargeTH;
+        const newPerKgDelivery = tempSettings.perKgDeliveryChargeTH;
+        const newSurcharge = parseFloat(tempSurcharge);
+
+        if (isNaN(newBaseDelivery) || isNaN(newPerKgDelivery) || isNaN(newSurcharge)) {
+             setMessage({ show: true, text: translate('admin_settingsError') });
+             return;
         }
-        const updatedSettings = { ...settings,
-          countries: { ...settings.countries,
-            'TH': { ...settings.countries['TH'], shipping: { base: tempSettings.baseDeliveryChargeTH, perKg: tempSettings.perKgDeliveryChargeTH } },
-          },
-          internationalSurchargePercentageDefault: tempSettings.internationalSurchargePercentageDefault / 100,
-        };
-        setSettings(updatedSettings);
+        if (newSurcharge < 0 || newSurcharge > 100) {
+            setMessage({ show: true, text: translate('admin_surchargeError')});
+            return;
+        }
+
+        setSettings(prev => ({
+            ...prev,
+            internationalSurchargePercentageDefault: newSurcharge / 100,
+            countries: {
+                ...prev.countries,
+                'TH': { ...prev.countries.TH, shipping: { base: newBaseDelivery, perKg: newPerKgDelivery }}
+            }
+        }));
         setMessage({ show: true, text: translate('admin_settingsSaved') });
     };
     
     const handleTempSettingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
-        setTempSettings(prev => ({...prev, [id]: parseFloat(value)}));
+        setTempSettings(prev => ({ ...prev, [id]: parseFloat(value) }));
     };
 
     const deminimisData = [
@@ -222,84 +273,94 @@ export const PriceStructurePage: React.FC = () => {
         { code: "TH", name: "Thailand" }, { code: "US", name: "United States" }, { code: "GB", name: "United Kingdom" }, { code: "AU", name: "Australia" }, { code: "CA", name: "Canada" }, { code: "EU", name: "European Union" }, { code: "AE", name: "United Arab Emirates" }, { code: "IN", name: "India" }, { code: "SA", name: "Saudi Arabia" }, { code: "MY", name: "Malaysia" }, { code: "ID", name: "Indonesia" }, { code: "PK", name: "Pakistan" }, { code: "EG", name: "Egypt" },
     ];
 
-    const InfoSection: React.FC<{titleKey: string, contentKey: string, itemsKeys?: string[], conclusionKey?: string}> = ({titleKey, contentKey, itemsKeys, conclusionKey}) => (
-        <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-3 text-stone-700">{translate(titleKey)}</h3>
-            <div className="prose prose-sm max-w-none text-stone-700 space-y-2">
-                <StyledText text={translate(contentKey)} />
-                {itemsKeys && <ul>{itemsKeys.map(key => <li key={key}><StyledText text={translate(key)} /></li>)}</ul>}
-                {conclusionKey && <StyledText text={translate(conclusionKey)} />}
-            </div>
+    const InfoContent: React.FC<{contentKey: string, itemsKeys?: string[], conclusionKey?: string}> = ({contentKey, itemsKeys, conclusionKey}) => (
+        <div className="prose prose-sm max-w-none text-stone-700 space-y-2">
+            <StyledText text={translate(contentKey)} />
+            {itemsKeys && <ul className="list-disc pl-5 space-y-1">{itemsKeys.map(key => <li key={key}><StyledText text={translate(key)} /></li>)}</ul>}
+            {conclusionKey && <StyledText text={translate(conclusionKey)} />}
         </div>
     );
     
     const renderUserView = () => (
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 max-w-6xl">
+        <ContentBlock>
             <StaticPriceTable />
-            <details open className="group">
-                <summary className="list-none cursor-pointer text-3xl font-serif-display font-semibold text-brandAccent-700 mb-6 text-center section-title-underline hover:text-brandAccent-800 transition-colors">
-                    {translate('priceStructure_collapsibleTitle')}
+            <details ref={mainPolicyRef} className="group mt-12 transition-all duration-500 ease-in-out">
+                <summary className="list-none flex items-center justify-center cursor-pointer text-3xl font-serif-display font-semibold text-brandAccent-700 mb-6 transition-all duration-300 p-4 rounded-lg bg-stone-50/70 hover:bg-stone-100/80 border border-stone-200/50 shadow-sm hover:shadow-md">
+                     <ChevronDownIcon className="w-8 h-8 mr-4 transition-transform duration-300 group-open:rotate-180" />
+                    <span>{translate('priceStructure_collapsibleTitle')}</span>
                 </summary>
-                <div className="pt-8">
-                     <div className="max-w-md mx-auto mb-10">
-                        <label htmlFor="country-select" className="block text-sm font-medium text-stone-600 mb-1.5">{translate('priceStructure_selectCountry')}</label>
-                        <select id="country-select" value={selectedCountry} onChange={e => setSelectedCountry(e.target.value)} className="w-full bg-white/80 border border-stone-300 rounded-md py-2.5 px-3 focus:ring-brandAccent-700 focus:border-brandAccent-700">
-                            {countryOptions.map(opt => <option key={opt.code} value={opt.code}>{opt.name}</option>)}
-                        </select>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
-                        {products.map(p => {
-                            const priceInfo = calculatedPrices[p.id];
-                            return (
-                            <div key={p.id} className="bg-white/50 backdrop-blur-xl p-6 rounded-lg shadow-md border border-stone-200/50">
-                                <h2 className="text-xl font-semibold mb-3 text-brandAccent-800">{translate(p.nameKey)}</h2>
-                                <img src={p.image} alt={translate(p.nameKey)} className="w-full h-auto rounded-md mb-4 aspect-[3/2] object-cover" />
-                                <p className="text-md mb-2">{translate('priceStructure_basePrice')} {formatCurrency(p.basePriceUSD, 'USD')}</p>
-                                <p className="text-sm text-stone-600 mb-4">{translate('priceStructure_weight')} {p.weightKg} kg</p>
-                                <div className="text-xl font-bold text-green-700">{translate('priceStructure_totalPrice')} <span>{priceInfo ? formatCurrency(priceInfo.totalPrice, priceInfo.currency) : translate('priceStructure_calculating')}</span></div>
-                                <div className="text-xs text-stone-500 mt-2"><p><strong>{translate('priceStructure_includes')}</strong> {priceInfo?.breakdown}</p></div>
+                <div className="transition-[grid-template-rows] duration-500 ease-in-out grid grid-rows-[0fr] group-open:grid-rows-[1fr]">
+                    <div className="overflow-hidden">
+                        <div className="pt-8">
+                            <div className="max-w-md mx-auto mb-10">
+                                <label htmlFor="country-select" className="block text-sm font-medium text-stone-600 mb-1.5">{translate('priceStructure_selectCountry')}</label>
+                                <select id="country-select" value={selectedCountry} onChange={e => setSelectedCountry(e.target.value)} className="w-full bg-white/80 border border-stone-300 rounded-md py-2.5 px-3 focus:ring-brandAccent-700 focus:border-brandAccent-700">
+                                    {countryOptions.map(opt => <option key={opt.code} value={opt.code}>{opt.name}</option>)}
+                                </select>
                             </div>
-                        )})}
-                    </div>
-                    <p className="text-center text-stone-600 text-sm">{translate('priceStructure_dynamicDisclaimer')}</p>
-                    
-                    <div className="bg-stone-50/70 backdrop-blur-sm p-6 md:p-8 rounded-md shadow-sm border border-stone-200 mt-12">
-                        <h2 className="text-2xl font-bold text-center mb-6 text-stone-800">{translate('priceStructure_policyTitle')}</h2>
-                        <InfoSection titleKey="priceStructure_calculationTitle" contentKey="priceStructure_policyIntro" itemsKeys={['priceStructure_calculation_item1', 'priceStructure_calculation_item2', 'priceStructure_calculation_item3', 'priceStructure_calculation_item4']} />
-                        <InfoSection titleKey="priceStructure_domesticTitle" contentKey="priceStructure_domesticIntro" itemsKeys={['priceStructure_domestic_item1', 'priceStructure_domestic_item2', 'priceStructure_domestic_item3', 'priceStructure_domestic_item4']} />
-                        <InfoSection titleKey="priceStructure_internationalTitle" contentKey="priceStructure_internationalIntro" itemsKeys={['priceStructure_international_item1', 'priceStructure_international_item2', 'priceStructure_international_item3', 'priceStructure_international_item4', 'priceStructure_international_item5']} conclusionKey="priceStructure_internationalConclusion" />
-                        
-                        <InfoSection titleKey="priceStructure_typicalCostsTitle" contentKey="priceStructure_typicalCostsIntro" itemsKeys={['priceStructure_typicalCosts_thobes_title', 'priceStructure_typicalCosts_thobes_content', 'priceStructure_typicalCosts_fabrics_title', 'priceStructure_typicalCosts_fabrics_content', 'priceStructure_typicalCosts_hsCodes']} />
-                        
-                        <InfoSection titleKey="priceStructure_shippingEstimatesTitle" contentKey="priceStructure_shippingEstimatesIntro" itemsKeys={['priceStructure_shippingEstimates_content']} conclusionKey="priceStructure_shippingEstimates_note"/>
-
-                        <h3 className="text-xl font-semibold mt-6 mb-3 text-stone-700">{translate('priceStructure_deminimisTitle')}</h3>
-                        <p className="mb-4 text-stone-700 text-sm">{translate('priceStructure_deminimisIntro')}</p>
-                        <div className="overflow-x-auto mt-4 bg-white/50 backdrop-blur-xl rounded-lg shadow-md border border-soft-sand">
-                            <table className="w-full text-left text-sm divide-y divide-soft-sand">
-                                <thead className="bg-creamy-beige/30"><tr>
-                                    <th className="px-3 py-3 text-left text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_country')}</th>
-                                    <th className="px-3 py-3 text-left text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_duty')}</th>
-                                    <th className="px-3 py-3 text-left text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_tax')}</th>
-                                    <th className="px-3 py-3 text-left text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_notes')}</th>
-                                </tr></thead>
-                                <tbody className="bg-white/80 divide-y divide-soft-sand">
-                                    {deminimisData.map(item => (<tr key={item.c}><td className="px-3 py-3 align-top font-semibold text-deep-chocolate">{countryOptions.find(opt => opt.code.toLowerCase().startsWith(item.c.substring(0,2)))?.name}</td><td className="px-3 py-3 align-top text-stone-700">{translate(item.duty)}</td><td className="px-3 py-3 align-top text-stone-700">{translate(item.tax)}</td><td className="px-3 py-3 align-top text-stone-700">{translate(item.notes)}</td></tr>))}
-                                </tbody>
-                            </table>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
+                                {products.map(p => {
+                                    const priceInfo = calculatedPrices[p.id];
+                                    return (
+                                    <div key={p.id} className="bg-white/50 backdrop-blur-xl p-6 rounded-lg shadow-md border border-stone-200/50">
+                                        <h2 className="text-xl font-semibold mb-3 text-brandAccent-800">{translate(p.nameKey)}</h2>
+                                        <img src={p.image} alt={translate(p.nameKey)} className="w-full h-auto rounded-md mb-4 aspect-[4/3] object-cover" />
+                                        <p className="text-md mb-2">{translate('priceStructure_basePrice')} {formatCurrency(p.basePriceUSD, 'USD')}</p>
+                                        <p className="text-sm text-stone-600 mb-4">{translate('priceStructure_weight')} {p.weightKg} kg</p>
+                                        <div className="text-xl font-bold text-brandAccent-800">{translate('priceStructure_totalPrice')} <span>{priceInfo ? formatCurrency(priceInfo.totalPrice, priceInfo.currency) : translate('priceStructure_calculating')}</span></div>
+                                        <div className="text-xs text-stone-500 mt-2"><p><strong>{translate('priceStructure_includes')}</strong> {priceInfo?.breakdown}</p></div>
+                                    </div>
+                                )})}
+                            </div>
+                            <p className="text-center text-stone-600 text-sm">{translate('priceStructure_dynamicDisclaimer')}</p>
+                            
+                            <div className="bg-stone-50/70 backdrop-blur-sm p-6 md:p-8 rounded-md shadow-sm border border-stone-200 mt-12">
+                                <h2 className="text-2xl font-bold text-center mb-6 text-stone-800">{translate('priceStructure_policyTitle')}</h2>
+                                <PolicySubsection ref={el => { subsectionRefs.current[0] = el; }} titleKey="priceStructure_calculationTitle">
+                                <InfoContent contentKey="priceStructure_policyIntro" itemsKeys={['priceStructure_calculation_item1', 'priceStructure_calculation_item2', 'priceStructure_calculation_item3', 'priceStructure_calculation_item4']} />
+                                </PolicySubsection>
+                                <PolicySubsection ref={el => { subsectionRefs.current[1] = el; }} titleKey="priceStructure_domesticTitle">
+                                <InfoContent contentKey="priceStructure_domesticIntro" itemsKeys={['priceStructure_domestic_item1', 'priceStructure_domestic_item2', 'priceStructure_domestic_item3', 'priceStructure_domestic_item4']} />
+                                </PolicySubsection>
+                                <PolicySubsection ref={el => { subsectionRefs.current[2] = el; }} titleKey="priceStructure_internationalTitle">
+                                <InfoContent contentKey="priceStructure_internationalIntro" itemsKeys={['priceStructure_international_item1', 'priceStructure_international_item2', 'priceStructure_international_item3', 'priceStructure_international_item4', 'priceStructure_international_item5']} conclusionKey="priceStructure_internationalConclusion" />
+                                </PolicySubsection>
+                                <PolicySubsection ref={el => { subsectionRefs.current[3] = el; }} titleKey="priceStructure_typicalCostsTitle">
+                                    <InfoContent contentKey="priceStructure_typicalCostsIntro" itemsKeys={['priceStructure_typicalCosts_thobes_title', 'priceStructure_typicalCosts_thobes_content', 'priceStructure_typicalCosts_fabrics_title', 'priceStructure_typicalCosts_fabrics_content', 'priceStructure_typicalCosts_hsCodes']} />
+                                </PolicySubsection>
+                                <PolicySubsection ref={el => { subsectionRefs.current[4] = el; }} titleKey="priceStructure_shippingEstimatesTitle">
+                                <InfoContent contentKey="priceStructure_shippingEstimatesIntro" itemsKeys={['priceStructure_shippingEstimates_content']} conclusionKey="priceStructure_shippingEstimates_note"/>
+                                </PolicySubsection>
+                                <PolicySubsection ref={el => { subsectionRefs.current[5] = el; }} titleKey="priceStructure_deminimisTitle">
+                                    <p className="mb-4 text-stone-700 text-sm">{translate('priceStructure_deminimisIntro')}</p>
+                                    <div className="overflow-x-auto mt-4 bg-white/50 backdrop-blur-xl rounded-lg shadow-md border border-soft-sand">
+                                        <table className="w-full text-left text-sm divide-y divide-soft-sand">
+                                            <thead className="bg-creamy-beige/30"><tr>
+                                                <th className="px-3 py-3 text-left text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_country')}</th>
+                                                <th className="px-3 py-3 text-left text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_duty')}</th>
+                                                <th className="px-3 py-3 text-left text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_tax')}</th>
+                                                <th className="px-3 py-3 text-left text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_notes')}</th>
+                                            </tr></thead>
+                                            <tbody className="bg-white/80 divide-y divide-soft-sand">
+                                                {deminimisData.map(item => (<tr key={item.c}><td className="px-3 py-3 align-top font-semibold text-deep-chocolate">{countryOptions.find(opt => opt.code.toLowerCase().startsWith(item.c.substring(0,2)))?.name}</td><td className="px-3 py-3 align-top text-stone-700">{translate(item.duty)}</td><td className="px-3 py-3 align-top text-stone-700">{translate(item.tax)}</td><td className="px-3 py-3 align-top text-stone-700">{translate(item.notes)}</td></tr>))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <p className="text-xs text-stone-600 mt-4 italic">{translate('priceStructure_deminimisTable_note')}</p>
+                                </PolicySubsection>
+                            </div>
                         </div>
-                        <p className="text-xs text-stone-600 mt-4 italic">{translate('priceStructure_deminimisTable_note')}</p>
                     </div>
                 </div>
             </details>
             <div className="text-center mt-8"><button onClick={() => setShowLogin(true)} className="text-sm text-stone-500 hover:text-brandAccent-700 transition-colors">{translate('admin_access')}</button></div>
-        </div>
+        </ContentBlock>
     );
 
     const renderAdminView = () => (
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 max-w-3xl">
+        <ContentBlock>
             <h1 className="text-3xl font-bold text-center mb-6 text-brandAccent-800">{translate('admin_panelTitle')}</h1>
-            <div className="bg-white/50 backdrop-blur-xl p-8 rounded-lg shadow-lg border border-stone-200/50">
+            <div className="p-8 rounded-lg max-w-3xl mx-auto">
                 <h2 className="text-xl font-semibold mb-4 text-stone-700">{translate('admin_deliverySettings')}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                      <div>
@@ -310,19 +371,44 @@ export const PriceStructurePage: React.FC = () => {
                         <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="perKgDeliveryChargeTH">{translate('admin_perKgDeliveryTH')}</label>
                         <input type="number" id="perKgDeliveryChargeTH" value={tempSettings.perKgDeliveryChargeTH} onChange={handleTempSettingChange} min="0" step="0.01" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brandAccent-500 focus:border-brandAccent-500 sm:text-sm" />
                     </div>
+                    <div className="md:col-span-2 mt-2">
+                        <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="internationalSurchargePercentageDefault">{translate('admin_internationalSurcharge')}</label>
+                        <input 
+                            type="number" 
+                            id="internationalSurchargePercentageDefault" 
+                            value={tempSurcharge}
+                            onChange={(e) => setTempSurcharge(e.target.value)} 
+                            min="0" 
+                            max="100"
+                            step="0.1" 
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brandAccent-500 focus:border-brandAccent-500 sm:text-sm"
+                        />
+                        <p className="text-xs text-stone-500 mt-1">{translate('admin_surchargeNote')}</p>
+                    </div>
                 </div>
                  <div className="flex justify-end space-x-4 mt-6">
                     <Button onClick={handleSave} variant="primary">{translate('admin_saveSettings')}</Button>
                     <Button onClick={() => setIsAdmin(false)} variant="secondary">{translate('admin_backToUserView')}</Button>
                 </div>
             </div>
-        </div>
+        </ContentBlock>
     );
     
     return (
         <>
             <SEOMetadata titleKey="page_priceStructure_title" descriptionKey="page_priceStructure_description" keywordsKey="page_priceStructure_keywords" pagePath="/price-structure" />
             
+            {!isAdmin && (
+                <ContentBlock isHero>
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-display font-bold text-stone-800 mb-8 md:mb-10 text-center section-title-underline">
+                        {translate('priceStructure_pageTitle_dynamic')}
+                    </h1>
+                    <p className="text-base md:text-lg text-stone-700 max-w-3xl mx-auto text-center leading-relaxed">
+                        {translate('priceStructure_policyIntro')}
+                    </p>
+                </ContentBlock>
+            )}
+
             {isAdmin ? renderAdminView() : renderUserView()}
 
             {showLogin && (
