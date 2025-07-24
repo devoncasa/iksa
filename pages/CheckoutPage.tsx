@@ -24,7 +24,7 @@ export const CheckoutPage: React.FC = () => {
   if (isOrderPlaced) {
     return (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
-        <div className="bg-white/90 backdrop-blur-sm p-8 rounded-lg max-w-2xl mx-auto">
+        <div className="bg-white/50 backdrop-blur-xl p-8 rounded-lg max-w-2xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-serif-display font-bold text-brandAccent-700 mb-4">{translate('thankYouForYourOrder')}</h1>
           <p className="text-lg text-stone-700 mb-8">{translate('orderConfirmationMsg')}</p>
           <ReactRouterDOM.Link to="/collections">
@@ -38,7 +38,7 @@ export const CheckoutPage: React.FC = () => {
   if (cart.length === 0 && !isOrderPlaced) {
     return (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
-          <div className="bg-white/90 backdrop-blur-sm p-8 rounded-lg max-w-2xl mx-auto">
+          <div className="bg-white/50 backdrop-blur-xl p-8 rounded-lg max-w-2xl mx-auto">
               <h1 className="text-3xl md:text-4xl font-serif-display font-bold text-stone-800 mb-4">{translate('yourCartIsEmpty')}</h1>
               <p className="text-lg text-stone-700 mb-8">{translate('checkout_emptyCartMessage') || 'Add some fabric rolls to your cart to proceed.'}</p>
               <ReactRouterDOM.Link to="/collections">
@@ -63,7 +63,7 @@ export const CheckoutPage: React.FC = () => {
         </h1>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
           {/* Shipping Form */}
-          <div className="bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-stone-200/50">
+          <div className="bg-white/50 backdrop-blur-xl p-8 rounded-lg shadow-lg border border-stone-200/50">
             <h2 className="text-2xl font-semibold font-serif-display text-brandAccent-700 mb-6">{translate('shippingAddress')}</h2>
             <form id="checkout-form" onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -96,7 +96,7 @@ export const CheckoutPage: React.FC = () => {
           </div>
 
           {/* Order Summary */}
-          <div className="bg-white/70 backdrop-blur-sm p-8 rounded-lg shadow-lg border border-stone-200/50">
+          <div className="bg-white/50 backdrop-blur-xl p-8 rounded-lg shadow-lg border border-stone-200/50">
             <h2 className="text-2xl font-semibold font-serif-display text-brandAccent-700 mb-6">{translate('orderSummary')}</h2>
             <div className="space-y-4 divide-y divide-stone-200/50">
               {cart.map(item => {

@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { FabricYieldCalculator } from '../components/artisans-tool/FabricYieldCalculator';
 import { useLanguage } from '../hooks/useLanguage';
@@ -9,7 +10,7 @@ const ProTip: React.FC<{ titleKey: string, contentKey: string, index: number }> 
     const { translate } = useLanguage();
     return (
         <div 
-            className="bg-white/70 backdrop-blur-sm p-6 rounded-lg shadow-md border border-stone-200/50 transition-all duration-500 ease-in-out hover:shadow-lg hover:-translate-y-0.5"
+            className="bg-white/50 backdrop-blur-xl p-6 rounded-lg shadow-md border border-stone-200/50 transition-all duration-500 ease-in-out hover:shadow-lg hover:-translate-y-0.5"
             style={{ transitionDelay: `${index * 100}ms` }}
         >
             <h3 className="font-semibold text-brandAccent-700 mb-2 font-serif-display text-lg">{translate('artisansTool_tips', titleKey)}</h3>
@@ -36,14 +37,14 @@ export const ArtisanToolPage: React.FC = () => {
         pagePath="/artisans-tool"
       />
       <div className="py-8 md:py-12 max-w-4xl mx-auto transition-all duration-1000 ease-in-out px-4"> 
-        <div className="bg-stone-50/90 backdrop-blur-sm p-8 rounded-lg mb-10">
+        <div className="bg-stone-50/50 backdrop-blur-xl p-8 rounded-lg mb-10">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-display font-bold text-stone-800 mb-8 md:mb-10 text-center section-title-underline transition-all duration-700 ease-in-out delay-100"> 
               {translate('artisansTool_pageTitle')}
             </h1>
             <p className="text-center text-stone-700 text-base md:text-lg leading-relaxed transition-all duration-700 ease-in-out delay-200">{translate('artisansTool_intro')}</p> 
         </div>
         
-        <div className="bg-white/70 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-xl border border-stone-200/50 transition-all duration-700 ease-in-out delay-300">
+        <div className="bg-white/50 backdrop-blur-xl p-6 md:p-8 rounded-lg shadow-xl border border-stone-200/50 transition-all duration-700 ease-in-out delay-300">
           <FabricYieldCalculator />
         </div>
 

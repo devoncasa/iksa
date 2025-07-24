@@ -24,6 +24,26 @@ export const NAV_LINKS: NavLink[] = [
   { path: '/checkout', labelKey: 'checkout'},
 ];
 
+export const COLOR_PALETTE: Record<string, { nameKey: string, className: string }> = {
+  white: { nameKey: 'colorWhite', className: 'bg-white border-stone-300' },
+  black: { nameKey: 'colorBlack', className: 'bg-black' },
+  earthTones: { nameKey: 'colorEarthTones', className: 'bg-warm-terracotta' },
+  grey: { nameKey: 'colorGrey', className: 'bg-stone-500' },
+  blue: { nameKey: 'colorBlue', className: 'bg-blue-800' },
+  green: { nameKey: 'colorGreen', className: 'bg-green-800' },
+  redMaroon: { nameKey: 'colorRedMaroon', className: 'bg-red-800' },
+};
+
+export const COLOR_MARKUPS: Record<string, { markup: number, infoKey: string }> = {
+  white: { markup: 0, infoKey: 'colorInfo_white' },
+  black: { markup: 0.25, infoKey: 'colorInfo_black' }, // 25%
+  redMaroon: { markup: 0.22, infoKey: 'colorInfo_redMaroon' }, // 22%
+  blue: { markup: 0.18, infoKey: 'colorInfo_blue' }, // 18%
+  green: { markup: 0.18, infoKey: 'colorInfo_green' }, // 18%
+  earthTones: { markup: 0.15, infoKey: 'colorInfo_earthTones' }, // 15%
+  grey: { markup: 0.15, infoKey: 'colorInfo_grey' }, // 15%
+};
+
 export const MOCK_FABRICS: Fabric[] = [
   { 
     id: 'heritage-weave-23', 
@@ -42,7 +62,8 @@ export const MOCK_FABRICS: Fabric[] = [
     weightKey: 'midWeight', 
     shadeKey: 'pearlWhite', 
     collectionKey: 'heritage',
-    widthInMeters: 1.5 
+    widthInMeters: 1.5,
+    availableColors: ['white', 'black', 'earthTones', 'blue']
   },
   { 
     id: 'crisp-twill-w-23', 
@@ -61,7 +82,8 @@ export const MOCK_FABRICS: Fabric[] = [
     weightKey: 'midWeight', 
     shadeKey: 'pureWhite', 
     collectionKey: 'heritage',
-    widthInMeters: 1.5 
+    widthInMeters: 1.5,
+    availableColors: ['white', 'black', 'grey', 'redMaroon']
   },
   { 
     id: 'performance-matte-50', 
@@ -80,7 +102,8 @@ export const MOCK_FABRICS: Fabric[] = [
     weightKey: 'midWeight',
     shadeKey: 'pureWhite', 
     collectionKey: 'performance',
-    widthInMeters: 1.5 
+    widthInMeters: 1.5,
+    availableColors: ['white', 'black', 'grey', 'blue']
   },
   { 
     id: 'feather-silk-23', 
@@ -99,7 +122,8 @@ export const MOCK_FABRICS: Fabric[] = [
     weightKey: 'ultraLight', 
     shadeKey: 'cream', 
     collectionKey: 'heritage',
-    widthInMeters: 1.4 
+    widthInMeters: 1.4,
+    availableColors: ['white', 'earthTones', 'green']
   },
   { 
     id: 'lustre-twill-23', 
@@ -118,7 +142,8 @@ export const MOCK_FABRICS: Fabric[] = [
     weightKey: 'midWeight', 
     shadeKey: 'opticWhite', 
     collectionKey: 'heritage',
-    widthInMeters: 1.5 
+    widthInMeters: 1.5,
+    availableColors: ['white', 'black']
   },
   { 
     id: 'non-iron-cotton-25', 
@@ -137,7 +162,8 @@ export const MOCK_FABRICS: Fabric[] = [
     weightKey: 'midWeight', 
     shadeKey: 'pureWhite', 
     collectionKey: 'performance',
-    widthInMeters: 1.5 
+    widthInMeters: 1.5,
+    availableColors: ['white', 'black', 'blue']
   },
   { 
     id: 'wind-voile-50', 
@@ -156,7 +182,8 @@ export const MOCK_FABRICS: Fabric[] = [
     weightKey: 'ultraLight', 
     shadeKey: 'softCream', 
     collectionKey: 'performance',
-    widthInMeters: 1.5 
+    widthInMeters: 1.5,
+    availableColors: ['white', 'earthTones']
   },
 ];
 
@@ -216,72 +243,77 @@ export const FEATURE_ICONS: Record<string, React.FC<any>> = {
   easyCare: EasyCareIcon,
 };
 
-export const BACKGROUND_IMAGES = [
-  "https://i.postimg.cc/L8YgkMvj/IKSA-The-Thobe-Guide-001.webp",
-  "https://i.postimg.cc/Hnvj5SyS/IKSA-The-Thobe-Guide-0010.webp",
-  "https://i.postimg.cc/1Rv8Lzjp/IKSA-The-Thobe-Guide-0011.webp",
-  "https://i.postimg.cc/htdhz1Pr/IKSA-The-Thobe-Guide-0012.webp",
-  "https://i.postimg.cc/QxVFsr2v/IKSA-The-Thobe-Guide-0013.webp",
-  "https://i.postimg.cc/CKp5jnRV/IKSA-The-Thobe-Guide-0014.webp",
-  "https://i.postimg.cc/L67n8bR5/IKSA-The-Thobe-Guide-0015.webp",
-  "https://i.postimg.cc/XvKJxN5B/IKSA-The-Thobe-Guide-0016.webp",
-  "https://i.postimg.cc/Kjj8ZnHt/IKSA-The-Thobe-Guide-0017.webp",
-  "https://i.postimg.cc/XJVvPMKH/IKSA-The-Thobe-Guide-0018.webp",
-  "https://i.postimg.cc/fLBbnHBw/IKSA-The-Thobe-Guide-0019.webp",
-  "https://i.postimg.cc/KvsggY7Z/IKSA-The-Thobe-Guide-002.webp",
-  "https://i.postimg.cc/4423WSYP/IKSA-The-Thobe-Guide-0020.webp",
-  "https://i.postimg.cc/prSXypw4/IKSA-The-Thobe-Guide-0021.webp",
-  "https://i.postimg.cc/PrL59QZj/IKSA-The-Thobe-Guide-0022.webp",
-  "https://i.postimg.cc/8PqzSfBr/IKSA-The-Thobe-Guide-0023.webp",
-  "https://i.postimg.cc/MpVKKZd3/IKSA-The-Thobe-Guide-0024.webp",
-  "https://i.postimg.cc/YS724cPr/IKSA-The-Thobe-Guide-0025.webp",
-  "https://i.postimg.cc/QMq814Lp/IKSA-The-Thobe-Guide-0026.webp",
-  "https://i.postimg.cc/1RBFsBfV/IKSA-The-Thobe-Guide-003.webp",
-  "https://i.postimg.cc/fTb9Ld92/IKSA-The-Thobe-Guide-004.webp",
-  "https://i.postimg.cc/1zDgTckt/IKSA-The-Thobe-Guide-005.webp",
-  "https://i.postimg.cc/cHmv114G/IKSA-The-Thobe-Guide-006.webp",
-  "https://i.postimg.cc/kg06fhhz/IKSA-The-Thobe-Guide-007.webp",
-  "https://i.postimg.cc/9MV4jw2B/IKSA-The-Thobe-Guide-008.webp",
-  "https://i.postimg.cc/HnkVrGVc/IKSA-The-Thobe-Guide-009.webp",
+export const BACKGROUND_IMAGES: string[] = [
+  'https://i.postimg.cc/BvW4fV2v/fabric-roll-collection-showcase-1.webp',
+  'https://i.postimg.cc/t4d7WvHh/fabric-roll-collection-showcase-2.webp',
+  'https://i.postimg.cc/wMsGtyXw/fabric-roll-collection-showcase-3.webp',
+  'https://i.postimg.cc/sXq0XkY5/fabric-roll-collection-showcase-4.webp',
+  'https://i.postimg.cc/wBq3y8yF/fabric-roll-shikibo-twill.webp',
+  'https://i.postimg.cc/G3x7zFmC/fabric-roll-nisshinbo-cotton.webp',
+  'https://i.postimg.cc/cCGJm7jJ/fabric-roll-ichimura-voile.webp',
+  'https://i.postimg.cc/y8gS2k42/about-us-summary.webp',
+  'https://i.postimg.cc/50v2f5fK/artisans-tool-summary.webp',
+  'https://i.postimg.cc/j2pT7Pq5/fabric-detail-drape.webp',
+  'https://i.postimg.cc/KzT5V0hB/fabric-detail-texture.webp',
+  'https://i.postimg.cc/W1SbcL5L/IKSA-hero-background-001.webp',
+  'https://i.postimg.cc/sgfscHsn/IKSA-hero-background-0010.webp',
+  'https://i.postimg.cc/XY23DKvn/IKSA-hero-background-0011.webp',
+  'https://i.postimg.cc/g0nd9ww8/IKSA-hero-background-0012.webp',
+  'https://i.postimg.cc/R0ymvMf8/IKSA-hero-background-0013.webp',
+  'https://i.postimg.cc/Qt73tRJM/IKSA-hero-background-0014.webp',
+  'https://i.postimg.cc/D0KKbBxP/IKSA-hero-background-0015.webp',
+  'https://i.postimg.cc/1Xc10wTh/IKSA-hero-background-0016.webp',
+  'https://i.postimg.cc/FzjNP2Y6/IKSA-hero-background-002.webp',
+  'https://i.postimg.cc/PqRXNbGS/IKSA-hero-background-003.webp',
+  'https://i.postimg.cc/Bv6ZqYz8/IKSA-hero-background-004.webp',
+  'https://i.postimg.cc/wvR6Ntgg/IKSA-hero-background-005.webp',
+  'https://i.postimg.cc/sDrVBD8C/IKSA-hero-background-006.webp',
+  'https://i.postimg.cc/L5dm3H8f/IKSA-hero-background-007.webp',
+  'https://i.postimg.cc/mZML2FmS/IKSA-hero-background-008.webp',
+  'https://i.postimg.cc/DyP713kJ/IKSA-hero-background-009.webp',
 ];
 
-export const THOBE_GUIDE_BACKGROUND_IMAGES = [
-  "https://i.postimg.cc/L8YgkMvj/IKSA-The-Thobe-Guide-001.webp",
-  "https://i.postimg.cc/Hnvj5SyS/IKSA-The-Thobe-Guide-0010.webp",
-  "https://i.postimg.cc/1Rv8Lzjp/IKSA-The-Thobe-Guide-0011.webp",
-  "https://i.postimg.cc/htdhz1Pr/IKSA-The-Thobe-Guide-0012.webp",
-  "https://i.postimg.cc/QxVFsr2v/IKSA-The-Thobe-Guide-0013.webp",
-  "https://i.postimg.cc/CKp5jnRV/IKSA-The-Thobe-Guide-0014.webp",
-  "https://i.postimg.cc/L67n8bR5/IKSA-The-Thobe-Guide-0015.webp",
-  "https://i.postimg.cc/XvKJxN5B/IKSA-The-Thobe-Guide-0016.webp",
-  "https://i.postimg.cc/Kjj8ZnHt/IKSA-The-Thobe-Guide-0017.webp",
-  "https://i.postimg.cc/XJVvPMKH/IKSA-The-Thobe-Guide-0018.webp",
-  "https://i.postimg.cc/fLBbnHBw/IKSA-The-Thobe-Guide-0019.webp",
-  "https://i.postimg.cc/KvsggY7Z/IKSA-The-Thobe-Guide-002.webp",
-  "https://i.postimg.cc/4423WSYP/IKSA-The-Thobe-Guide-0020.webp",
-  "https://i.postimg.cc/prSXypw4/IKSA-The-Thobe-Guide-0021.webp",
-  "https://i.postimg.cc/PrL59QZj/IKSA-The-Thobe-Guide-0022.webp",
-  "https://i.postimg.cc/8PqzSfBr/IKSA-The-Thobe-Guide-0023.webp",
-  "https://i.postimg.cc/MpVKKZd3/IKSA-The-Thobe-Guide-0024.webp",
-  "https://i.postimg.cc/YS724cPr/IKSA-The-Thobe-Guide-0025.webp",
-  "https://i.postimg.cc/QMq814Lp/IKSA-The-Thobe-Guide-0026.webp",
-  "https://i.postimg.cc/1RBFsBfV/IKSA-The-Thobe-Guide-003.webp",
-  "https://i.postimg.cc/fTb9Ld92/IKSA-The-Thobe-Guide-004.webp",
-  "https://i.postimg.cc/1zDgTckt/IKSA-The-Thobe-Guide-005.webp",
-  "https://i.postimg.cc/cHmv114G/IKSA-The-Thobe-Guide-006.webp",
-  "https://i.postimg.cc/kg06fhhz/IKSA-The-Thobe-Guide-007.webp",
-  "https://i.postimg.cc/9MV4jw2B/IKSA-The-Thobe-Guide-008.webp",
-  "https://i.postimg.cc/HnkVrGVc/IKSA-The-Thobe-Guide-009.webp",
+export const THOBE_GUIDE_BACKGROUND_IMAGES: string[] = [
+  'https://i.postimg.cc/q7x2D1rD/article-regional-styles.webp',
+  'https://i.postimg.cc/5N18qDML/article-sundus-casa.webp',
+  'https://i.postimg.cc/9Q2w0h1G/article-fabric-science.webp',
+  'https://i.postimg.cc/2j5T00Fw/inspiration-kandura.webp',
+  'https://i.postimg.cc/k4GkYyv0/inspiration-abaya.webp',
+  'https://i.postimg.cc/L8YgkMvj/IKSA-The-Thobe-Guide-001.webp',
+  'https://i.postimg.cc/Hnvj5SyS/IKSA-The-Thobe-Guide-0010.webp',
+  'https://i.postimg.cc/1Rv8Lzjp/IKSA-The-Thobe-Guide-0011.webp',
+  'https://i.postimg.cc/htdhz1Pr/IKSA-The-Thobe-Guide-0012.webp',
+  'https://i.postimg.cc/QxVFsr2v/IKSA-The-Thobe-Guide-0013.webp',
+  'https://i.postimg.cc/CKp5jnRV/IKSA-The-Thobe-Guide-0014.webp',
+  'https://i.postimg.cc/L67n8bR5/IKSA-The-Thobe-Guide-0015.webp',
+  'https://i.postimg.cc/XvKJxN5B/IKSA-The-Thobe-Guide-0016.webp',
+  'https://i.postimg.cc/Kjj8ZnHt/IKSA-The-Thobe-Guide-0017.webp',
+  'https://i.postimg.cc/XJVvPMKH/IKSA-The-Thobe-Guide-0018.webp',
+  'https://i.postimg.cc/fLBbnHBw/IKSA-The-Thobe-Guide-0019.webp',
+  'https://i.postimg.cc/KvsggY7Z/IKSA-The-Thobe-Guide-002.webp',
+  'https://i.postimg.cc/1RBFsBfV/IKSA-The-Thobe-Guide-003.webp',
+  'https://i.postimg.cc/fTb9Ld92/IKSA-The-Thobe-Guide-004.webp',
+  'https://i.postimg.cc/1zDgTckt/IKSA-The-Thobe-Guide-005.webp',
+  'https://i.postimg.cc/cHmv114G/IKSA-The-Thobe-Guide-006.webp',
+  'https://i.postimg.cc/kg06fhhz/IKSA-The-Thobe-Guide-007.webp',
+  'https://i.postimg.cc/9MV4jw2B/IKSA-The-Thobe-Guide-008.webp',
+  'https://i.postimg.cc/HnkVrGVc/IKSA-The-Thobe-Guide-009.webp',
 ];
 
-export const getRandomImage = (sourceArray: string[], excludeUrl: string | null = null): string => {
-  if (sourceArray.length === 0) return '';
-  if (sourceArray.length === 1) return sourceArray[0];
+export const getRandomImage = (imageArray: string[], currentImage?: string): string => {
+  if (!imageArray || imageArray.length === 0) {
+    return ''; // Return a default or empty string if the array is invalid
+  }
   
+  if (imageArray.length === 1) {
+    return imageArray[0];
+  }
+
   let newImage;
   do {
-    const randomIndex = Math.floor(Math.random() * sourceArray.length);
-    newImage = sourceArray[randomIndex];
-  } while (newImage === excludeUrl);
+    const randomIndex = Math.floor(Math.random() * imageArray.length);
+    newImage = imageArray[randomIndex];
+  } while (newImage === currentImage);
+
   return newImage;
 };

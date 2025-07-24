@@ -67,7 +67,7 @@ export const AcquirePage: React.FC = () => {
         pagePath="/acquire"
       />
       <div className="py-12 md:py-16 transition-all duration-1000 ease-in-out">
-        <div className="bg-stone-50/90 backdrop-blur-sm p-8 rounded-lg mb-12">
+        <div className="bg-stone-50/50 backdrop-blur-xl p-8 rounded-lg mb-12">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-display font-bold text-stone-800 mb-8 md:mb-10 text-center section-title-underline transition-all duration-700 ease-in-out delay-100">
               {translate('acquire_pageTitle')}
             </h1>
@@ -78,7 +78,7 @@ export const AcquirePage: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
           {/* Contact Information Section */}
-          <section className="bg-white/90 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-xl border border-stone-200/50 transition-all duration-700 ease-in-out delay-300">
+          <section className="bg-white/50 backdrop-blur-xl p-6 md:p-8 rounded-lg shadow-xl border border-stone-200/50 transition-all duration-700 ease-in-out delay-300">
             <h2 className="text-2xl md:text-3xl font-serif-display font-semibold text-brandAccent-700 mb-6 md:mb-8 section-title-underline">
               {translate('footer_contactTitle')}
             </h2>
@@ -99,7 +99,7 @@ export const AcquirePage: React.FC = () => {
           </section>
 
           {/* Contact Form Section */}
-          <section className="bg-white/70 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-xl border border-stone-200/50 transition-all duration-700 ease-in-out delay-400">
+          <section className="bg-white/50 backdrop-blur-xl p-6 md:p-8 rounded-lg shadow-xl border border-stone-200/50 transition-all duration-700 ease-in-out delay-400">
             <h2 className="text-2xl md:text-3xl font-serif-display font-semibold text-brandAccent-700 mb-6 md:mb-8 section-title-underline">
               {translate('acquire_formTitle')}
             </h2>
@@ -163,7 +163,7 @@ export const AcquirePage: React.FC = () => {
 
         {/* Google Maps Section */}
         <section className="mt-12 md:mt-16 transition-all duration-700 ease-in-out delay-500">
-            <div className="bg-white/90 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-xl border border-stone-200/50">
+            <div className="bg-white/50 backdrop-blur-xl p-6 md:p-8 rounded-lg shadow-xl border border-stone-200/50">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif-display font-semibold text-stone-800 mb-6 md:mb-8 text-center section-title-underline">
                 {translate('acquire_mapTitle')}
               </h2>

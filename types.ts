@@ -30,6 +30,7 @@ export interface Fabric {
   shadeKey: string; // e.g., 'pureWhite', 'pearlWhite'
   collectionKey: string; // e.g., 'heritage', 'performance'
   widthInMeters: number; 
+  availableColors?: string[]; // e.g., ['white', 'black', 'earthTones']
 }
 
 export interface GarmentSize {

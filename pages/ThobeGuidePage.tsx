@@ -17,7 +17,7 @@ const GuideTable: React.FC<{ caption: string; headersJSON: string; rowsJSON:stri
         return (
             <div className="my-10 not-prose">
                 <h4 className="text-lg font-semibold text-warm-terracotta mb-4 italic text-center">{caption}</h4>
-                <div className="overflow-x-auto bg-white/90 backdrop-blur-sm rounded-lg shadow-md border border-soft-sand">
+                <div className="overflow-x-auto bg-white/50 backdrop-blur-xl rounded-lg shadow-md border border-soft-sand">
                     <table className="min-w-full divide-y divide-soft-sand">
                         <thead className="bg-creamy-beige/30">
                             <tr>
@@ -84,7 +84,7 @@ const useScrollSpy = (ids: string[], options?: IntersectionObserverInit): string
 
 const ArticleCard: React.FC<{id: string; children: React.ReactNode;}> = ({ id, children }) => {
     return (
-         <section id={id} className="scroll-mt-28 bg-white/70 backdrop-blur-sm p-8 md:p-12 rounded-lg shadow-lg">
+         <section id={id} className="scroll-mt-28 bg-white/50 backdrop-blur-xl p-8 md:p-12 rounded-lg shadow-lg">
             <article className="prose prose-stone lg:prose-lg max-w-none 
                 text-deep-chocolate 
                 prose-headings:text-warm-terracotta prose-h1:text-muted-gold 

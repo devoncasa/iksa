@@ -1,4 +1,6 @@
 
+
+
 import React, { useState, useEffect, useCallback } from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 import { BACKGROUND_IMAGES, THOBE_GUIDE_BACKGROUND_IMAGES, getRandomImage } from '../constants';
@@ -46,10 +48,11 @@ export const GlobalBackground: React.FC = () => {
         style={{
           backgroundImage: `url('${backgroundImage}')`,
           backgroundAttachment: 'fixed', // This creates the classic "still parallax" effect
-          filter: 'blur(3px)',
+          filter: 'blur(4px)',
+          transform: 'scale(1.05)',
         }}
       ></div>
-      <div className="absolute inset-0 bg-white opacity-10"></div>
+      <div className="absolute inset-0 bg-white/30"></div>
     </div>
   );
 };

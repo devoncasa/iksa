@@ -1,9 +1,10 @@
 
+
 import React, { useState, useMemo } from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { Button } from '../components/Button';
-import { MOCK_FABRICS, FABRIC_FILTERS, FEATURE_ICONS } from '../constants';
+import { MOCK_FABRICS, FABRIC_FILTERS, FEATURE_ICONS, COLOR_MARKUPS } from '../constants';
 import { Fabric } from '../types';
 import { SEOMetadata } from '../components/SEOMetadata';
 
@@ -20,9 +21,19 @@ const FabricCard: React.FC<{ fabric: Fabric; }> = ({ fabric }) => {
   const defaultThobeMeters = 2.9;
   const estimatedYield = Math.floor(fabric.rollLengthInMeters / defaultThobeMeters);
 
+  const priceRange = useMemo(() => {
+    if (!fabric.availableColors || fabric.availableColors.length <= 1) {
+      return { min: fabric.pricePerRoll, max: fabric.pricePerRoll };
+    }
+    const markups = fabric.availableColors.map(color => COLOR_MARKUPS[color]?.markup || 0);
+    const maxMarkup = Math.max(...markups);
+    const maxPrice = fabric.pricePerRoll * (1 + maxMarkup);
+    return { min: fabric.pricePerRoll, max: maxPrice };
+  }, [fabric]);
+
   return (
     <div 
-      className="bg-white/70 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 ease-in-out transform hover:shadow-xl hover:-translate-y-1 border border-stone-200/50 group h-full" 
+      className="bg-white/50 backdrop-blur-xl rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 ease-in-out transform hover:shadow-xl hover:-translate-y-1 border border-stone-200/50 group h-full" 
       id={fabric.id} 
     >
       <div className="relative overflow-hidden">
@@ -48,7 +59,14 @@ const FabricCard: React.FC<{ fabric: Fabric; }> = ({ fabric }) => {
               ) : null;
             })}
           </div>
-          <p className="text-xl md:text-2xl font-semibold text-brandAccent-800">${fabric.pricePerRoll.toFixed(2)} <span className="text-lg text-stone-600 font-normal">{translate('pricePerRoll')}</span></p> 
+          {priceRange.min === priceRange.max ? (
+            <p className="text-xl md:text-2xl font-semibold text-brandAccent-800">${fabric.pricePerRoll.toFixed(2)} <span className="text-lg text-stone-600 font-normal">{translate('pricePerRoll')}</span></p> 
+          ) : (
+            <p className="text-xl md:text-2xl font-semibold text-brandAccent-800">
+                ${priceRange.min.toFixed(2)} - ${priceRange.max.toFixed(2)}
+                <span className="block text-sm text-stone-500 font-normal -mt-1">{translate('priceVariesByColor')}</span>
+            </p>
+          )}
         </div>
         
         <div className="mt-auto"> 
@@ -96,7 +114,7 @@ const FabricFilter: React.FC<{
   );
 
   return (
-    <div className="bg-white/70 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-lg mb-10 md:mb-16 border border-stone-200/50 transition-all duration-700 ease-in-out"> 
+    <div className="bg-white/50 backdrop-blur-xl p-6 md:p-8 rounded-lg shadow-lg mb-10 md:mb-16 border border-stone-200/50 transition-all duration-700 ease-in-out"> 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"> 
         {renderSelect('useCase', FABRIC_FILTERS.useCases)}
         {renderSelect('feel', FABRIC_FILTERS.feel)}
@@ -141,7 +159,7 @@ export const CollectionsPage: React.FC = () => {
         pagePath="/collections"
       />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12"> 
-        <div className="text-center mb-10 md:mb-12 bg-stone-50/90 backdrop-blur-sm p-8 rounded-lg">
+        <div className="text-center mb-10 md:mb-12 bg-stone-50/50 backdrop-blur-xl p-8 rounded-lg">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-display font-bold text-stone-800 mb-4">{translate('collections_heroTitle')}</h1>
             <p className="text-lg text-stone-700 max-w-3xl mx-auto">{translate('collections_heroSubtitle')}</p>
             <ReactRouterDOM.Link to="/price-structure" className="mt-6 inline-block">
@@ -149,7 +167,7 @@ export const CollectionsPage: React.FC = () => {
             </ReactRouterDOM.Link>
         </div>
 
-        <div className="bg-white/70 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-lg mb-10 md:mb-16 border border-stone-200/50">
+        <div className="bg-white/50 backdrop-blur-xl p-6 md:p-8 rounded-lg shadow-lg mb-10 md:mb-16 border border-stone-200/50">
           <FabricFilter filters={filters} onFilterChange={handleFilterChange} />
         </div>
         
@@ -164,7 +182,7 @@ export const CollectionsPage: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center bg-white/70 backdrop-blur-sm rounded-lg p-16">
+          <div className="text-center bg-white/50 backdrop-blur-xl rounded-lg p-16">
             <p className="text-stone-500 text-xl">{translate('noResultsFound')}</p> 
           </div>
         )}

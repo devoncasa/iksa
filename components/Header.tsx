@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
@@ -25,23 +24,24 @@ export const Header: React.FC = () => {
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-    `relative py-2 px-1 text-sm font-medium transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-brandAccent-600 focus:ring-offset-2 focus:ring-offset-stone-900 rounded-sm
+    `relative py-2 px-1 text-sm font-medium transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-brandAccent-600 focus:ring-offset-2 focus:ring-offset-creamy-beige rounded-sm
+     after:content-[""] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:bg-white after:transition-all after:duration-300 after:ease-in-out
      ${isActive
-        ? 'text-brandAccent-500 after:content-[""] after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-brandAccent-600'
-        : 'text-stone-300 hover:text-white after:content-[""] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-0.5 after:bg-brandAccent-600 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full'
+        ? 'text-white after:w-full'
+        : 'text-deep-chocolate hover:text-white after:w-0 hover:after:w-full'
      }`;
 
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out bg-black/5 shadow-md backdrop-blur-lg border-b border-white/10`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out bg-creamy-beige/75 shadow-md backdrop-blur-xl border-b border-warm-terracotta/20`}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 md:h-24">
             <div className="flex-shrink-0">
-              <ReactRouterDOM.Link to="/" className="flex items-center gap-x-3 bg-white/70 backdrop-blur-sm px-3 py-1.5 rounded-xl shadow-sm transition-all duration-300 hover:shadow-md">
-                <img src="https://i.postimg.cc/W3Lp1gQ5/IKSA-logo.webp" alt="IKSA Logo" className="h-11 md:h-14 w-auto" />
-                <img src="https://i.postimg.cc/vDBfC7zB/IKSA-name.webp" alt="IKSA" className="h-7 md:h-9 w-auto" />
+              <ReactRouterDOM.Link to="/" className="relative z-10 flex items-center gap-x-3 bg-white/70 backdrop-blur-sm px-3 py-1.5 rounded-xl shadow-sm transition-all duration-300 hover:shadow-md">
+                <img src="https://i.postimg.cc/mZSFSj42/iksa-logo.webp" alt="IKSA Logo" className="h-11 md:h-14 w-auto" />
+                <img src="https://i.postimg.cc/C5JBLh7f/iksa-name-logo.webp" alt="IKSA" className="h-7 md:h-9 w-auto" />
               </ReactRouterDOM.Link>
             </div>
 
@@ -60,7 +60,7 @@ export const Header: React.FC = () => {
             <div className="flex items-center">
               <button
                 onClick={() => setIsCartOpen(true)}
-                className="relative p-2 rounded-full text-stone-300 hover:text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-stone-900 focus:ring-white"
+                className="relative p-2 rounded-full text-deep-chocolate hover:text-white hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-creamy-beige focus:ring-white"
                 aria-label="Open shopping cart"
               >
                 <ShoppingCartIcon className="h-6 w-6" />
@@ -74,7 +74,7 @@ export const Header: React.FC = () => {
                 <button
                   onClick={toggleMobileMenu}
                   type="button"
-                  className="ml-2 inline-flex items-center justify-center p-2 rounded-md text-stone-300 hover:text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  className="ml-2 inline-flex items-center justify-center p-2 rounded-md text-deep-chocolate hover:text-white hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                   aria-controls="mobile-menu"
                   aria-expanded={isMobileMenuOpen}
                 >
@@ -95,16 +95,16 @@ export const Header: React.FC = () => {
           id="mobile-menu"
         >
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={toggleMobileMenu}></div>
-          <div className={`fixed top-0 right-0 bottom-0 z-50 w-64 bg-brandAccent-50 p-5 shadow-xl transition-transform duration-300 ease-in-out flex flex-col ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <div className={`fixed top-0 right-0 bottom-0 z-50 w-64 bg-creamy-beige p-5 shadow-xl transition-transform duration-300 ease-in-out flex flex-col ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
             <div className="flex items-center justify-between mb-8">
-              <ReactRouterDOM.Link to="/" className="flex items-center gap-x-3">
-                <img src="https://i.postimg.cc/W3Lp1gQ5/IKSA-logo.webp" alt="IKSA Logo" className="h-11 w-auto" />
-                <img src="https://i.postimg.cc/vDBfC7zB/IKSA-name.webp" alt="IKSA" className="h-7 w-auto" />
+              <ReactRouterDOM.Link to="/" className="relative z-10 flex items-center gap-x-3">
+                <img src="https://i.postimg.cc/mZSFSj42/iksa-logo.webp" alt="IKSA Logo" className="h-11 w-auto" />
+                <img src="https://i.postimg.cc/C5JBLh7f/iksa-name-logo.webp" alt="IKSA" className="h-7 w-auto" />
               </ReactRouterDOM.Link>
               <button
                 onClick={toggleMobileMenu}
                 type="button"
-                className="p-2 rounded-md text-stone-600 hover:text-brandAccent-800 hover:bg-brandAccent-200 focus:outline-none focus:ring-2 focus:ring-brandAccent-600"
+                className="p-2 rounded-md text-deep-chocolate hover:text-warm-terracotta hover:bg-brandAccent-200 focus:outline-none focus:ring-2 focus:ring-brandAccent-600"
               >
                 <span className="sr-only">Close menu</span>
                 <CloseIcon className="h-6 w-6" />
@@ -120,8 +120,8 @@ export const Header: React.FC = () => {
                       className={({ isActive }) =>
                         `block py-2 px-3 rounded-md text-base font-medium transition-colors duration-150 ease-in-out ${
                           isActive
-                            ? 'bg-brandAccent-800 text-white'
-                            : 'text-stone-700 hover:bg-brandAccent-200 hover:text-stone-800'
+                            ? 'bg-warm-terracotta text-white'
+                            : 'text-deep-chocolate hover:bg-warm-terracotta hover:text-white'
                         }`
                       }
                     >

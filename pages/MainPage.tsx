@@ -13,7 +13,7 @@ const HeroSection: React.FC = () => {
     const { translate } = useLanguage();
     return (
         <section className="relative min-h-[60vh] md:min-h-[75vh] flex items-center justify-center text-center p-4">
-            <div className="relative z-10 max-w-4xl w-full p-8 md:p-12 bg-gradient-to-br from-stone-100/90 to-brandAccent-100/90 backdrop-blur-sm rounded-xl shadow-2xl">
+            <div className="relative z-10 max-w-4xl w-full p-8 md:p-12 bg-gradient-to-br from-stone-100/50 to-brandAccent-100/50 backdrop-blur-xl rounded-xl shadow-2xl">
                 <h1 className="font-serif-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight text-brandAccent-800 animate-fadeInUp">
                   {translate('main_heroTitle')}
                 </h1>
@@ -46,7 +46,7 @@ const MarketInsightsSection: React.FC = () => {
     return (
         <section ref={ref} className="my-16 md:my-24">
             <div className={`container mx-auto px-4 sm:px-6 lg:px-8`}>
-                <div className={`bg-white/90 backdrop-blur-sm p-8 md:p-12 rounded-xl shadow-2xl ${isVisible ? 'section-visible' : ''}`}>
+                <div className={`bg-white/50 backdrop-blur-xl p-8 md:p-12 rounded-xl shadow-2xl ${isVisible ? 'section-visible' : ''}`}>
                     <h2 className={`text-3xl md:text-4xl font-serif-display font-semibold text-center mb-12 text-stone-800 section-title-underline scroll-animate ${isVisible ? 'is-visible' : ''}`}>
                         {translate('main_marketInsights_title')}
                     </h2>
@@ -79,7 +79,7 @@ interface InfoSectionProps {
 const InfoSection: React.FC<InfoSectionProps> = ({ titleKey, contentKey, ctaKey, linkTo, imageSrc, imageAltKey, reverseLayout = false, titleColor = 'text-stone-800', isPrimaryBg = true }) => {
   const { translate } = useLanguage();
   const { ref, isVisible } = useScrollAnimation<HTMLDivElement>(0.2);
-  const bgColor = isPrimaryBg ? 'bg-stone-50/90' : 'bg-stone-100/90';
+  const bgColor = isPrimaryBg ? 'bg-stone-50/50' : 'bg-stone-100/50';
 
   const textContent = (
     <div className={`md:w-1/2 flex flex-col justify-center`}>
@@ -109,7 +109,7 @@ const InfoSection: React.FC<InfoSectionProps> = ({ titleKey, contentKey, ctaKey,
   return (
     <section ref={ref} className="my-8 md:my-12"> 
       <div className={`container mx-auto px-4 sm:px-6 lg:px-8 ${isVisible ? 'section-visible' : ''}`}> 
-        <div className={`flex flex-col md:flex-row items-center gap-10 md:gap-16 ${bgColor} backdrop-blur-sm p-8 md:p-12 rounded-xl shadow-xl ${reverseLayout ? 'md:flex-row-reverse' : ''}`}>
+        <div className={`flex flex-col md:flex-row items-center gap-10 md:gap-16 ${bgColor} backdrop-blur-xl p-8 md:p-12 rounded-xl shadow-xl ${reverseLayout ? 'md:flex-row-reverse' : ''}`}>
             {textContent}
             {imageContent}
         </div>
@@ -123,7 +123,7 @@ const FinalCTASection: React.FC = () => {
     return (
         <section className="my-16 md:my-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="bg-brandAccent-800/80 backdrop-blur-sm text-white text-center p-8 md:p-16 rounded-xl shadow-2xl">
+                <div className="bg-brandAccent-800/60 backdrop-blur-xl text-white text-center p-8 md:p-16 rounded-xl shadow-2xl">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif-display font-semibold mb-6 md:mb-8 section-title-underline">{translate('main_final_cta_title')}</h2>
                     <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed">{translate('main_final_cta_content')}</p>
                     <ReactRouterDOM.Link to="/acquire">

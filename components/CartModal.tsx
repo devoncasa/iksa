@@ -35,7 +35,7 @@ export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
       aria-labelledby="cartModalTitle"
     >
       <div
-        className="fixed top-0 right-0 h-full w-full max-w-md bg-stone-50/80 backdrop-blur-md shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out"
+        className="fixed top-0 right-0 h-full w-full max-w-md bg-stone-50/60 backdrop-blur-xl shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between p-6 border-b border-stone-200/50">
@@ -93,7 +93,7 @@ export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         {cart.length > 0 && (
-          <div className="p-6 border-t border-stone-200/50 bg-white/80">
+          <div className="p-6 border-t border-stone-200/50 bg-white/70">
             <div className="flex justify-between items-center mb-4">
               <span className="text-lg font-semibold text-stone-700">{translate('subtotal')}</span>
               <span className="text-2xl font-bold text-brandAccent-800">${totalPrice.toFixed(2)}</span>

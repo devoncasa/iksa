@@ -1,10 +1,10 @@
 
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { useCart } from '../hooks/useCart';
-import { MOCK_FABRICS, GARMENT_CATEGORIES, GARMENT_SIZES, FEATURE_ICONS } from '../constants';
+import { MOCK_FABRICS, GARMENT_CATEGORIES, GARMENT_SIZES, FEATURE_ICONS, COLOR_PALETTE, COLOR_MARKUPS } from '../constants';
 import { Fabric } from '../types';
 import { Button } from '../components/Button';
 import { SEOMetadata } from '../components/SEOMetadata';
@@ -132,9 +132,19 @@ export const ProductDetailPage: React.FC = () => {
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState(fabric?.imageUrl || '');
+  const [selectedColor, setSelectedColor] = useState('white');
+  
+  const displayedPrice = useMemo(() => {
+    if (!fabric) return 0;
+    const markup = COLOR_MARKUPS[selectedColor]?.markup || 0;
+    return fabric.pricePerRoll * (1 + markup);
+  }, [fabric, selectedColor]);
 
-  React.useEffect(() => {
-    setMainImage(fabric?.imageUrl || '');
+  useEffect(() => {
+    if (fabric) {
+        setMainImage(fabric.imageUrl);
+        setSelectedColor('white'); // Reset color on fabric change
+    }
   }, [fabric]);
 
   if (!fabric) {
@@ -159,7 +169,7 @@ export const ProductDetailPage: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
           {/* Image Gallery */}
-          <div className="bg-white/90 p-4 rounded-lg backdrop-blur-sm">
+          <div className="bg-white/50 backdrop-blur-xl p-4 rounded-lg">
             <div className="aspect-square bg-stone-100/90 backdrop-blur-sm rounded-lg overflow-hidden mb-4 shadow-lg">
               <img src={mainImage} alt={translate(fabric.nameKey)} className="w-full h-full object-cover" />
             </div>
@@ -173,10 +183,34 @@ export const ProductDetailPage: React.FC = () => {
           </div>
 
           {/* Product Info, Estimator, and Purchase */}
-          <div className="flex flex-col bg-white/70 backdrop-blur-sm p-8 rounded-lg">
+          <div className="flex flex-col bg-white/50 backdrop-blur-xl p-8 rounded-lg">
             <h1 className="text-3xl sm:text-4xl font-serif-display font-bold text-stone-800 mb-2">{translate(fabric.nameKey)}</h1>
             <p className="text-lg text-stone-600 mb-4">{fabric.rollLengthInMeters}m {translate('pricePerRoll')}</p>
-            <p className="text-4xl font-bold text-brandAccent-800 mb-8">${fabric.pricePerRoll.toFixed(2)}</p>
+            <p className="text-4xl font-bold text-brandAccent-800 mb-4">${displayedPrice.toFixed(2)}</p>
+
+            {fabric.availableColors && fabric.availableColors.length > 1 && (
+                <div className="mb-8">
+                <h3 className="text-md font-semibold text-stone-700 mb-3">Color</h3>
+                <div className="flex flex-wrap gap-3">
+                    {fabric.availableColors.map(colorKey => (
+                    <button
+                        key={colorKey}
+                        onClick={() => setSelectedColor(colorKey)}
+                        className={`w-10 h-10 rounded-full focus:outline-none ring-offset-2 ring-offset-white/80 transition-all duration-150 ${selectedColor === colorKey ? 'ring-2 ring-brandAccent-700' : 'ring-1 ring-transparent hover:ring-1 hover:ring-stone-400'}`}
+                        title={translate(COLOR_PALETTE[colorKey]?.nameKey)}
+                        aria-label={`Select color ${translate(COLOR_PALETTE[colorKey]?.nameKey)}`}
+                    >
+                        <div className={`w-full h-full rounded-full ${COLOR_PALETTE[colorKey]?.className} border border-black/10`}></div>
+                    </button>
+                    ))}
+                </div>
+                {selectedColor !== 'white' && (
+                    <div className="mt-4 p-3 bg-stone-100/90 rounded-md border border-stone-200 text-sm text-stone-600">
+                        <p><strong className="text-stone-700">{translate('colorInfoTitle')}:</strong> {translate(COLOR_MARKUPS[selectedColor]?.infoKey)}</p>
+                    </div>
+                )}
+                </div>
+            )}
             
             <YieldEstimator fabric={fabric} />
 
@@ -194,13 +228,13 @@ export const ProductDetailPage: React.FC = () => {
         </div>
 
         {/* Deep Dive Section */}
-        <section className="mt-16 md:mt-20 bg-white/90 backdrop-blur-sm p-8 rounded-lg">
+        <section className="mt-16 md:mt-20 bg-white/50 backdrop-blur-xl p-8 rounded-lg">
             <h2 className="text-3xl font-serif-display font-semibold text-center text-stone-800 mb-10 section-title-underline">{translate('product_deepDiveTitle')}</h2>
             <DeepDiveTabs fabric={fabric} />
         </section>
 
         {/* Project Inspiration Section */}
-        <section className="mt-16 md:mt-20 bg-white/70 backdrop-blur-sm p-8 rounded-lg">
+        <section className="mt-16 md:mt-20 bg-white/50 backdrop-blur-xl p-8 rounded-lg">
             <h2 className="text-3xl font-serif-display font-semibold text-center text-stone-800 mb-10 section-title-underline">{translate('product_projectInspirationTitle')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div className="text-center">

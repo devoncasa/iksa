@@ -5,7 +5,6 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { CartProvider } from './contexts/CartContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { GlobalBackground } from './components/GlobalBackground';
 import { MainPage } from './pages/MainPage'; 
 import { AboutUsPage } from './pages/AboutUsPage';
 import { CollectionsPage } from './pages/CollectionsPage';
@@ -16,12 +15,13 @@ import { ArtisanToolPage } from './pages/ArtisanToolPage';
 import { AcquirePage } from './pages/AcquirePage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { PriceStructurePage } from './pages/PriceStructurePage';
+import { GlobalBackground } from './components/GlobalBackground';
 
 const MainLayout: React.FC = () => {
   return (
     <>
-      <GlobalBackground />
-      <div className="flex flex-col min-h-screen bg-transparent text-stone-700 font-sans selection:bg-brandAccent-700 selection:text-white overflow-x-hidden">
+      <div className="flex flex-col min-h-screen text-stone-700 font-sans selection:bg-brandAccent-700 selection:text-white overflow-x-hidden isolate">
+        <GlobalBackground />
         <Header />
         <main className="flex-grow pt-20 md:pt-24">
           <ReactRouterDOM.Routes>

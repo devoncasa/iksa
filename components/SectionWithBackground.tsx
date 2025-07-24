@@ -1,4 +1,6 @@
 
+
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 interface SectionWithBackgroundProps {
@@ -68,14 +70,14 @@ export const SectionWithBackground: React.FC<SectionWithBackgroundProps> = ({
           className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
           style={{
             backgroundImage: `url('${backgroundImage}')`,
-            filter: 'blur(15px)',
+            filter: 'blur(4px)',
             transform: `scale(1.1) translateY(${offsetY}px)`,
             opacity: loading ? 0 : 1,
           }}
         ></div>
       )}
 
-      <div className="absolute inset-0 bg-white opacity-15"></div>
+      <div className="absolute inset-0 bg-white opacity-30"></div>
 
       <div className="relative z-10 p-6 md:p-10 max-w-4xl mx-auto bg-white/80 backdrop-blur-sm rounded-xl shadow-2xl">
         {children}

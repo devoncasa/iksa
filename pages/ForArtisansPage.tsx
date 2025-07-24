@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
@@ -19,7 +20,7 @@ const CommitmentPoint: React.FC<PointProps> = ({ titleKey, itemsKeys, promiseKey
   return (
     <div 
       ref={ref}
-      className={`mb-10 md:mb-12 p-6 md:p-8 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-stone-200/50 transition-all duration-700 ease-in-out hover:shadow-xl hover:-translate-y-1 scroll-animate ${isVisible ? 'is-visible' : ''}`}
+      className={`mb-10 md:mb-12 p-6 md:p-8 bg-white/50 backdrop-blur-xl rounded-lg shadow-lg border border-stone-200/50 transition-all duration-700 ease-in-out hover:shadow-xl hover:-translate-y-1 scroll-animate ${isVisible ? 'is-visible' : ''}`}
     >
       <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold text-brandAccent-700 mb-5 md:mb-6 font-serif-display">{translate(titleKey)}</h3> 
       <ul className="space-y-2.5 md:space-y-3 mb-5 md:mb-6 list-disc list-inside text-stone-700 text-sm md:text-base leading-relaxed"> 
@@ -54,7 +55,7 @@ export const ForArtisansPage: React.FC = () => {
         pagePath="/for-artisans"
       />
       <div className="py-12 md:py-16 max-w-4xl mx-auto"> 
-        <header ref={ref} className={`text-center mb-12 md:mb-16 bg-stone-50/90 backdrop-blur-sm p-8 rounded-lg transition-all duration-700 ease-in-out ${isVisible ? 'is-visible section-visible' : ''}`}>
+        <header ref={ref} className={`text-center mb-12 md:mb-16 bg-stone-50/50 backdrop-blur-xl p-8 rounded-lg transition-all duration-700 ease-in-out ${isVisible ? 'is-visible section-visible' : ''}`}>
           <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-brandAccent-700 mb-6 md:mb-8 font-serif-display leading-tight section-title-underline scroll-animate ${isVisible ? 'is-visible' : ''}`}> 
             {translate('forArtisans_mainTitle')}
           </h1>
@@ -74,7 +75,7 @@ export const ForArtisansPage: React.FC = () => {
           ))}
         </div>
 
-        <section className="mt-16 md:mt-20 text-center bg-stone-100/90 backdrop-blur-sm p-8 md:p-10 rounded-lg shadow-xl border border-stone-200/50"> 
+        <section className="mt-16 md:mt-20 text-center bg-stone-100/50 backdrop-blur-xl p-8 md:p-10 rounded-lg shadow-xl border border-stone-200/50"> 
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-brandAccent-700 mb-5 md:mb-6 font-serif-display section-title-underline">{translate('forArtisans_conclusion_title')}</h2> 
           <p className="text-base md:text-lg text-stone-800 mb-4 md:mb-5 leading-relaxed">{translate('forArtisans_conclusion_text1')}</p> 
           <p className="text-lg md:text-xl font-bold text-brandAccent-800">{translate('forArtisans_conclusion_text2')}</p> 

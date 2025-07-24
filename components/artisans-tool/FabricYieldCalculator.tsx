@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useLanguage } from '../../hooks/useLanguage';
 import { Button } from '../Button';
@@ -396,7 +397,7 @@ export const FabricYieldCalculator: React.FC = () => {
   const selectOptionClassName = "bg-white text-stone-800 font-medium";
 
   return (
-    <div className="bg-white/70 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-xl border border-stone-200/50 transition-all duration-700 ease-in-out delay-300">
+    <div className="bg-white/50 backdrop-blur-xl p-6 md:p-8 rounded-lg shadow-xl border border-stone-200/50 transition-all duration-700 ease-in-out delay-300">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             {/* Step 1 & 2 */}
             <div>
@@ -503,7 +504,7 @@ export const FabricYieldCalculator: React.FC = () => {
       </Button>
 
       {calculatedYield !== null && selectedFabricObject && selectedGarmentStyleObject && selectedGarmentSizeObject && (
-        <div className="mt-8 p-6 bg-brandAccent-50/70 backdrop-blur-sm rounded-lg text-center border border-brandAccent-200">
+        <div className="mt-8 p-6 bg-brandAccent-50/60 backdrop-blur-sm rounded-lg text-center border border-brandAccent-200">
           <p className="text-stone-700 text-lg mb-2">
             {translate('calculatorResultIntro')
                .replace('{garmentSize}', translate(selectedGarmentSizeObject.nameKey))

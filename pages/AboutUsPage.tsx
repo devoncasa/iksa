@@ -13,7 +13,7 @@ const HeroSection: React.FC = () => {
     <section 
       className="relative min-h-[60vh] md:min-h-[75vh] flex items-center justify-center text-center p-4"
     >
-      <div className="relative z-10 max-w-4xl container mx-auto p-8 md:p-12 bg-stone-100/90 backdrop-blur-sm rounded-xl shadow-2xl">
+      <div className="relative z-10 max-w-4xl container mx-auto p-8 md:p-12 bg-stone-100/50 backdrop-blur-xl rounded-xl shadow-2xl">
         <h1 className="font-serif-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight text-brandAccent-700 opacity-0 animate-fadeInUp" style={{ animationDelay: '0.2s' }}> 
           {translate('about_heroTitle')}
         </h1>
@@ -34,7 +34,7 @@ const FourPillarsSection: React.FC = () => {
   return (
     <section ref={ref} className="my-16 md:my-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`bg-white/90 backdrop-blur-sm p-8 md:p-12 rounded-xl shadow-2xl text-center ${isVisible ? 'section-visible' : ''}`}>
+        <div className={`bg-white/50 backdrop-blur-xl p-8 md:p-12 rounded-xl shadow-2xl text-center ${isVisible ? 'section-visible' : ''}`}>
           <h2 className={`text-3xl md:text-4xl lg:text-5xl font-serif-display font-semibold text-brandAccent-700 mb-12 md:mb-16 scroll-animate ${isVisible ? 'is-visible' : ''} section-title-underline`}>
             {translate('about_pillars_title')}
           </h2>
@@ -63,7 +63,7 @@ const CtaSection: React.FC = () => {
   return (
     <section ref={ref} className="my-16 md:my-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-stone-100/90 backdrop-blur-sm p-8 md:p-12 rounded-xl shadow-2xl text-center">
+        <div className="bg-stone-100/50 backdrop-blur-xl p-8 md:p-12 rounded-xl shadow-2xl text-center">
             <h2 className={`text-3xl md:text-4xl lg:text-5xl font-serif-display font-semibold text-brandAccent-700 mb-6 md:mb-8 scroll-animate ${isVisible ? 'is-visible' : ''} `}>
               {translate('about_cta_title')}
             </h2>
