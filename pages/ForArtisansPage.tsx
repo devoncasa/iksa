@@ -1,22 +1,23 @@
 
 
-
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { SEOMetadata } from '../components/SEOMetadata';
 import { Button } from '../components/Button';
 import { ContentBlock } from '../components/ContentBlock';
+import { generateOrganizationSchema, generateWebsiteSchema } from '../components/Schema';
 
 interface PointProps {
   titleKey: string;
   itemsKeys: string[];
   promiseKey: string;
   imageUrl: string;
+  altKey: string;
   reverseLayout?: boolean;
 }
 
-const CommitmentPoint: React.FC<PointProps> = ({ titleKey, itemsKeys, promiseKey, imageUrl, reverseLayout = false }) => {
+const CommitmentPoint: React.FC<PointProps> = ({ titleKey, itemsKeys, promiseKey, imageUrl, altKey, reverseLayout = false }) => {
   const { translate } = useLanguage();
 
   const textContent = (
@@ -33,11 +34,13 @@ const CommitmentPoint: React.FC<PointProps> = ({ titleKey, itemsKeys, promiseKey
 
   const imageContent = (
     <div className="lg:w-1/2 mt-6 lg:mt-0">
-      <img
-        src={imageUrl}
-        alt={translate(titleKey)}
-        className="w-full h-auto aspect-[4/3] object-cover rounded-lg shadow-lg"
-      />
+      <div className="relative">
+        <img
+          src={imageUrl}
+          alt={translate(altKey)}
+          className="w-full h-auto aspect-[4/3] object-cover rounded-lg shadow-lg"
+        />
+      </div>
     </div>
   );
 
@@ -58,27 +61,38 @@ export const ForArtisansPage: React.FC = () => {
   const { translate } = useLanguage();
 
   const pointsData: PointProps[] = [
-    { titleKey: 'forArtisans_point1_title', itemsKeys: ['forArtisans_point1_item1', 'forArtisans_point1_item2', 'forArtisans_point1_item3'], promiseKey: 'forArtisans_point1_promise', imageUrl: 'https://i.postimg.cc/sDv8ZST6/IKSA-section-background-00120.webp', reverseLayout: false },
-    { titleKey: 'forArtisans_point2_title', itemsKeys: ['forArtisans_point2_item1', 'forArtisans_point2_item2', 'forArtisans_point2_item3'], promiseKey: 'forArtisans_point2_promise', imageUrl: 'https://i.postimg.cc/KYysVWxw/IKSA-section-background-00121.webp', reverseLayout: true },
-    { titleKey: 'forArtisans_point3_title', itemsKeys: ['forArtisans_point3_item1', 'forArtisans_point3_item2', 'forArtisans_point3_item3'], promiseKey: 'forArtisans_point3_promise', imageUrl: 'https://i.postimg.cc/3NWLm5F4/IKSA-section-background-00122.webp', reverseLayout: false },
-    { titleKey: 'forArtisans_point4_title', itemsKeys: ['forArtisans_point4_item1', 'forArtisans_point4_item2', 'forArtisans_point4_item3'], promiseKey: 'forArtisans_point4_promise', imageUrl: 'https://i.postimg.cc/GpJS1jp2/IKSA-section-background-00123.webp', reverseLayout: true },
-    { titleKey: 'forArtisans_point5_title', itemsKeys: ['forArtisans_point5_item1', 'forArtisans_point5_item2', 'forArtisans_point5_item3'], promiseKey: 'forArtisans_point5_promise', imageUrl: 'https://i.postimg.cc/vBY2861v/IKSA-section-background-00124.webp', reverseLayout: false },
-    { titleKey: 'forArtisans_point6_title', itemsKeys: ['forArtisans_point6_item1', 'forArtisans_point6_item2', 'forArtisans_point6_item3'], promiseKey: 'forArtisans_point6_promise', imageUrl: 'https://i.postimg.cc/MT9PnKVJ/IKSA-section-background-00125.webp', reverseLayout: true },
+    { titleKey: 'forArtisans_point1_title', itemsKeys: ['forArtisans_point1_item1', 'forArtisans_point1_item2', 'forArtisans_point1_item3'], promiseKey: 'forArtisans_point1_promise', imageUrl: 'https://i.postimg.cc/sDv8ZST6/IKSA-section-background-00120.webp', altKey: 'forArtisans_point1_alt', reverseLayout: false },
+    { titleKey: 'forArtisans_point2_title', itemsKeys: ['forArtisans_point2_item1', 'forArtisans_point2_item2', 'forArtisans_point2_item3'], promiseKey: 'forArtisans_point2_promise', imageUrl: 'https://i.postimg.cc/KYysVWxw/IKSA-section-background-00121.webp', altKey: 'forArtisans_point2_alt', reverseLayout: true },
+    { titleKey: 'forArtisans_point3_title', itemsKeys: ['forArtisans_point3_item1', 'forArtisans_point3_item2', 'forArtisans_point3_item3'], promiseKey: 'forArtisans_point3_promise', imageUrl: 'https://i.postimg.cc/3NWLm5F4/IKSA-section-background-00122.webp', altKey: 'forArtisans_point3_alt', reverseLayout: false },
+    { titleKey: 'forArtisans_point4_title', itemsKeys: ['forArtisans_point4_item1', 'forArtisans_point4_item2', 'forArtisans_point4_item3'], promiseKey: 'forArtisans_point4_promise', imageUrl: 'https://i.postimg.cc/GpJS1jp2/IKSA-section-background-00123.webp', altKey: 'forArtisans_point4_alt', reverseLayout: true },
+    { titleKey: 'forArtisans_point5_title', itemsKeys: ['forArtisans_point5_item1', 'forArtisans_point5_item2', 'forArtisans_point5_item3'], promiseKey: 'forArtisans_point5_promise', imageUrl: 'https://i.postimg.cc/vBY2861v/IKSA-section-background-00124.webp', altKey: 'forArtisans_point5_alt', reverseLayout: false },
+    { titleKey: 'forArtisans_point6_title', itemsKeys: ['forArtisans_point6_item1', 'forArtisans_point6_item2', 'forArtisans_point6_item3'], promiseKey: 'forArtisans_point6_promise', imageUrl: 'https://i.postimg.cc/MT9PnKVJ/IKSA-section-background-00125.webp', altKey: 'forArtisans_point6_alt', reverseLayout: true },
   ];
+
+  const schemas = useMemo(() => {
+    return [
+        generateOrganizationSchema(translate),
+        generateWebsiteSchema()
+    ];
+  }, [translate]);
 
   return (
     <>
       <SEOMetadata
         titleKey="page_forArtisans_title"
         descriptionKey="page_forArtisans_description"
-        keywordsKey="page_forArtisans_keywords"
         pagePath="/for-artisans"
+        schemas={schemas}
       />
-      <ContentBlock isHero>
-          <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-brandAccent-700 mb-6 md:mb-8 font-serif-display leading-tight section-title-underline`}> 
+      <ContentBlock 
+        isHero
+        heroImageSrc="https://i.postimg.cc/50v2f5fK/artisans-tool-summary.webp"
+        heroImageAlt={translate('forArtisans_hero_alt')}
+      >
+          <h1 className={`text-3xl sm:text-4xl font-bold text-brandAccent-700 mb-6 md:mb-8 font-serif-display leading-tight section-title-underline`}> 
             {translate('forArtisans_mainTitle')}
           </h1>
-          <p className={`text-base md:text-lg text-stone-700 leading-relaxed max-w-3xl mx-auto`}> 
+          <p className={`text-base md:text-lg text-stone-700 leading-relaxed`}> 
             {translate('forArtisans_intro')}
           </p>
       </ContentBlock>
@@ -92,6 +106,7 @@ export const ForArtisansPage: React.FC = () => {
             itemsKeys={point.itemsKeys}
             promiseKey={point.promiseKey}
             imageUrl={point.imageUrl}
+            altKey={point.altKey}
             reverseLayout={point.reverseLayout}
             />
         ))}

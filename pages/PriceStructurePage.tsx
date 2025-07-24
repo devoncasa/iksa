@@ -1,4 +1,5 @@
 
+
 import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { SEOMetadata } from '../components/SEOMetadata';
@@ -9,6 +10,7 @@ import { PricingSettings, CountrySettings } from '../types';
 import { ContentBlock } from '../components/ContentBlock';
 import { ChevronDownIcon } from '../components/icons';
 import { PolicySubsection } from '../components/PolicySubsection';
+import { generateOrganizationSchema, generateWebsiteSchema } from '../components/Schema';
 
 interface Product {
     id: string;
@@ -114,6 +116,13 @@ export const PriceStructurePage: React.FC = () => {
     const [message, setMessage] = useState<{ show: boolean, text: string }>({ show: false, text: '' });
     const [calculatedPrices, setCalculatedPrices] = useState<Record<string, CalculatedPrice>>({});
     
+    const schemas = useMemo(() => {
+        return [
+            generateOrganizationSchema(translate),
+            generateWebsiteSchema()
+        ];
+    }, [translate]);
+
     const calculateTotalPrice = useCallback((product: Product, countryCode: string): CalculatedPrice => {
         const countrySettings = settings.countries[countryCode];
         let basePriceInUSD = product.basePriceUSD;
@@ -304,7 +313,9 @@ export const PriceStructurePage: React.FC = () => {
                                     return (
                                     <div key={p.id} className="bg-white/50 backdrop-blur-xl p-6 rounded-lg shadow-md border border-stone-200/50">
                                         <h2 className="text-xl font-semibold mb-3 text-brandAccent-800">{translate(p.nameKey)}</h2>
-                                        <img src={p.image} alt={translate(p.nameKey)} className="w-full h-auto rounded-md mb-4 aspect-[4/3] object-cover" />
+                                        <div className="relative mb-4">
+                                            <img src={p.image} alt={translate(p.nameKey)} className="w-full h-auto rounded-md aspect-[4/3] object-cover" />
+                                        </div>
                                         <p className="text-md mb-2">{translate('priceStructure_basePrice')} {formatCurrency(p.basePriceUSD, 'USD')}</p>
                                         <p className="text-sm text-stone-600 mb-4">{translate('priceStructure_weight')} {p.weightKg} kg</p>
                                         <div className="text-xl font-bold text-brandAccent-800">{translate('priceStructure_totalPrice')} <span>{priceInfo ? formatCurrency(priceInfo.totalPrice, priceInfo.currency) : translate('priceStructure_calculating')}</span></div>
@@ -396,14 +407,24 @@ export const PriceStructurePage: React.FC = () => {
     
     return (
         <>
-            <SEOMetadata titleKey="page_priceStructure_title" descriptionKey="page_priceStructure_description" keywordsKey="page_priceStructure_keywords" pagePath="/price-structure" />
+            <SEOMetadata 
+                titleKey="page_priceStructure_title" 
+                descriptionKey="page_priceStructure_description"
+                pagePath="/price-structure"
+                schemas={schemas} 
+            />
             
             {!isAdmin && (
-                <ContentBlock isHero>
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-display font-bold text-stone-800 mb-8 md:mb-10 text-center section-title-underline">
+                <ContentBlock 
+                    isHero
+                    heroImageSrc="https://i.postimg.cc/yNF28HL7/IKSA-section-background-00113.webp"
+                    heroImageAlt={translate('priceStructure_pageTitle_dynamic')}
+                    imageOnLeft={true}
+                >
+                    <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-stone-800 mb-8 md:mb-10 section-title-underline">
                         {translate('priceStructure_pageTitle_dynamic')}
                     </h1>
-                    <p className="text-base md:text-lg text-stone-700 max-w-3xl mx-auto text-center leading-relaxed">
+                    <p className="text-base md:text-lg text-stone-700 leading-relaxed">
                         {translate('priceStructure_policyIntro')}
                     </p>
                 </ContentBlock>

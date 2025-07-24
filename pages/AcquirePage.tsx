@@ -1,12 +1,15 @@
 
 
-import React, { useState } from 'react';
+
+
+import React, { useState, useMemo } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { Button } from '../components/Button';
 import { BuildingIcon, PhoneIcon, EmailIcon, ClockIcon, IconProps } from '../components/icons';
 import { SEOMetadata } from '../components/SEOMetadata';
 import { ContentBlock } from '../components/ContentBlock';
 import { SOCIAL_MEDIA_LINKS } from '../constants';
+import { generateOrganizationSchema, generateWebsiteSchema } from '../components/Schema';
 
 interface ContactInfoItemProps {
   IconComponent: React.FC<IconProps>;
@@ -53,6 +56,13 @@ export const AcquirePage: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const googleMapsEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.836222623386!2d100.5191733!3d13.7285517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e298d280a52033%3A0x2967174e3049b161!2sJewelry%20Trade%20Center!5e0!3m2!1sen!2sth!4v1716382946571!5m2!1sen!2sth";
+
+  const schemas = useMemo(() => {
+    return [
+        generateOrganizationSchema(translate),
+        generateWebsiteSchema()
+    ];
+  }, [translate]);
 
   const validate = (): boolean => {
     const newErrors: Partial<FormData> = {};
@@ -112,14 +122,18 @@ export const AcquirePage: React.FC = () => {
       <SEOMetadata
         titleKey="page_contact_title"
         descriptionKey="page_contact_description"
-        keywordsKey="page_contact_keywords"
         pagePath="/contact"
+        schemas={schemas}
       />
-      <ContentBlock isHero>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-display font-bold text-stone-800 mb-8 md:mb-10 text-center section-title-underline">
+      <ContentBlock 
+        isHero
+        heroImageSrc="https://i.postimg.cc/LsH3jFH9/IKSA-section-background-00140.webp"
+        heroImageAlt={translate('contact_hero_alt')}
+      >
+        <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-stone-800 mb-8 md:mb-10 section-title-underline">
           {translate('contact_pageTitle')}
         </h1>
-        <p className="text-base md:text-lg text-stone-700 max-w-2xl mx-auto text-center leading-relaxed">
+        <p className="text-base md:text-lg text-stone-700 leading-relaxed">
           {translate('contact_intro')}
         </p>
       </ContentBlock>
@@ -225,7 +239,7 @@ export const AcquirePage: React.FC = () => {
                     rel="noopener noreferrer"
                 >
                     <Button variant="outline" size="md" className="focus:ring-offset-white">
-                        {translate('contact_getDirections')}
+                        {translate('getDirections')}
                     </Button>
                 </a>
             </div>

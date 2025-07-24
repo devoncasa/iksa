@@ -1,9 +1,14 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { SEOMetadata } from '../components/SEOMetadata';
 import { StyledText } from '../components/StyledText';
 import { ContentBlock } from '../components/ContentBlock';
+import { ChevronDownIcon, ArrowUpIcon } from '../components/icons';
+import { Breadcrumb } from '../types';
+import { generateOrganizationSchema, generateWebsiteSchema, generateBreadcrumbSchema, generateArticleSchema } from '../components/Schema';
+
 
 const GuideTable: React.FC<{ caption: string; headersJSON: string; rowsJSON:string }> = ({ caption, headersJSON, rowsJSON }) => {
     try {
@@ -62,22 +67,17 @@ const useScrollSpy = (ids: string[], options?: IntersectionObserverInit): string
         }
 
         observer.current = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setActiveId(entry.target.id);
-                }
-            });
+            // Find the first entry that is intersecting from the top of the viewport
+            const firstIntersecting = entries.find(entry => entry.isIntersecting);
+            if (firstIntersecting) {
+                setActiveId(firstIntersecting.target.id);
+            }
         }, options);
 
         elements.forEach(el => observer.current?.observe(el));
 
-        // Set initial active ID
-        if (!activeId) {
-            setActiveId(elements[0].id);
-        }
-
         return () => observer.current?.disconnect();
-    }, [ids, options, activeId]);
+    }, [ids, options]);
 
     return activeId;
 };
@@ -98,9 +98,32 @@ const ArticleCard: React.FC<{id: string; children: React.ReactNode;}> = ({ id, c
     );
 };
 
+const ImageWithInfo: React.FC<{ src: string, alt: string, className?: string }> = ({ src, alt, className='' }) => {
+    return (
+        <figure className={`not-prose relative my-8 ${className}`}>
+            <img src={src} alt={alt} className="rounded-lg shadow-xl w-full object-cover aspect-[4/3]"/>
+        </figure>
+    );
+};
+
 
 export const ThobeGuidePage: React.FC = () => {
     const { translate } = useLanguage();
+    const mobileNavRef = useRef<HTMLDetailsElement>(null);
+    const [showScrollTopButton, setShowScrollTopButton] = useState(false);
+    
+    useEffect(() => {
+        const checkScrollTop = () => {
+            if (!showScrollTopButton && window.scrollY > window.innerHeight) {
+                setShowScrollTopButton(true);
+            } else if (showScrollTopButton && window.scrollY <= window.innerHeight) {
+                setShowScrollTopButton(false);
+            }
+        };
+
+        window.addEventListener('scroll', checkScrollTop, { passive: true });
+        return () => window.removeEventListener('scroll', checkScrollTop);
+    }, [showScrollTopButton]);
     
     const sections = [
         { id: 'colors', titleKey: 'color_title' },
@@ -111,7 +134,20 @@ export const ThobeGuidePage: React.FC = () => {
     ];
 
     const sectionIds = sections.map(s => s.id);
-    const activeId = useScrollSpy(sectionIds, { rootMargin: '-30% 0px -70% 0px' });
+    const activeId = useScrollSpy(sectionIds, { rootMargin: '-25% 0px -75% 0px' });
+    
+    const schemas = useMemo(() => {
+        const breadcrumbs: Breadcrumb[] = [
+            { name: translate('nav', 'main'), path: '/' },
+            { name: translate('nav', 'thobeGuide'), path: '/thobe-guide' }
+        ];
+        return [
+            generateOrganizationSchema(translate),
+            generateWebsiteSchema(),
+            generateBreadcrumbSchema(breadcrumbs),
+            generateArticleSchema(translate)
+        ];
+    }, [translate]);
 
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
         e.preventDefault();
@@ -119,8 +155,25 @@ export const ThobeGuidePage: React.FC = () => {
         if (element) {
             element.scrollIntoView({
                 behavior: 'smooth',
-                block: 'center'
+                block: 'start'
             });
+        }
+    };
+    
+    const scrollToGuideStart = () => {
+        const element = document.getElementById('guide-content-start');
+        if (element) {
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    };
+    
+    const handleMobileNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+        handleNavClick(e, sectionId);
+        if (mobileNavRef.current) {
+            mobileNavRef.current.open = false;
         }
     };
 
@@ -129,22 +182,59 @@ export const ThobeGuidePage: React.FC = () => {
             <SEOMetadata
                 titleKey="page_thobeGuide_title"
                 descriptionKey="page_thobeGuide_description"
-                keywordsKey="page_thobeGuide_keywords"
                 pagePath="/thobe-guide"
+                schemas={schemas}
             />
 
-            <ContentBlock isHero>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-display font-bold text-stone-800 mb-8 md:mb-10 text-center section-title-underline">
+            <ContentBlock 
+                isHero
+                heroImageSrc="https://i.postimg.cc/2j5T00Fw/inspiration-kandura.webp"
+                heroImageAlt={translate('thobeGuide_hero_alt')}
+                imageOnLeft={true}
+            >
+                <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-stone-800 mb-8 md:mb-10 section-title-underline">
                     {translate('thobeGuide_full', 'title')}
                 </h1>
-                <div className="text-lg text-deep-chocolate leading-relaxed max-w-3xl mx-auto">
+                <div className="text-lg text-deep-chocolate leading-relaxed">
                     <StyledText text={translate('thobeGuide_full', 'intro')} />
                 </div>
             </ContentBlock>
 
-            <section className="relative w-full py-12 md:py-16">
+            <section id="guide-content-start" className="relative w-full py-12 md:py-16 scroll-mt-24">
                 <div className="max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8">
+                    {/* Mobile Navigation */}
+                    <div className="lg:hidden mb-8">
+                        <details ref={mobileNavRef} className="group bg-[rgba(255,255,255,0.70)] backdrop-blur-sm rounded-2xl shadow-lg">
+                            <summary className="list-none flex items-center justify-between p-4 cursor-pointer">
+                                <span className="text-lg font-semibold text-warm-terracotta">{translate('thobeGuide_pageTitle')}</span>
+                                <ChevronDownIcon className="w-6 h-6 text-warm-terracotta transition-transform duration-300 group-open:rotate-180" />
+                            </summary>
+                            <nav className="p-4 pt-0">
+                                <ul className="space-y-1 border-t border-soft-sand pt-3">
+                                    {sections.map(section => (
+                                        <li key={section.id}>
+                                            <a
+                                                href={`#${section.id}`}
+                                                onClick={(e) => handleMobileNavClick(e, section.id)}
+                                                className={`block rounded-md py-2 px-3 transition-all duration-200 ease-in-out text-sm font-medium
+                                                    ${activeId === section.id 
+                                                        ? 'bg-creamy-beige text-warm-terracotta' 
+                                                        : 'text-stone-600 hover:bg-stone-100/80 hover:text-stone-800'
+                                                    }`
+                                                }
+                                                aria-current={activeId === section.id ? 'page' : undefined}
+                                            >
+                                                {translate('thobeGuide_full', section.titleKey)}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </nav>
+                        </details>
+                    </div>
+
                     <div className="lg:grid lg:grid-cols-12 lg:gap-12">
+                        {/* Desktop Sidebar */}
                         <aside className="hidden lg:block lg:col-span-3">
                             <nav className="sticky top-28 bg-[rgba(255,255,255,0.70)] backdrop-blur-sm rounded-2xl shadow-lg p-6">
                                 <h3 className="text-sm font-semibold text-stone-500 uppercase tracking-wider mb-4">
@@ -181,7 +271,7 @@ export const ThobeGuidePage: React.FC = () => {
                                 <StyledText text={translate('thobeGuide_full', 'color_white_content')} />
                                 <h4>{translate('thobeGuide_full', 'color_black_title')}</h4>
                                 <StyledText text={translate('thobeGuide_full', 'color_black_content')} />
-                                <img src="https://i.postimg.cc/5N18qDML/article-sundus-casa.webp" alt="Thobes in classic white and black colors" className="my-8 rounded-lg shadow-xl w-full h-auto object-cover not-prose"/>
+                                <ImageWithInfo src="https://i.postimg.cc/5N18qDML/article-sundus-casa.webp" alt={translate('thobeGuide_colors_alt')} />
                                 <h3>{translate('thobeGuide_full', 'color_expressive_title')}</h3>
                                 <h4>{translate('thobeGuide_full', 'color_brown_title')}</h4>
                                 <StyledText text={translate('thobeGuide_full', 'color_brown_content')} />
@@ -201,7 +291,7 @@ export const ThobeGuidePage: React.FC = () => {
                                 <StyledText text={translate('thobeGuide_full', 'artistry_intro')} />
                                 <h3>{translate('thobeGuide_full', 'artistry_minimalism_title')}</h3>
                                 <StyledText text={translate('thobeGuide_full', 'artistry_minimalism_content')} />
-                                <img src="https://i.postimg.cc/q7x2D1rD/article-regional-styles.webp" alt="Examples of minimalist and embroidered thobes" className="my-8 rounded-lg shadow-xl w-full h-auto object-cover not-prose"/>
+                                <ImageWithInfo src="https://i.postimg.cc/q7x2D1rD/article-regional-styles.webp" alt={translate('thobeGuide_minimalism_alt')} />
                                 <h3>{translate('thobeGuide_full', 'artistry_embroidery_title')}</h3>
                                 <StyledText text={translate('thobeGuide_full', 'artistry_embroidery_content')} />
                                 <h4>{translate('thobeGuide_full', 'artistry_tatreez_title')}</h4>
@@ -216,7 +306,7 @@ export const ThobeGuidePage: React.FC = () => {
                                 <StyledText text={translate('thobeGuide_full', 'trends_slimfit_content')} />
                                 <h3>{translate('thobeGuide_full', 'trends_fabric_title')}</h3>
                                 <StyledText text={translate('thobeGuide_full', 'trends_fabric_content')} />
-                                <img src="https://i.postimg.cc/9Q2w0h1G/article-fabric-science.webp" alt="Innovative fabric textures" className="my-8 rounded-lg shadow-xl w-full h-auto object-cover not-prose"/>
+                                <ImageWithInfo src="https://i.postimg.cc/9Q2w0h1G/article-fabric-science.webp" alt={translate('thobeGuide_fabric_alt')} />
                                 <h3>{translate('thobeGuide_full', 'trends_fusion_title')}</h3>
                                 <StyledText text={translate('thobeGuide_full', 'trends_fusion_content')} />
                                 <h3>{translate('thobeGuide_full', 'trends_custom_title')}</h3>
@@ -237,6 +327,17 @@ export const ThobeGuidePage: React.FC = () => {
                     </div>
                 </div>
             </section>
+            
+            {showScrollTopButton && (
+                <button
+                    onClick={scrollToGuideStart}
+                    title={translate('thobeGuide_backToTopics') || 'View Topics'}
+                    aria-label="Scroll back to topics menu"
+                    className="hidden lg:flex fixed bottom-8 left-8 z-50 w-12 h-12 rounded-full bg-creamy-beige/70 backdrop-blur-sm text-deep-chocolate items-center justify-center shadow-lg transition-all duration-300 ease-in-out hover:bg-creamy-beige hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-brandAccent-700 focus:ring-offset-2"
+                >
+                    <ArrowUpIcon className="w-6 h-6" />
+                </button>
+            )}
         </>
     );
 };

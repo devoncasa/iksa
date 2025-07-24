@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IKSA: Premium Japanese Textiles for Thobes & Abayas</title>
+    <meta name="description" content="IKSA: Premium Japanese Textiles for Thobes & Abayas. Discover luxury fabrics engineered for performance and elegance.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://i.postimg.cc/mZSFSj42/iksa-logo.webp" type="image/webp" sizes="any">
+    <link rel="apple-touch-icon" href="https://i.postimg.cc/mZSFSj42/iksa-logo.webp">
 
     <!-- High-priority assets for hero section -->
     <link rel="preload" href="https://i.postimg.cc/FK3XkcH5/IKSA-section-background-0011.webp" as="image" fetchpriority="high">
@@ -93,6 +98,22 @@
             position: relative;
             display: inline-block;
             padding-bottom: 0.75rem;
+        }
+
+        /* Custom filter for footer social media icons */
+        .social-icon-filter {
+            /* This filter approximates #E0D8CC from a black base */
+            filter: brightness(0) invert(87%) sepia(10%) saturate(231%) hue-rotate(349deg) brightness(92%) contrast(88%);
+            transition: filter 0.3s ease-in-out;
+        }
+        .group:hover .social-icon-filter {
+            /* On hover, transition to a bright white highlight */
+            filter: brightness(0) invert(1) brightness(1.1);
+        }
+
+        /* Custom filter for footer logo */
+        .footer-logo-filter {
+            filter: brightness(1.2);
         }
     </style>
     

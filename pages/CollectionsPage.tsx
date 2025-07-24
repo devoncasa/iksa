@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { Button } from '../components/Button';
 import { MOCK_FABRICS, FABRIC_FILTERS, FEATURE_ICONS, COLOR_MARKUPS } from '../constants';
-import { Fabric } from '../types';
+import { Fabric, Breadcrumb } from '../types';
 import { SEOMetadata } from '../components/SEOMetadata';
 import { ContentBlock } from '../components/ContentBlock';
+import { generateOrganizationSchema, generateWebsiteSchema, generateBreadcrumbSchema } from '../components/Schema';
 
 interface FabricFiltersState {
   useCase: string;
@@ -38,7 +39,7 @@ const FabricCard: React.FC<{ fabric: Fabric; }> = ({ fabric }) => {
       id={fabric.id} 
     >
       <div className="relative overflow-hidden">
-        <img src={fabric.imageUrl} alt={translate(fabric.nameKey)} className="w-full h-48 object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"/>
+        <img src={fabric.imageUrl} alt={translate(fabric.nameKey)} className="w-full aspect-[4/3] object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"/>
       </div>
       <div className="p-5 md:p-6 flex flex-col flex-grow">
         <div className="flex-grow mb-4">
@@ -151,20 +152,38 @@ export const CollectionsPage: React.FC = () => {
     });
   }, [filters]); 
 
+  const schemas = useMemo(() => {
+    const breadcrumbs: Breadcrumb[] = [
+        { name: translate('nav', 'main'), path: '/' },
+        { name: translate('nav', 'collections'), path: '/collections' }
+    ];
+    return [
+        generateOrganizationSchema(translate),
+        generateWebsiteSchema(),
+        generateBreadcrumbSchema(breadcrumbs)
+    ];
+  }, [translate]);
+
   return (
     <>
       <SEOMetadata
         titleKey="page_collections_title"
         descriptionKey="page_collections_description"
-        keywordsKey="page_collections_keywords"
         pagePath="/collections"
+        schemas={schemas}
       />
-      <ContentBlock isHero>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif-display font-bold text-stone-800 mb-4">{translate('collections_heroTitle')}</h1>
-          <p className="text-lg text-stone-700 max-w-3xl mx-auto">{translate('collections_heroSubtitle')}</p>
-          <Link to="/price-structure" className="mt-6 inline-block">
-            <Button variant="outline">{translate('collections_viewPricing')}</Button>
-          </Link>
+      <ContentBlock 
+        isHero
+        heroImageSrc="https://i.postimg.cc/t4d7WvHh/fabric-roll-collection-showcase-2.webp"
+        heroImageAlt={translate('collections_hero_alt')}
+      >
+          <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-stone-800 mb-4">{translate('collections_heroTitle')}</h1>
+          <p className="text-lg text-stone-700">{translate('collections_heroSubtitle')}</p>
+          <div className="mt-6 text-center md:text-left">
+            <Link to="/price-structure">
+                <Button variant="outline">{translate('collections_viewPricing')}</Button>
+            </Link>
+          </div>
       </ContentBlock>
 
       <ContentBlock>

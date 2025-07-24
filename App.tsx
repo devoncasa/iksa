@@ -17,125 +17,47 @@ import { CheckoutPage } from './pages/CheckoutPage';
 import { PriceStructurePage } from './pages/PriceStructurePage';
 import { SECTION_BACKGROUND_IMAGES } from './constants';
 
-// --- Dynamic Background System ---
-const HERO_BACKGROUND_IMAGE = 'https://i.postimg.cc/FK3XkcH5/IKSA-section-background-0011.webp';
-
-interface BackgroundContextType {
-    activeImageUrl: string;
-    registerSection: () => string;
-    setActiveImageUrl: (url: string) => void;
-}
-
-const BackgroundContext = createContext<BackgroundContextType | undefined>(undefined);
-
-export const useBackground = () => {
-    const context = useContext(BackgroundContext);
-    if (!context) {
-        throw new Error("useBackground must be used within a BackgroundProvider");
-    }
-    return context;
-};
-
-const shuffleArray = (array: string[]) => {
-    const newArr = [...array];
-    for (let i = newArr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
-    }
-    return newArr;
-};
-
-const BackgroundProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const otherShuffledImages = useMemo(() => {
-        const otherImages = SECTION_BACKGROUND_IMAGES.filter(img => img !== HERO_BACKGROUND_IMAGE);
-        return shuffleArray(otherImages);
-    }, []);
-    const [activeImageUrl, setActiveImageUrl] = useState(HERO_BACKGROUND_IMAGE);
-    const imageCounter = useRef(0);
-    const heroRegistered = useRef(false);
-
-    const registerSection = useCallback(() => {
-        if (!heroRegistered.current) {
-            heroRegistered.current = true;
-            return HERO_BACKGROUND_IMAGE;
-        }
-        
-        const imageUrl = otherShuffledImages[imageCounter.current % otherShuffledImages.length];
-        imageCounter.current++;
-        return imageUrl;
-    }, [otherShuffledImages]);
-
-    useEffect(() => {
-        // Preload non-hero images in the background
-        otherShuffledImages.forEach(src => {
-            const img = new Image();
-            img.src = src;
-        });
-    }, [otherShuffledImages]);
-
-    const value = { activeImageUrl, registerSection, setActiveImageUrl };
-
-    return (
-        <BackgroundContext.Provider value={value}>
-            {children}
-        </BackgroundContext.Provider>
-    );
-};
-
+// --- Static Background System ---
 const DynamicBackground: React.FC = () => {
-    const { activeImageUrl } = useBackground();
-    const [current, setCurrent] = useState({ url: activeImageUrl, key: 0 });
-    const [previous, setPrevious] = useState({ url: '', key: -1 });
+    // Select one image on component mount and memoize it to keep it static for the session.
+    const selectedImageUrl = useMemo(() => {
+        const randomIndex = Math.floor(Math.random() * SECTION_BACKGROUND_IMAGES.length);
+        return SECTION_BACKGROUND_IMAGES[randomIndex];
+    }, []); // Empty dependency array ensures this runs only once per session.
 
-    // Ref to track the URL we are currently loading, to prevent race conditions
-    const loadingUrlRef = useRef<string | null>(null);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        // Only trigger if there's a new URL that we aren't already loading and is not the current one
-        if (activeImageUrl && activeImageUrl !== current.url && activeImageUrl !== loadingUrlRef.current) {
-            loadingUrlRef.current = activeImageUrl;
+        if (selectedImageUrl) {
             const img = new Image();
-            img.src = activeImageUrl;
-            
+            img.src = selectedImageUrl;
             img.onload = () => {
-                // Check if the loaded image is still the one we want.
-                // This prevents race conditions if the user scrolls quickly.
-                if (img.src === loadingUrlRef.current) {
-                    setPrevious(current);
-                    setCurrent({ url: img.src, key: current.key + 1 });
-                    loadingUrlRef.current = null;
-                }
+                setIsLoaded(true);
             };
             img.onerror = () => {
-                console.error("Failed to load background image:", activeImageUrl);
-                // If loading fails, clear the loading ref so we can try again for this URL
-                if (activeImageUrl === loadingUrlRef.current) {
-                    loadingUrlRef.current = null;
-                }
+                console.error("Failed to load background image:", selectedImageUrl);
+                // Allow content to render even if the background image fails
+                setIsLoaded(true);
             };
+        } else {
+            // If for some reason there's no image, we are 'loaded' with no background
+            setIsLoaded(true);
         }
-    }, [activeImageUrl, current]);
-
-    const BgLayer: React.FC<{ url: string; active: boolean }> = ({ url, active }) => (
-        <div
-            className="absolute inset-0 bg-cover bg-center bg-fixed transition-opacity duration-1000 ease-in-out"
-            style={{
-                backgroundImage: url ? `url(${url})` : 'none',
-                filter: 'blur(8px)',
-                transform: 'scale(1.15)',
-                opacity: active ? 1 : 0,
-            }}
-        >
-            <div className="absolute inset-0 bg-white/30" />
-        </div>
-    );
+    }, [selectedImageUrl]);
 
     return (
         <div className="fixed inset-0 -z-10 overflow-hidden bg-creamy-beige">
-            {/* The previous image is rendered but with active=false, so it fades out */}
-            {previous.url && <BgLayer key={previous.key} url={previous.url} active={false} />}
-            {/* The current image is rendered with active=true, so it fades in */}
-            {current.url && <BgLayer key={current.key} url={current.url} active={true} />}
+            <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed transition-opacity duration-1000 ease-in-out"
+                style={{
+                    backgroundImage: selectedImageUrl ? `url(${selectedImageUrl})` : 'none',
+                    filter: 'blur(4px)',
+                    transform: 'scale(1.15)', // Prevents blurred edges from being visible
+                    opacity: isLoaded ? 1 : 0,
+                }}
+            >
+                <div className="absolute inset-0 bg-white/[.20]" />
+            </div>
         </div>
     );
 };
@@ -174,9 +96,7 @@ const App: React.FC = () => {
     <HashRouter>
       <LanguageProvider>
         <CartProvider>
-            <BackgroundProvider>
-                <MainLayout />
-            </BackgroundProvider>
+            <MainLayout />
         </CartProvider>
       </LanguageProvider>
     </HashRouter>

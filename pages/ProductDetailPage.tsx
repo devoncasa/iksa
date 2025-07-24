@@ -5,10 +5,12 @@ import { useParams, Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { useCart } from '../hooks/useCart';
 import { MOCK_FABRICS, GARMENT_CATEGORIES, GARMENT_SIZES, FEATURE_ICONS, COLOR_PALETTE, COLOR_MARKUPS } from '../constants';
-import { Fabric } from '../types';
+import { Fabric, Breadcrumb } from '../types';
 import { Button } from '../components/Button';
 import { SEOMetadata } from '../components/SEOMetadata';
 import { ContentBlock } from '../components/ContentBlock';
+import { generateOrganizationSchema, generateWebsiteSchema, generateBreadcrumbSchema, generateProductSchema } from '../components/Schema';
+
 
 const YieldEstimator: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
     const { translate } = useLanguage();
@@ -36,10 +38,10 @@ const YieldEstimator: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label htmlFor="garment-style" className="block text-sm font-medium text-stone-600 mb-1.5">{translate('chooseGarmentStyle')}</label>
-                    <select id="garment-style" value={selectedGarmentStyleId} onChange={e => setSelectedGarmentStyleId(e.target.value)} className="w-full bg-white/80 border border-stone-300 rounded-md py-2 px-3 focus:ring-brandAccent-700 focus:border-brandAccent-700">
+                    <select id="garment-style" value={selectedGarmentStyleId} onChange={e => setSelectedGarmentStyleId(e.target.value)} className="w-full bg-white/80 border border-stone-300 text-stone-800 rounded-md py-2 px-3 focus:ring-brandAccent-700 focus:border-brandAccent-700 transition-colors duration-150 ease-in-out text-base text-left">
                         {GARMENT_CATEGORIES.map(category => (
                             <optgroup key={category.nameKey} label={translate(category.nameKey)}>
-                                {category.styles.map(style => <option key={style.id} value={style.id}>{translate(style.nameKey)}</option>)}
+                                {category.styles.map(style => <option key={style.id} value={style.id} className="bg-white text-stone-800 font-medium">{translate(style.nameKey)}</option>)}
                             </optgroup>
                         ))}
                     </select>
@@ -141,6 +143,21 @@ export const ProductDetailPage: React.FC = () => {
     return fabric.pricePerRoll * (1 + markup);
   }, [fabric, selectedColor]);
   
+  const schemas = useMemo(() => {
+    if (!fabric) return [];
+    const breadcrumbs: Breadcrumb[] = [
+        { name: translate('nav', 'main'), path: '/' },
+        { name: translate('nav', 'collections'), path: '/collections' },
+        { name: translate(fabric.nameKey), path: `/collections/${fabric.id}` }
+    ];
+    return [
+        generateOrganizationSchema(translate),
+        generateWebsiteSchema(),
+        generateBreadcrumbSchema(breadcrumbs),
+        generateProductSchema(fabric, translate)
+    ];
+  }, [fabric, translate]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     if (fabric) {
@@ -171,9 +188,9 @@ export const ProductDetailPage: React.FC = () => {
       <SEOMetadata
         titleKey="page_product_detail_title"
         descriptionKey="page_product_detail_description"
-        keywordsKey="page_product_detail_keywords"
         pagePath={`/collections/${fabric.id}`}
         item={fabric}
+        schemas={schemas}
       />
       <section className="pt-24 md:pt-32">
         <div className="max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -181,13 +198,16 @@ export const ProductDetailPage: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
                     {/* Image Gallery */}
                     <div className="bg-white/50 backdrop-blur-xl p-4 rounded-lg">
-                        <div className="aspect-square bg-stone-100/90 backdrop-blur-sm rounded-lg overflow-hidden mb-4 shadow-lg">
-                        <img src={mainImage} alt={translate(fabric.nameKey)} className="w-full h-full object-cover" />
+                        <div className="mb-4">
+                            <div className="relative aspect-square bg-stone-100/90 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg">
+                                <img src={mainImage} alt={`${translate(fabric.nameKey)} - Main View`} className="w-full h-full object-cover" />
+                            </div>
                         </div>
+
                         <div className="grid grid-cols-4 gap-2">
                         {fabric.galleryImages.map((img, idx) => (
-                            <button key={idx} onClick={() => setMainImage(img)} className={`aspect-square bg-stone-100/90 backdrop-blur-sm rounded-md overflow-hidden focus:outline-none focus:ring-2 focus:ring-brandAccent-700 ${mainImage === img ? 'ring-2 ring-brandAccent-700' : ''}`}>
-                            <img src={img} alt={`${translate(fabric.nameKey)} view ${idx + 1}`} className="w-full h-full object-cover" />
+                            <button key={idx} onClick={() => setMainImage(img)} className={`relative aspect-square bg-stone-100/90 backdrop-blur-sm rounded-md overflow-hidden focus:outline-none focus:ring-2 focus:ring-brandAccent-700 ${mainImage === img ? 'ring-2 ring-brandAccent-700' : ''}`}>
+                                <img src={img} alt={`${translate(fabric.nameKey)} view ${idx + 1}`} className="w-full h-full object-cover" />
                             </button>
                         ))}
                         </div>
@@ -252,11 +272,15 @@ export const ProductDetailPage: React.FC = () => {
             <h2 className="text-3xl font-serif-display font-semibold text-center text-stone-800 mb-10 section-title-underline">{translate('product_projectInspirationTitle')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div className="text-center">
-                    <img src="https://i.postimg.cc/2j5T00Fw/inspiration-kandura.webp" alt="Emirati Kandura" className="rounded-lg shadow-xl mb-4" />
+                    <div className="relative mb-4">
+                        <img src="https://i.postimg.cc/2j5T00Fw/inspiration-kandura.webp" alt={translate('product_inspiration_kandura_alt')} className="rounded-lg shadow-xl aspect-[4/3] object-cover" />
+                    </div>
                     <p className="text-stone-600 italic">{translate('product_inspirationCaption').replace('{garment}', 'Emirati Kandura').replace('{fabricName}', translate(fabric.nameKey))}</p>
                 </div>
                 <div className="text-center">
-                    <img src="https://i.postimg.cc/k4GkYyv0/inspiration-abaya.webp" alt="Luxury Abaya" className="rounded-lg shadow-xl mb-4" />
+                    <div className="relative mb-4">
+                        <img src="https://i.postimg.cc/k4GkYyv0/inspiration-abaya.webp" alt={translate('product_inspiration_abaya_alt')} className="rounded-lg shadow-xl aspect-[4/3] object-cover" />
+                    </div>
                     <p className="text-stone-600 italic">{translate('product_inspirationCaption').replace('{garment}', 'Luxury Abaya').replace('{fabricName}', translate(fabric.nameKey))}</p>
                 </div>
             </div>

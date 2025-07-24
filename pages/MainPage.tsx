@@ -1,7 +1,6 @@
 
 
-
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { Button } from '../components/Button';
@@ -9,20 +8,26 @@ import { SEOMetadata } from '../components/SEOMetadata';
 import { ChevronRightIcon } from '../components/icons'; 
 import { StyledText } from '../components/StyledText';
 import { ContentBlock } from '../components/ContentBlock';
+import { generateOrganizationSchema, generateWebsiteSchema } from '../components/Schema';
+
 
 const HeroSection: React.FC = () => {
     const { translate } = useLanguage();
     return (
-        <ContentBlock isHero>
-            <h1 className="font-serif-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight text-brandAccent-800 animate-fadeInUp">
+        <ContentBlock 
+            isHero
+            heroImageSrc="https://i.postimg.cc/nrY3WbnL/iksa-about-us-summary.webp"
+            heroImageAlt={translate('main_hero_alt')}
+        >
+            <h1 className="font-serif-display text-4xl sm:text-5xl font-bold mb-6 md:mb-8 leading-tight text-brandAccent-800 animate-fadeInUp">
               {translate('main_heroTitle')}
             </h1>
             <StyledText 
               text={translate('main_heroSubtitle')} 
-              className="text-lg sm:text-xl text-stone-700 mb-10 md:mb-12 leading-relaxed animate-fadeInUp" 
+              className="text-lg text-stone-700 mb-10 md:mb-12 leading-relaxed animate-fadeInUp" 
               style={{ animationDelay: '0.2s' }}
             />
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 animate-fadeInUp" style={{ animationDelay: '0.4s' }}> 
+            <div className="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4 sm:gap-6 animate-fadeInUp" style={{ animationDelay: '0.4s' }}> 
                 <Link to="/collections">
                     <Button variant="primary" size="lg" className="w-full sm:w-auto">{translate('main_cta_explore_collections')}</Button>
                 </Link>
@@ -88,12 +93,14 @@ const InfoSection: React.FC<InfoSectionProps> = ({ titleKey, contentKey, ctaKey,
   );
 
   const imageContent = imageSrc ? (
-    <div className={`md:w-1/2 mt-8 md:mt-0 group overflow-hidden rounded-lg`}> 
-      <img 
-        src={imageSrc} 
-        alt={imageAltKey ? translate(imageAltKey) : translate(titleKey)} 
-        className="rounded-lg shadow-lg object-cover w-full h-auto max-h-[450px] md:max-h-[500px] transition-transform duration-500 ease-in-out group-hover:scale-105" 
-      />
+    <div className={`md:w-1/2 mt-8 md:mt-0`}>
+        <div className="relative group overflow-hidden rounded-lg">
+            <img
+                src={imageSrc}
+                alt={imageAltKey ? translate(imageAltKey) : translate(titleKey)}
+                className="rounded-lg shadow-lg object-cover w-full aspect-[4/3] transition-transform duration-500 ease-in-out group-hover:scale-105"
+            />
+        </div>
     </div>
   ) : null;
 
@@ -124,13 +131,21 @@ const FinalCTASection: React.FC = () => {
 
 
 export const MainPage: React.FC = () => {
+  const { translate } = useLanguage();
+  const schemas = useMemo(() => {
+    return [
+        generateOrganizationSchema(translate),
+        generateWebsiteSchema()
+    ];
+  }, [translate]);
+
   return (
     <>
       <SEOMetadata
         titleKey="page_main_title"
         descriptionKey="page_main_description"
-        keywordsKey="page_main_keywords"
         pagePath="/"
+        schemas={schemas}
       />
       <HeroSection />
       
@@ -139,7 +154,7 @@ export const MainPage: React.FC = () => {
           contentKey="main_section_about_content"
           ctaKey="main_cta_learn_more" 
           linkTo="/about-us" 
-          imageSrc="https://i.postimg.cc/y8gS2k42/about-us-summary.webp" 
+          imageSrc="https://i.postimg.cc/nrY3WbnL/iksa-about-us-summary.webp" 
           imageAltKey="main_alt_about_us_summary"
           reverseLayout={false}
           titleColor="text-stone-800"

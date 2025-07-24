@@ -1,21 +1,27 @@
 
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { Button } from '../components/Button';
 import { SEOMetadata } from '../components/SEOMetadata';
 import { ContentBlock } from '../components/ContentBlock';
 import { SECTION_BACKGROUND_IMAGES } from '../constants';
+import { generateOrganizationSchema, generateWebsiteSchema } from '../components/Schema';
+
 
 const HeroSection: React.FC = () => {
   const { translate } = useLanguage();
   return (
-    <ContentBlock isHero>
-        <h1 className="font-serif-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-tight text-brandAccent-700 opacity-0 animate-fadeInUp" style={{ animationDelay: '0.2s' }}> 
+    <ContentBlock 
+        isHero
+        heroImageSrc="https://i.postimg.cc/sgJ0kcx2/IKSA-section-background-00149.webp"
+        heroImageAlt={translate('about_hero_alt')}
+    >
+        <h1 className="font-serif-display text-4xl sm:text-5xl font-bold mb-6 md:mb-8 leading-tight text-brandAccent-700 opacity-0 animate-fadeInUp" style={{ animationDelay: '0.2s' }}> 
           {translate('about_heroTitle')}
         </h1>
-        <p className="text-lg sm:text-xl md:text-2xl text-stone-800 mb-10 md:mb-12 whitespace-pre-line leading-relaxed opacity-0 animate-fadeInUp" style={{ animationDelay: '0.4s' }}> 
+        <p className="text-lg text-stone-800 mb-10 md:mb-12 whitespace-pre-line leading-relaxed opacity-0 animate-fadeInUp" style={{ animationDelay: '0.4s' }}> 
           {translate('about_heroSubtitle')}
         </p>
     </ContentBlock>
@@ -43,10 +49,10 @@ const FourPillarsSection: React.FC = () => {
                     <p className="text-md font-semibold text-stone-600 mb-4">{translate('about_pillars', `${pillar}_tagline`)}</p>
                     <p className="text-sm text-stone-700 leading-relaxed">{translate('about_pillars', `${pillar}_desc`)}</p>
                 </div>
-                <div className="mt-6">
+                <div className="mt-6 relative">
                     <img 
                         src={pillarImages[index]} 
-                        alt={translate('about_pillars', `${pillar}_name`)}
+                        alt={translate('about_pillar_alt')}
                         className="w-full h-auto aspect-[4/3] object-cover rounded-md shadow-inner"
                     />
                 </div>
@@ -79,13 +85,21 @@ const CtaSection: React.FC = () => {
 };
 
 export const AboutUsPage: React.FC = () => { 
+  const { translate } = useLanguage();
+  const schemas = useMemo(() => {
+    return [
+        generateOrganizationSchema(translate),
+        generateWebsiteSchema()
+    ];
+  }, [translate]);
+  
   return (
     <>
       <SEOMetadata
         titleKey="page_about_title" 
         descriptionKey="page_about_description"
-        keywordsKey="page_about_keywords"
         pagePath="/about-us"
+        schemas={schemas}
       />
       <HeroSection />
       <FourPillarsSection />

@@ -116,10 +116,13 @@ export const translations: Record<LanguageCode, Translations> = {
     main_cta_explore_partnership: "Explore Partnership",
     main_final_cta_title: "Ready to Elevate Your Creations?",
     main_final_cta_content: "Connect with our team for samples, inquiries, or to discuss how IKSA can become the foundation of your next masterpiece.",
-    main_alt_about_us_summary: "Tailor inspecting a roll of premium IKSA Japanese textile.",
-    main_alt_collections_summary: "Elegant rolls of IKSA's 'Heritage Weave' fabric collection.",
-    main_alt_thobeGuide_summary: "Detailed shot of a perfectly tailored Thobe collar made from IKSA fabric.",
-    main_alt_for_artisans_summary: "Artisan tailor meticulously working with IKSA textiles.",
+    
+    // SEO-Optimized Alt Text
+    main_hero_alt: "Master tailor inspecting a roll of IKSA's 'Elite Heritage Weave' Japanese fabric, checking the texture for a luxury thobe.",
+    main_alt_about_us_summary: "Master tailor inspects IKSA's 'Elite Heritage Weave' Japanese fabric, ensuring quality for a luxury thobe.",
+    main_alt_collections_summary: "A curated collection of IKSA's luxury Japanese fabric rolls, showcasing various textures and shades for thobes and abayas.",
+    main_alt_thobeGuide_summary: "Close-up of a perfectly tailored thobe collar, demonstrating the structure of IKSA's premium Japanese textile.",
+    main_alt_for_artisans_summary: "A tailor meticulously measures and cuts a length of IKSA's Japanese fabric, preparing for a bespoke garment.",
     
     // About Us Page
     about_heroTitle: "Our Heritage: Woven with Mastery",
@@ -141,6 +144,8 @@ export const translations: Record<LanguageCode, Translations> = {
     },
     about_cta_title: "The Fabric of Excellence",
     about_cta_content: "Each of our collections is a tribute to this heritage. Explore the result of decades of innovation and discover the tangible difference in quality and performance.",
+    about_hero_alt: "A weaver's hands guiding threads on a traditional loom, representing IKSA's commitment to textile heritage.",
+    about_pillar_alt: "A detailed macro shot of a complex fabric weave, showcasing IKSA's masterful finishing.",
 
     // Collections Page (B2B)
     collections_pageTitle: "IKSA Professional Catalogue",
@@ -151,6 +156,7 @@ export const translations: Record<LanguageCode, Translations> = {
     filterByFeel: "Filter by Fabric Feel",
     filterByPerformance: "Filter by Performance",
     filterByRollLength: "Filter by Roll Length",
+    collections_hero_alt: "Several rolls of luxury IKSA fabrics in varying neutral tones, arranged for professional selection.",
     
     // B2B Filters
     filterAllUseCases: "All Use Cases",
@@ -208,12 +214,19 @@ export const translations: Record<LanguageCode, Translations> = {
     product_tabSpecifications: "Specifications",
     product_projectInspirationTitle: "Creations Powered by IKSA",
     product_inspirationCaption: "Inspiration: A formal {garment} tailored from our {fabricName}.",
+    product_inspiration_kandura_alt: "An elegant Emirati Kandura made from flowing IKSA fabric, showcasing its perfect drape.",
+    product_inspiration_abaya_alt: "A luxurious black Abaya with intricate details, crafted from premium IKSA textile.",
 
     // Thobe Guide Page
     thobeGuide_pageTitle: "The IKSA Thobe Guide",
+    thobeGuide_backToTopics: "View Topics",
+    thobeGuide_hero_alt: "A mannequin dressed in a perfectly tailored white thobe, highlighting craftsmanship.",
+    thobeGuide_colors_alt: "A palette of thobes in various colors from white and black to earth tones, displayed side-by-side.",
+    thobeGuide_minimalism_alt: "Comparison of a minimalist Emirati Kandura against a thobe with intricate embroidery.",
+    thobeGuide_fabric_alt: "Macro photograph showing the detailed texture and weave of a high-performance Japanese fabric.",
     thobeGuide_full: {
-      "title": "An Authoritative Guide to the Thobe: Heritage, Artistry, and Modern Expression",
-      "intro": "The thobe—known regionally as the **kandura** or **dishdasha**—is far more than a garment. It is a profound cultural signifier, an embodiment of heritage, and a canvas for personal dignity. Worn for centuries, this iconic robe has gracefully navigated the currents of history, adapting to climate, custom, and contemporary aesthetics while retaining its essential character.\n\nThis guide offers an authoritative exploration of the thobe's intricate world. We will decode the nuanced language of its colors, examine the masterful artistry of its construction, and trace its evolution into a symbol of modern elegance. Here, tradition and innovation are not opposing forces but are **exquisitely woven together**, cementing the thobe’s status as a timeless and globally relevant sartorial masterpiece.",
+      "title": "The Thobe: Tradition Meets Modern Elegance",
+      "intro": "The thobe—also known as kandura or dishdasha—is more than clothing; it represents cultural heritage and personal dignity. Worn for centuries, it adapts to climate and style while preserving its core identity. This guide explores the thobe’s colors, craftsmanship, and evolution, highlighting how tradition and modern design blend to keep it a timeless symbol of elegance worldwide.",
       "color_title": "I. The Chromatic Language: Decoding the Symbolism of Thobe Colors",
       "color_intro": "The selection of a thobe's color is a deliberate act, rich with meaning. It is a sophisticated interplay of religious tradition, cultural convention, climatic necessity, and personal aesthetic. Each hue imparts a distinct narrative, contributing to the garment's gravitas and style.",
       "color_palette_title": "A. The Foundational Palette: White and Black",
@@ -275,7 +288,6 @@ export const translations: Record<LanguageCode, Translations> = {
     forArtisans_point1_item3: "The sample you see is the roll you get. No compromises.",
     forArtisans_point1_promise: "Our Promise: We eliminate uncertainty and risk.",
     forArtisans_point2_title: "Precise Data, Not Guesswork",
-    forArtisans_point2_item1: "Our Artisan's Tool provides precise yield calculations.",
     forArtisans_point2_item2: "Realistic data based on standard markers, with no over-promising.",
     forArtisans_point2_item3: "User-friendly guides to help you work more efficiently.",
     forArtisans_point2_promise: "Our Promise: You know your exact costs and yields in advance.",
@@ -303,6 +315,14 @@ export const translations: Record<LanguageCode, Translations> = {
     forArtisans_conclusion_text1: "We conduct business with the heart of a long-term partner, not as a one-time transaction. We believe in transparency, respecting our clients, and delivering tangible, proven quality.",
     forArtisans_conclusion_text2: "Today, you may just be ordering fabric — but tomorrow, we can be a team, growing together.",
     forArtisans_cta_button: "Inquire About Partnership",
+    forArtisans_hero_alt: "Two tailors collaborating over a table of IKSA fabric swatches, signifying partnership.",
+    forArtisans_point1_alt: "A magnifying glass inspects the quality of a white textile, symbolizing IKSA's commitment to proven quality.",
+    forArtisans_point2_alt: "A tailor using a calculator and notepad next to a roll of fabric, illustrating precise data and yield calculation.",
+    forArtisans_point3_alt: "A logistics worker loading boxes of IKSA textiles, representing timely and respected delivery schedules.",
+    forArtisans_point4_alt: "An itemized quote for IKSA fabrics, showcasing transparent pricing with no hidden fees.",
+    forArtisans_point5_alt: "A display of different thobe styles from various regions, highlighting IKSA's cultural understanding.",
+    forArtisans_point6_alt: "A customer service representative assisting a client, showing IKSA's commitment to support.",
+
 
     // Contact Page
     contact_pageTitle: "Contact Us",
@@ -321,6 +341,7 @@ export const translations: Record<LanguageCode, Translations> = {
     contact_form_success: "Thank you for your message. We will get back to you shortly.",
     form_error_email: "Please enter a valid email address.",
     form_error_required: "This field is required.",
+    contact_hero_alt: "A close-up of a hand using a vintage telephone, symbolizing professional communication.",
 
 
     // Artisan's Tool Page
@@ -343,6 +364,20 @@ export const translations: Record<LanguageCode, Translations> = {
     sizeM: "Medium (M)",
     sizeL: "Large (L)",
     sizeXL: "Extra Large (XL)",
+    artisansTool_hero_alt: "A tailor's hands precisely cutting fabric with traditional shears on a large table.",
+    artisansTool_tip_alt_1: "A diagram showing an efficient 'marker' layout of pattern pieces on a length of fabric.",
+    artisansTool_tip_alt_2: "A close-up of a fabric with a clear directional 'nap' or sheen.",
+    artisansTool_tip_alt_3: "An illustration comparing cutting a pattern piece on a fold versus tracing two halves on flat fabric.",
+
+    // Garment Styles & Categories
+    garmentCategoryMens: "Men's Garments",
+    garmentCategoryWomens: "Women's Garments",
+    garmentSaudiThobe: "Saudi Thobe",
+    garmentEmiratiKandura: "Emirati Kandura",
+    garmentOmaniThobe: "Omani Thobe",
+    garmentKuwaitiDishdasha: "Kuwaiti Dishdasha",
+    garmentAbayaStandard: "Standard Abaya",
+    
     calculatorResultIntro: "Based on a {garmentSize} {garmentStyle}, one {rollLength} {unit} roll of {fabricName} can yield approximately:",
     calculatorResultIntro_short: "Estimated Yield From This Roll:",
     calculatorDisclaimer: "This is an estimate. Actual yield may vary based on tailor's specific pattern and cutting efficiency.",
@@ -486,46 +521,36 @@ export const translations: Record<LanguageCode, Translations> = {
     priceStructure_collapsibleTitle: "Product Pricing Overview & Policy",
 
     // SEO Meta Tags
-    page_main_title: "IKSA: Premium Japanese Textiles for Thobes & Abayas",
-    page_main_description: "Experience IKSA: Your premier source for high-quality, Japanese-engineered fabrics. Explore luxurious collections based on the 'Four Pillars' of Japanese manufacturing, a master Thobe Guide, and artisan support.",
-    page_main_keywords: "IKSA, Japanese fabrics, Thobe fabric, Abaya material, luxury Islamic wear, breathable fabric, anti-wrinkle fabric, premium textiles",
-
-    page_about_title: "About IKSA | Our Four Pillars of Textile Excellence",
-    page_about_description: "Learn about IKSA's foundation, built upon our four pillars of textile excellence: Heritage Innovation, Masterful Finishing, Functional Elegance, and Modern Versatility. Discover our commitment to quality.",
-    page_about_keywords: "About IKSA, Four Pillars textiles, Japanese fabric heritage, textile engineering, premium Thobe material",
-
-    page_collections_title: "Fabric Roll Collections | IKSA Professional B2B Catalogue",
-    page_collections_description: "Explore IKSA's B2B catalogue of luxury fabric rolls. Priced per roll for professional tailors and designers. Premier textiles for Thobes and Abayas.",
-    page_collections_keywords: "IKSA fabric collections, buy fabric rolls, wholesale fabric, B2B textiles, luxury thobe fabric, Japanese textiles, abaya cloth",
-
-    page_product_detail_title: "Buy {fabricName} Roll | IKSA B2B",
-    page_product_detail_description: "Purchase a {rollLength}m roll of {fabricName}. View technical specs, professional tailoring notes, and use the yield estimator to calculate your production of Thobes or Abayas.",
-    page_product_detail_keywords: "{fabricName}, buy fabric roll, {rollLength}m roll, textile, thobe production, abaya fabric, wholesale",
-
-    page_thobeGuide_title: "The Thobe Guide | IKSA",
-    page_thobeGuide_description: "Read the IKSA Thobe Guide: An in-depth guide to Thobe color, craftsmanship, and contemporary style. Explore tradition and innovation with IKSA.",
-    page_thobeGuide_keywords: "Thobe guide, IKSA journal, thobe colors, thobe styles, tatreez, kandura, dishdasha, modern thobe trends, fabric technology, textile innovation",
+    page_main_title: "IKSA | Premium Japanese Fabrics for Thobe & Abaya",
+    page_main_description: "Discover IKSA's luxury Japanese textiles. Engineered for wrinkle-resistance and breathability, our fabrics are the choice for master thobe and abaya artisans.",
     
-    page_forArtisans_title: "B2B Partnership for Artisans & Tailors | IKSA",
-    page_forArtisans_description: "Partner with IKSA for direct access to premium fabric rolls. Benefit from consistent quality, technical expertise, and transparent collaboration.",
-    page_forArtisans_keywords: "B2B fabric supplier, tailor partnership, IKSA for artisans, wholesale textiles, premium fabric factory",
+    page_about_title: "About IKSA | Our Four Pillars of Japanese Textile Mastery",
+    page_about_description: "Learn about IKSA's textile philosophy. We blend heritage innovation with masterful finishing to produce functionally elegant fabrics for the modern artisan.",
 
-    page_artisansTool_title: "Fabric Yield Calculator & Artisan's Tool | IKSA",
-    page_artisansTool_description: "Calculate fabric yield for Thobes and Abayas with IKSA's Artisan Tool. Optimize your fabric usage with helpful pro-tips for tailors and manufacturers.",
-    page_artisansTool_keywords: "fabric calculator, yield calculator, artisan tool, thobe cutting, abaya fabric, IKSA, textile advice, fabric optimization, tailoring calculator",
-
-    page_contact_title: "Contact IKSA | Inquiries & Premium Fabric Orders",
-    page_contact_description: "Connect with IKSA for inquiries, fabric samples, and partnership opportunities. Find our address, WhatsApp, email, and business hours. We supply premium textiles globally.",
-    page_contact_keywords: "contact IKSA, order fabric, fabric samples, textile supplier, fabrics Thailand, fabric wholesale, IKSA email, IKSA phone",
+    page_collections_title: "B2B Fabric Catalogue | Thobe & Abaya Textiles by IKSA",
+    page_collections_description: "Explore the IKSA B2B catalogue of luxury fabric rolls. Find the perfect Japanese textiles for Kandura, Dishdasha, and Abaya, priced for professionals.",
     
-    page_checkout_title: "Checkout | IKSA Secure B2B Order",
-    page_checkout_description: "Complete your B2B fabric roll order with IKSA. Enter your shipping details and review your order summary for a secure and professional transaction.",
-    page_checkout_keywords: "IKSA checkout, fabric order, secure payment, B2B purchase, textile shipping",
+    page_product_detail_title: "Buy {fabricName} Fabric Roll ({rollLength}m) | IKSA B2B",
+    page_product_detail_description: "Source a {rollLength}m roll of {fabricName}. View specs and pro tailoring notes. Ideal for luxury thobes, this {fabricFeel} material offers {fabricPerformance}.",
+
+    page_thobeGuide_title: "The Thobe Guide: Color, Style & Fabric | IKSA",
+    page_thobeGuide_description: "Our expert guide to the Thobe (Kandura). Learn about the meaning of colors, regional styles, and choosing the right high-performance fabric for your garment.",
+    
+    page_forArtisans_title: "Artisan Partnerships | Wholesale Japanese Fabrics from IKSA",
+    page_forArtisans_description: "Partner with IKSA for direct B2B access to premium Japanese fabric rolls. We offer consistent quality, transparent pricing, and dedicated support for tailors.",
+
+    page_artisansTool_title: "Fabric Yield Calculator for Thobes & Abayas | IKSA Tool",
+    page_artisansTool_description: "Optimize your production with IKSA's Fabric Yield Calculator. Estimate how many thobes or abayas you can create from a single roll of our Japanese textiles.",
+    
+    page_contact_title: "Contact IKSA | Premium Textile Supplier",
+    page_contact_description: "Get in touch with IKSA for fabric samples, B2B partnership inquiries, and orders. We are a premier global supplier of Japanese textiles for luxury garments.",
+    
+    page_checkout_title: "Secure Checkout | IKSA B2B Fabric Order",
+    page_checkout_description: "Complete your professional order for IKSA's Japanese fabric rolls. Provide your shipping details to finalize your B2B purchase of our premium textiles.",
     checkout_emptyCartMessage: "Add some fabric rolls to your cart to proceed with your order.",
     
-    page_priceStructure_title: "IKSA Fabric Collections & Pricing",
-    page_priceStructure_description: "Explore the pricing structure for IKSA's curated fabric collections. Find detailed information on our Heritage and Performance lines for professional tailors.",
-    page_priceStructure_keywords: "IKSA pricing, fabric price list, wholesale fabric cost, textile collections, thobe fabric price",
+    page_priceStructure_title: "IKSA Fabric Pricing | Wholesale Textile Costs",
+    page_priceStructure_description: "Review the transparent pricing for IKSA's fabric collections. Our structure includes landed costs with estimated shipping, duties, and taxes for global partners.",
     
     // Pricing Calculator Page
     priceStructure_pageTitle_dynamic: "Product Pricing Overview & Policy",

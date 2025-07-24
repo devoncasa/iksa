@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
@@ -43,10 +44,11 @@ export const Header: React.FC = () => {
   
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
     `relative py-2 px-1 text-sm font-medium transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-brandAccent-700 focus:ring-offset-2 focus:ring-offset-current rounded-sm
-     after:content-[""] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:bg-brandAccent-500 after:transition-all after:duration-300 after:ease-in-out
+     after:content-[""] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:transition-all after:duration-300 after:ease-in-out
+     after:bg-brandAccent-500 lg:after:bg-brandAccent-600
      ${isActive
-        ? 'text-white after:w-full'
-        : 'text-stone-300 hover:text-white after:w-0 hover:after:w-full'
+        ? 'text-white lg:text-stone-500 after:w-full'
+        : 'text-stone-300 lg:text-deep-chocolate after:w-0 hover:text-white hover:after:w-full'
      }`;
 
   const mobileNavLinkClasses = ({ isActive }: { isActive: boolean }) =>
@@ -59,9 +61,9 @@ export const Header: React.FC = () => {
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out lg:bg-brandAccent-500/90 lg:backdrop-blur-lg ${
           isScrolled || isMobileMenuOpen
-            ? 'bg-stone-800/80 backdrop-blur-lg shadow-lg'
+            ? 'bg-stone-800/80 backdrop-blur-lg shadow-lg lg:bg-brandAccent-500/90'
             : 'bg-transparent'
         }`}
       >
@@ -69,7 +71,7 @@ export const Header: React.FC = () => {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link to="/" className="flex items-center space-x-2" aria-label="IKSA Home">
+              <Link to="/" className="flex items-center space-x-3 bg-white/[.95] p-2.5 rounded-xl backdrop-blur-sm shadow-sm transition-all duration-300 hover:bg-white hover:shadow-md" aria-label="IKSA Home">
                 <img src="https://i.postimg.cc/mZSFSj42/iksa-logo.webp" alt="IKSA Logo" className="h-10 w-auto" />
                 <img src="https://i.postimg.cc/C5JBLh7f/iksa-name-logo.webp" alt="IKSA Name" className="h-5 w-auto hidden sm:block" />
               </Link>
@@ -88,7 +90,7 @@ export const Header: React.FC = () => {
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => setIsCartOpen(true)}
-                className="relative p-2 rounded-full text-stone-300 hover:text-white hover:bg-stone-700/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-stone-800 focus:ring-white transition-colors"
+                className="relative p-2 rounded-full text-stone-300 lg:text-deep-chocolate hover:text-white hover:bg-stone-700/50 lg:hover:bg-brandAccent-600/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-stone-800 lg:focus:ring-offset-brandAccent-100 focus:ring-white transition-colors"
                 aria-label="Open shopping cart"
               >
                 <ShoppingCartIcon className="w-6 h-6" />

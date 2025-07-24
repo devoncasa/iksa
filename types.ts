@@ -105,3 +105,9 @@ export interface CountrySettings {
   };
   notes: string;
 }
+
+// SEO-related types
+export interface Breadcrumb {
+  name: string;
+  path: string;
+}
