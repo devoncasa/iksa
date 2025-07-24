@@ -1,6 +1,5 @@
 
 
-
 import React, { useState, useEffect, useCallback } from 'react';
 import * as ReactRouterDOM from 'react-router-dom';
 import { BACKGROUND_IMAGES, THOBE_GUIDE_BACKGROUND_IMAGES, getRandomImage } from '../constants';
@@ -52,7 +51,7 @@ export const GlobalBackground: React.FC = () => {
           transform: 'scale(1.05)',
         }}
       ></div>
-      <div className="absolute inset-0 bg-white/30"></div>
+      <div className="absolute inset-0 bg-white/20"></div>
     </div>
   );
 };

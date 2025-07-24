@@ -16,10 +16,24 @@ export const Header: React.FC = () => {
 
   const { totalItems } = getCartTotal();
 
+  // Close menus on route change
   useEffect(() => {
     setIsMobileMenuOpen(false); 
     setIsCartOpen(false);
   }, [location.pathname]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    // Cleanup function
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   
@@ -38,6 +52,7 @@ export const Header: React.FC = () => {
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 md:h-24">
+            {/* Logo */}
             <div className="flex-shrink-0">
               <ReactRouterDOM.Link to="/" className="relative z-10 flex items-center gap-x-3 bg-white/70 backdrop-blur-sm px-3 py-1.5 rounded-xl shadow-sm transition-all duration-300 hover:shadow-md">
                 <img src="https://i.postimg.cc/mZSFSj42/iksa-logo.webp" alt="IKSA Logo" className="h-11 md:h-14 w-auto" />
@@ -45,6 +60,7 @@ export const Header: React.FC = () => {
               </ReactRouterDOM.Link>
             </div>
 
+            {/* Desktop Nav */}
             <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
               {NAV_LINKS.filter(l => l.path !== '/checkout').map((link) => (
                 <ReactRouterDOM.NavLink
@@ -57,6 +73,7 @@ export const Header: React.FC = () => {
               ))}
             </nav>
 
+            {/* Icons */}
             <div className="flex items-center">
               <button
                 onClick={() => setIsCartOpen(true)}
@@ -89,51 +106,60 @@ export const Header: React.FC = () => {
             </div>
           </div>
         </div>
+      </header>
 
-        <div 
-          className={`md:hidden fixed inset-0 z-40 transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`} 
-          id="mobile-menu"
-        >
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={toggleMobileMenu}></div>
-          <div className={`fixed top-0 right-0 bottom-0 z-50 w-64 bg-creamy-beige p-5 shadow-xl transition-transform duration-300 ease-in-out flex flex-col ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-            <div className="flex items-center justify-between mb-8">
-              <ReactRouterDOM.Link to="/" className="relative z-10 flex items-center gap-x-3">
-                <img src="https://i.postimg.cc/mZSFSj42/iksa-logo.webp" alt="IKSA Logo" className="h-11 w-auto" />
-                <img src="https://i.postimg.cc/C5JBLh7f/iksa-name-logo.webp" alt="IKSA" className="h-7 w-auto" />
-              </ReactRouterDOM.Link>
-              <button
-                onClick={toggleMobileMenu}
-                type="button"
-                className="p-2 rounded-md text-deep-chocolate hover:text-warm-terracotta hover:bg-brandAccent-200 focus:outline-none focus:ring-2 focus:ring-brandAccent-600"
-              >
-                <span className="sr-only">Close menu</span>
-                <CloseIcon className="h-6 w-6" />
-              </button>
-            </div>
-            <nav className="flex-grow">
-              <ul className="space-y-3">
-                {NAV_LINKS.filter(l => l.path !== '/checkout').map((link) => (
-                  <li key={link.path}>
-                    <ReactRouterDOM.NavLink
-                      to={link.path}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={({ isActive }) =>
-                        `block py-2 px-3 rounded-md text-base font-medium transition-colors duration-150 ease-in-out ${
-                          isActive
-                            ? 'bg-warm-terracotta text-white'
-                            : 'text-deep-chocolate hover:bg-warm-terracotta hover:text-white'
-                        }`
-                      }
-                    >
-                      {translate('nav', link.labelKey)}
-                    </ReactRouterDOM.NavLink>
-                  </li>
+      {/* Mobile Menu Panel */}
+      <div
+        role="dialog"
+        aria-modal="true"
+        className={`fixed inset-0 z-40 md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}
+      >
+        {/* Overlay */}
+        <div
+          className="absolute inset-0 bg-black/60 transition-opacity"
+          onClick={toggleMobileMenu}
+          aria-hidden="true"
+        ></div>
+
+        {/* Menu Panel */}
+        <div className={`relative flex h-full w-full max-w-xs flex-col overflow-y-auto bg-creamy-beige pb-12 shadow-xl ml-auto transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <div className="flex items-center justify-between px-4 pt-5 pb-2">
+             <h2 className="text-lg font-semibold text-deep-chocolate">Menu</h2>
+             <button
+              type="button"
+              className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-deep-chocolate"
+              onClick={toggleMobileMenu}
+            >
+              <span className="sr-only">Close menu</span>
+              <CloseIcon className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
+
+          <div className="mt-6 flow-root">
+            <div className="-my-6 divide-y divide-warm-terracotta/20">
+              <div className="space-y-2 py-6 px-4">
+                 {NAV_LINKS.filter(l => l.path !== '/checkout').map((link) => (
+                  <ReactRouterDOM.NavLink
+                    key={link.path}
+                    to={link.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `block py-2 px-3 rounded-md text-base font-medium transition-colors duration-150 ease-in-out ${
+                        isActive
+                          ? 'bg-warm-terracotta text-white'
+                          : 'text-deep-chocolate hover:bg-warm-terracotta/50'
+                      }`
+                    }
+                  >
+                    {translate('nav', link.labelKey)}
+                  </ReactRouterDOM.NavLink>
                 ))}
-              </ul>
-            </nav>
+              </div>
+            </div>
           </div>
         </div>
-      </header>
+      </div>
+      
       <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );

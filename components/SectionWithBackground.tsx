@@ -1,6 +1,5 @@
 
 
-
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 interface SectionWithBackgroundProps {
@@ -77,7 +76,7 @@ export const SectionWithBackground: React.FC<SectionWithBackgroundProps> = ({
         ></div>
       )}
 
-      <div className="absolute inset-0 bg-white opacity-30"></div>
+      <div className="absolute inset-0 bg-white opacity-20"></div>
 
       <div className="relative z-10 p-6 md:p-10 max-w-4xl mx-auto bg-white/80 backdrop-blur-sm rounded-xl shadow-2xl">
         {children}

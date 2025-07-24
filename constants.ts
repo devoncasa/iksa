@@ -254,23 +254,7 @@ export const BACKGROUND_IMAGES: string[] = [
   'https://i.postimg.cc/y8gS2k42/about-us-summary.webp',
   'https://i.postimg.cc/50v2f5fK/artisans-tool-summary.webp',
   'https://i.postimg.cc/j2pT7Pq5/fabric-detail-drape.webp',
-  'https://i.postimg.cc/KzT5V0hB/fabric-detail-texture.webp',
-  'https://i.postimg.cc/W1SbcL5L/IKSA-hero-background-001.webp',
-  'https://i.postimg.cc/sgfscHsn/IKSA-hero-background-0010.webp',
-  'https://i.postimg.cc/XY23DKvn/IKSA-hero-background-0011.webp',
-  'https://i.postimg.cc/g0nd9ww8/IKSA-hero-background-0012.webp',
-  'https://i.postimg.cc/R0ymvMf8/IKSA-hero-background-0013.webp',
-  'https://i.postimg.cc/Qt73tRJM/IKSA-hero-background-0014.webp',
-  'https://i.postimg.cc/D0KKbBxP/IKSA-hero-background-0015.webp',
-  'https://i.postimg.cc/1Xc10wTh/IKSA-hero-background-0016.webp',
-  'https://i.postimg.cc/FzjNP2Y6/IKSA-hero-background-002.webp',
-  'https://i.postimg.cc/PqRXNbGS/IKSA-hero-background-003.webp',
-  'https://i.postimg.cc/Bv6ZqYz8/IKSA-hero-background-004.webp',
-  'https://i.postimg.cc/wvR6Ntgg/IKSA-hero-background-005.webp',
-  'https://i.postimg.cc/sDrVBD8C/IKSA-hero-background-006.webp',
-  'https://i.postimg.cc/L5dm3H8f/IKSA-hero-background-007.webp',
-  'https://i.postimg.cc/mZML2FmS/IKSA-hero-background-008.webp',
-  'https://i.postimg.cc/DyP713kJ/IKSA-hero-background-009.webp',
+  'https://i.postimg.cc/KzT5V0hB/fabric-detail-texture.webp'
 ];
 
 export const THOBE_GUIDE_BACKGROUND_IMAGES: string[] = [
@@ -278,26 +262,7 @@ export const THOBE_GUIDE_BACKGROUND_IMAGES: string[] = [
   'https://i.postimg.cc/5N18qDML/article-sundus-casa.webp',
   'https://i.postimg.cc/9Q2w0h1G/article-fabric-science.webp',
   'https://i.postimg.cc/2j5T00Fw/inspiration-kandura.webp',
-  'https://i.postimg.cc/k4GkYyv0/inspiration-abaya.webp',
-  'https://i.postimg.cc/L8YgkMvj/IKSA-The-Thobe-Guide-001.webp',
-  'https://i.postimg.cc/Hnvj5SyS/IKSA-The-Thobe-Guide-0010.webp',
-  'https://i.postimg.cc/1Rv8Lzjp/IKSA-The-Thobe-Guide-0011.webp',
-  'https://i.postimg.cc/htdhz1Pr/IKSA-The-Thobe-Guide-0012.webp',
-  'https://i.postimg.cc/QxVFsr2v/IKSA-The-Thobe-Guide-0013.webp',
-  'https://i.postimg.cc/CKp5jnRV/IKSA-The-Thobe-Guide-0014.webp',
-  'https://i.postimg.cc/L67n8bR5/IKSA-The-Thobe-Guide-0015.webp',
-  'https://i.postimg.cc/XvKJxN5B/IKSA-The-Thobe-Guide-0016.webp',
-  'https://i.postimg.cc/Kjj8ZnHt/IKSA-The-Thobe-Guide-0017.webp',
-  'https://i.postimg.cc/XJVvPMKH/IKSA-The-Thobe-Guide-0018.webp',
-  'https://i.postimg.cc/fLBbnHBw/IKSA-The-Thobe-Guide-0019.webp',
-  'https://i.postimg.cc/KvsggY7Z/IKSA-The-Thobe-Guide-002.webp',
-  'https://i.postimg.cc/1RBFsBfV/IKSA-The-Thobe-Guide-003.webp',
-  'https://i.postimg.cc/fTb9Ld92/IKSA-The-Thobe-Guide-004.webp',
-  'https://i.postimg.cc/1zDgTckt/IKSA-The-Thobe-Guide-005.webp',
-  'https://i.postimg.cc/cHmv114G/IKSA-The-Thobe-Guide-006.webp',
-  'https://i.postimg.cc/kg06fhhz/IKSA-The-Thobe-Guide-007.webp',
-  'https://i.postimg.cc/9MV4jw2B/IKSA-The-Thobe-Guide-008.webp',
-  'https://i.postimg.cc/HnkVrGVc/IKSA-The-Thobe-Guide-009.webp',
+  'https://i.postimg.cc/k4GkYyv0/inspiration-abaya.webp'
 ];
 
 export const getRandomImage = (imageArray: string[], currentImage?: string): string => {

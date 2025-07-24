@@ -1,3 +1,4 @@
+
 export enum LanguageCode {
   EN = 'en',
 }
@@ -67,4 +68,40 @@ export interface CartContextType {
   removeFromCart: (fabricId: string) => void;
   clearCart: () => void;
   getCartTotal: () => { totalItems: number; totalPrice: number };
+}
+
+// For the new dynamic price calculator
+export interface PricingSettings {
+  baseDeliveryChargeTH: number;
+  perKgDeliveryChargeTH: number;
+  internationalSurchargePercentageDefault: number;
+  currencyExchangeRateTHB_USD: number;
+  countries: Record<string, CountrySettings>;
+}
+
+export interface CountrySettings {
+  currency: string;
+  exchangeRateToUSD: number;
+  shipping: {
+    base: number;
+    perKg: number;
+  };
+  taxes: {
+    vatRate?: number;
+    gstRate?: number;
+    sstRate?: number;
+    salesTaxRate?: number;
+    alwaysApplies: boolean;
+    notes?: string;
+    deMinimisUSD?: number;
+  };
+  duties: {
+    deMinimisUSD: number;
+    rates: {
+        apparel?: number;
+        textile?: number;
+        swsRateOnDuty?: number;
+    };
+  };
+  notes: string;
 }
