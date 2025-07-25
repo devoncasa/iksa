@@ -1,7 +1,6 @@
 
-
 import React from 'react';
-import { NavLink, Fabric, LanguageCode } from './types';
+import { NavLink, Fabric, LanguageCode, GarmentStyleAdvanced, GarmentSizeAdvanced } from './types';
 import {
   BreathableIcon, UVProtectionIcon, AntiYellowingIcon, CrispIcon, SoftDrapeIcon, SilkShineIcon, LightweightIcon, CoolTouchIcon, AntiStaticIcon, CreaseResistantIcon, EasyCareIcon,
 } from './components/icons';
@@ -87,7 +86,7 @@ export const MOCK_FABRICS: Fabric[] = [
     features: ['crisp', 'breathable', 'easyCare', 'antiYellowing'], 
     useCases: ['saudiThobe', 'kuwaitiDishdasha'],
     feel: ['crispStructured'],
-    performance: ['breathability', 'durability'],
+    performance: ['durability'],
     finishKey: 'crisp', 
     weightKey: 'midWeight', 
     shadeKey: 'pureWhite', 
@@ -197,16 +196,42 @@ export const MOCK_FABRICS: Fabric[] = [
   },
 ];
 
-export const GARMENT_SIZES = [
-  { key: 'S', nameKey: 'sizeS' },
-  { key: 'M', nameKey: 'sizeM' },
-  { key: 'L', nameKey: 'sizeL' },
-  { key: 'XL', nameKey: 'sizeXL' },
+export const GARMENT_SIZES_ADVANCED: GarmentSizeAdvanced[] = [
+  { key: 'XS', nameKey: 'sizeXS', multiplier: 0.85 },
+  { key: 'S', nameKey: 'sizeS', multiplier: 0.9 },
+  { key: 'M', nameKey: 'sizeM', multiplier: 1.0 },
+  { key: 'L', nameKey: 'sizeL', multiplier: 1.1 },
+  { key: 'XL', nameKey: 'sizeXL', multiplier: 1.15 },
+  { key: 'XXL', nameKey: 'sizeXXL', multiplier: 1.25 },
+  { key: '3XL', nameKey: 'size3XL', multiplier: 1.35 },
 ];
 
-export const GARMENT_CATEGORIES = [
-  { nameKey: 'garmentCategoryMens', styles: [ { id: 'saudi-thobe', nameKey: 'garmentSaudiThobe', fabricPerSize: { 'S': 2.7, 'M': 2.9, 'L': 3.1, 'XL': 3.3 } }, { id: 'emirati-kandura', nameKey: 'garmentEmiratiKandura', fabricPerSize: { 'S': 2.8, 'M': 3.0, 'L': 3.2, 'XL': 3.4 } }, { id: 'omani-thobe', nameKey: 'garmentOmaniThobe', fabricPerSize: { 'S': 2.6, 'M': 2.8, 'L': 3.0, 'XL': 3.2 } }, { id: 'kuwaiti-dishdasha', nameKey: 'garmentKuwaitiDishdasha', fabricPerSize: { 'S': 2.7, 'M': 2.9, 'L': 3.1, 'XL': 3.3 } } ]},
-  { nameKey: 'garmentCategoryWomens', styles: [ { id: 'abaya-standard', nameKey: 'garmentAbayaStandard', fabricPerSize: { 'S': 3.0, 'M': 3.3, 'L': 3.6, 'XL': 3.9 } } ]}
+export const GARMENT_STYLES_ADVANCED: GarmentStyleAdvanced[] = [
+  { id: 'thobe-kandura', nameKey: 'garmentThobeKandura', gender: 'Male', region: 'Gulf (Arabian)', baseRequirement: 4.0 },
+  { id: 'dishdasha', nameKey: 'garmentDishdasha', gender: 'Male', region: 'Kuwait, Oman', baseRequirement: 4.0 },
+  { id: 'jubbah', nameKey: 'garmentJubbah', gender: 'Male', region: 'Egypt, Sudan', baseRequirement: 4.0 },
+  { id: 'qamees', nameKey: 'garmentQamees', gender: 'Male', region: 'North Africa', baseRequirement: 3.8 },
+  { id: 'shalwar-kameez', nameKey: 'garmentShalwarKameez', gender: 'Both', region: 'Pakistan, India', baseRequirement: 4.5 },
+  { id: 'kurta-pajama', nameKey: 'garmentKurtaPajama', gender: 'Male', region: 'India, Bangladesh', baseRequirement: 4.0 },
+  { id: 'baju-melayu', nameKey: 'garmentBajuMelayu', gender: 'Male', region: 'Malaysia, Brunei', baseRequirement: 4.0 },
+  { id: 'baju-kurung', nameKey: 'garmentBajuKurung', gender: 'Female', region: 'Malaysia, Brunei', baseRequirement: 4.5 },
+  { id: 'abaya', nameKey: 'garmentAbaya', gender: 'Female', region: 'Gulf / Middle East', baseRequirement: 4.75 }, // Avg of 4.5-5.0
+  { id: 'kaftan', nameKey: 'garmentKaftan', gender: 'Female', region: 'Morocco, Algeria', baseRequirement: 5.0 },
+  { id: 'djellaba', nameKey: 'garmentDjellaba', gender: 'Both', region: 'Morocco', baseRequirement: 4.5 },
+  { id: 'jalabiya', nameKey: 'garmentJalabiya', gender: 'Female', region: 'Egypt, Sudan', baseRequirement: 3.5 },
+  { id: 'chador', nameKey: 'garmentChador', gender: 'Female', region: 'Iran', baseRequirement: 3.5 },
+  { id: 'hijab', nameKey: 'garmentHijab', gender: 'Female', region: 'Global', baseRequirement: 2.0 },
+  { id: 'niqab', nameKey: 'garmentNiqab', gender: 'Female', region: 'Global', baseRequirement: 1.0 },
+  { id: 'burqa', nameKey: 'garmentBurqa', gender: 'Female', region: 'Afghanistan/Pakistan', baseRequirement: 5.5 },
+  { id: 'khimar', nameKey: 'garmentKhimar', gender: 'Female', region: 'Global', baseRequirement: 2.0 },
+  { id: 'al-amira', nameKey: 'garmentAlAmira', gender: 'Female', region: 'Levant', baseRequirement: 1.5 },
+  { id: 'tunic-pants', nameKey: 'garmentTunicPants', gender: 'Female', region: 'Global', baseRequirement: 4.0 },
+  { id: 'sirwal', nameKey: 'garmentSirwal', gender: 'Both', region: 'Middle East', baseRequirement: 2.5 },
+  { id: 'haram-pants', nameKey: 'garmentHaramPants', gender: 'Male', region: 'Makkah/Hajj wear', baseRequirement: 2.5 },
+  { id: 'hajj-ihram', nameKey: 'garmentHajjIhram', gender: 'Male', region: 'Pilgrimage', baseRequirement: 4.0 },
+  { id: 'prayer-robe', nameKey: 'garmentPrayerRobe', gender: 'Female', region: 'Africa', baseRequirement: 3.5 },
+  { id: 'childrens-thobe', nameKey: 'garmentChildrensThobe', gender: 'Male', region: 'Global', baseRequirement: 2.5 },
+  { id: 'childrens-abaya', nameKey: 'garmentChildrensAbaya', gender: 'Female', region: 'Global', baseRequirement: 2.5 },
 ];
 
 export const FABRIC_FILTERS = {

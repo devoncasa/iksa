@@ -172,6 +172,14 @@ export const ClockIcon: React.FC<IconProps> = (props) => (
     </svg>
 );
 
+export const CalculatorIcon: React.FC<IconProps> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+      {props.title && <title>{props.title}</title>}
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-4.5-2.25V18m-4.5-2.25V18M9.75 11.25h.008v.008H9.75v-.008zM9.75 15h.008v.008H9.75v-.008zM11.25 15h.008v.008h-.008V15zm.75-3.75h.008v.008h-.008v-.008zm.75 3.75h.008v.008h-.008v-.008zM14.25 11.25h.008v.008h-.008v-.008zm.75 3.75h.008v.008h-.008v-.008zM4.5 6.75h15v10.5h-15V6.75z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 5.25h16.5a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75H3.75a.75.75 0 01-.75-.75V6a.75.75 0 01.75-.75z" />
+    </svg>
+);
+
 export const LightbulbIcon: React.FC<IconProps> = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
         {props.title && <title>{props.title}</title>}

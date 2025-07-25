@@ -165,7 +165,7 @@ export const CheckoutPage: React.FC = () => {
                             </div>
                             <div>
                                 <p className="font-semibold text-stone-700">{translate(fabric.nameKey)}</p>
-                                <p className="text-sm text-stone-500">{item.quantity} x ${fabric.pricePerRoll.toFixed(2)}</p>
+                                <p className="text-sm text-stone-500">{item.quantity} {translate('rolls')} x ${fabric.pricePerRoll.toFixed(2)}</p>
                             </div>
                             </div>
                             <p className="font-semibold text-stone-800">${(item.quantity * fabric.pricePerRoll).toFixed(2)}</p>

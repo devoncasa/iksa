@@ -34,20 +34,18 @@ export interface Fabric {
   availableColors?: string[]; // e.g., ['white', 'black', 'earthTones']
 }
 
-export interface GarmentSize {
-  key: string; // e.g., 'S', 'M', 'L', 'XL'
-  nameKey: string; // Translation key for the size name e.g., 'sizeS'
+export interface GarmentSizeAdvanced {
+  key: string;
+  nameKey: string;
+  multiplier: number;
 }
 
-export interface GarmentStyle {
+export interface GarmentStyleAdvanced {
   id: string;
   nameKey: string;
-  fabricPerSize: Record<string, number>; // e.g. { 'S': 2.3, 'M': 2.5, 'L': 2.7, 'XL': 2.9 }
-}
-
-export interface GarmentCategory {
-  nameKey: string;
-  styles: GarmentStyle[];
+  gender: 'Male' | 'Female' | 'Both';
+  region: string;
+  baseRequirement: number; 
 }
 
 export interface NavLink {

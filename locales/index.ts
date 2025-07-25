@@ -1,5 +1,4 @@
 
-
 import { LanguageCode, Translations } from '../types';
 
 export const translations: Record<LanguageCode, Translations> = {
@@ -352,109 +351,75 @@ export const translations: Record<LanguageCode, Translations> = {
     meters: "Meters",
     yards: "Yards",
     chooseFabricWidth: "Step 3: Choose Fabric Width",
-    fabricWidthStandard: "150cm / 58\" (Standard)",
-    fabricWidthNarrow: "110cm / 44\" (Narrow)",
+    fabricWidthStandard: "Wide (150cm)",
+    fabricWidthNarrow: "Narrow (112cm)",
     choosePatternType: "Step 4: Choose Pattern Type",
-    patternSolid: "Solid Color / No-Match",
-    patternSmallRepeat: "Small Repeat Pattern (~10% extra)",
-    patternLargeRepeat: "Large Repeat / Plaid (~20% extra)",
-    chooseGarmentStyle: "Step 5: Choose Garment Style",
-    chooseGarmentSize: "Step 6: Choose Garment Size",
+    patternSolid: "Solid / No-Match",
+    patternSmallRepeat: "Small / Random Print",
+    patternLargeRepeat: "Striped / Plaid",
+    chooseGarmentStyle: "Choose Garment Style",
+    chooseGarmentSize: "Choose Garment Size",
+    
+    // New Calculator Blueprint translations
+    calculator_quantity: "Garment Quantity",
+    calculator_rollLength: "Fabric Roll Length",
+    calculator_costPerMeter: "Cost Per Meter",
+    calculator_optional: "(Optional)",
+    
+    calculator_outputs_title: "Calculation Results",
+    calculator_adjustedFabricPerGarment: "Adjusted Fabric per Garment",
+    calculator_totalFabricRequired: "Total Fabric Required",
+    calculator_rollsToPurchase: "Rolls to Purchase",
+    calculator_garmentsPerRoll: "Garments per Roll",
+    calculator_remnantFabricPerRoll: "Remnant Fabric per Roll",
+    
+    calculator_bonus_cost_title: "Cost Analysis",
+    calculator_totalFabricCost: "Total Fabric Cost",
+    calculator_costPerGarment: "Cost per Garment",
+    
+    // Garment Styles & Categories
+    garmentThobeKandura: "Thobe / Kandura",
+    garmentDishdasha: "Dishdasha",
+    garmentJubbah: "Jubba / Jubbah",
+    garmentQamees: "Qamees (Long Shirt)",
+    garmentShalwarKameez: "Shalwar Kameez",
+    garmentKurtaPajama: "Kurta Pajama",
+    garmentBajuMelayu: "Baju Melayu",
+    garmentBajuKurung: "Baju Kurung",
+    garmentAbaya: "Abaya",
+    garmentKaftan: "Kaftan / Caftan",
+    garmentDjellaba: "Djellaba",
+    garmentJalabiya: "Jalabiya",
+    garmentChador: "Chador",
+    garmentHijab: "Hijab (Full Cover)",
+    garmentNiqab: "Niqab (Face Cover)",
+    garmentBurqa: "Burqa (Full-body)",
+    garmentKhimar: "Khimar (Cape Veil)",
+    garmentAlAmira: "Al-Amira Set",
+    garmentTunicPants: "Tunic + Pants Set",
+    garmentSirwal: "Sirwal (Loose Pants)",
+    garmentHaramPants: "Haram Pants (Izar)",
+    garmentHajjIhram: "Hajj Ihram (2-piece)",
+    garmentPrayerRobe: "Prayer Robe (Mu’akhara)",
+    garmentChildrensThobe: "Children’s Thobe",
+    garmentChildrensAbaya: "Children’s Abaya",
+
+    // Advanced Sizes
+    sizeXS: "Extra Small (XS)",
     sizeS: "Small (S)",
     sizeM: "Medium (M)",
     sizeL: "Large (L)",
     sizeXL: "Extra Large (XL)",
+    sizeXXL: "Double Extra Large (XXL)",
+    size3XL: "Triple Extra Large (3XL+)",
+
     artisansTool_hero_alt: "A tailor's hands precisely cutting fabric with traditional shears on a large table.",
     artisansTool_tip_alt_1: "A diagram showing an efficient 'marker' layout of pattern pieces on a length of fabric.",
     artisansTool_tip_alt_2: "A close-up of a fabric with a clear directional 'nap' or sheen.",
     artisansTool_tip_alt_3: "An illustration comparing cutting a pattern piece on a fold versus tracing two halves on flat fabric.",
 
-    // Garment Styles & Categories
-    garmentCategoryMens: "Men's Garments",
-    garmentCategoryWomens: "Women's Garments",
-    garmentSaudiThobe: "Saudi Thobe",
-    garmentEmiratiKandura: "Emirati Kandura",
-    garmentOmaniThobe: "Omani Thobe",
-    garmentKuwaitiDishdasha: "Kuwaiti Dishdasha",
-    garmentAbayaStandard: "Standard Abaya",
-    
-    calculatorResultIntro: "Based on a {garmentSize} {garmentStyle}, one {rollLength} {unit} roll of {fabricName} can yield approximately:",
-    calculatorResultIntro_short: "Estimated Yield From This Roll:",
     calculatorDisclaimer: "This is an estimate. Actual yield may vary based on tailor's specific pattern and cutting efficiency.",
-    optimizationTipsTitle: "Optimization Pro-Tips",
     artisansTool_proTipsTitle: "Optimization Pro-Tips",
-    optimizationTips: {
-        // General & Default Tips
-        "tip_general_default": "Plan your marker layout carefully before cutting to maximize fabric use. A small adjustment can often save enough material for an extra small piece or accessory.",
-        "tip_general_layout_planning": "Plan your complete marker layout before the first cut. Utilize software if available, or a to-scale paper layout to optimize piece placement.",
-        "tip_general_sharp_tools": "Ensure your cutting tools (scissors or rotary cutter) are exceptionally sharp. A clean cut prevents fraying and improves accuracy, reducing waste.",
-        "tip_general_scrap_utilization": "Systematically save larger scraps. They are perfect for smaller components like collars, cuffs, pocket flaps, or for creating samples.",
-        "tip_general_grainline_accuracy": "Strict adherence to the grainline is crucial for drape and fit, but for non-visible parts like interfacing, you can sometimes be more flexible with placement.",
-        "tip_general_pressing_care": "Press each seam as you sew. Use a press cloth with delicate fabrics like '${fabricName}' to avoid shine or heat damage.",
-        "tip_general_clean_workspace": "Work on a large, clean, flat surface. A cluttered space can lead to inaccurate cutting and mistakes.",
-        "tip_general_pattern_preparation": "Ensure all your pattern pieces are pressed flat and are complete before you begin laying them out.",
-        "tip_general_rest_fabric": "After unrolling, let the fabric rest for at least an hour to relax and return to its natural state, especially for synthetics or blends.",
-        "tip_general_seam_allowance_consistency": "Maintaining consistent seam allowances is key to a professional finish and ensuring pieces fit together perfectly.",
-  
-        // Tool-Specific Tips
-        "tip_tool_rotary_cutter_mat": "Using a rotary cutter and self-healing mat offers superior accuracy and speed over scissors, especially for long, straight cuts.",
-        "tip_tool_needles_appropriate": "Use a new, sharp needle appropriate for the fabric weight. For '${fabricName}', a fine microtex needle is often a good choice.",
-        "tip_tool_thread_quality": "Invest in high-quality thread. It is less likely to break and will result in stronger, more durable seams.",
-  
-        // Technique-Specific Tips
-        "tip_technique_understitching_facings": "Understitch facings and linings to ensure they roll to the inside and remain hidden, giving a clean, professional edge.",
-        "tip_technique_staystitching_necklines_shoulders": "Staystitch curved areas like necklines and armholes to prevent them from stretching out of shape during construction.",
-        "tip_technique_clipping_grading_seams": "Clip concave curves and notch convex curves. Grade seam allowances in bulky areas to reduce thickness and help seams lie flat.",
-  
-        // Fabric Property-Specific Tips
-        "tip_fabric_lightweight_handling": "For lightweight fabrics like '${fabricName}', use pattern weights instead of pins to avoid leaving marks or distorting the material.",
-        "tip_fabric_lightweight_seams": "When sewing lightweight fabrics, consider using a French seam or a narrow overlocked edge for a clean, durable finish that won't fray.",
-        "tip_fabric_midweight_structure": "Mid-weight fabrics like '${fabricName}' offer good structure. Take advantage of this for crisp collars and plackets.",
-        "tip_fabric_silkshine_direction": "Fabrics with a shine or nap, like '${fabricName}', must be cut with all pattern pieces facing the same direction to avoid color shifts.",
-        "tip_fabric_crisp_finish_interfacing": "For fabrics with a crisp finish, choose interfacing that matches the weight and stiffness to maintain the desired structure without being too rigid.",
-        "tip_fabric_width_wide_efficiency": "With a wide fabric (${fabricWidth}m), you can often place pattern pieces side-by-side, drastically improving yield for a '${garmentStyleName}'.",
-        "tip_fabric_width_narrow_planning": "A narrow fabric (${fabricWidth}m) requires careful planning. You may need to lay out pieces in a single column, requiring more length.",
-  
-        // Garment-Specific Tips
-        "tip_garment_thobe_collar_placket_precision": "The collar and placket are focal points on a Thobe. Cut these with extreme precision and consider using a template for consistency.",
-        "tip_garment_thobe_pocket_placement": "For Thobes, double-check pocket placement for both ergonomics and aesthetics. A slightly misplaced pocket can disrupt the garment's clean lines.",
-        "tip_garment_abaya_sleeve_volume": "When cutting voluminous Abaya sleeves, ensure you have enough width. Sometimes turning the grainline slightly (cross-grain) can help fit large pieces.",
-        "tip_garment_abaya_hem_evenness": "After constructing an Abaya, hang it for 24 hours before hemming. This allows the fabric to drape and settle, ensuring an even hemline.",
-        "tip_garment_jalabiya_embellishment_planning": "If your Jalabiya design includes embroidery, plan its placement *before* cutting. This may affect how you lay out the pattern pieces.",
-        "tip_garment_jalabiya_neckline_finish": "A faced or bound neckline provides a high-quality finish for a Jalabiya compared to a simple fold-and-stitch.",
-        "tip_garment_kurta_panel_efficiency": "For Kurtas with separate side panels (kalidars), nesting the tapered panel pieces in opposite directions can save a significant amount of fabric.",
-        "tip_garment_kurta_side_slits": "Reinforce the top of Kurta side slits with a small bar tack or a piece of interfacing to prevent tearing.",
-        "tip_garment_childrens_thobe_abaya_scraps": "The smaller pieces for children's wear are ideal for using up fabric from the end of a roll.",
-        "tip_garment_scarf_hijab_edges": "For scarves and hijabs, a fine, rolled hem is often the most elegant and lightweight edge finish.",
-        "tip_garment_thobe_emirati_lightweight": "The flowing style of an Emirati Thobe is perfect for a lightweight fabric like '${fabricName}'. Cut with a generous ease for an authentic drape.",
-        "tip_garment_thobe_saudi_crisp": "The structured look of a Saudi Thobe is best achieved with a crisp fabric. Use sharp, high-quality interfacing for the collar and cuffs.",
-        "tip_garment_abaya_butterfly_widefabric": "A butterfly Abaya benefits greatly from wide fabric. You may be able to cut the entire body as one piece, eliminating side seams for a beautiful, continuous drape.",
-        "tip_garment_formal_sherwani_jubbah_lining": "For formal wear like Sherwanis or lined Jubbahs, remember to cut both the main fabric and the lining. Lining pieces can often be placed in less optimal areas of the marker.",
-  
-        // Size-Specific Tips
-        "tip_size_large_xl_layout": "For larger sizes (L/XL), layout is critical. You may not be able to fold the fabric and cut double. A single-layer layout is often more efficient.",
-        "tip_size_large_xl_allowance": "When calculating for larger sizes, ensure your fabric consumption per piece allows for wider pattern pieces, not just longer ones.",
-        "tip_size_small_nesting": "For smaller sizes (S/M), you can 'nest' pieces very tightly. Look for opportunities to fit smaller parts like cuffs and plackets into the gaps left by larger pieces.",
-        "tip_size_children_growth_room": "When making children's garments, consider adding a slightly larger hem or seam allowance that can be let out later.",
-  
-        // Yield-Specific Tips
-        "tip_yield_high_bulk_cutting": "With a high yield of ${calculatedYieldValue}, consider stack-cutting. Layer several lengths of fabric and cut them simultaneously for efficiency. (Only for experienced cutters!)",
-        "tip_yield_high_workflow_organization": "For high-yield projects, organize your cut pieces into bundles for each garment to streamline the sewing process.",
-        "tip_yield_high_quality_control": "When working in bulk, perform spot checks on cut pieces to ensure accuracy is maintained throughout the stack.",
-        "tip_yield_low_meticulous_planning": "With a low yield, every centimeter counts. Your marker must be perfect. There is no room for error.",
-        "tip_yield_low_error_avoidance": "For low-yield cuts, trace your pattern pieces onto the fabric with removable marker *before* cutting to ensure placement is perfect.",
-        "tip_yield_single_garment_layout": "When you can only get one garment from a length, prioritize the placement of the largest pattern pieces first (front/back body).",
-        "tip_roll_end_check_flaws": "Always inspect the final meters of a roll for potential flaws before your last cut.",
-  
-        // Common Mistakes to Avoid
-        "tip_mistake_grainline_effect": "Ignoring the grainline can cause a garment to twist or hang incorrectly after it's sewn, wasting all your work.",
-        "tip_mistake_pressing_direct_heat": "Never press directly onto synthetic fabrics with a hot iron. Always use a press cloth to prevent melting or creating a permanent shine.",
-        "tip_mistake_marking_permanent": "Avoid using permanent markers or pens. Use tailor's chalk, a water-soluble pen, or small clips/notches within the seam allowance.",
-        "tip_mistake_seam_allowance_inconsistent": "Inconsistent seam allowances are a hallmark of amateur work and will cause pieces to fit together poorly.",
-        "tip_mistake_interfacing_wrong_type": "Using interfacing that is too heavy or stiff for your fabric will ruin the drape of your garment.",
-        "tip_caution_prewashing_shrinkage": "While our performance fabrics have anti-shrink treatments, always test-wash a swatch if you have any doubts, especially for 100% natural fibers.",
-        "tip_caution_cutting_accuracy": "The most common and costly mistake is inaccurate cutting. Measure twice, cut once."
-      },
       artisansTool_tips: {
         "tip1_title": "Master Your Marker",
         "tip1_content": "A 'marker' is the layout of all your pattern pieces on the fabric. The tighter you can 'nest' these pieces without going off-grain, the less waste you'll have. Digital tools can help, but even a hand-drawn miniature can save meters on a large project.",

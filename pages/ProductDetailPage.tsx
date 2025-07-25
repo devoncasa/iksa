@@ -3,7 +3,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { useCart } from '../hooks/useCart';
-import { MOCK_FABRICS, GARMENT_CATEGORIES, GARMENT_SIZES, FEATURE_ICONS, COLOR_PALETTE, COLOR_MARKUPS } from '../constants';
+import { MOCK_FABRICS, GARMENT_STYLES_ADVANCED, GARMENT_SIZES_ADVANCED, FEATURE_ICONS, COLOR_PALETTE, COLOR_MARKUPS } from '../constants';
 import { Fabric, Breadcrumb } from '../types';
 import { Button } from '../components/Button';
 import { SEOMetadata } from '../components/SEOMetadata';
@@ -14,23 +14,21 @@ import { ManagedImage } from '../components/ManagedImage';
 
 const YieldEstimator: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
     const { translate } = useLanguage();
-    const allGarmentStyles = useMemo(() => GARMENT_CATEGORIES.flatMap(category => category.styles), []);
+    const [selectedGarmentId, setSelectedGarmentId] = useState<string>(GARMENT_STYLES_ADVANCED[0].id);
+    const [selectedSizeKey, setSelectedSizeKey] = useState<string>('M');
 
-    const [selectedGarmentStyleId, setSelectedGarmentStyleId] = useState<string>(allGarmentStyles[0]?.id || '');
-    const [selectedGarmentSize, setSelectedGarmentSize] = useState<string>(GARMENT_SIZES[0]?.key || '');
-    
     const { yieldValue } = useMemo(() => {
-        const garmentStyle = allGarmentStyles.find(gs => gs.id === selectedGarmentStyleId);
-        if (!garmentStyle) return { yieldValue: 0, remainder: 0 };
-
-        const baseRequirement = garmentStyle.fabricPerSize[selectedGarmentSize] || 0;
-        if (baseRequirement <= 0) return { yieldValue: 0, remainder: 0 };
+        const garmentStyle = GARMENT_STYLES_ADVANCED.find(g => g.id === selectedGarmentId);
+        const size = GARMENT_SIZES_ADVANCED.find(s => s.key === selectedSizeKey);
         
-        const yieldVal = Math.floor(fabric.rollLengthInMeters / baseRequirement);
-        const rem = fabric.rollLengthInMeters % baseRequirement;
+        if (!garmentStyle || !size) return { yieldValue: 0 };
 
-        return { yieldValue: yieldVal, remainder: rem };
-    }, [selectedGarmentStyleId, selectedGarmentSize, fabric.rollLengthInMeters, allGarmentStyles]);
+        const fabricPerGarment = garmentStyle.baseRequirement * size.multiplier;
+        if (fabricPerGarment <= 0) return { yieldValue: 0 };
+
+        const yieldVal = Math.floor(fabric.rollLengthInMeters / fabricPerGarment);
+        return { yieldValue: yieldVal };
+    }, [selectedGarmentId, selectedSizeKey, fabric.rollLengthInMeters]);
 
     return (
         <div className="bg-stone-100/90 backdrop-blur-sm p-6 rounded-lg border border-stone-200/50">
@@ -38,23 +36,19 @@ const YieldEstimator: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label htmlFor="garment-style" className="block text-sm font-medium text-stone-600 mb-1.5">{translate('chooseGarmentStyle')}</label>
-                    <select id="garment-style" value={selectedGarmentStyleId} onChange={e => setSelectedGarmentStyleId(e.target.value)} className="w-full bg-white/80 border border-stone-300 text-stone-800 rounded-md py-2 px-3 focus:ring-brandAccent-700 focus:border-brandAccent-700 transition-colors duration-150 ease-in-out text-base text-left">
-                        {GARMENT_CATEGORIES.map(category => (
-                            <optgroup key={category.nameKey} label={translate(category.nameKey)}>
-                                {category.styles.map(style => <option key={style.id} value={style.id} className="bg-white text-stone-800 font-medium">{translate(style.nameKey)}</option>)}
-                            </optgroup>
-                        ))}
+                    <select id="garment-style" value={selectedGarmentId} onChange={e => setSelectedGarmentId(e.target.value)} className="w-full bg-white/80 border border-stone-300 text-stone-800 rounded-md py-2 px-3 focus:ring-brandAccent-700 focus:border-brandAccent-700 transition-colors duration-150 ease-in-out text-base text-left">
+                        {GARMENT_STYLES_ADVANCED.map(style => <option key={style.id} value={style.id} className="bg-white text-stone-800 font-medium">{translate(style.nameKey)}</option>)}
                     </select>
                 </div>
                 <div>
                     <label htmlFor="garment-size" className="block text-sm font-medium text-stone-600 mb-1.5">{translate('chooseGarmentSize')}</label>
-                    <select id="garment-size" value={selectedGarmentSize} onChange={e => setSelectedGarmentSize(e.target.value)} className="w-full bg-white/80 border border-stone-300 rounded-md py-2 px-3 focus:ring-brandAccent-700 focus:border-brandAccent-700">
-                        {GARMENT_SIZES.map(size => <option key={size.key} value={size.key}>{translate(size.nameKey)}</option>)}
+                    <select id="garment-size" value={selectedSizeKey} onChange={e => setSelectedSizeKey(e.target.value)} className="w-full bg-white/80 border border-stone-300 rounded-md py-2 px-3 focus:ring-brandAccent-700 focus:border-brandAccent-700">
+                        {GARMENT_SIZES_ADVANCED.map(size => <option key={size.key} value={size.key}>{translate(size.nameKey)}</option>)}
                     </select>
                 </div>
             </div>
             <div className="text-center bg-white/80 p-4 rounded-md">
-                <p className="text-stone-700">{translate('calculatorResultIntro_short') || "Estimated Yield From This Roll:"}</p>
+                <p className="text-stone-700">Estimated Yield From This Roll:</p>
                 <p className="text-3xl font-bold text-brandAccent-800">{yieldValue} <span className="text-xl font-normal">{translate('pieces')}</span></p>
                 <p className="text-xs text-stone-500 mt-1">({translate('calculatorDisclaimer')})</p>
             </div>
