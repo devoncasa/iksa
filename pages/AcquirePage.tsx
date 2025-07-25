@@ -1,7 +1,4 @@
 
-
-
-
 import React, { useState, useMemo } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { Button } from '../components/Button';
@@ -10,6 +7,7 @@ import { SEOMetadata } from '../components/SEOMetadata';
 import { ContentBlock } from '../components/ContentBlock';
 import { SOCIAL_MEDIA_LINKS } from '../constants';
 import { generateOrganizationSchema, generateWebsiteSchema } from '../components/Schema';
+import { ManagedImage } from '../components/ManagedImage';
 
 interface ContactInfoItemProps {
   IconComponent: React.FC<IconProps>;
@@ -129,8 +127,10 @@ export const AcquirePage: React.FC = () => {
         isHero
         heroImageSrc="https://i.postimg.cc/LsH3jFH9/IKSA-section-background-00140.webp"
         heroImageAlt={translate('contact_hero_alt')}
+        heroPageName="Contact"
+        heroSectionTitle="Contact Hero"
       >
-        <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-stone-800 mb-8 md:mb-10 section-title-underline">
+        <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-warm-terracotta mb-8 md:mb-10 section-title-underline">
           {translate('contact_pageTitle')}
         </h1>
         <p className="text-base md:text-lg text-stone-700 leading-relaxed">
@@ -166,7 +166,13 @@ export const AcquirePage: React.FC = () => {
                             <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer"
                             className="text-stone-400 hover:text-brandAccent-500 transition-transform duration-200 ease-in-out hover:scale-110"
                             aria-label={`Follow us on ${social.name}`}>
-                                <img src={social.icon} alt={`${social.name} logo`} className="w-8 h-8" />
+                                <ManagedImage 
+                                    src={social.icon} 
+                                    alt={`${social.name} logo`} 
+                                    pageName="Contact"
+                                    sectionTitle={`Social Link: ${social.name}`}
+                                    className="w-8 h-8" 
+                                />
                             </a>
                         ))}
                     </div>

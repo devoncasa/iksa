@@ -1,5 +1,4 @@
 
-
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
@@ -9,6 +8,7 @@ import { Fabric, Breadcrumb } from '../types';
 import { SEOMetadata } from '../components/SEOMetadata';
 import { ContentBlock } from '../components/ContentBlock';
 import { generateOrganizationSchema, generateWebsiteSchema, generateBreadcrumbSchema } from '../components/Schema';
+import { ManagedImage } from '../components/ManagedImage';
 
 interface FabricFiltersState {
   useCase: string;
@@ -39,7 +39,13 @@ const FabricCard: React.FC<{ fabric: Fabric; }> = ({ fabric }) => {
       id={fabric.id} 
     >
       <div className="relative overflow-hidden">
-        <img src={fabric.imageUrl} alt={translate(fabric.nameKey)} className="w-full aspect-[4/3] object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"/>
+        <ManagedImage 
+            src={fabric.imageUrl} 
+            alt={translate(fabric.nameKey)}
+            pageName="Collections"
+            sectionTitle={`Fabric Card: ${translate(fabric.nameKey)}`}
+            className="w-full aspect-[4/3] object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+        />
       </div>
       <div className="p-5 md:p-6 flex flex-col flex-grow">
         <div className="flex-grow mb-4">
@@ -176,8 +182,10 @@ export const CollectionsPage: React.FC = () => {
         isHero
         heroImageSrc="https://i.postimg.cc/t4d7WvHh/fabric-roll-collection-showcase-2.webp"
         heroImageAlt={translate('collections_hero_alt')}
+        heroPageName="Collections"
+        heroSectionTitle="Collections Hero"
       >
-          <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-stone-800 mb-4">{translate('collections_heroTitle')}</h1>
+          <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-warm-terracotta mb-4">{translate('collections_heroTitle')}</h1>
           <p className="text-lg text-stone-700">{translate('collections_heroSubtitle')}</p>
           <div className="mt-6 text-center md:text-left">
             <Link to="/price-structure">
@@ -191,7 +199,7 @@ export const CollectionsPage: React.FC = () => {
       </ContentBlock>
 
       <section className="relative w-full py-12 md:py-16">
-        <div className="max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             {filteredFabrics.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"> 
                 {filteredFabrics.map((fabric) => (

@@ -1,5 +1,4 @@
 
-
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
@@ -9,6 +8,7 @@ import { ChevronRightIcon } from '../components/icons';
 import { StyledText } from '../components/StyledText';
 import { ContentBlock } from '../components/ContentBlock';
 import { generateOrganizationSchema, generateWebsiteSchema } from '../components/Schema';
+import { ManagedImage } from '../components/ManagedImage';
 
 
 const HeroSection: React.FC = () => {
@@ -18,8 +18,10 @@ const HeroSection: React.FC = () => {
             isHero
             heroImageSrc="https://i.postimg.cc/nrY3WbnL/iksa-about-us-summary.webp"
             heroImageAlt={translate('main_hero_alt')}
+            heroPageName="Main Page"
+            heroSectionTitle="Main Hero"
         >
-            <h1 className="font-serif-display text-4xl sm:text-5xl font-bold mb-6 md:mb-8 leading-tight text-brandAccent-800 animate-fadeInUp">
+            <h1 className="font-serif-display text-4xl sm:text-5xl font-bold mb-6 md:mb-8 leading-tight text-warm-terracotta animate-fadeInUp">
               {translate('main_heroTitle')}
             </h1>
             <StyledText 
@@ -95,9 +97,11 @@ const InfoSection: React.FC<InfoSectionProps> = ({ titleKey, contentKey, ctaKey,
   const imageContent = imageSrc ? (
     <div className={`md:w-1/2 mt-8 md:mt-0`}>
         <div className="relative group overflow-hidden rounded-lg">
-            <img
+            <ManagedImage
                 src={imageSrc}
                 alt={imageAltKey ? translate(imageAltKey) : translate(titleKey)}
+                pageName="Main Page"
+                sectionTitle={`Info: ${translate(titleKey)}`}
                 className="rounded-lg shadow-lg object-cover w-full aspect-[4/3] transition-transform duration-500 ease-in-out group-hover:scale-105"
             />
         </div>

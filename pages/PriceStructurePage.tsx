@@ -1,5 +1,4 @@
 
-
 import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { SEOMetadata } from '../components/SEOMetadata';
@@ -11,6 +10,7 @@ import { ContentBlock } from '../components/ContentBlock';
 import { ChevronDownIcon } from '../components/icons';
 import { PolicySubsection } from '../components/PolicySubsection';
 import { generateOrganizationSchema, generateWebsiteSchema } from '../components/Schema';
+import { ManagedImage } from '../components/ManagedImage';
 
 interface Product {
     id: string;
@@ -313,8 +313,14 @@ export const PriceStructurePage: React.FC = () => {
                                     return (
                                     <div key={p.id} className="bg-white/50 backdrop-blur-xl p-6 rounded-lg shadow-md border border-stone-200/50">
                                         <h2 className="text-xl font-semibold mb-3 text-brandAccent-800">{translate(p.nameKey)}</h2>
-                                        <div className="relative mb-4">
-                                            <img src={p.image} alt={translate(p.nameKey)} className="w-full h-auto rounded-md aspect-[4/3] object-cover" />
+                                        <div className="mb-4">
+                                            <ManagedImage 
+                                                src={p.image} 
+                                                alt={translate(p.nameKey)} 
+                                                pageName="Price Structure"
+                                                sectionTitle={`Product Example: ${translate(p.nameKey)}`}
+                                                className="w-full h-auto rounded-md aspect-[4/3] object-cover" 
+                                            />
                                         </div>
                                         <p className="text-md mb-2">{translate('priceStructure_basePrice')} {formatCurrency(p.basePriceUSD, 'USD')}</p>
                                         <p className="text-sm text-stone-600 mb-4">{translate('priceStructure_weight')} {p.weightKg} kg</p>
@@ -419,9 +425,10 @@ export const PriceStructurePage: React.FC = () => {
                     isHero
                     heroImageSrc="https://i.postimg.cc/yNF28HL7/IKSA-section-background-00113.webp"
                     heroImageAlt={translate('priceStructure_pageTitle_dynamic')}
-                    imageOnLeft={true}
+                    heroPageName="Price Structure"
+                    heroSectionTitle="Price Structure Hero"
                 >
-                    <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-stone-800 mb-8 md:mb-10 section-title-underline">
+                    <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-warm-terracotta mb-8 md:mb-10 section-title-underline">
                         {translate('priceStructure_pageTitle_dynamic')}
                     </h1>
                     <p className="text-base md:text-lg text-stone-700 leading-relaxed">

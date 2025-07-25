@@ -1,5 +1,4 @@
 
-
 import React, { useState, useMemo, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
@@ -10,6 +9,7 @@ import { Button } from '../components/Button';
 import { SEOMetadata } from '../components/SEOMetadata';
 import { ContentBlock } from '../components/ContentBlock';
 import { generateOrganizationSchema, generateWebsiteSchema, generateBreadcrumbSchema, generateProductSchema } from '../components/Schema';
+import { ManagedImage } from '../components/ManagedImage';
 
 
 const YieldEstimator: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
@@ -183,6 +183,8 @@ export const ProductDetailPage: React.FC = () => {
     }
   };
 
+  const pageName = `Product Detail: ${translate(fabric.nameKey)}`;
+
   return (
     <>
       <SEOMetadata
@@ -193,21 +195,33 @@ export const ProductDetailPage: React.FC = () => {
         schemas={schemas}
       />
       <section className="pt-24 md:pt-32">
-        <div className="max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-[rgba(255,255,255,0.70)] backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-12 lg:p-16">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
                     {/* Image Gallery */}
                     <div className="bg-white/50 backdrop-blur-xl p-4 rounded-lg">
                         <div className="mb-4">
-                            <div className="relative aspect-square bg-stone-100/90 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg">
-                                <img src={mainImage} alt={`${translate(fabric.nameKey)} - Main View`} className="w-full h-full object-cover" />
+                            <div className="aspect-square bg-stone-100/90 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg">
+                                <ManagedImage 
+                                    src={mainImage} 
+                                    alt={`${translate(fabric.nameKey)} - Main View`} 
+                                    pageName={pageName}
+                                    sectionTitle="Main Gallery Image"
+                                    className="w-full h-full object-cover" 
+                                />
                             </div>
                         </div>
 
                         <div className="grid grid-cols-4 gap-2">
                         {fabric.galleryImages.map((img, idx) => (
-                            <button key={idx} onClick={() => setMainImage(img)} className={`relative aspect-square bg-stone-100/90 backdrop-blur-sm rounded-md overflow-hidden focus:outline-none focus:ring-2 focus:ring-brandAccent-700 ${mainImage === img ? 'ring-2 ring-brandAccent-700' : ''}`}>
-                                <img src={img} alt={`${translate(fabric.nameKey)} view ${idx + 1}`} className="w-full h-full object-cover" />
+                            <button key={idx} onClick={() => setMainImage(img)} className={`aspect-square bg-stone-100/90 backdrop-blur-sm rounded-md overflow-hidden focus:outline-none focus:ring-2 focus:ring-brandAccent-700 ${mainImage === img ? 'ring-2 ring-brandAccent-700' : ''}`}>
+                                <ManagedImage 
+                                    src={img} 
+                                    alt={`${translate(fabric.nameKey)} view ${idx + 1}`} 
+                                    pageName={pageName}
+                                    sectionTitle={`Gallery Thumbnail ${idx + 1}`}
+                                    className="w-full h-full object-cover" 
+                                />
                             </button>
                         ))}
                         </div>
@@ -272,14 +286,26 @@ export const ProductDetailPage: React.FC = () => {
             <h2 className="text-3xl font-serif-display font-semibold text-center text-stone-800 mb-10 section-title-underline">{translate('product_projectInspirationTitle')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div className="text-center">
-                    <div className="relative mb-4">
-                        <img src="https://i.postimg.cc/2j5T00Fw/inspiration-kandura.webp" alt={translate('product_inspiration_kandura_alt')} className="rounded-lg shadow-xl aspect-[4/3] object-cover" />
+                    <div className="mb-4">
+                        <ManagedImage 
+                            src="https://i.postimg.cc/2j5T00Fw/inspiration-kandura.webp" 
+                            alt={translate('product_inspiration_kandura_alt')} 
+                            pageName={pageName}
+                            sectionTitle="Inspiration Image: Kandura"
+                            className="rounded-lg shadow-xl aspect-[4/3] object-cover" 
+                        />
                     </div>
                     <p className="text-stone-600 italic">{translate('product_inspirationCaption').replace('{garment}', 'Emirati Kandura').replace('{fabricName}', translate(fabric.nameKey))}</p>
                 </div>
                 <div className="text-center">
-                    <div className="relative mb-4">
-                        <img src="https://i.postimg.cc/k4GkYyv0/inspiration-abaya.webp" alt={translate('product_inspiration_abaya_alt')} className="rounded-lg shadow-xl aspect-[4/3] object-cover" />
+                    <div className="mb-4">
+                        <ManagedImage 
+                            src="https://i.postimg.cc/k4GkYyv0/inspiration-abaya.webp" 
+                            alt={translate('product_inspiration_abaya_alt')} 
+                            pageName={pageName}
+                            sectionTitle="Inspiration Image: Abaya"
+                            className="rounded-lg shadow-xl aspect-[4/3] object-cover" 
+                        />
                     </div>
                     <p className="text-stone-600 italic">{translate('product_inspirationCaption').replace('{garment}', 'Luxury Abaya').replace('{fabricName}', translate(fabric.nameKey))}</p>
                 </div>

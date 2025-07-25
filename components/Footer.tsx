@@ -1,8 +1,10 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { SOCIAL_MEDIA_LINKS } from '../constants';
 import { PhoneIcon, EmailIcon, BuildingIcon } from './icons';
+import { ManagedImage } from './ManagedImage';
 
 export const Footer: React.FC = () => {
   const { translate } = useLanguage();
@@ -85,10 +87,12 @@ export const Footer: React.FC = () => {
                   className="group transition-transform duration-200 ease-in-out hover:scale-110"
                   aria-label={`Follow us on ${social.name}`}
                 >
-                  <img 
-                    src={social.icon} 
-                    alt={`${social.name} logo`} 
-                    className="w-7 h-7 social-icon-filter"
+                  <ManagedImage 
+                      src={social.icon} 
+                      alt={`${social.name} logo`}
+                      pageName="Global"
+                      sectionTitle={`Footer Social: ${social.name}`}
+                      className="w-7 h-7 social-icon-filter"
                   />
                 </a>
               ))}
@@ -98,10 +102,12 @@ export const Footer: React.FC = () => {
 
         <div className="text-center text-sm pt-8 md:pt-10 border-t border-stone-700/50">
           <div className="flex items-center justify-center gap-3">
-            <img 
-              src="https://i.postimg.cc/mZSFSj42/iksa-logo.webp" 
-              alt="IKSA Logo" 
-              className="h-6 w-auto footer-logo-filter" 
+            <ManagedImage 
+                src="https://i.postimg.cc/mZSFSj42/iksa-logo.webp" 
+                alt="IKSA Logo" 
+                pageName="Global"
+                sectionTitle="Footer Logo"
+                className="h-6 w-auto footer-logo-filter"
             />
             <p>{translate('footerRights')}</p>
           </div>

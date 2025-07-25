@@ -111,3 +111,33 @@ export interface Breadcrumb {
   name: string;
   path: string;
 }
+
+// Image Asset Reporting Types
+export interface ImageRecommendation {
+  subject: string;
+  style: string;
+}
+
+export interface RegisteredImage {
+  id: string;
+  src: string;
+  alt: string;
+  pageName: string;
+  sectionTitle: string;
+  aspectRatio: string;
+  recommendations?: ImageRecommendation;
+}
+
+export interface ImageRegistryContextType {
+  images: RegisteredImage[];
+  registerImage: (image: Omit<RegisteredImage, 'id' | 'recommendations'>) => void;
+  updateImageRecommendations: (id: string, recommendations: ImageRecommendation) => void;
+  isImageRegistered: (src: string) => boolean;
+}
+
+// Admin Auth Types
+export interface AdminAuthContextType {
+  isAdmin: boolean;
+  login: (password: string) => boolean;
+  logout: () => void;
+}

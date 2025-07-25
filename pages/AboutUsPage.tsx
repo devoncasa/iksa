@@ -1,5 +1,4 @@
 
-
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
@@ -8,6 +7,7 @@ import { SEOMetadata } from '../components/SEOMetadata';
 import { ContentBlock } from '../components/ContentBlock';
 import { SECTION_BACKGROUND_IMAGES } from '../constants';
 import { generateOrganizationSchema, generateWebsiteSchema } from '../components/Schema';
+import { ManagedImage } from '../components/ManagedImage';
 
 
 const HeroSection: React.FC = () => {
@@ -17,8 +17,10 @@ const HeroSection: React.FC = () => {
         isHero
         heroImageSrc="https://i.postimg.cc/sgJ0kcx2/IKSA-section-background-00149.webp"
         heroImageAlt={translate('about_hero_alt')}
+        heroPageName="About Us"
+        heroSectionTitle="About Us Hero"
     >
-        <h1 className="font-serif-display text-4xl sm:text-5xl font-bold mb-6 md:mb-8 leading-tight text-brandAccent-700 opacity-0 animate-fadeInUp" style={{ animationDelay: '0.2s' }}> 
+        <h1 className="font-serif-display text-4xl sm:text-5xl font-bold mb-6 md:mb-8 leading-tight text-warm-terracotta opacity-0 animate-fadeInUp" style={{ animationDelay: '0.2s' }}> 
           {translate('about_heroTitle')}
         </h1>
         <p className="text-lg text-stone-800 mb-10 md:mb-12 whitespace-pre-line leading-relaxed opacity-0 animate-fadeInUp" style={{ animationDelay: '0.4s' }}> 
@@ -49,10 +51,12 @@ const FourPillarsSection: React.FC = () => {
                     <p className="text-md font-semibold text-stone-600 mb-4">{translate('about_pillars', `${pillar}_tagline`)}</p>
                     <p className="text-sm text-stone-700 leading-relaxed">{translate('about_pillars', `${pillar}_desc`)}</p>
                 </div>
-                <div className="mt-6 relative">
-                    <img 
+                <div className="mt-6">
+                    <ManagedImage 
                         src={pillarImages[index]} 
                         alt={translate('about_pillar_alt')}
+                        pageName="About Us"
+                        sectionTitle={translate('about_pillars', `${pillar}_name`)}
                         className="w-full h-auto aspect-[4/3] object-cover rounded-md shadow-inner"
                     />
                 </div>

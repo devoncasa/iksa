@@ -28,8 +28,8 @@ export const Button: React.FC<ButtonProps> = ({
       variantStyles = 'bg-stone-200 hover:bg-stone-300 text-stone-700 focus:ring-stone-400 focus:ring-offset-stone-50 border border-stone-300 hover:border-stone-400';
       break;
     case 'outline':
-      // Burnished Gold (#B59F6C) border & text. Hover: Burnished Gold bg, White text. Gold glow.
-      variantStyles = 'border border-brandAccent-700 text-brandAccent-700 hover:bg-brandAccent-700 hover:text-white focus:ring-brandAccent-700 focus:ring-offset-stone-50 hover:shadow-lg hover:shadow-brandAccent-700/30';
+      // White background, light gold border, hover to orange border/text.
+      variantStyles = 'bg-white/80 border border-muted-gold text-muted-gold hover:border-brandAccent-600 hover:text-brandAccent-600 focus:ring-brandAccent-600 focus:ring-offset-stone-50 shadow-sm';
       break;
   }
 

@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
@@ -7,6 +6,7 @@ import { useLanguage } from '../hooks/useLanguage';
 import { MOCK_FABRICS } from '../constants';
 import { Button } from './Button';
 import { CloseIcon, TrashIcon } from './icons';
+import { ManagedImage } from './ManagedImage';
 
 interface CartModalProps {
   isOpen: boolean;
@@ -65,7 +65,15 @@ export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
 
                 return (
                   <li key={item.fabricId} className="py-4 flex">
-                    <img src={fabric.imageUrl} alt={translate(fabric.nameKey)} className="h-20 w-20 rounded-md object-cover mr-4" />
+                    <div className="h-20 w-20 mr-4 flex-shrink-0">
+                      <ManagedImage 
+                          src={fabric.imageUrl} 
+                          alt={translate(fabric.nameKey)} 
+                          pageName="Cart Modal"
+                          sectionTitle={`Cart Item: ${translate(fabric.nameKey)}`}
+                          className="h-full w-full rounded-md object-cover" 
+                      />
+                    </div>
                     <div className="flex-grow">
                       <h3 className="font-semibold text-stone-700">{translate(fabric.nameKey)}</h3>
                       <p className="text-sm text-stone-500">{fabric.rollLengthInMeters}m / Roll</p>

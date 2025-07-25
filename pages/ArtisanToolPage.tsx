@@ -1,5 +1,4 @@
 
-
 import React, { useMemo } from 'react';
 import { FabricYieldCalculator } from '../components/artisans-tool/FabricYieldCalculator';
 import { useLanguage } from '../hooks/useLanguage';
@@ -7,6 +6,7 @@ import { SEOMetadata } from '../components/SEOMetadata';
 import { LightbulbIcon } from '../components/icons';
 import { ContentBlock } from '../components/ContentBlock';
 import { generateOrganizationSchema, generateWebsiteSchema, generateHowToSchema } from '../components/Schema';
+import { ManagedImage } from '../components/ManagedImage';
 
 interface ProTipProps {
     titleKey: string;
@@ -23,9 +23,13 @@ const ProTip: React.FC<ProTipProps> = ({ titleKey, contentKey, altKey, index, im
             className="bg-white/50 backdrop-blur-xl rounded-lg shadow-md border border-stone-200/50 transition-all duration-500 ease-in-out hover:shadow-lg hover:-translate-y-0.5 overflow-hidden"
             style={{ transitionDelay: `${index * 100}ms` }}
         >
-            <div className="relative">
-                <img src={imageUrl} alt={translate(altKey)} className="w-full h-auto aspect-[4/3] object-cover" />
-            </div>
+            <ManagedImage 
+                src={imageUrl} 
+                alt={translate(altKey)} 
+                pageName="Artisan's Tool"
+                sectionTitle={`Pro-Tip: ${translate('artisansTool_tips', titleKey)}`}
+                className="w-full h-auto aspect-[4/3] object-cover"
+            />
             <div className="p-6">
                 <h3 className="font-semibold text-brandAccent-700 mb-2 font-serif-display text-lg">{translate('artisansTool_tips', titleKey)}</h3>
                 <p className="text-stone-600 text-sm leading-relaxed">{translate('artisansTool_tips', contentKey)}</p>
@@ -63,9 +67,10 @@ export const ArtisanToolPage: React.FC = () => {
         isHero
         heroImageSrc="https://i.postimg.cc/JhmPKBQW/IKSA-section-background-00130.webp"
         heroImageAlt={translate('artisansTool_hero_alt')}
-        imageOnLeft={true}
+        heroPageName="Artisan's Tool"
+        heroSectionTitle="Artisan's Tool Hero"
       >
-        <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-stone-800 mb-8 md:mb-10 section-title-underline"> 
+        <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-warm-terracotta mb-8 md:mb-10 section-title-underline"> 
           {translate('artisansTool_pageTitle')}
         </h1>
         <p className="text-stone-700 text-base md:text-lg leading-relaxed">{translate('artisansTool_intro')}</p> 

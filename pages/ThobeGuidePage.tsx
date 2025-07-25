@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { SEOMetadata } from '../components/SEOMetadata';
@@ -8,6 +7,7 @@ import { ContentBlock } from '../components/ContentBlock';
 import { ChevronDownIcon, ArrowUpIcon } from '../components/icons';
 import { Breadcrumb } from '../types';
 import { generateOrganizationSchema, generateWebsiteSchema, generateBreadcrumbSchema, generateArticleSchema } from '../components/Schema';
+import { ManagedImage } from '../components/ManagedImage';
 
 
 const GuideTable: React.FC<{ caption: string; headersJSON: string; rowsJSON:string }> = ({ caption, headersJSON, rowsJSON }) => {
@@ -100,8 +100,14 @@ const ArticleCard: React.FC<{id: string; children: React.ReactNode;}> = ({ id, c
 
 const ImageWithInfo: React.FC<{ src: string, alt: string, className?: string }> = ({ src, alt, className='' }) => {
     return (
-        <figure className={`not-prose relative my-8 ${className}`}>
-            <img src={src} alt={alt} className="rounded-lg shadow-xl w-full object-cover aspect-[4/3]"/>
+        <figure className={`not-prose my-8 ${className}`}>
+            <ManagedImage 
+                src={src} 
+                alt={alt} 
+                pageName="Thobe Guide"
+                sectionTitle={`Article Image: ${alt}`}
+                className="rounded-lg shadow-xl w-full object-cover aspect-[4/3]"
+            />
         </figure>
     );
 };
@@ -190,9 +196,10 @@ export const ThobeGuidePage: React.FC = () => {
                 isHero
                 heroImageSrc="https://i.postimg.cc/2j5T00Fw/inspiration-kandura.webp"
                 heroImageAlt={translate('thobeGuide_hero_alt')}
-                imageOnLeft={true}
+                heroPageName="Thobe Guide"
+                heroSectionTitle="Thobe Guide Hero"
             >
-                <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-stone-800 mb-8 md:mb-10 section-title-underline">
+                <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-warm-terracotta mb-8 md:mb-10 section-title-underline">
                     {translate('thobeGuide_full', 'title')}
                 </h1>
                 <div className="text-lg text-deep-chocolate leading-relaxed">
@@ -201,7 +208,7 @@ export const ThobeGuidePage: React.FC = () => {
             </ContentBlock>
 
             <section id="guide-content-start" className="relative w-full py-12 md:py-16 scroll-mt-24">
-                <div className="max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Mobile Navigation */}
                     <div className="lg:hidden mb-8">
                         <details ref={mobileNavRef} className="group bg-[rgba(255,255,255,0.70)] backdrop-blur-sm rounded-2xl shadow-lg">
@@ -333,7 +340,7 @@ export const ThobeGuidePage: React.FC = () => {
                     onClick={scrollToGuideStart}
                     title={translate('thobeGuide_backToTopics') || 'View Topics'}
                     aria-label="Scroll back to topics menu"
-                    className="hidden lg:flex fixed bottom-8 left-8 z-50 w-12 h-12 rounded-full bg-creamy-beige/70 backdrop-blur-sm text-deep-chocolate items-center justify-center shadow-lg transition-all duration-300 ease-in-out hover:bg-creamy-beige hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-brandAccent-700 focus:ring-offset-2"
+                    className="flex fixed bottom-4 right-4 z-50 w-12 h-12 rounded-full bg-creamy-beige/70 backdrop-blur-sm text-deep-chocolate items-center justify-center shadow-lg transition-all duration-300 ease-in-out hover:bg-creamy-beige hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-brandAccent-700 focus:ring-offset-2"
                 >
                     <ArrowUpIcon className="w-6 h-6" />
                 </button>

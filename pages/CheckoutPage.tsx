@@ -1,8 +1,4 @@
 
-
-
-
-
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
@@ -12,6 +8,7 @@ import { Button } from '../components/Button';
 import { SEOMetadata } from '../components/SEOMetadata';
 import { ContentBlock } from '../components/ContentBlock';
 import { generateOrganizationSchema, generateWebsiteSchema } from '../components/Schema';
+import { ManagedImage } from '../components/ManagedImage';
 
 export const CheckoutPage: React.FC = () => {
   const { cart, getCartTotal, clearCart } = useCart();
@@ -47,8 +44,10 @@ export const CheckoutPage: React.FC = () => {
         isHero
         heroImageSrc="https://i.postimg.cc/d0HN1V8P/IKSA-section-background-00151.webp"
         heroImageAlt={translate('thankYouForYourOrder')}
+        heroPageName="Checkout"
+        heroSectionTitle="Thank You Hero"
       >
-          <h1 className="text-3xl md:text-4xl font-serif-display font-bold text-brandAccent-700 mb-4">{translate('thankYouForYourOrder')}</h1>
+          <h1 className="text-3xl md:text-4xl font-serif-display font-bold text-warm-terracotta mb-4">{translate('thankYouForYourOrder')}</h1>
           <p className="text-lg text-stone-700 mb-8">{translate('orderConfirmationMsg')}</p>
           <div className="text-center md:text-left">
             <Link to="/collections">
@@ -73,8 +72,10 @@ export const CheckoutPage: React.FC = () => {
             isHero
             heroImageSrc="https://i.postimg.cc/wBTbgmRQ/IKSA-section-background-00150.webp"
             heroImageAlt={translate('yourCartIsEmpty')}
+            heroPageName="Checkout"
+            heroSectionTitle="Empty Cart Hero"
         >
-            <h1 className="text-3xl md:text-4xl font-serif-display font-bold text-stone-800 mb-4">{translate('yourCartIsEmpty')}</h1>
+            <h1 className="text-3xl md:text-4xl font-serif-display font-bold text-warm-terracotta mb-4">{translate('yourCartIsEmpty')}</h1>
             <p className="text-lg text-stone-700 mb-8">{translate('checkout_emptyCartMessage') || 'Add some fabric rolls to your cart to proceed.'}</p>
             <div className="text-center md:text-left">
                 <Link to="/collections">
@@ -98,15 +99,17 @@ export const CheckoutPage: React.FC = () => {
         isHero
         heroImageSrc="https://i.postimg.cc/fRY8xvmK/IKSA-section-background-00129.webp"
         heroImageAlt={translate('checkout')}
+        heroPageName="Checkout"
+        heroSectionTitle="Checkout Hero"
       >
-        <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-stone-800">
+        <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-warm-terracotta">
           {translate('checkout')}
         </h1>
         <p className="mt-4 text-lg text-stone-700">Please provide your details to complete your professional order.</p>
       </ContentBlock>
       
       <section className="relative w-full pb-12 md:pb-16 -mt-20">
-        <div className="max-w-[960px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 text-left">
                 {/* Shipping Form */}
                 <div className="bg-white/50 backdrop-blur-xl p-8 rounded-lg shadow-lg border border-stone-200/50">
@@ -151,7 +154,15 @@ export const CheckoutPage: React.FC = () => {
                         return (
                         <div key={item.fabricId} className="flex items-center justify-between pt-4 first:pt-0">
                             <div className="flex items-center">
-                            <img src={fabric.imageUrl} alt={translate(fabric.nameKey)} className="w-16 h-16 rounded-md object-cover mr-4" />
+                            <div className="w-16 h-16 mr-4 flex-shrink-0">
+                                <ManagedImage 
+                                    src={fabric.imageUrl} 
+                                    alt={translate(fabric.nameKey)}
+                                    pageName="Checkout"
+                                    sectionTitle="Order Summary Item"
+                                    className="w-full h-full rounded-md object-cover" 
+                                />
+                            </div>
                             <div>
                                 <p className="font-semibold text-stone-700">{translate(fabric.nameKey)}</p>
                                 <p className="text-sm text-stone-500">{item.quantity} x ${fabric.pricePerRoll.toFixed(2)}</p>

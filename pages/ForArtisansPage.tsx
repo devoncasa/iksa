@@ -1,5 +1,4 @@
 
-
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
@@ -7,6 +6,7 @@ import { SEOMetadata } from '../components/SEOMetadata';
 import { Button } from '../components/Button';
 import { ContentBlock } from '../components/ContentBlock';
 import { generateOrganizationSchema, generateWebsiteSchema } from '../components/Schema';
+import { ManagedImage } from '../components/ManagedImage';
 
 interface PointProps {
   titleKey: string;
@@ -34,13 +34,13 @@ const CommitmentPoint: React.FC<PointProps> = ({ titleKey, itemsKeys, promiseKey
 
   const imageContent = (
     <div className="lg:w-1/2 mt-6 lg:mt-0">
-      <div className="relative">
-        <img
-          src={imageUrl}
-          alt={translate(altKey)}
-          className="w-full h-auto aspect-[4/3] object-cover rounded-lg shadow-lg"
-        />
-      </div>
+      <ManagedImage
+        src={imageUrl}
+        alt={translate(altKey)}
+        pageName="For Artisans"
+        sectionTitle={`Commitment: ${translate(titleKey)}`}
+        className="w-full h-auto aspect-[4/3] object-cover rounded-lg shadow-lg"
+      />
     </div>
   );
 
@@ -88,8 +88,10 @@ export const ForArtisansPage: React.FC = () => {
         isHero
         heroImageSrc="https://i.postimg.cc/50v2f5fK/artisans-tool-summary.webp"
         heroImageAlt={translate('forArtisans_hero_alt')}
+        heroPageName="For Artisans"
+        heroSectionTitle="For Artisans Hero"
       >
-          <h1 className={`text-3xl sm:text-4xl font-bold text-brandAccent-700 mb-6 md:mb-8 font-serif-display leading-tight section-title-underline`}> 
+          <h1 className={`text-3xl sm:text-4xl font-bold text-warm-terracotta mb-6 md:mb-8 font-serif-display leading-tight section-title-underline`}> 
             {translate('forArtisans_mainTitle')}
           </h1>
           <p className={`text-base md:text-lg text-stone-700 leading-relaxed`}> 
