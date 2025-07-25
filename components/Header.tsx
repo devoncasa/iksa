@@ -44,12 +44,12 @@ export const Header: React.FC = () => {
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-    `relative py-2 px-1 text-sm font-medium transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-brandAccent-700 focus:ring-offset-2 focus:ring-offset-current rounded-sm
+    `relative py-2 px-1 text-sm font-medium transition-colors duration-300 ease-in-out focus:outline-none
      after:content-[""] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:transition-all after:duration-300 after:ease-in-out
      after:bg-brandAccent-500 lg:after:bg-brandAccent-600
      ${isActive
-        ? 'text-white lg:text-stone-500 after:w-full'
-        : 'text-stone-300 lg:text-deep-chocolate after:w-0 hover:text-white hover:after:w-full'
+        ? 'text-white lg:text-white after:w-full focus:after:h-1'
+        : 'text-stone-300 lg:text-deep-chocolate after:w-0 hover:text-white hover:after:w-full focus:text-white focus:after:w-full'
      }`;
 
   const mobileNavLinkClasses = ({ isActive }: { isActive: boolean }) =>

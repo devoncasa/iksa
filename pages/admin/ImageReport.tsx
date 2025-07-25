@@ -174,13 +174,13 @@ export const ImageReport: React.FC = () => {
               {sortedImages.map(image => (
                 <tr key={image.id} className="bg-white border-b hover:bg-stone-50">
                   <td className="p-4">
-                    <div className="w-24 h-24">
+                    <div className="w-24 h-24 rounded-lg border-2 border-muted-gold/50 shadow-sm overflow-hidden">
                         <ManagedImage 
                             src={image.src} 
                             alt={image.alt}
                             pageName={image.pageName}
                             sectionTitle={image.sectionTitle}
-                            className="w-full h-full object-cover rounded" 
+                            className="w-full h-full object-cover rounded-md" 
                         />
                     </div>
                   </td>

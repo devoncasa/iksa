@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { ManagedImage } from './ManagedImage';
@@ -46,14 +47,14 @@ export const ContentBlock: React.FC<ContentBlockProps> = ({ children, className 
                 </div>
                 {/* Image column */}
                 <div className="md:col-span-2 w-full h-full">
-                  <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg h-full">
+                  <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg h-full border-2 border-muted-gold/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-muted-gold/30 hover:-translate-y-1">
                     <ManagedImage 
                       src={heroImageSrc} 
                       alt={heroImageAlt || ''}
                       pageName={heroPageName || 'Unknown Page'}
                       sectionTitle={heroSectionTitle || 'Hero Image'}
-                      className="w-full h-full object-cover" 
-                      style={{ filter: 'blur(2px)', transform: 'scale(1.1)' }}
+                      className="w-full h-full object-cover rounded-md" 
+                      style={{ filter: 'blur(1px)', transform: 'scale(1.1)' }}
                       loading="lazy"
                     />
                   </div>

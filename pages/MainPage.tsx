@@ -96,13 +96,13 @@ const InfoSection: React.FC<InfoSectionProps> = ({ titleKey, contentKey, ctaKey,
 
   const imageContent = imageSrc ? (
     <div className={`md:w-1/2 mt-8 md:mt-0`}>
-        <div className="relative group overflow-hidden rounded-lg">
+        <div className="relative group overflow-hidden rounded-lg border-2 border-muted-gold/50 shadow-sm transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-muted-gold/30 hover:-translate-y-1">
             <ManagedImage
                 src={imageSrc}
                 alt={imageAltKey ? translate(imageAltKey) : translate(titleKey)}
                 pageName="Main Page"
                 sectionTitle={`Info: ${translate(titleKey)}`}
-                className="rounded-lg shadow-lg object-cover w-full aspect-[4/3] transition-transform duration-500 ease-in-out group-hover:scale-105"
+                className="rounded-md object-cover w-full aspect-[4/3] transition-transform duration-500 ease-in-out group-hover:scale-105"
             />
         </div>
     </div>

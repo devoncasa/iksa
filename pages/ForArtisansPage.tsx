@@ -34,13 +34,15 @@ const CommitmentPoint: React.FC<PointProps> = ({ titleKey, itemsKeys, promiseKey
 
   const imageContent = (
     <div className="lg:w-1/2 mt-6 lg:mt-0">
-      <ManagedImage
-        src={imageUrl}
-        alt={translate(altKey)}
-        pageName="For Artisans"
-        sectionTitle={`Commitment: ${translate(titleKey)}`}
-        className="w-full h-auto aspect-[4/3] object-cover rounded-lg shadow-lg"
-      />
+      <div className="rounded-lg border-2 border-muted-gold/50 shadow-sm transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-muted-gold/30 hover:-translate-y-1 overflow-hidden">
+        <ManagedImage
+          src={imageUrl}
+          alt={translate(altKey)}
+          pageName="For Artisans"
+          sectionTitle={`Commitment: ${translate(titleKey)}`}
+          className="w-full h-auto aspect-[4/3] object-cover rounded-md"
+        />
+      </div>
     </div>
   );
 

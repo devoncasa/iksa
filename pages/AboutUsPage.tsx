@@ -51,7 +51,7 @@ const FourPillarsSection: React.FC = () => {
                     <p className="text-md font-semibold text-stone-600 mb-4">{translate('about_pillars', `${pillar}_tagline`)}</p>
                     <p className="text-sm text-stone-700 leading-relaxed">{translate('about_pillars', `${pillar}_desc`)}</p>
                 </div>
-                <div className="mt-6">
+                <div className="mt-6 rounded-lg border-2 border-muted-gold/50 shadow-sm transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-muted-gold/30 hover:-translate-y-1 overflow-hidden">
                     <ManagedImage 
                         src={pillarImages[index]} 
                         alt={translate('about_pillar_alt')}

@@ -154,7 +154,7 @@ export const CheckoutPage: React.FC = () => {
                         return (
                         <div key={item.fabricId} className="flex items-center justify-between pt-4 first:pt-0">
                             <div className="flex items-center">
-                            <div className="w-16 h-16 mr-4 flex-shrink-0">
+                            <div className="w-16 h-16 mr-4 flex-shrink-0 rounded-lg border-2 border-muted-gold/50 shadow-sm transition-all duration-300 ease-in-out hover:shadow-md hover:shadow-muted-gold/30 hover:-translate-y-0.5 overflow-hidden">
                                 <ManagedImage 
                                     src={fabric.imageUrl} 
                                     alt={translate(fabric.nameKey)}

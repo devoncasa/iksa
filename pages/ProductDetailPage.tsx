@@ -195,26 +195,26 @@ export const ProductDetailPage: React.FC = () => {
                     {/* Image Gallery */}
                     <div className="bg-white/50 backdrop-blur-xl p-4 rounded-lg">
                         <div className="mb-4">
-                            <div className="aspect-square bg-stone-100/90 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg">
+                            <div className="aspect-square bg-stone-100/90 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg border-2 border-muted-gold/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-muted-gold/30 hover:-translate-y-1">
                                 <ManagedImage 
                                     src={mainImage} 
                                     alt={`${translate(fabric.nameKey)} - Main View`} 
                                     pageName={pageName}
                                     sectionTitle="Main Gallery Image"
-                                    className="w-full h-full object-cover" 
+                                    className="w-full h-full object-cover rounded-md" 
                                 />
                             </div>
                         </div>
 
                         <div className="grid grid-cols-4 gap-2">
                         {fabric.galleryImages.map((img, idx) => (
-                            <button key={idx} onClick={() => setMainImage(img)} className={`aspect-square bg-stone-100/90 backdrop-blur-sm rounded-md overflow-hidden focus:outline-none focus:ring-2 focus:ring-brandAccent-700 ${mainImage === img ? 'ring-2 ring-brandAccent-700' : ''}`}>
+                            <button key={idx} onClick={() => setMainImage(img)} className={`aspect-square bg-stone-100/90 backdrop-blur-sm rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-brandAccent-700 border-2 transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-muted-gold/30 hover:-translate-y-0.5 ${mainImage === img ? 'ring-2 ring-brandAccent-700 border-brandAccent-700' : 'border-muted-gold/50'}`}>
                                 <ManagedImage 
                                     src={img} 
                                     alt={`${translate(fabric.nameKey)} view ${idx + 1}`} 
                                     pageName={pageName}
                                     sectionTitle={`Gallery Thumbnail ${idx + 1}`}
-                                    className="w-full h-full object-cover" 
+                                    className="w-full h-full object-cover rounded-md" 
                                 />
                             </button>
                         ))}
@@ -280,25 +280,25 @@ export const ProductDetailPage: React.FC = () => {
             <h2 className="text-3xl font-serif-display font-semibold text-center text-stone-800 mb-10 section-title-underline">{translate('product_projectInspirationTitle')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div className="text-center">
-                    <div className="mb-4">
+                    <div className="mb-4 rounded-lg border-2 border-muted-gold/50 shadow-sm transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-muted-gold/30 hover:-translate-y-1 overflow-hidden">
                         <ManagedImage 
                             src="https://i.postimg.cc/2j5T00Fw/inspiration-kandura.webp" 
                             alt={translate('product_inspiration_kandura_alt')} 
                             pageName={pageName}
                             sectionTitle="Inspiration Image: Kandura"
-                            className="rounded-lg shadow-xl aspect-[4/3] object-cover" 
+                            className="rounded-md aspect-[4/3] object-cover w-full" 
                         />
                     </div>
                     <p className="text-stone-600 italic">{translate('product_inspirationCaption').replace('{garment}', 'Emirati Kandura').replace('{fabricName}', translate(fabric.nameKey))}</p>
                 </div>
                 <div className="text-center">
-                    <div className="mb-4">
+                    <div className="mb-4 rounded-lg border-2 border-muted-gold/50 shadow-sm transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-muted-gold/30 hover:-translate-y-1 overflow-hidden">
                         <ManagedImage 
                             src="https://i.postimg.cc/k4GkYyv0/inspiration-abaya.webp" 
                             alt={translate('product_inspiration_abaya_alt')} 
                             pageName={pageName}
                             sectionTitle="Inspiration Image: Abaya"
-                            className="rounded-lg shadow-xl aspect-[4/3] object-cover" 
+                            className="rounded-md aspect-[4/3] object-cover w-full" 
                         />
                     </div>
                     <p className="text-stone-600 italic">{translate('product_inspirationCaption').replace('{garment}', 'Luxury Abaya').replace('{fabricName}', translate(fabric.nameKey))}</p>

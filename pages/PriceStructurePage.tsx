@@ -313,7 +313,7 @@ export const PriceStructurePage: React.FC = () => {
                                     return (
                                     <div key={p.id} className="bg-white/50 backdrop-blur-xl p-6 rounded-lg shadow-md border border-stone-200/50">
                                         <h2 className="text-xl font-semibold mb-3 text-brandAccent-800">{translate(p.nameKey)}</h2>
-                                        <div className="mb-4">
+                                        <div className="mb-4 rounded-lg border-2 border-muted-gold/50 shadow-sm transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-muted-gold/30 hover:-translate-y-1 overflow-hidden">
                                             <ManagedImage 
                                                 src={p.image} 
                                                 alt={translate(p.nameKey)} 

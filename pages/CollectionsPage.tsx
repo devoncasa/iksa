@@ -38,13 +38,13 @@ const FabricCard: React.FC<{ fabric: Fabric; }> = ({ fabric }) => {
       className="bg-white/70 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 ease-in-out transform hover:shadow-xl hover:-translate-y-1 border border-stone-200/50 group h-full" 
       id={fabric.id} 
     >
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden rounded-lg border-2 border-muted-gold/50 shadow-sm transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-muted-gold/30 hover:-translate-y-1">
         <ManagedImage 
             src={fabric.imageUrl} 
             alt={translate(fabric.nameKey)}
             pageName="Collections"
             sectionTitle={`Fabric Card: ${translate(fabric.nameKey)}`}
-            className="w-full aspect-[4/3] object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+            className="w-full aspect-[4/3] object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 rounded-md"
         />
       </div>
       <div className="p-5 md:p-6 flex flex-col flex-grow">
