@@ -54,7 +54,6 @@ export const ContentBlock: React.FC<ContentBlockProps> = ({ children, className 
                       pageName={heroPageName || 'Unknown Page'}
                       sectionTitle={heroSectionTitle || 'Hero Image'}
                       className="w-full h-full object-cover rounded-md" 
-                      style={{ filter: 'blur(1px)', transform: 'scale(1.1)' }}
                       loading="lazy"
                     />
                   </div>

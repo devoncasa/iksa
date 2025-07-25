@@ -25,51 +25,59 @@ import { SECTION_BACKGROUND_IMAGES, getRandomImage } from './constants';
 // --- Dynamic Background System ---
 const DynamicBackground: React.FC = () => {
     const location = useLocation();
-    const [displayUrl, setDisplayUrl] = useState('');
-    const [isLoaded, setIsLoaded] = useState(false);
-    const currentUrlRef = useRef('');
+    const isFirstRender = useRef(true);
+    
+    // Use useMemo to ensure the initial image is calculated only once.
+    const initialUrl = useMemo(() => getRandomImage(SECTION_BACKGROUND_IMAGES), []);
+    
+    const [currentUrl, setCurrentUrl] = useState(initialUrl);
+    const [previousUrl, setPreviousUrl] = useState('');
 
     useEffect(() => {
-        // When navigation happens, get a new image that's different from the current one.
-        const newUrl = getRandomImage(SECTION_BACKGROUND_IMAGES, currentUrlRef.current);
-        
-        // Start the fade-out transition
-        setIsLoaded(false);
+        // Skip the effect on the initial render to prevent an immediate background change.
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
 
-        // Preload the new image.
-        const img = new Image();
-        img.src = newUrl;
-        
-        img.onload = () => {
-            // Once loaded, set it as the new display URL.
-            // A short delay can make the fade-out/fade-in transition appear smoother.
-            setTimeout(() => {
-                currentUrlRef.current = newUrl;
-                setDisplayUrl(newUrl);
-                setIsLoaded(true); // Trigger fade-in
-            }, 300);
-        };
-        
-        img.onerror = () => {
-            console.error("Failed to load background image:", newUrl);
-            // If there's an error, just fade the current image back in.
-            setIsLoaded(true);
-        };
+        setCurrentUrl(prevUrl => {
+            const newUrl = getRandomImage(SECTION_BACKGROUND_IMAGES, prevUrl);
+            if (newUrl !== prevUrl) {
+                setPreviousUrl(prevUrl);
+            }
+            return newUrl;
+        });
+
     }, [location.pathname]);
 
     return (
         <div className="fixed inset-0 -z-10 overflow-hidden bg-creamy-beige">
+            {/* Render the previous image with a fade-out animation */}
+            {previousUrl && (
+                 <div
+                    key={previousUrl}
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+                    style={{
+                        backgroundImage: `url(${previousUrl})`,
+                        filter: 'blur(8px)',
+                        transform: 'scale(1.15)',
+                        animation: 'fadeOut 1.5s ease-in-out forwards'
+                    }}
+                />
+            )}
+            {/* Render the current image with a fade-in animation */}
             <div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed transition-opacity duration-1000 ease-in-out"
+                key={currentUrl}
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
                 style={{
-                    backgroundImage: displayUrl ? `url(${displayUrl})` : 'none',
+                    backgroundImage: `url(${currentUrl})`,
                     filter: 'blur(8px)',
-                    transform: 'scale(1.15)', // Prevents blurred edges from being visible
-                    opacity: isLoaded ? 1 : 0,
+                    transform: 'scale(1.15)',
+                    animation: 'fadeIn 1.5s ease-in-out forwards'
                 }}
-            >
-                <div className="absolute inset-0 bg-white/[.30]" />
-            </div>
+            />
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-white/[.30]" />
         </div>
     );
 };

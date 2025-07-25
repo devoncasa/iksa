@@ -7,7 +7,7 @@ import { CalculatorIcon } from '../icons';
 
 const InputField: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
   <div>
-    <label className="block text-sm font-medium text-stone-600 mb-1.5">{label}</label>
+    <label className="block text-sm font-semibold text-stone-600 mb-1.5">{label}</label>
     {children}
   </div>
 );
