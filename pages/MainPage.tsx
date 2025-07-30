@@ -1,4 +1,3 @@
-
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
@@ -20,6 +19,7 @@ const HeroSection: React.FC = () => {
             heroImageAlt={translate('main_hero_alt')}
             heroPageName="Main Page"
             heroSectionTitle="Main Hero"
+            heroImagePriority={true}
         >
             <h1 className="font-serif-display text-4xl sm:text-5xl font-bold mb-6 md:mb-8 leading-tight text-warm-terracotta animate-fadeInUp">
               {translate('main_heroTitle')}

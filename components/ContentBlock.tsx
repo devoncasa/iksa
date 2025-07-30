@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { ManagedImage } from './ManagedImage';
@@ -12,9 +10,10 @@ interface ContentBlockProps {
   heroImageAlt?: string;
   heroPageName?: string;
   heroSectionTitle?: string;
+  heroImagePriority?: boolean;
 }
 
-export const ContentBlock: React.FC<ContentBlockProps> = ({ children, className = '', isHero = false, heroImageSrc, heroImageAlt, heroPageName, heroSectionTitle }) => {
+export const ContentBlock: React.FC<ContentBlockProps> = ({ children, className = '', isHero = false, heroImageSrc, heroImageAlt, heroPageName, heroSectionTitle, heroImagePriority = false }) => {
   const { ref, isVisible } = useScrollAnimation<HTMLElement>(isHero ? 0 : 0.25);
   const verticalSpacing = isHero ? 'pt-24 pb-12 md:pt-40 md:pb-16' : 'py-12 md:py-16';
   const internalPadding = 'p-8 md:p-12 lg:p-16';
@@ -54,7 +53,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = ({ children, className 
                       pageName={heroPageName || 'Unknown Page'}
                       sectionTitle={heroSectionTitle || 'Hero Image'}
                       className="w-full h-full object-cover rounded-md" 
-                      loading="lazy"
+                      priority={heroImagePriority}
                     />
                   </div>
                 </div>

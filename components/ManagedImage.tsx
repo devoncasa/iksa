@@ -1,13 +1,13 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { useImageRegistry } from '../hooks/useImageRegistry';
 
 interface ManagedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   pageName: string;
   sectionTitle: string;
+  priority?: boolean;
 }
 
-export const ManagedImage: React.FC<ManagedImageProps> = ({ src, alt, pageName, sectionTitle, ...props }) => {
+export const ManagedImage: React.FC<ManagedImageProps> = ({ src, alt, pageName, sectionTitle, priority = false, ...props }) => {
   const { registerImage, isImageRegistered } = useImageRegistry();
   const [aspectRatio, setAspectRatio] = useState('N/A');
   const [showInfo, setShowInfo] = useState(false);
@@ -87,6 +87,20 @@ export const ManagedImage: React.FC<ManagedImageProps> = ({ src, alt, pageName, 
     }
   };
 
+  const imgProps: React.ImgHTMLAttributes<HTMLImageElement> = {
+    ...props,
+    src: displaySrc,
+    alt: alt || '',
+    onLoad: handleLoad,
+  };
+
+  if (priority) {
+    (imgProps as any).fetchpriority = 'high';
+    imgProps.loading = 'eager';
+  } else {
+    imgProps.loading = 'lazy';
+  }
+
   return (
     <div 
         className="relative" 
@@ -94,13 +108,7 @@ export const ManagedImage: React.FC<ManagedImageProps> = ({ src, alt, pageName, 
         onMouseLeave={() => setShowInfo(false)}
         // The parent container should have the necessary layout classes
     >
-      <img
-        ref={imgRef}
-        src={displaySrc}
-        alt={alt}
-        onLoad={handleLoad}
-        {...props}
-      />
+      <img ref={imgRef} {...imgProps} />
       {showInfo && (
         <div 
             className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-[10px] p-1 z-10 pointer-events-none" 

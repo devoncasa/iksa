@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) – IKSA Lux Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D20YQ94S5Y"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-D20YQ94S5Y');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IKSA: Premium Japanese Textiles for Thobes & Abayas</title>
@@ -10,10 +18,14 @@
     <link rel="icon" href="https://i.postimg.cc/mZSFSj42/iksa-logo.webp" type="image/webp" sizes="any">
     <link rel="apple-touch-icon" href="https://i.postimg.cc/mZSFSj42/iksa-logo.webp">
 
-    <!-- High-priority assets for hero section -->
-    <link rel="preload" href="https://i.postimg.cc/FK3XkcH5/IKSA-section-background-0011.webp" as="image" fetchpriority="high">
+    <!-- High-priority assets for immediate rendering -->
+    <!-- The main logo and homepage hero image are critical for LCP -->
     <link rel="preload" href="https://i.postimg.cc/mZSFSj42/iksa-logo.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="https://i.postimg.cc/nrY3WbnL/iksa-about-us-summary.webp" as="image" fetchpriority="high">
+
+    <!-- Other important assets -->
     <link rel="preload" href="https://i.postimg.cc/C5JBLh7f/iksa-name-logo.webp" as="image">
+    <link rel="preload" href="https://i.postimg.cc/FK3XkcH5/IKSA-section-background-0011.webp" as="image">
     
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
