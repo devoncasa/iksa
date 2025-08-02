@@ -1,8 +1,10 @@
 
 
+
 import React, { useEffect } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { Fabric } from '../types';
+import { LANGUAGES } from '../constants';
 
 const ORG_URL = "https://www.iksa-textiles.com";
 
@@ -21,7 +23,7 @@ export const SEOMetadata: React.FC<SEOMetadataProps> = ({
   item,
   schemas = [],
 }) => {
-  const { translate } = useLanguage();
+  const { translate, language } = useLanguage();
 
   useEffect(() => {
     // Title
@@ -61,10 +63,18 @@ export const SEOMetadata: React.FC<SEOMetadataProps> = ({
     }
     canonicalLink.setAttribute('href', canonicalUrl);
     
-    // Schema
-    // Remove existing schemas to prevent duplicates on navigation
-    document.querySelectorAll('script[type="application/ld+json"]').forEach(e => e.remove());
+    // Hreflang tags
+    document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(e => e.remove());
+    LANGUAGES.forEach(lang => {
+        const link = document.createElement('link');
+        link.rel = 'alternate';
+        link.hreflang = lang.code;
+        link.href = canonicalUrl;
+        document.head.appendChild(link);
+    });
     
+    // Schema
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(e => e.remove());
     schemas.forEach((schema, index) => {
         if (schema) {
             const script = document.createElement('script');
@@ -80,11 +90,11 @@ export const SEOMetadata: React.FC<SEOMetadataProps> = ({
     });
 
     return () => {
-        // Cleanup on unmount, good practice for SPAs
         document.querySelectorAll('script[id^="schema-ld-"]').forEach(e => e.remove());
+        document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(e => e.remove());
     };
 
-  }, [translate, titleKey, descriptionKey, pagePath, item, schemas]);
+  }, [translate, language, titleKey, descriptionKey, pagePath, item, schemas]);
 
   return null; 
 };

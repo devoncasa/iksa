@@ -36,6 +36,8 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"></noscript>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"></noscript>
     
     <script>
       tailwind.config = {
@@ -76,6 +78,7 @@
 
     <style>
         body { font-family: 'Inter', sans-serif; }
+        body[dir="rtl"] { font-family: 'Cairo', sans-serif; }
         .font-serif-display { font-family: 'Playfair Display', serif; }
         
         /* Global Animation Styles for React Components */
@@ -137,6 +140,10 @@
         .footer-logo-filter {
             filter: brightness(1.2);
         }
+        
+        /* Utility for flipping icons in RTL */
+        .rtl-flip { transition: transform 0.3s; }
+        [dir="rtl"] .rtl-flip { transform: scaleX(-1); }
     </style>
     
     <script type="importmap">

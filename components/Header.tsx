@@ -7,6 +7,7 @@ import { NAV_LINKS } from '../constants';
 import { CloseIcon, MenuIcon, ShoppingCartIcon } from './icons'; 
 import { CartModal } from './CartModal';
 import { ManagedImage } from './ManagedImage';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export const Header: React.FC = () => {
   const { translate } = useLanguage();
@@ -102,7 +103,10 @@ export const Header: React.FC = () => {
             </nav>
 
             {/* Icons and Mobile Menu Button */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <div className="hidden lg:block">
+                <LanguageSwitcher />
+              </div>
               <button
                 onClick={() => setIsCartOpen(true)}
                 className="relative p-2 rounded-full text-stone-300 lg:text-deep-chocolate hover:text-white hover:bg-stone-700/50 lg:hover:bg-brandAccent-600/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-stone-800 lg:focus:ring-offset-brandAccent-100 focus:ring-white transition-colors"
@@ -145,6 +149,9 @@ export const Header: React.FC = () => {
                   {translate('nav', link.labelKey)}
                 </NavLink>
               ))}
+               <div className="border-t border-stone-700 pt-4 mt-4 px-2">
+                 <LanguageSwitcher />
+               </div>
             </div>
           </div>
         )}

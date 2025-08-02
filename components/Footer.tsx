@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
@@ -57,7 +58,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3 mb-6">
               <li>
                 <div className="flex items-start">
-                  <BuildingIcon className="w-4 h-4 mr-2.5 mt-0.5 text-brandAccent-500 flex-shrink-0" />
+                  <BuildingIcon className="w-4 h-4 me-2.5 mt-0.5 text-brandAccent-500 flex-shrink-0" />
                   <address className="not-italic leading-relaxed">
                     {translate('contact_addressLine1')}<br />
                     {translate('contact_addressLine2')}
@@ -66,13 +67,13 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a href="https://wa.me/66818519922" target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-brandAccent-500 hover:underline transition-colors">
-                  <PhoneIcon className="w-4 h-4 mr-2.5 text-brandAccent-500 flex-shrink-0" />
+                  <PhoneIcon className="w-4 h-4 me-2.5 text-brandAccent-500 flex-shrink-0" />
                   <span>{translate('contact_whatsapp')}</span>
                 </a>
               </li>
               <li>
                 <a href="mailto:sales@iksa-textiles.com" className="flex items-center hover:text-brandAccent-500 hover:underline transition-colors">
-                  <EmailIcon className="w-4 h-4 mr-2.5 text-brandAccent-500 flex-shrink-0" />
+                  <EmailIcon className="w-4 h-4 me-2.5 text-brandAccent-500 flex-shrink-0" />
                   <span>sales@iksa-textiles.com</span>
                 </a>
               </li>

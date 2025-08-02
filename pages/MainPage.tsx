@@ -8,6 +8,7 @@ import { StyledText } from '../components/StyledText';
 import { ContentBlock } from '../components/ContentBlock';
 import { generateOrganizationSchema, generateWebsiteSchema } from '../components/Schema';
 import { ManagedImage } from '../components/ManagedImage';
+import { DevelopmentBanner } from '../components/DevelopmentBanner';
 
 
 const HeroSection: React.FC = () => {
@@ -87,7 +88,7 @@ const InfoSection: React.FC<InfoSectionProps> = ({ titleKey, contentKey, ctaKey,
         <Link to={linkTo}>
           <Button variant="primary" size="md" className="group">
             {translate(ctaKey)}
-            <ChevronRightIcon className="w-5 h-5 ml-2.5 inline-block group-hover:translate-x-1 transition-transform duration-300 ease-in-out" /> 
+            <ChevronRightIcon className="w-5 h-5 ms-2.5 rtl-flip inline-block group-hover:translate-x-1 group-hover:dir-rtl:-translate-x-1 transition-transform duration-300 ease-in-out" /> 
           </Button>
         </Link>
       </div>
@@ -145,6 +146,7 @@ export const MainPage: React.FC = () => {
 
   return (
     <>
+      <DevelopmentBanner />
       <SEOMetadata
         titleKey="page_main_title"
         descriptionKey="page_main_description"

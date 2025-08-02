@@ -9,6 +9,7 @@ export const DEFAULT_LANGUAGE: LanguageCode = LanguageCode.EN;
 
 export const LANGUAGES = [
   { code: LanguageCode.EN, name: 'English' },
+  { code: LanguageCode.AR, name: 'العربية' },
 ];
 
 export const NAV_LINKS: NavLink[] = [

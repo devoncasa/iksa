@@ -1,6 +1,7 @@
 
 export enum LanguageCode {
   EN = 'en',
+  AR = 'ar',
 }
 
 export interface Translations {
