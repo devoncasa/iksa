@@ -1,3 +1,5 @@
+import { DiscoveryNav } from '../components/DiscoveryNav';
+import '../discovery.css';
 
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
@@ -187,7 +189,7 @@ export const CollectionsPage: React.FC = () => {
       />
       <ContentBlock 
         isHero
-        heroImageSrc="https://i.postimg.cc/t4d7WvHh/fabric-roll-collection-showcase-2.webp"
+        heroImageSrc="/images/hithobe/courtyard-editorial-1280.webp"
         heroImageAlt={translate('collections_hero_alt')}
         heroPageName="Collections"
         heroSectionTitle="Collections Hero"
@@ -201,6 +203,7 @@ export const CollectionsPage: React.FC = () => {
           </div>
       </ContentBlock>
 
+      <section className="discovery-launch"><h2>{translate('discovery_heading')}</h2><p>{translate('discovery_intro')}</p><DiscoveryNav /></section>
       <ContentBlock>
         <FabricFilter filters={filters} onFilterChange={handleFilterChange} />
       </ContentBlock>

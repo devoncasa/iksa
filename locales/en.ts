@@ -4,6 +4,17 @@ import {
  LanguageCode, Translations } from '../types';
 
 export const en: Translations = {
+    atelier_title: "The Edit — Six Fashion Stories | hithobe",
+    atelier_description: "Explore six thobe and abaya styling stories, model colour photographs and related hithobe fabric rolls.",
+    "fabric-library_title": "Fabric Reference Library — Search & Compare 52 Entries | hithobe",
+    "fabric-library_description": "Search and compare 52 unverified textile research references by name, origin and drape. Prepare a sourcing brief with clear verification requirements.",
+    "trade-studio_title": "Fabric Roll Yield & Weight Calculator | hithobe",
+    "trade-studio_description": "Estimate garment yields and fabric shipment weight using editable dimensions, GSM and allowances. Explore six illustrative white and cream tones.",
+    "sourcing-guide_title": "Fabric Buying Guides & Sourcing Checklist | hithobe",
+    "sourcing-guide_description": "Prepare a fabric sourcing brief with practical guides to samples, specifications, test evidence and roll orders. Print the checklist or draft an enquiry.",
+    discovery_heading: "More ways to discover hithobe.",
+    discovery_intro: "Explore six styling stories, compare 52 fabric research references, and plan your next fabric enquiry.",
+
     getDirections: "Get directions",
     forArtisans_point2_item1: "Request specifications and a physical swatch before confirming a production order.",
     // General

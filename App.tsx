@@ -10,6 +10,7 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import { PolicyPage, NotFoundPage } from './pages/PolicyPage';
+import { AtelierPage, FabricLibraryPage, TradeStudioPage, SourcingGuidePage } from './pages/DiscoveryPages';
 import { MainPage } from './pages/MainPage'; 
 import { AboutUsPage } from './pages/AboutUsPage';
 import { CollectionsPage } from './pages/CollectionsPage';
@@ -95,6 +96,10 @@ const MainLayout: React.FC = () => {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<MainPage />} />
+            <Route path="/atelier" element={<AtelierPage />} />
+            <Route path="/fabric-library" element={<FabricLibraryPage />} />
+            <Route path="/trade-studio" element={<TradeStudioPage />} />
+            <Route path="/sourcing-guide" element={<SourcingGuidePage />} />
             <Route path="/about-us" element={<AboutUsPage />} />
             <Route path="/collections" element={<CollectionsPage />} />
             <Route path="/collections/:fabricId" element={<ProductDetailPage />} />

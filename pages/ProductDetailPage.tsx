@@ -256,7 +256,7 @@ export const ProductDetailPage: React.FC = () => {
                             </div>
                         )}
                         
-                        <p className="text-sm text-stone-600 mb-6" role="note">{language === 'ar' ? 'يرجى تأكيد المواصفات والتوفر واللون بعينة فعلية قبل الدفع. معاينة اللون تقريبية، وتبقى صور المعرض الأصلية متاحة أسفل المعاينة.' : 'Confirm specifications, availability and colour with a physical swatch before payment. Colour previews are illustrative; original gallery photographs remain available below the preview.'}</p>
+                        <p className="text-sm text-stone-600 mb-6" role="note">{language === 'ar' ? 'يرجى تأكيد المواصفات والتوفر واللون بعينة فعلية قبل الدفع. معاينة اللون تقريبية، وتبقى صور المعرض الأصلية متاحة أسفل المعاينة.' : 'Confirm specifications, availability and colour with a physical swatch before payment. Colour previews are illustrative; additional illustrative model photographs remain available below the preview.'}</p>
                         <YieldEstimator fabric={fabric} />
 
                         <div className="flex items-center gap-4 mt-8">

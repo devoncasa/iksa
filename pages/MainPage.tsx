@@ -1,3 +1,5 @@
+import { DiscoveryNav } from '../components/DiscoveryNav';
+import '../discovery.css';
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
@@ -154,6 +156,7 @@ export const MainPage: React.FC = () => {
         schemas={schemas}
       />
       <HeroSection />
+        <section className="discovery-launch"><h2>{translate('discovery_heading')}</h2><p>{translate('discovery_intro')}</p><DiscoveryNav /></section>
 
       <InfoSection
           titleKey="main_section_about_title"
