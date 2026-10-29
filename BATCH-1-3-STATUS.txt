@@ -1,0 +1,8 @@
+HITHOBE BATCHES 1-3 — 29 October 2026
+Undeployed working copy. No Netlify deployment performed.
+
+Implemented: colour-aware cart totals and line operations; legacy cart recovery; responsive editorial WebP assets; always-rendered page sections; stylesheet and image sizing fixes; reduced-motion styles; email draft handoff for contact/order enquiries; cart retained after enquiry; bilingual privacy, ordering and shipping information; missing-route page; lowercase hithobe header/footer branding, metadata identity and favicon.
+
+Verification: seven cart tests; TypeScript; Vite production build; browser smoke checks of all nine navigation destinations plus three policy pages and missing route. Homepage loaded images reported no failed resources at inspection time.
+
+Limits: enquiry delivery requires the visitor to send through their email application; no backend order acceptance or payment processing. Full mobile/Arabic and interaction regression remains outstanding. Business specification/stock/shipping verification remains in batch 5. The internal admin uses demonstration authentication and must be hardened before release. Existing contact email, registered operator and social handles retained; replacement accounts have not been verified. Search routing, empty sitemap and full SEO are batch 6. Approved logo reference retained; current header remains a typographic rendering rather than an exact vector trace. No live-domain/DNS changes.

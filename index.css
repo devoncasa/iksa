@@ -1,0 +1,10 @@
+/* Accessibility and sizing additions; existing visual theme is retained. */
+img { max-width: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .scroll-animate { opacity: 1 !important; transform: none !important; }
+}
+
+:focus-visible { outline: 2px solid #8B5E3C; outline-offset: 4px; }
+main { background: linear-gradient(135deg,rgba(250,240,228,.12),transparent 45%,rgba(209,192,170,.12)); }
+@media (max-width: 767px) { input,select,textarea { font-size:16px!important; } }

@@ -3,7 +3,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import { useLanguage } from '../hooks/useLanguage';
-import { MOCK_FABRICS } from '../constants';
+import { MOCK_FABRICS, COLOR_MARKUPS, COLOR_PALETTE } from '../constants';
+import { cartLineKey, cartUnitPrice } from '../lib/cart';
 import { Button } from './Button';
 import { CloseIcon, TrashIcon } from './icons';
 import { ManagedImage } from './ManagedImage';
@@ -64,7 +65,7 @@ export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                 if (!fabric) return null;
 
                 return (
-                  <li key={item.fabricId} className="py-4 flex">
+                  <li key={cartLineKey(item)} className="py-4 flex">
                     <div className="h-20 w-20 mr-4 flex-shrink-0">
                       <ManagedImage 
                           src={fabric.imageUrl} 
@@ -76,8 +77,8 @@ export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                     </div>
                     <div className="flex-grow">
                       <h3 className="font-semibold text-stone-700">{translate(fabric.nameKey)}</h3>
-                      <p className="text-sm text-stone-500">{fabric.rollLengthInMeters}m / Roll</p>
-                      <p className="text-sm font-semibold text-brandAccent-700">${fabric.pricePerRoll.toFixed(2)}</p>
+                      <p className="text-sm text-stone-500">{fabric.rollLengthInMeters}m / Roll · {translate(COLOR_PALETTE[item.color ?? 'white']?.nameKey)}</p>
+                      <p className="text-sm font-semibold text-brandAccent-700">${cartUnitPrice(fabric, item.color, COLOR_MARKUPS).toFixed(2)}</p>
                     </div>
                     <div className="flex flex-col items-end justify-between ml-4">
                       <div className="flex items-center border border-stone-300 rounded-md bg-white/50">
@@ -85,12 +86,12 @@ export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                           type="number"
                           min="1"
                           value={item.quantity}
-                          onChange={(e) => updateQuantity(item.fabricId, parseInt(e.target.value, 10))}
+                          onChange={(e) => updateQuantity(item.fabricId, parseInt(e.target.value, 10), item.color)}
                           className="w-12 text-center bg-transparent border-none focus:ring-0 text-sm"
                           aria-label={`Quantity for ${translate(fabric.nameKey)}`}
                         />
                       </div>
-                       <button onClick={() => removeFromCart(item.fabricId)} className="text-stone-500 hover:text-red-600 transition-colors">
+                       <button onClick={() => removeFromCart(item.fabricId, item.color)} className="text-stone-500 hover:text-red-600 transition-colors" aria-label={`Remove ${translate(fabric.nameKey)} — ${translate(COLOR_PALETTE[item.color ?? 'white']?.nameKey)}`}>
                           <TrashIcon className="w-5 h-5" />
                        </button>
                     </div>

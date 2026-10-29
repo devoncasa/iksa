@@ -11,9 +11,7 @@ interface LanguageProviderProps {
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const [language, setLanguageState] = useState<LanguageCode>(() => {
-    // Check for saved language in localStorage
-    const savedLanguage = localStorage.getItem('iksa-language') as LanguageCode;
-    return savedLanguage && Object.values(LanguageCode).includes(savedLanguage) ? savedLanguage : DEFAULT_LANGUAGE;
+    return window.location.pathname === '/ar' || window.location.pathname.startsWith('/ar/') ? LanguageCode.AR : LanguageCode.EN;
   });
 
   useEffect(() => {
@@ -55,7 +53,9 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   }, [language]);
 
   const setLanguage = (newLanguage: LanguageCode) => {
-    setLanguageState(newLanguage);
+    if (newLanguage === language) return;
+    const route = window.location.pathname.replace(/^\/ar(?=\/|$)/, '') || '/';
+    window.location.assign((newLanguage === LanguageCode.AR ? '/ar' : '') + route + window.location.search + window.location.hash);
   };
 
   return (

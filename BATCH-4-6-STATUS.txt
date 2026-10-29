@@ -1,0 +1,10 @@
+HITHOBE BATCHES 4-6 — 29 October 2026
+No deployment or DNS change performed.
+
+Batch 4: Integrated the three prepared editorial photographs as a bilingual guide gallery with portrait framing, descriptive captions, responsive WebP source sets and a clear editorial context. Original product imagery retained.
+Batch 5: Colour selections and surcharge arithmetic remain covered by seven passing cart tests. Added bilingual product clarification concerning physical samples, availability and unchanged gallery colours. Removed unsupported structured-data InStock claims. Actual composition, mill origin, certified performance, available inventory and exact colour photographs still require supplier evidence; these are not verified.
+Batch 6: Migrated HashRouter to BrowserRouter; retained legacy hash-link entry compatibility; added /ar route base and URL-driven language; canonical and reciprocal hreflang URLs; social meta; checkout noindex; bilingual sitemap (36 entries); robots.txt and Netlify SPA fallback/legacy HTML redirect files. Removed nonfunctional SearchAction and artificial article publication/modification dates.
+
+Checks: TypeScript and production build pass. Seven cart regression tests passed before gallery integration. XML parser validates sitemap. Browser verified Arabic collections language/RTL/canonical/alternates, and old hash guide link converts to clean URL with gallery present.
+
+Remaining before SEO release: prerendered HTML or SSR, page-specific policy/error metadata, correct server HTTP 404 handling, complete locale-aware schema review, social image landscape art direction, real-domain Search Console validation, complete mobile/accessibility/flow regression. Current SPA fallback returns HTML for unknown paths. Full advanced SEO/AEO/GEO is not yet complete. Admin security remains a release blocker. No production changes.

@@ -58,13 +58,14 @@ export interface NavLink {
 export interface CartItem {
   fabricId: string;
   quantity: number; // Represents number of rolls
+  color?: string; // Missing in legacy carts; treated as white
 }
 
 export interface CartContextType {
   cart: CartItem[];
-  addToCart: (fabricId: string, quantity: number) => void;
-  updateQuantity: (fabricId: string, quantity: number) => void;
-  removeFromCart: (fabricId: string) => void;
+  addToCart: (fabricId: string, quantity: number, color?: string) => void;
+  updateQuantity: (fabricId: string, quantity: number, color?: string) => void;
+  removeFromCart: (fabricId: string, color?: string) => void;
   clearCart: () => void;
   getCartTotal: () => { totalItems: number; totalPrice: number };
 }

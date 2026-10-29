@@ -228,7 +228,7 @@ export const PriceStructurePage: React.FC = () => {
     }, []);
 
     const handleLogin = () => {
-        if (password === '0007') {
+        if (import.meta.env.DEV && password === '0007') {
             setIsAdmin(true);
             setShowLogin(false);
             setTempSettings({

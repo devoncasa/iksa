@@ -1,12 +1,12 @@
 import { Fabric, Breadcrumb } from '../types';
 
-const ORG_URL = "https://www.iksa-textiles.com";
-const ORG_LOGO_URL = "https://i.postimg.cc/C5JBLh7f/iksa-name-logo.webp";
+const ORG_URL = "https://www.hithobe.com";
+const ORG_LOGO_URL = "https://www.hithobe.com/hithobe-icon.svg";
 
 export const generateOrganizationSchema = (translate: (key: string, subKey?: string) => string) => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  'name': 'IKSA Textiles',
+  'name': 'hithobe',
   'url': ORG_URL,
   'logo': ORG_LOGO_URL,
   'contactPoint': {
@@ -39,12 +39,8 @@ export const generateWebsiteSchema = () => ({
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   'url': ORG_URL,
-  'name': 'IKSA',
-  'potentialAction': {
-    '@type': 'SearchAction',
-    'target': `${ORG_URL}/#/collections?q={search_term_string}`,
-    'query-input': 'required name=search_term_string',
-  },
+  'name': 'hithobe',
+
 });
 
 export const generateBreadcrumbSchema = (crumbs: Breadcrumb[]) => {
@@ -56,7 +52,7 @@ export const generateBreadcrumbSchema = (crumbs: Breadcrumb[]) => {
             '@type': 'ListItem',
             'position': index + 1,
             'name': crumb.name,
-            'item': `${ORG_URL}/#${crumb.path}`
+            'item': `${ORG_URL}${crumb.path}`
         }))
     };
 };
@@ -74,17 +70,16 @@ export const generateProductSchema = (fabric: Fabric, translate: (key: string, s
         'image': fabric.galleryImages,
         'brand': {
             '@type': 'Brand',
-            'name': 'IKSA'
+            'name': 'hithobe'
         },
         'offers': {
             '@type': 'Offer',
             'price': fabric.pricePerRoll,
             'priceCurrency': 'USD',
-            'availability': 'https://schema.org/InStock',
-            'url': `${ORG_URL}/#/collections/${fabric.id}`,
+            'url': `${ORG_URL}/collections/${fabric.id}`,
             'seller': {
                 '@type': 'Organization',
-                'name': 'IKSA Textiles'
+                'name': 'hithobe'
             }
         },
         'additionalProperty': [
@@ -103,20 +98,18 @@ export const generateArticleSchema = (translate: (key: string, subKey?: string) 
         'headline': translate('thobeGuide_full', 'title'),
         'author': {
             '@type': 'Organization',
-            'name': 'IKSA Master Tailors'
+            'name': 'hithobe'
         },
         'publisher': {
             '@type': 'Organization',
-            'name': 'IKSA Textiles',
+            'name': 'hithobe',
             'logo': {
                 '@type': 'ImageObject',
                 'url': ORG_LOGO_URL
             }
         },
         'image': "https://i.postimg.cc/2j5T00Fw/inspiration-kandura.webp",
-        'datePublished': '2024-05-01T09:00:00+07:00',
-        'dateModified': new Date().toISOString(),
-        'mainEntityOfPage': `${ORG_URL}/#/thobe-guide`
+        'mainEntityOfPage': `${ORG_URL}/thobe-guide`
     };
 };
 
@@ -130,7 +123,7 @@ export const generateHowToSchema = (translate: (key: string, subKey?: string) =>
             {
                 '@type': 'HowToStep',
                 'name': translate('selectFabric'),
-                'text': 'Choose the IKSA fabric roll you plan to use from the dropdown list.'
+                'text': 'Choose the hithobe fabric roll you plan to use from the dropdown list.'
             },
             {
                 '@type': 'HowToStep',
@@ -157,7 +150,7 @@ export const generateHowToSchema = (translate: (key: string, subKey?: string) =>
         'tool': [
             {
                 '@type': 'HowToTool',
-                'name': 'IKSA Fabric Roll'
+                'name': 'hithobe Fabric Roll'
             },
             {
                 '@type': 'HowToTool',

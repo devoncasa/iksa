@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useAdminAuth } from '../hooks/useAdminAuth';
 import { useImageRegistry } from '../hooks/useImageRegistry';
 
 interface ManagedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -8,6 +9,7 @@ interface ManagedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 }
 
 export const ManagedImage: React.FC<ManagedImageProps> = ({ src, alt, pageName, sectionTitle, priority = false, ...props }) => {
+  const { isAdmin } = useAdminAuth();
   const { registerImage, isImageRegistered } = useImageRegistry();
   const [aspectRatio, setAspectRatio] = useState('N/A');
   const [showInfo, setShowInfo] = useState(false);
@@ -19,11 +21,11 @@ export const ManagedImage: React.FC<ManagedImageProps> = ({ src, alt, pageName, 
       setDisplaySrc(src);
       return;
     }
-    
+
     if (src instanceof Blob) {
       const objectUrl = URL.createObjectURL(src);
       setDisplaySrc(objectUrl);
-      
+
       return () => {
         URL.revokeObjectURL(objectUrl);
       };
@@ -33,7 +35,7 @@ export const ManagedImage: React.FC<ManagedImageProps> = ({ src, alt, pageName, 
   }, [src]);
 
   useEffect(() => {
-    if (displaySrc && alt && !isImageRegistered(displaySrc)) {
+    if (isAdmin && displaySrc && alt && !isImageRegistered(displaySrc)) {
         const img = new Image();
         img.src = displaySrc;
         const calculateAndRegister = () => {
@@ -41,7 +43,7 @@ export const ManagedImage: React.FC<ManagedImageProps> = ({ src, alt, pageName, 
             const arString = `${img.naturalWidth}x${img.naturalHeight} (${ar.toFixed(2)}:1)`;
             setAspectRatio(arString);
             registerImage({
-                src: displaySrc,
+                src: displaySrc ?? (typeof src === 'string' ? src : undefined),
                 alt: alt,
                 pageName: pageName,
                 sectionTitle: sectionTitle,
@@ -53,7 +55,7 @@ export const ManagedImage: React.FC<ManagedImageProps> = ({ src, alt, pageName, 
             setAspectRatio('Load Error');
             if (!isImageRegistered(displaySrc)) {
                 registerImage({
-                    src: displaySrc,
+                    src: displaySrc ?? (typeof src === 'string' ? src : undefined),
                     alt: `${alt} (LOAD ERROR)`,
                     pageName,
                     sectionTitle,
@@ -62,7 +64,7 @@ export const ManagedImage: React.FC<ManagedImageProps> = ({ src, alt, pageName, 
             }
         };
     }
-  }, [displaySrc, alt, pageName, sectionTitle, registerImage, isImageRegistered]);
+  }, [isAdmin, displaySrc, alt, pageName, sectionTitle, registerImage, isImageRegistered]);
 
   const handleLoad = () => {
     if (imgRef.current) {
@@ -89,29 +91,37 @@ export const ManagedImage: React.FC<ManagedImageProps> = ({ src, alt, pageName, 
 
   const imgProps: React.ImgHTMLAttributes<HTMLImageElement> = {
     ...props,
-    src: displaySrc,
+    src: displaySrc ?? (typeof src === 'string' ? src : undefined),
+    decoding: 'async',
     alt: alt || '',
     onLoad: handleLoad,
   };
 
+  if (typeof src === 'string' && /\/images\/hithobe\/.+-1120\.webp$/.test(src)) {
+    imgProps.srcSet = [480, 800, 1120].map(width => `${src.replace('-1120.webp', `-${width}.webp`)} ${width}w`).join(', ');
+    imgProps.sizes = props.sizes ?? '(max-width: 767px) 90vw, 45vw';
+    imgProps.width = 1120;
+    imgProps.height = 1400;
+  }
+
   if (priority) {
-    (imgProps as any).fetchpriority = 'high';
+    imgProps.fetchPriority = 'high';
     imgProps.loading = 'eager';
   } else {
     imgProps.loading = 'lazy';
   }
 
   return (
-    <div 
-        className="relative" 
-        onMouseEnter={() => setShowInfo(true)} 
+    <div
+        className="relative w-full h-full min-w-0"
+        onMouseEnter={() => setShowInfo(true)}
         onMouseLeave={() => setShowInfo(false)}
         // The parent container should have the necessary layout classes
     >
       <img ref={imgRef} {...imgProps} />
-      {showInfo && (
-        <div 
-            className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-[10px] p-1 z-10 pointer-events-none" 
+      {isAdmin && showInfo && (
+        <div
+            className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-[10px] p-1 z-10 pointer-events-none"
             style={{ userSelect: 'text', lineHeight: '1.2' }}
         >
           <p className="whitespace-nowrap overflow-hidden text-ellipsis font-mono">{getFileName(displaySrc)}</p>

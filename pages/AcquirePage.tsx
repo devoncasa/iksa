@@ -101,12 +101,9 @@ export const AcquirePage: React.FC = () => {
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (validate()) {
-        console.log("Form Submitted:", formData);
+        const body = `Name: ${formData.name}\nReply email: ${formData.email}\n\n${formData.message}`;
+        window.location.href = `mailto:sales@iksa-textiles.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(body)}`;
         setIsSubmitted(true);
-        setTimeout(() => {
-            setFormData({ name: '', email: '', subject: '', message: '' });
-            setIsSubmitted(false);
-        }, 3000);
     }
   };
 

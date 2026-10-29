@@ -7,6 +7,7 @@ import { ContentBlock } from '../components/ContentBlock';
 import { ChevronDownIcon, ArrowUpIcon } from '../components/icons';
 import { Breadcrumb } from '../types';
 import { generateOrganizationSchema, generateWebsiteSchema, generateBreadcrumbSchema, generateArticleSchema } from '../components/Schema';
+import { EditorialGallery } from '../components/EditorialGallery';
 import { ManagedImage } from '../components/ManagedImage';
 
 
@@ -345,6 +346,7 @@ export const ThobeGuidePage: React.FC = () => {
                     <ArrowUpIcon className="w-6 h-6" />
                 </button>
             )}
-        </>
+        <EditorialGallery />
+</>
     );
 };

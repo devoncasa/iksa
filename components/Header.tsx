@@ -73,23 +73,8 @@ export const Header: React.FC = () => {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link to="/" className="flex items-center space-x-3 bg-white/[.95] p-2.5 rounded-xl backdrop-blur-sm shadow-sm transition-all duration-300 hover:bg-white hover:shadow-md" aria-label="IKSA Home">
-                <ManagedImage 
-                    src="https://i.postimg.cc/mZSFSj42/iksa-logo.webp" 
-                    alt="IKSA Logo" 
-                    pageName="Global"
-                    sectionTitle="Header Logo"
-                    className="h-10 w-auto" 
-                />
-                <div className="hidden sm:block">
-                  <ManagedImage 
-                      src="https://i.postimg.cc/C5JBLh7f/iksa-name-logo.webp" 
-                      alt="IKSA Name" 
-                      pageName="Global"
-                      sectionTitle="Header Name Logo"
-                      className="h-5 w-auto" 
-                  />
-                </div>
+              <Link to="/" className="flex items-center space-x-3 bg-white/[.95] p-2.5 rounded-xl backdrop-blur-sm shadow-sm transition-all duration-300 hover:bg-white hover:shadow-md" aria-label="hithobe home">
+                <span className="font-serif-display text-2xl tracking-tight text-deep-chocolate" aria-label="hithobe"><span className="italic text-muted-gold">hi</span><span>thobe</span></span>
               </Link>
             </div>
 

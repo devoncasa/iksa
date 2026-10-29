@@ -22,9 +22,9 @@ export const Footer: React.FC = () => {
   ];
 
   const legalLinks = [
-    { path: '#', label: 'Privacy Policy' },
-    { path: '#', label: 'Terms of Service' },
-    { path: '#', label: 'Shipping Policy' },
+    { path: '/privacy', label: 'Privacy Policy' },
+    { path: '/terms', label: 'Terms of Service' },
+    { path: '/shipping', label: 'Shipping Policy' },
   ];
 
   const renderLinkColumn = (title: string, links: { path: string; label?: string; labelKey?: string }[]) => (
@@ -103,13 +103,7 @@ export const Footer: React.FC = () => {
 
         <div className="text-center text-sm pt-8 md:pt-10 border-t border-stone-700/50">
           <div className="flex items-center justify-center gap-3">
-            <ManagedImage 
-                src="https://i.postimg.cc/mZSFSj42/iksa-logo.webp" 
-                alt="IKSA Logo" 
-                pageName="Global"
-                sectionTitle="Footer Logo"
-                className="h-6 w-auto footer-logo-filter"
-            />
+            <span className="font-serif-display text-2xl" aria-label="hithobe"><i className="text-muted-gold">hi</i>thobe</span>
             <p>{translate('footerRights')}</p>
           </div>
         </div>

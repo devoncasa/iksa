@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { Button } from '../components/Button';
 import { SEOMetadata } from '../components/SEOMetadata';
-import { ChevronRightIcon } from '../components/icons'; 
+import { ChevronRightIcon } from '../components/icons';
 import { StyledText } from '../components/StyledText';
 import { ContentBlock } from '../components/ContentBlock';
 import { generateOrganizationSchema, generateWebsiteSchema } from '../components/Schema';
@@ -14,10 +14,10 @@ import { DevelopmentBanner } from '../components/DevelopmentBanner';
 const HeroSection: React.FC = () => {
     const { translate } = useLanguage();
     return (
-        <ContentBlock 
+        <ContentBlock
             isHero
-            heroImageSrc="https://i.postimg.cc/nrY3WbnL/iksa-about-us-summary.webp"
-            heroImageAlt={translate('main_hero_alt')}
+            heroImageSrc="/images/hithobe/kandura-window-portrait-1120.webp"
+            heroImageAlt="Man wearing an ivory collarless kandura in natural window light"
             heroPageName="Main Page"
             heroSectionTitle="Main Hero"
             heroImagePriority={true}
@@ -25,12 +25,12 @@ const HeroSection: React.FC = () => {
             <h1 className="font-serif-display text-4xl sm:text-5xl font-bold mb-6 md:mb-8 leading-tight text-warm-terracotta animate-fadeInUp">
               {translate('main_heroTitle')}
             </h1>
-            <StyledText 
-              text={translate('main_heroSubtitle')} 
-              className="text-lg text-stone-700 mb-10 md:mb-12 leading-relaxed animate-fadeInUp" 
+            <StyledText
+              text={translate('main_heroSubtitle')}
+              className="text-lg text-stone-700 mb-10 md:mb-12 leading-relaxed animate-fadeInUp"
               style={{ animationDelay: '0.2s' }}
             />
-            <div className="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4 sm:gap-6 animate-fadeInUp" style={{ animationDelay: '0.4s' }}> 
+            <div className="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4 sm:gap-6 animate-fadeInUp" style={{ animationDelay: '0.4s' }}>
                 <Link to="/collections">
                     <Button variant="primary" size="lg" className="w-full sm:w-auto">{translate('main_cta_explore_collections')}</Button>
                 </Link>
@@ -74,7 +74,7 @@ interface InfoSectionProps {
   imageSrc?: string;
   imageAltKey?: string;
   reverseLayout?: boolean;
-  titleColor?: string; 
+  titleColor?: string;
 }
 
 const InfoSection: React.FC<InfoSectionProps> = ({ titleKey, contentKey, ctaKey, linkTo, imageSrc, imageAltKey, reverseLayout = false, titleColor = 'text-stone-800' }) => {
@@ -88,7 +88,7 @@ const InfoSection: React.FC<InfoSectionProps> = ({ titleKey, contentKey, ctaKey,
         <Link to={linkTo}>
           <Button variant="primary" size="md" className="group">
             {translate(ctaKey)}
-            <ChevronRightIcon className="w-5 h-5 ms-2.5 rtl-flip inline-block group-hover:translate-x-1 group-hover:dir-rtl:-translate-x-1 transition-transform duration-300 ease-in-out" /> 
+            <ChevronRightIcon className="w-5 h-5 ms-2.5 rtl-flip inline-block group-hover:translate-x-1 group-hover:dir-rtl:-translate-x-1 transition-transform duration-300 ease-in-out" />
           </Button>
         </Link>
       </div>
@@ -126,7 +126,7 @@ const FinalCTASection: React.FC = () => {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif-display font-semibold mb-6 md:mb-8 section-title-underline">{translate('main_final_cta_title')}</h2>
             <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed">{translate('main_final_cta_content')}</p>
             <Link to="/contact">
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-brandAccent-800 focus:ring-offset-brandAccent-800"> 
+            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-brandAccent-800 focus:ring-offset-brandAccent-800">
                 {translate('contactUs')}
             </Button>
             </Link>
@@ -154,28 +154,28 @@ export const MainPage: React.FC = () => {
         schemas={schemas}
       />
       <HeroSection />
-      
+
       <InfoSection
           titleKey="main_section_about_title"
           contentKey="main_section_about_content"
-          ctaKey="main_cta_learn_more" 
-          linkTo="/about-us" 
-          imageSrc="https://i.postimg.cc/nrY3WbnL/iksa-about-us-summary.webp" 
+          ctaKey="main_cta_learn_more"
+          linkTo="/about-us"
+          imageSrc="https://i.postimg.cc/nrY3WbnL/iksa-about-us-summary.webp"
           imageAltKey="main_alt_about_us_summary"
           reverseLayout={false}
           titleColor="text-stone-800"
         />
 
       <MarketInsightsSection />
-      
+
       <InfoSection
           titleKey="main_section_collections_title"
           contentKey="main_section_collections_content"
           ctaKey="main_cta_explore_collections"
           linkTo="/collections"
-          imageSrc="https://i.postimg.cc/BvW4fV2v/fabric-roll-collection-showcase-1.webp" 
+          imageSrc="https://i.postimg.cc/BvW4fV2v/fabric-roll-collection-showcase-1.webp"
           imageAltKey="main_alt_collections_summary"
-          reverseLayout={true} 
+          reverseLayout={true}
           titleColor="text-brandAccent-800"
         />
 
@@ -184,17 +184,17 @@ export const MainPage: React.FC = () => {
           contentKey="main_section_thobeGuide_content"
           ctaKey="main_cta_read_guide"
           linkTo="/thobe-guide"
-          imageSrc="https://i.postimg.cc/q7x2D1rD/article-regional-styles.webp" 
+          imageSrc="/images/hithobe/kandura-courtyard-1120.webp"
           imageAltKey="main_alt_thobeGuide_summary"
           titleColor="text-stone-800"
         />
-      
+
       <InfoSection
           titleKey="main_section_forArtisans_title"
           contentKey="main_section_forArtisans_content"
           ctaKey="main_cta_explore_partnership"
           linkTo="/for-artisans"
-          imageSrc="https://i.postimg.cc/50v2f5fK/artisans-tool-summary.webp" 
+          imageSrc="https://i.postimg.cc/50v2f5fK/artisans-tool-summary.webp"
           imageAltKey="main_alt_for_artisans_summary"
           reverseLayout={true}
           titleColor="text-brandAccent-800"

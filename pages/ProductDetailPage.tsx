@@ -9,6 +9,7 @@ import { SEOMetadata } from '../components/SEOMetadata';
 import { ContentBlock } from '../components/ContentBlock';
 import { generateOrganizationSchema, generateWebsiteSchema, generateBreadcrumbSchema, generateProductSchema } from '../components/Schema';
 import { ManagedImage } from '../components/ManagedImage';
+import { cartUnitPrice } from '../lib/cart';
 
 
 const YieldEstimator: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
@@ -124,7 +125,7 @@ const DeepDiveTabs: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
 export const ProductDetailPage: React.FC = () => {
   const { fabricId } = useParams<{ fabricId: string }>();
   const fabric = MOCK_FABRICS.find(f => f.id === fabricId);
-  const { translate } = useLanguage();
+  const { translate, language } = useLanguage();
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState(fabric?.imageUrl || '');
@@ -132,8 +133,7 @@ export const ProductDetailPage: React.FC = () => {
   
   const displayedPrice = useMemo(() => {
     if (!fabric) return 0;
-    const markup = COLOR_MARKUPS[selectedColor]?.markup || 0;
-    return fabric.pricePerRoll * (1 + markup);
+    return cartUnitPrice(fabric, selectedColor, COLOR_MARKUPS);
   }, [fabric, selectedColor]);
   
   const schemas = useMemo(() => {
@@ -172,7 +172,7 @@ export const ProductDetailPage: React.FC = () => {
   
   const handleAddToCart = () => {
     if (quantity > 0) {
-        addToCart(fabric.id, quantity);
+        addToCart(fabric.id, quantity, selectedColor);
     }
   };
 
@@ -234,6 +234,7 @@ export const ProductDetailPage: React.FC = () => {
                                 <button
                                     key={colorKey}
                                     onClick={() => setSelectedColor(colorKey)}
+                                    aria-pressed={selectedColor === colorKey}
                                     className={`w-10 h-10 rounded-full focus:outline-none ring-offset-2 ring-offset-white/80 transition-all duration-150 ${selectedColor === colorKey ? 'ring-2 ring-brandAccent-700' : 'ring-1 ring-transparent hover:ring-1 hover:ring-stone-400'}`}
                                     title={translate(COLOR_PALETTE[colorKey]?.nameKey)}
                                     aria-label={`Select color ${translate(COLOR_PALETTE[colorKey]?.nameKey)}`}
@@ -250,6 +251,7 @@ export const ProductDetailPage: React.FC = () => {
                             </div>
                         )}
                         
+                        <p className="text-sm text-stone-600 mb-6" role="note">{language === 'ar' ? 'يرجى تأكيد المواصفات والتوفر واللون بعينة فعلية قبل الدفع. صور المعرض لا تتغير لتطابق اللون المحدد.' : 'Confirm specifications, availability and colour with a physical swatch before payment. Gallery photos do not change to represent the selected colour.'}</p>
                         <YieldEstimator fabric={fabric} />
 
                         <div className="flex items-center gap-4 mt-8">

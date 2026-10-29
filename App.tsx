@@ -1,7 +1,7 @@
 
 
 import React, { createContext, useContext, useState, useEffect, useMemo, useRef, useCallback, ReactNode } from 'react';
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { CartProvider } from './contexts/CartContext';
 import { ImageRegistryProvider } from './contexts/ImageRegistryContext';
@@ -9,6 +9,7 @@ import { AdminAuthProvider } from './contexts/AdminAuthContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import { PolicyPage, NotFoundPage } from './pages/PolicyPage';
 import { MainPage } from './pages/MainPage'; 
 import { AboutUsPage } from './pages/AboutUsPage';
 import { CollectionsPage } from './pages/CollectionsPage';
@@ -103,7 +104,11 @@ const MainLayout: React.FC = () => {
             <Route path="/artisans-tool" element={<ArtisanToolPage />} />
             <Route path="/contact" element={<AcquirePage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/privacy" element={<PolicyPage kind="privacy" />} />
+            <Route path="/terms" element={<PolicyPage kind="terms" />} />
+            <Route path="/shipping" element={<PolicyPage kind="shipping" />} />
+            <Route path="*" element={<NotFoundPage />} />
+            <Route path="/admin" element={<NotFoundPage />} />
           </Routes>
         </main>
         <Footer />
@@ -112,9 +117,7 @@ const MainLayout: React.FC = () => {
   );
 }
 
-const App: React.FC = () => {
-  return (
-    <HashRouter>
+export const AppContent = () => <>
       <ScrollToTop />
       <LanguageProvider>
         <AdminAuthProvider>
@@ -125,7 +128,13 @@ const App: React.FC = () => {
           </CartProvider>
         </AdminAuthProvider>
       </LanguageProvider>
-    </HashRouter>
+ </>;
+
+const App: React.FC = () => {
+  return (
+    <BrowserRouter basename={window.location.pathname === "/ar" || window.location.pathname.startsWith("/ar/") ? "/ar" : "/"}>
+      <AppContent />
+    </BrowserRouter>
   );
 };
 

@@ -1,7 +1,8 @@
 
 import React, { createContext, useState, useEffect, ReactNode, useMemo } from 'react';
 import { CartItem, CartContextType } from '../types';
-import { MOCK_FABRICS } from '../constants';
+import { MOCK_FABRICS, COLOR_MARKUPS } from '../constants';
+import { addCartLine, cartLineKey, cartTotals, normalizeCart, updateCartLine } from '../lib/cart';
 
 export const CartContext = createContext<CartContextType | undefined>(undefined);
 
@@ -9,7 +10,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
       const localData = window.localStorage.getItem('iksaCart');
-      return localData ? JSON.parse(localData) : [];
+      return normalizeCart(localData ? JSON.parse(localData) : [], MOCK_FABRICS);
     } catch (error) {
       console.error("Error reading cart from localStorage", error);
       return [];
@@ -24,50 +25,20 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   }, [cart]);
 
-  const addToCart = (fabricId: string, quantity: number) => {
-    setCart(prevCart => {
-      const existingItem = prevCart.find(item => item.fabricId === fabricId);
-      if (existingItem) {
-        return prevCart.map(item =>
-          item.fabricId === fabricId ? { ...item, quantity: item.quantity + quantity } : item
-        );
-      }
-      return [...prevCart, { fabricId, quantity }];
-    });
+  const addToCart = (fabricId: string, quantity: number, color = 'white') => {
+    setCart(previous => addCartLine(previous, { fabricId, quantity, color }, MOCK_FABRICS));
   };
 
-  const updateQuantity = (fabricId: string, quantity: number) => {
-    if (quantity <= 0) {
-      removeFromCart(fabricId);
-    } else {
-      setCart(prevCart =>
-        prevCart.map(item => (item.fabricId === fabricId ? { ...item, quantity } : item))
-      );
-    }
+  const updateQuantity = (fabricId: string, quantity: number, color = 'white') => {
+    setCart(previous => updateCartLine(previous, cartLineKey({ fabricId, quantity, color }), quantity));
   };
 
-  const removeFromCart = (fabricId: string) => {
-    setCart(prevCart => prevCart.filter(item => item.fabricId !== fabricId));
+  const removeFromCart = (fabricId: string, color = 'white') => {
+    setCart(previous => previous.filter(item => cartLineKey(item) !== cartLineKey({ fabricId, color, quantity: 1 })));
   };
 
-  const clearCart = () => {
-    setCart([]);
-  };
-
-  const getCartTotal = useMemo(() => () => {
-    let totalItems = 0;
-    let totalPrice = 0;
-
-    cart.forEach(cartItem => {
-      const fabric = MOCK_FABRICS.find(f => f.id === cartItem.fabricId);
-      if (fabric) {
-        totalItems += cartItem.quantity;
-        totalPrice += fabric.pricePerRoll * cartItem.quantity;
-      }
-    });
-
-    return { totalItems, totalPrice };
-  }, [cart]);
+  const clearCart = () => setCart([]);
+  const getCartTotal = useMemo(() => () => cartTotals(cart, MOCK_FABRICS, COLOR_MARKUPS), [cart]);
 
   const value = {
     cart,

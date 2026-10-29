@@ -1,0 +1,83 @@
+{
+  "kandura-courtyard": {
+    "original_dimensions": [
+      1122,
+      1402
+    ],
+    "variants": [
+      {
+        "src": "/images/hithobe/kandura-courtyard-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 29070
+      },
+      {
+        "src": "/images/hithobe/kandura-courtyard-800.webp",
+        "width": 800,
+        "height": 1000,
+        "bytes": 57352
+      },
+      {
+        "src": "/images/hithobe/kandura-courtyard-1120.webp",
+        "width": 1120,
+        "height": 1400,
+        "bytes": 89070
+      }
+    ],
+    "use": "AI-generated editorial garment inspiration; not a verified SKU swatch"
+  },
+  "kandura-window-portrait": {
+    "original_dimensions": [
+      1122,
+      1402
+    ],
+    "variants": [
+      {
+        "src": "/images/hithobe/kandura-window-portrait-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 16978
+      },
+      {
+        "src": "/images/hithobe/kandura-window-portrait-800.webp",
+        "width": 800,
+        "height": 1000,
+        "bytes": 36602
+      },
+      {
+        "src": "/images/hithobe/kandura-window-portrait-1120.webp",
+        "width": 1120,
+        "height": 1400,
+        "bytes": 61046
+      }
+    ],
+    "use": "AI-generated editorial garment inspiration; not a verified SKU swatch"
+  },
+  "abaya-courtyard": {
+    "original_dimensions": [
+      1122,
+      1402
+    ],
+    "variants": [
+      {
+        "src": "/images/hithobe/abaya-courtyard-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 24418
+      },
+      {
+        "src": "/images/hithobe/abaya-courtyard-800.webp",
+        "width": 800,
+        "height": 1000,
+        "bytes": 48568
+      },
+      {
+        "src": "/images/hithobe/abaya-courtyard-1120.webp",
+        "width": 1120,
+        "height": 1400,
+        "bytes": 74230
+      }
+    ],
+    "use": "AI-generated editorial garment inspiration; not a verified SKU swatch"
+  }
+}

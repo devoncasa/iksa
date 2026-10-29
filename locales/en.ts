@@ -1,10 +1,13 @@
 
 
-import { LanguageCode, Translations } from '../types';
+import {
+ LanguageCode, Translations } from '../types';
 
 export const en: Translations = {
+    getDirections: "Get directions",
+    forArtisans_point2_item1: "Request specifications and a physical swatch before confirming a production order.",
     // General
-    appName: "IKSA", 
+    appName: "hithobe",
     discoverCollections: "Discover Collections",
     viewDetails: "View Details",
     calculateYield: "Calculate Yield",
@@ -23,7 +26,7 @@ export const en: Translations = {
     pieces: "Garments",
     ok: "OK",
     subject: "Subject",
-    
+
     // B2B E-commerce
     rolls: "Roll(s)",
     addRollToCart: "Add Roll to Cart",
@@ -40,9 +43,9 @@ export const en: Translations = {
     country: "Country",
     postalCode: "Postal Code",
     orderSummary: "Order Summary",
-    placeOrder: "Place Order",
-    thankYouForYourOrder: "Thank You For Your Order",
-    orderConfirmationMsg: "A confirmation has been sent to your email. We will contact you shortly regarding payment and shipping.",
+    placeOrder: "Open Order Enquiry in Email",
+    thankYouForYourOrder: "Your enquiry draft is ready",
+    orderConfirmationMsg: "Complete sending in your email app. No order or payment has been confirmed. Your cart is saved. If no email app opened, contact sales@iksa-textiles.com or use our WhatsApp link.",
     continueShopping: "Continue Shopping",
     item: "Item",
     quantity: "Qty",
@@ -57,9 +60,9 @@ export const en: Translations = {
     colorBlue: "Blue",
     colorGreen: "Green",
     colorRedMaroon: "Red & Maroon",
-    
+
     colorInfoTitle: "Color Information",
-    
+
     colorInfo_white: "The foundational standard for purity and prestige. Our white fabrics are engineered for exceptional brightness and anti-yellowing performance.",
     colorInfo_black: "Most resource-intensive to dye, requiring specialized processes to achieve a deep, uniform, and lasting shade that resists fading.",
     colorInfo_earthTones: "Achieving consistent, sophisticated earth tones requires precise dye mixing and multi-stage treatments to ensure color-fastness.",
@@ -67,13 +70,13 @@ export const en: Translations = {
     colorInfo_blue: "From light sky to deep navy, our blue dyes are selected for their stability and resistance to environmental factors.",
     colorInfo_green: "A spiritually and culturally significant color, our greens are produced with high-grade dyes to ensure vibrancy and longevity.",
     colorInfo_redMaroon: "Complex to achieve vibrant, non-fading shades. These colors require premium dyes and careful processing to ensure richness and stability.",
-    
+
     priceVariesByColor: "Price varies by color",
     startingFrom: "Starting from",
 
     // Nav
     nav: {
-      main: "Main", 
+      main: "Main",
       aboutUs: "About Us",
       collections: "Collections",
       pricing: "Pricing",
@@ -83,9 +86,9 @@ export const en: Translations = {
       contact: "Contact",
       checkout: "Checkout",
     },
-    
+
     // Footer
-    footerRights: "© 2025 IKSA Textiles Co., Ltd. All rights reserved.",
+    footerRights: "© 2026 hithobe. All rights reserved.",
     footer_sitemapTitle: "Sitemap",
     footer_contactTitle: "Contact",
     footer_addressTitle: "Office",
@@ -93,7 +96,7 @@ export const en: Translations = {
 
     // Main Page
     main_heroTitle: "Redefining Luxury: Premium Japanese Textiles for the Modern Thobe & Kandura",
-    main_heroSubtitle: "The modern luxury thobe is more than tradition—it's innovation in motion. Discerning wearers today expect high performance, comfort, and refinement.\n\nIKSA leads this evolution by integrating advanced Japanese textile technology into every fabric, combining timeless elegance with modern functionality. We're setting a new benchmark for what a luxury thobe can be, available for tailors worldwide.",
+    main_heroSubtitle: "The modern luxury thobe is more than tradition—it's innovation in motion. Discerning wearers today expect high performance, comfort, and refinement.\n\nhithobe leads this evolution by integrating advanced Japanese textile technology into every fabric, combining timeless elegance with modern functionality. We're setting a new benchmark for what a luxury thobe can be, available for tailors worldwide.",
     main_marketInsights_title: "Market Insights: The New Standard of Luxury",
     main_marketInsights_card1_title: "15-20% Growth",
     main_marketInsights_card1_text: "Projected annual growth in the GCC's high-end Thobe market, driven by demand for innovative, high-performance textiles.",
@@ -102,61 +105,61 @@ export const en: Translations = {
     main_marketInsights_card3_title: "Exceptional Colorfastness",
     main_marketInsights_card3_text: "A non-negotiable attribute, with consumers expecting pure, lasting whites and vibrant colors that resist yellowing and fading.",
     main_section_about_title: "Our Philosophy: Four Pillars of Excellence",
-    main_section_about_content: "IKSA is built upon a legacy of textile mastery. Discover our Four Pillars of Excellence—Heritage Innovation, Masterful Finishing, Functional Elegance, and Modern Versatility—and see the standard of innovation woven into every fabric.",
+    main_section_about_content: "hithobe is built upon a legacy of textile mastery. Discover our Four Pillars of Excellence—Heritage Innovation, Masterful Finishing, Functional Elegance, and Modern Versatility—and see the standard of innovation woven into every fabric.",
     main_section_collections_title: "Our Signature Collections",
     main_section_collections_content: "Explore a curated selection of premier fabrics, each engineered with unique properties for wrinkle resistance, superior drape, and lasting elegance. Buy men's thobe fabric online with confidence.",
     main_section_thobeGuide_title: "The Master Tailor's Guide",
-    main_section_thobeGuide_content: "From the crisp formality of a Saudi Thobe to the flowing elegance of an Emirati Kandura, our guide helps you select the ideal IKSA textile for any regional style, ensuring impeccable results.",
+    main_section_thobeGuide_content: "From the crisp formality of a Saudi Thobe to the flowing elegance of an Emirati Kandura, our guide helps you select the ideal hithobe textile for any regional style, ensuring impeccable results.",
     main_section_forArtisans_title: "A Partnership for Artisans",
-    main_section_forArtisans_content: "We provide tailors with direct access to premier fabric rolls, consistent quality, and technical expertise. Discover how an IKSA partnership can empower your craftsmanship.",
+    main_section_forArtisans_content: "We provide tailors with direct access to premier fabric rolls, consistent quality, and technical expertise. Discover how a hithobe partnership can empower your craftsmanship.",
     main_cta_explore_collections: "Explore Our Collections",
     main_cta_read_guide: "Read The Thobe Guide",
     main_cta_learn_more: "Learn More About Us",
     main_cta_explore_partnership: "Explore Partnership",
     main_final_cta_title: "Ready to Elevate Your Creations?",
-    main_final_cta_content: "Connect with our team for samples, inquiries, or to discuss how IKSA can become the foundation of your next masterpiece.",
-    
+    main_final_cta_content: "Connect with our team for samples, inquiries, or to discuss how hithobe can become the foundation of your next masterpiece.",
+
     // SEO-Optimized Alt Text
-    main_hero_alt: "Master tailor inspecting a roll of IKSA's 'Elite Heritage Weave' Japanese fabric, checking the texture for a luxury thobe.",
-    main_alt_about_us_summary: "Master tailor inspects IKSA's 'Elite Heritage Weave' Japanese fabric, ensuring quality for a luxury thobe.",
-    main_alt_collections_summary: "A curated collection of IKSA's luxury Japanese fabric rolls, showcasing various textures and shades for thobes and abayas.",
-    main_alt_thobeGuide_summary: "Close-up of a perfectly tailored thobe collar, demonstrating the structure of IKSA's premium Japanese textile.",
-    main_alt_for_artisans_summary: "A tailor meticulously measures and cuts a length of IKSA's Japanese fabric, preparing for a bespoke garment.",
-    
+    main_hero_alt: "Master tailor inspecting a roll of hithobe's 'Elite Heritage Weave' Japanese fabric, checking the texture for a luxury thobe.",
+    main_alt_about_us_summary: "Master tailor inspects hithobe's 'Elite Heritage Weave' Japanese fabric, ensuring quality for a luxury thobe.",
+    main_alt_collections_summary: "A curated collection of hithobe's luxury Japanese fabric rolls, showcasing various textures and shades for thobes and abayas.",
+    main_alt_thobeGuide_summary: "Close-up of a perfectly tailored thobe collar, demonstrating the structure of hithobe's premium Japanese textile.",
+    main_alt_for_artisans_summary: "A tailor meticulously measures and cuts a length of hithobe's Japanese fabric, preparing for a bespoke garment.",
+
     // About Us Page
     about_heroTitle: "Our Heritage: Woven with Mastery",
-    about_heroSubtitle: "IKSA is founded on a deep respect for the heritage and technological supremacy of textile manufacturing. These are the Four Pillars of our quality promise.",
-    about_pillars_title: "The Four Pillars of IKSA Textile Excellence",
+    about_heroSubtitle: "hithobe is founded on a deep respect for the heritage and technological supremacy of textile manufacturing. These are the Four Pillars of our quality promise.",
+    about_pillars_title: "The Four Pillars of hithobe Textile Excellence",
     about_pillars: {
       pillar1_name: "Heritage Innovation",
       pillar1_tagline: "The Legacy, Perfected",
-      pillar1_desc: "We honor the legacy of premium thobe fabrics by building on a foundation of trust and reliability. IKSA sources and refines textiles with a history of excellence for the modern connoisseur.",
+      pillar1_desc: "We honor the legacy of premium thobe fabrics by building on a foundation of trust and reliability. hithobe sources and refines textiles with a history of excellence for the modern connoisseur.",
       pillar2_name: "Masterful Finishing",
       pillar2_tagline: "The Art of Perfection",
       pillar2_desc: "Our advantage lies in specialized finishing techniques that impart a superior hand-feel, luster, and performance, ensuring a level of quality highly prized in the Gulf market.",
       pillar3_name: "Functional Elegance",
       pillar3_tagline: "Intelligence in Every Thread",
-      pillar3_desc: "IKSA leads in functional textiles, renowned for world-class non-iron and comfort technologies. We deliver convenience without compromising on the luxurious feel of high-quality materials.",
+      pillar3_desc: "hithobe leads in functional textiles, renowned for world-class non-iron and comfort technologies. We deliver convenience without compromising on the luxurious feel of high-quality materials.",
       pillar4_name: "Modern Versatility",
       pillar4_tagline: "The Future of Fabric",
-      pillar4_desc: "As textile innovators, IKSA offers immense flexibility, scale, and modern solutions. We provide a vast range of options to suit any design vision, from classic to contemporary.",
+      pillar4_desc: "As textile innovators, hithobe offers immense flexibility, scale, and modern solutions. We provide a vast range of options to suit any design vision, from classic to contemporary.",
     },
     about_cta_title: "The Fabric of Excellence",
     about_cta_content: "Each of our collections is a tribute to this heritage. Explore the result of decades of innovation and discover the tangible difference in quality and performance.",
-    about_hero_alt: "A weaver's hands guiding threads on a traditional loom, representing IKSA's commitment to textile heritage.",
-    about_pillar_alt: "A detailed macro shot of a complex fabric weave, showcasing IKSA's masterful finishing.",
+    about_hero_alt: "A weaver's hands guiding threads on a traditional loom, representing hithobe's commitment to textile heritage.",
+    about_pillar_alt: "A detailed macro shot of a complex fabric weave, showcasing hithobe's masterful finishing.",
 
     // Collections Page (B2B)
-    collections_pageTitle: "IKSA Professional Catalogue",
+    collections_pageTitle: "hithobe Professional Catalogue",
     collections_heroTitle: "The Foundation of Masterful Creations",
-    collections_heroSubtitle: "Explore full rolls of world-class textiles, engineered by IKSA for the exacting standards of professional tailors and designers. The best place to buy dishdasha fabric online.",
+    collections_heroSubtitle: "Explore full rolls of world-class textiles, engineered by hithobe for the exacting standards of professional tailors and designers. The best place to buy dishdasha fabric online.",
     collections_viewPricing: "View Full Price Structure",
     filterByUseCase: "Filter by Use Case",
     filterByFeel: "Filter by Fabric Feel",
     filterByPerformance: "Filter by Performance",
     filterByRollLength: "Filter by Roll Length",
-    collections_hero_alt: "Several rolls of luxury IKSA fabrics in varying neutral tones, arranged for professional selection.",
-    
+    collections_hero_alt: "Several rolls of luxury hithobe fabrics in varying neutral tones, arranged for professional selection.",
+
     // B2B Filters
     filterAllUseCases: "All Use Cases",
     filterUseCaseEmiratiKandura: "Emirati Kandura",
@@ -177,7 +180,7 @@ export const en: Translations = {
     filterRollLength23: "23 Meters / Roll",
     filterRollLength25: "25 Meters / Roll",
     filterRollLength50: "50 Meters / Roll",
-    
+
     filterWeightUltraLight: 'Ultra-Lightweight',
     filterWeightMidWeight: 'Mid-Weight',
 
@@ -188,7 +191,7 @@ export const en: Translations = {
     filterShadeSoftCream: "Soft Cream",
 
     filterFeelLustrous: "Lustrous",
-    
+
     finishMatte: "Matte",
     finishSilkShine: "Silk Shine",
     finishCrisp: "Crisp",
@@ -211,13 +214,13 @@ export const en: Translations = {
     product_tabEngineersNotes: "The Engineer's Notes",
     product_tabProBriefing: "Professional Tailor's Briefing",
     product_tabSpecifications: "Specifications",
-    product_projectInspirationTitle: "Creations Powered by IKSA",
+    product_projectInspirationTitle: "Creations Powered by hithobe",
     product_inspirationCaption: "Inspiration: A formal {garment} tailored from our {fabricName}.",
-    product_inspiration_kandura_alt: "An elegant Emirati Kandura made from flowing IKSA fabric, showcasing its perfect drape.",
-    product_inspiration_abaya_alt: "A luxurious black Abaya with intricate details, crafted from premium IKSA textile.",
+    product_inspiration_kandura_alt: "An elegant Emirati Kandura made from flowing hithobe fabric, showcasing its perfect drape.",
+    product_inspiration_abaya_alt: "A luxurious black Abaya with intricate details, crafted from premium hithobe textile.",
 
     // Thobe Guide Page
-    thobeGuide_pageTitle: "The IKSA Thobe Guide",
+    thobeGuide_pageTitle: "The hithobe Thobe Guide",
     thobeGuide_backToTopics: "View Topics",
     thobeGuide_hero_alt: "A mannequin dressed in a perfectly tailored white thobe, highlighting craftsmanship.",
     thobeGuide_colors_alt: "A palette of thobes in various colors from white and black to earth tones, displayed side-by-side.",
@@ -244,7 +247,7 @@ export const en: Translations = {
       "color_green_content": "Deeply symbolic in Islamic culture, green signifies renewal, prosperity, and paradise. Often worn during religious celebrations, it embodies vitality and cultural pride.",
       "color_red_title": "Red and Maroon: Bold Celebration",
       "color_red_content": "Red and maroon express festivity, pride, and energy. These bold choices are often seen at weddings or national holidays, making a vivid and memorable impression while preserving elegance.",
-      "color_table_caption": "IKSA Reference: Thobe Color Symbolism & Occasion",
+      "color_table_caption": "hithobe Reference: Thobe Color Symbolism & Occasion",
       "color_table_headers": "[\"Color\",\"Primary Symbolism\",\"Appropriate Occasions\",\"Practical & Stylistic Notes\"]",
       "color_table_rows": "[[\"White\",\"Purity, Dignity, Serenity, Piety\",\"Religious Observances, Formal Events, Daily Wear\",\"Reflects heat, essential for warm climates; the universal standard.\"],[\"Black\",\"Sophistication, Formality, Modernity\",\"Evening Events, Official Functions, Weddings\",\"Best for cooler climates; projects authority and refined taste.\"],[\"Brown/Earth Tones\",\"Groundedness, Modesty, Reliability\",\"Versatile for Day-to-Night, Business Casual\",\"Pairs excellently with traditional leather accessories.\"],[\"Grey\",\"Balance, Neutrality, Understated Style\",\"Urban Environments, Professional & Casual Settings\",\"A modern, sophisticated alternative to traditional colors.\"],[\"Blue\",\"Tranquility, Trustworthiness, Professionalism\",\"Light blues for summer; navy for formal or business wear\",\"Conveys a sense of calm authority and stability.\"],[\"Green\",\"Renewal, Nature, Spirituality, Prosperity\",\"Religious Festivals, Celebrations, Social Gatherings\",\"Spiritually significant; projects vitality and connection to heritage.\"],[\"Red/Maroon\",\"Vitality, Confidence, Celebration\",\"Weddings, National Holidays, Festive Occasions\",\"A bold, high-impact choice for making a statement.\"]]",
       "artistry_title": "II. Artistry in Form: Minimalism vs. Embellishment",
@@ -255,7 +258,7 @@ export const en: Translations = {
       "artistry_embroidery_content": "Embroidery transforms the thobe into wearable art. Traditional motifs reflect local identity, history, and craftsmanship. Modern designers reinterpret these patterns to honor heritage while appealing to a younger audience.",
       "artistry_tatreez_title": "Focus on Palestinian Tatreez",
       "artistry_tatreez_content": "Tatreez is a vibrant expression of Palestinian heritage. Hand-stitched patterns often tell personal or regional stories—such as red patterns from Ramallah or silver/gold threads from Bethlehem wedding attire. Each thobe becomes a living record of culture, resilience, and artistry.",
-      "artistry_table_caption": "IKSA Reference: Minimalism vs. Intricate Embroidery",
+      "artistry_table_caption": "hithobe Reference: Minimalism vs. Intricate Embroidery",
       "artistry_table_headers": "[\"Attribute\",\"Minimalist Design (e.g., Emirati Kandura)\",\"Intricate Embroidery (e.g., Moroccan Djellaba, Palestinian Thobe)\"]",
       "artistry_table_rows": "[[\"Defining Philosophy\",\"Understated elegance, focus on silhouette and fabric quality, 'less is more'.\",\"Expressive storytelling, celebration of artisanal skill, visible declaration of identity.\"],[\"Key Characteristics\",\"Clean lines, concealed fastenings, absence of ornamentation, high-quality fabric is paramount.\",\"Rich, complex patterns (geometric or floral), diverse stitching techniques, often contrasting colors.\"],[\"Cultural Significance\",\"Projects quiet confidence, modernity, and a respect for pure form and function.\",\"Conveys heritage, regional pride, personal history, and artistic mastery.\"],[\"Typical Occasions\",\"Daily wear for the discerning, professional settings, formal events requiring understated sophistication.\",\"Weddings, religious festivals, cultural celebrations, ceremonial events.\"]]",
       "trends_title": "III. The Evolving Thobe: Modern Interpretations",
@@ -268,7 +271,7 @@ export const en: Translations = {
       "trends_fusion_content": "The fusion of thobe design with global fashion—like pairing with blazers or luxury sneakers—broadens its context. This modern styling reflects the global rise of modest fashion and cultural exchange.",
       "trends_custom_title": "D. Bespoke & Personalization",
       "trends_custom_content": "Customization defines luxury today. Clients increasingly seek tailored fits, signature details, custom colorways, or monograms—turning the thobe into a unique expression of personal style.",
-      "trends_table_caption": "IKSA Reference: Contemporary Thobe Trends",
+      "trends_table_caption": "hithobe Reference: Contemporary Thobe Trends",
       "trends_table_headers": "[\"Trend\",\"Core Concept\",\"Market Driver\"]",
       "trends_table_rows": "[[\"The Refined Silhouette\",\"A more tailored, structured fit that maintains modesty.\",\"Desire for a modern, sharp aesthetic that aligns with global menswear trends.\"],[\"Innovation in Textiles\",\"Use of high-performance, sustainable, and 'smart' fabrics.\",\"Demand for enhanced comfort, practicality (e.g., non-iron), and sustainability.\"],[\"Sartorial Fusion\",\"Styling the thobe with contemporary, non-traditional elements.\",\"Increased global travel and cultural exchange; the rise of a global 'modest fashion' market.\"],[\"Bespoke & Personalization\",\"Custom fits, unique details, and monogramming.\",\"The ultimate expression of luxury; a desire for unique, individualized garments.\"]]",
       "conclusion_title": "Conclusion: A Timeless Garment, Reimagined",
@@ -279,8 +282,8 @@ export const en: Translations = {
 
     // For Artisans Page
     forArtisans_pageTitle: "A Partnership for Artisans",
-    forArtisans_mainTitle: "IKSA: Your Trusted Partner in Textiles",
-    forArtisans_intro: "In high-quality fabric trading, trust is paramount. Bad experiences with exaggerated claims or subpar quality are common. IKSA transforms these risks into promises, building partnerships on transparency, quality, and respect.",
+    forArtisans_mainTitle: "hithobe: Your Trusted Partner in Textiles",
+    forArtisans_intro: "In high-quality fabric trading, trust is paramount. Bad experiences with exaggerated claims or subpar quality are common. hithobe transforms these risks into promises, building partnerships on transparency, quality, and respect.",
     forArtisans_point1_title: "Proven Quality, Not Just Claims",
     forArtisans_point1_item1: "Backed by test results for durability and performance.",
     forArtisans_point1_item2: "Relevant certifications (e.g., OEKO-TEX) provided where applicable.",
@@ -310,24 +313,24 @@ export const en: Translations = {
     forArtisans_point6_item2: "We take full responsibility for any manufacturing defects.",
     forArtisans_point6_item3: "Accessible trial orders with a low minimum quantity.",
     forArtisans_point6_promise: "Our Promise: Partnering with us is easy and secure.",
-    forArtisans_conclusion_title: "IKSA Isn’t Just a Brand — It’s a Partnership",
+    forArtisans_conclusion_title: "hithobe Isn’t Just a Brand — It’s a Partnership",
     forArtisans_conclusion_text1: "We conduct business with the heart of a long-term partner, not as a one-time transaction. We believe in transparency, respecting our clients, and delivering tangible, proven quality.",
     forArtisans_conclusion_text2: "Today, you may just be ordering fabric — but tomorrow, we can be a team, growing together.",
     forArtisans_cta_button: "Inquire About Partnership",
-    forArtisans_hero_alt: "Two tailors collaborating over a table of IKSA fabric swatches, signifying partnership.",
-    forArtisans_point1_alt: "A magnifying glass inspects the quality of a white textile, symbolizing IKSA's commitment to proven quality.",
+    forArtisans_hero_alt: "Two tailors collaborating over a table of hithobe fabric swatches, signifying partnership.",
+    forArtisans_point1_alt: "A magnifying glass inspects the quality of a white textile, symbolizing hithobe's commitment to proven quality.",
     forArtisans_point2_alt: "A tailor using a calculator and notepad next to a roll of fabric, illustrating precise data and yield calculation.",
-    forArtisans_point3_alt: "A logistics worker loading boxes of IKSA textiles, representing timely and respected delivery schedules.",
-    forArtisans_point4_alt: "An itemized quote for IKSA fabrics, showcasing transparent pricing with no hidden fees.",
-    forArtisans_point5_alt: "A display of different thobe styles from various regions, highlighting IKSA's cultural understanding.",
-    forArtisans_point6_alt: "A customer service representative assisting a client, showing IKSA's commitment to support.",
+    forArtisans_point3_alt: "A logistics worker loading boxes of hithobe textiles, representing timely and respected delivery schedules.",
+    forArtisans_point4_alt: "An itemized quote for hithobe fabrics, showcasing transparent pricing with no hidden fees.",
+    forArtisans_point5_alt: "A display of different thobe styles from various regions, highlighting hithobe's cultural understanding.",
+    forArtisans_point6_alt: "A customer service representative assisting a client, showing hithobe's commitment to support.",
 
 
     // Contact Page
     contact_pageTitle: "Contact Us",
-    contact_intro: "We're here to assist with inquiries, sample requests, and partnership opportunities. Reach out to discover the IKSA difference.",
+    contact_intro: "We're here to assist with inquiries, sample requests, and partnership opportunities. Reach out to discover the hithobe difference.",
     contact_addressTitle: "Our Office",
-    contact_addressLine1: "IKSA Textiles Co., Ltd.", 
+    contact_addressLine1: "IKSA Textiles Co., Ltd.",
     contact_addressLine2: "919/1 JTC Tower, B1-BB038, Silom Road, Silom, Bangrak, Bangkok 10500, THAILAND",
     contact_whatsapp: "WhatsApp (English/Arabic): +66 81 851 9922",
     contact_hoursTitle: "Business Hours",
@@ -337,7 +340,7 @@ export const en: Translations = {
     contact_mapTitle: "Find Us Here",
     contact_getDirections: "Get Directions",
     contact_formTitle: "Send Us a Message",
-    contact_form_success: "Thank you for your message. We will get back to you shortly.",
+    contact_form_success: "Your email app has been opened with your enquiry. Please send it there. Your message has not been sent by this website.",
     form_error_email: "Please enter a valid email address.",
     form_error_required: "This field is required.",
     contact_hero_alt: "A close-up of a hand using a vintage telephone, symbolizing professional communication.",
@@ -359,24 +362,24 @@ export const en: Translations = {
     patternLargeRepeat: "Striped / Plaid",
     chooseGarmentStyle: "Choose Garment Style",
     chooseGarmentSize: "Choose Garment Size",
-    
+
     // New Calculator Blueprint translations
     calculator_quantity: "Garment Quantity",
     calculator_rollLength: "Fabric Roll Length",
     calculator_costPerMeter: "Cost Per Meter",
     calculator_optional: "(Optional)",
-    
+
     calculator_outputs_title: "Calculation Results",
     calculator_adjustedFabricPerGarment: "Adjusted Fabric per Garment",
     calculator_totalFabricRequired: "Total Fabric Required",
     calculator_rollsToPurchase: "Rolls to Purchase",
     calculator_garmentsPerRoll: "Garments per Roll",
     calculator_remnantFabricPerRoll: "Remnant Fabric per Roll",
-    
+
     calculator_bonus_cost_title: "Cost Analysis",
     calculator_totalFabricCost: "Total Fabric Cost",
     calculator_costPerGarment: "Cost per Garment",
-    
+
     // Garment Styles & Categories
     garmentThobeKandura: "Thobe / Kandura",
     garmentDishdasha: "Dishdasha",
@@ -428,7 +431,7 @@ export const en: Translations = {
         "tip3_title": "The 'With or Without Fold' Trick",
         "tip3_content": "For symmetrical pieces (like a Thobe back), cutting 'on the fold' is standard. But for larger sizes or narrow fabrics, sometimes opening the fabric flat and tracing two halves gives you more flexibility to place other pieces and improve overall yield."
       },
-    
+
     // Fabric Features
     feature_softDrape: "Soft Drape",
     feature_silkShine: "Silk Shine",
@@ -441,10 +444,10 @@ export const en: Translations = {
     feature_lightweight: "Lightweight",
     feature_antiStatic: "Anti-Static",
 
-    // IKSA Fabric Names & Professional Briefings (B2B) - NEW
+    // hithobe Fabric Names & Professional Briefings (B2B) - NEW
     fabricEliteHeritageWeave: "Elite Heritage Weave (23m Roll)",
     fabricEliteHeritageWeave_detailDesc: "A sophisticated blend resulting from advanced yarn technology, offering a luxurious feel and elegant appearance.\n\n**Key Features:** Soft Drape (flows gracefully, ideal for fluid designs), Silk Shine (subtle sheen for a refined look), Breathable (allows air circulation for comfort), Crease Resistant (maintains a smooth appearance with minimal wrinkles).",
-    
+
     fabricVanguardCrispTwill: "Vanguard Crisp Twill (23m Roll)",
     fabricVanguardCrispTwill_detailDesc: "A highly versatile and durable fabric, ideal for structured garments and tailored pieces. It offers exceptional performance and easy maintenance.\n\n**Key Features:** Crisp Finish (a clean, sharp handfeel for defined silhouettes), Breathable (comfortable in various climates), Easy Care (simplifies washing and maintenance), Anti-Yellowing (resists discoloration over time).",
 
@@ -453,70 +456,70 @@ export const en: Translations = {
 
     fabricRadiantLustreTwill: "Radiant Lustre Twill (23m Roll)",
     fabricRadiantLustreTwill_detailDesc: "A testament to advanced finishing techniques, combining a refined crispness with an elegant drape.\n\n**Key Features:** Crisp Finish (provides structure and a polished look), Soft Drape (allows for graceful movement and comfortable wear), Easy Care (simplifies daily use and maintenance), Anti-Yellowing (preserves the fabric's original color).",
-    
+
     fabricActiveMattePerformance: "Active Matte Performance (50m Roll)",
     fabricActiveMattePerformance_detailDesc: "Specifically engineered for optimal comfort in warm and humid conditions, offering a cool and comfortable experience.\n\n**Key Features:** Cool Touch (feels cool against the skin), Lightweight (minimizes bulk for ease of movement), Anti-Static (prevents clinging and discomfort), Crease Resistant (maintains a smooth appearance throughout the day).",
 
     fabricEffortlessCotton: "Effortless Cotton (25m Roll)",
     fabricEffortlessCotton_detailDesc: "The ultimate functional cotton, combining natural comfort with exceptional practicality, minimizing the need for ironing.\n\n**Key Features:** Crease Resistant (retains a smooth look with minimal effort), Breathable (ensures air circulation for comfort), Easy Care (designed for hassle-free washing and drying), Crisp Finish (provides a clean, polished appearance).",
-    
+
     fabricAeroFlowWindVoile: "AeroFlow Wind Voile (50m Roll)",
     fabricAeroFlowWindVoile_detailDesc: "An incredibly light and airy textile, an innovative blend of Tencel and advanced polyester, designed for ultimate breathability and comfort.\n\n**Key Features:** Lightweight (offers a barely-there feel), Cool Touch (provides a refreshing sensation), Soft Drape (creates elegant and flowing silhouettes), Breathable (allows for maximum air circulation, ideal for hot climates).",
 
     // Old Pro-Briefings (retained for other pages until updated)
-    fabricIKSAHeritageWeave_proBriefing: "This 23-meter roll is your foundation for a high-end formalwear collection. Its substantial weight and elegant sheen are ideal for prestigious Emirati Kanduras. The fabric's stability and beautiful drape ensure flawless tailoring with minimal handling—a profitable choice for luxury bespoke orders.",
-    fabricIKSACrispTwill_proBriefing: "The cornerstone of an efficient professional workshop. A 23-meter roll is perfect for a balanced production run of classic Saudi Thobes or Kuwaiti Dishdashas. Its crispness is ideal for structured collars, and its durability is a strong selling point for the end client, ensuring repeat business.",
-    fabricIKSAPerformanceMatte_proBriefing: "This 50-meter roll is an excellent investment for daily-wear collections. Its comfort-driven characteristics make it highly desirable for clients who prioritize all-day wearability. Anti-static and crease-resistant properties reduce post-production handling and present a high-value garment.",
-    fabricIKSAFeatherSilk_proBriefing: "This 23-meter roll is perfect for a premium, niche collection for clients who demand the natural feel of cotton with modern performance. Its lightweight nature is ideal for seasonal collections (e.g., Ramadan). The anti-wrinkle finish is a key feature that justifies a premium price point.",
-    fabricIKSALustreTwill_proBriefing: "Ideal for high-end bespoke tailoring. The 23-meter roll is suited for creating structured garments like formal Kuwaiti Dishdashas. The fabric's stability and refined sheen command a premium, appealing to clients with discerning taste.",
-    fabricIKSANonIronCotton_proBriefing: "A top-tier choice for professional and daily-wear thobes. This 25-meter roll provides excellent value for garments where wrinkle-resistance is a key selling point. Its durability and easy-care nature ensure high client satisfaction.",
-    fabricIKSAWindVoile_proBriefing: "This 50-meter roll is a strategic investment for high-volume production of summer collections. Perfect for Omani thobes and flowing abayas, its superior comfort and competitive price-point make it a profitable core textile.",
-    
+    fabrichithobeHeritageWeave_proBriefing: "This 23-meter roll is your foundation for a high-end formalwear collection. Its substantial weight and elegant sheen are ideal for prestigious Emirati Kanduras. The fabric's stability and beautiful drape ensure flawless tailoring with minimal handling—a profitable choice for luxury bespoke orders.",
+    fabrichithobeCrispTwill_proBriefing: "The cornerstone of an efficient professional workshop. A 23-meter roll is perfect for a balanced production run of classic Saudi Thobes or Kuwaiti Dishdashas. Its crispness is ideal for structured collars, and its durability is a strong selling point for the end client, ensuring repeat business.",
+    fabrichithobePerformanceMatte_proBriefing: "This 50-meter roll is an excellent investment for daily-wear collections. Its comfort-driven characteristics make it highly desirable for clients who prioritize all-day wearability. Anti-static and crease-resistant properties reduce post-production handling and present a high-value garment.",
+    fabrichithobeFeatherSilk_proBriefing: "This 23-meter roll is perfect for a premium, niche collection for clients who demand the natural feel of cotton with modern performance. Its lightweight nature is ideal for seasonal collections (e.g., Ramadan). The anti-wrinkle finish is a key feature that justifies a premium price point.",
+    fabrichithobeLustreTwill_proBriefing: "Ideal for high-end bespoke tailoring. The 23-meter roll is suited for creating structured garments like formal Kuwaiti Dishdashas. The fabric's stability and refined sheen command a premium, appealing to clients with discerning taste.",
+    fabrichithobeNonIronCotton_proBriefing: "A top-tier choice for professional and daily-wear thobes. This 25-meter roll provides excellent value for garments where wrinkle-resistance is a key selling point. Its durability and easy-care nature ensure high client satisfaction.",
+    fabrichithobeWindVoile_proBriefing: "This 50-meter roll is a strategic investment for high-volume production of summer collections. Perfect for Omani thobes and flowing abayas, its superior comfort and competitive price-point make it a profitable core textile.",
+
     collection_heritage: "The Heritage Collection",
     collection_performance: "The Performance Collection",
 
     priceStructure_pageTitle: "Our Fabric Collections & Pricing",
-    priceStructure_intro: "IKSA provides a curated range of premier textiles, organized into collections based on their unique characteristics. Below is a transparent overview of our offerings.",
+    priceStructure_intro: "hithobe provides a curated range of premier textiles, organized into collections based on their unique characteristics. Below is a transparent overview of our offerings.",
     priceStructure_fabric: "Fabric",
     priceStructure_composition: "Description & Key Features",
     priceStructure_roll_size: "Roll Size",
     priceStructure_wholesale_meter: "Price / Meter (Approx.)",
     priceStructure_wholesale_roll: "Price / Roll (USD)",
-    
+
     priceStructure_collapsibleTitle: "Product Pricing Overview & Policy",
 
     // SEO Meta Tags
-    page_main_title: "IKSA | Premium Japanese Fabrics for Thobe, Kandura & Abaya",
-    page_main_description: "Discover IKSA's luxury Japanese textiles for thobe, kandura, and dishdasha. Buy premium fabric rolls online, engineered for wrinkle-resistance and breathability. The choice for master artisans in the USA, UK, and worldwide.",
-    
-    page_about_title: "About IKSA | Our Four Pillars of Japanese Textile Mastery",
-    page_about_description: "Learn about IKSA's textile philosophy. We blend heritage innovation with masterful finishing to produce functionally elegant fabrics for the modern artisan.",
+    page_main_title: "hithobe | Premium Japanese Fabrics for Thobe, Kandura & Abaya",
+    page_main_description: "Discover hithobe's luxury Japanese textiles for thobe, kandura, and dishdasha. Buy premium fabric rolls online, engineered for wrinkle-resistance and breathability. The choice for master artisans in the USA, UK, and worldwide.",
 
-    page_collections_title: "B2B Fabric Catalogue | Thobe & Abaya Textiles by IKSA",
-    page_collections_description: "Explore the IKSA B2B catalogue of luxury fabric rolls. Find the perfect Japanese textiles for Kandura, Dishdasha, and Abaya, priced for professionals.",
-    
-    page_product_detail_title: "Buy {fabricName} Fabric Roll ({rollLength}m) | IKSA B2B",
+    page_about_title: "About hithobe | Our Four Pillars of Japanese Textile Mastery",
+    page_about_description: "Learn about hithobe's textile philosophy. We blend heritage innovation with masterful finishing to produce functionally elegant fabrics for the modern artisan.",
+
+    page_collections_title: "B2B Fabric Catalogue | Thobe & Abaya Textiles by hithobe",
+    page_collections_description: "Explore the hithobe B2B catalogue of luxury fabric rolls. Find the perfect Japanese textiles for Kandura, Dishdasha, and Abaya, priced for professionals.",
+
+    page_product_detail_title: "Buy {fabricName} Fabric Roll ({rollLength}m) | hithobe B2B",
     page_product_detail_description: "Source a {rollLength}m roll of {fabricName}. View specs and pro tailoring notes. Ideal for luxury thobes, this {fabricFeel} material offers {fabricPerformance}.",
 
-    page_thobeGuide_title: "The Thobe Guide: Color, Style & Fabric | IKSA",
+    page_thobeGuide_title: "The Thobe Guide: Color, Style & Fabric | hithobe",
     page_thobeGuide_description: "Our expert guide to the Thobe (Kandura). Learn about the meaning of colors, regional styles, and choosing the right high-performance fabric for your garment.",
-    
-    page_forArtisans_title: "Artisan Partnerships | Wholesale Japanese Fabrics from IKSA",
-    page_forArtisans_description: "Partner with IKSA for direct B2B access to premium Japanese fabric rolls. We offer consistent quality, transparent pricing, and dedicated support for tailors.",
 
-    page_artisansTool_title: "Fabric Yield Calculator for Thobes & Abayas | IKSA Tool",
-    page_artisansTool_description: "Optimize your production with IKSA's Fabric Yield Calculator. Estimate how many thobes or abayas you can create from a single roll of our Japanese textiles.",
-    
-    page_contact_title: "Contact IKSA | Premium Textile Supplier",
-    page_contact_description: "Get in touch with IKSA for fabric samples, B2B partnership inquiries, and orders. We are a premier global supplier of Japanese textiles for luxury garments.",
-    
-    page_checkout_title: "Secure Checkout | IKSA B2B Fabric Order",
-    page_checkout_description: "Complete your professional order for IKSA's Japanese fabric rolls. Provide your shipping details to finalize your B2B purchase of our premium textiles.",
+    page_forArtisans_title: "Artisan Partnerships | Wholesale Japanese Fabrics from hithobe",
+    page_forArtisans_description: "Partner with hithobe for direct B2B access to premium Japanese fabric rolls. We offer consistent quality, transparent pricing, and dedicated support for tailors.",
+
+    page_artisansTool_title: "Fabric Yield Calculator for Thobes & Abayas | hithobe Tool",
+    page_artisansTool_description: "Optimize your production with hithobe's Fabric Yield Calculator. Estimate how many thobes or abayas you can create from a single roll of our Japanese textiles.",
+
+    page_contact_title: "Contact hithobe | Premium Textile Supplier",
+    page_contact_description: "Get in touch with hithobe for fabric samples, B2B partnership inquiries, and orders. We are a premier global supplier of Japanese textiles for luxury garments.",
+
+    page_checkout_title: "Secure Checkout | hithobe B2B Fabric Order",
+    page_checkout_description: "Complete your professional order for hithobe's Japanese fabric rolls. Provide your shipping details to finalize your B2B purchase of our premium textiles.",
     checkout_emptyCartMessage: "Add some fabric rolls to your cart to proceed with your order.",
-    
-    page_priceStructure_title: "IKSA Fabric Pricing | Wholesale Textile Costs",
-    page_priceStructure_description: "Review the transparent pricing for IKSA's fabric collections. Our structure includes landed costs with estimated shipping, duties, and taxes for global partners.",
-    
+
+    page_priceStructure_title: "hithobe Fabric Pricing | Wholesale Textile Costs",
+    page_priceStructure_description: "Review the transparent pricing for hithobe's fabric collections. Our structure includes landed costs with estimated shipping, duties, and taxes for global partners.",
+
     // Pricing Calculator Page
     priceStructure_pageTitle_dynamic: "Product Pricing Overview & Policy",
     priceStructure_selectCountry: "Select Your Shipping Country:",
@@ -530,7 +533,7 @@ export const en: Translations = {
     priceStructure_priceBreakdown: "Price Breakdown",
     priceStructure_dynamicDisclaimer: "Prices are dynamically calculated based on your selected country, including estimated shipping, duties, and taxes. This is for illustrative purposes.",
     priceStructure_policyTitle: "Our Transparent Pricing Policy",
-    priceStructure_policyIntro: "At IKSA, we believe in clear and predictable pricing. The total price you see for our products includes all relevant costs, ensuring no surprises at checkout or upon delivery.",
+    priceStructure_policyIntro: "At hithobe, we believe in clear and predictable pricing. The total price you see for our products includes all relevant costs, ensuring no surprises at checkout or upon delivery.",
     priceStructure_calculationTitle: "How Your Price is Calculated:",
     priceStructure_calculation_item1: "**Product Base Price:** The core cost of the item.",
     priceStructure_calculation_item2: "**Shipping Costs:** Calculated based on product weight/dimensions and your shipping destination.",
@@ -604,7 +607,7 @@ export const en: Translations = {
     priceStructure_shippingEstimatesIntro: "These are general estimates for small e-commerce parcels (e.g., 0.5kg - 2kg), actual rates vary significantly by courier, service level, and exact weight/volume.",
     priceStructure_shippingEstimates_content: "*   **UAE:** Around **$15 - $35 USD** for 0.5kg, increasing with weight. (Air cargo for 30kg+ can be ~AED 25/kg or ~$7/kg USD).\n*   **India:** Around **$20 - $40 USD** for 0.5kg, increasing with weight. (e.g., Shoppre indicates ~₹1400 for 0.5-5kg, ~$17 USD).\n*   **Saudi Arabia:** Around **$25 - $50 USD** for 0.5kg, increasing with weight.\n*   **Malaysia:** Around **$8 - $15 USD** for 0.5kg, increasing with weight. (Closer proximity to Thailand).\n*   **Indonesia:** Around **$15 - $30 USD** for 0.5kg, increasing with weight. (e.g., SXD Express starts at 465 THB/kg for 30kg+, ~$12.7/kg USD).\n*   **Pakistan:** Around **$25 - $45 USD** for 0.5kg, increasing with weight.\n*   **Egypt:** Around **$30 - $55 USD** for 0.5kg, increasing with weight.",
     priceStructure_shippingEstimates_note: "*Note: These are estimates for typical e-commerce parcel services. Bulk shipping via air freight or sea freight would have different cost structures.*",
-    
+
     // Admin Section
     admin_access: "Admin Access",
     admin_loginTitle: "Admin Login",

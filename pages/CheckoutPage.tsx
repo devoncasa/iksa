@@ -3,7 +3,8 @@ import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import { useLanguage } from '../hooks/useLanguage';
-import { MOCK_FABRICS } from '../constants';
+import { MOCK_FABRICS, COLOR_MARKUPS, COLOR_PALETTE } from '../constants';
+import { cartLineKey, cartUnitPrice } from '../lib/cart';
 import { Button } from '../components/Button';
 import { SEOMetadata } from '../components/SEOMetadata';
 import { ContentBlock } from '../components/ContentBlock';
@@ -11,7 +12,7 @@ import { generateOrganizationSchema, generateWebsiteSchema } from '../components
 import { ManagedImage } from '../components/ManagedImage';
 
 export const CheckoutPage: React.FC = () => {
-  const { cart, getCartTotal, clearCart } = useCart();
+  const { cart, getCartTotal } = useCart();
   const { translate } = useLanguage();
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const { totalPrice } = getCartTotal();
@@ -25,10 +26,15 @@ export const CheckoutPage: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would submit to a server
-    console.log("Order placed:", { cart });
+    const form = e.target as HTMLFormElement;
+    const customer = Array.from(new FormData(form).entries()).map(([key, value]) => `${key}: ${value}`).join('\n');
+    const lines = cart.map(item => {
+      const fabric = MOCK_FABRICS.find(f => f.id === item.fabricId)!;
+      return `${translate(fabric.nameKey)} | ${item.color ?? 'white'} | ${item.quantity} rolls | USD ${(item.quantity * cartUnitPrice(fabric, item.color, COLOR_MARKUPS)).toFixed(2)}`;
+    }).join('\n');
+    const body = `${customer}\n\n${lines}\n\nFabric subtotal: USD ${totalPrice.toFixed(2)}\nPlease confirm availability, delivery, taxes and the final quotation.`;
+    window.location.href = `mailto:sales@iksa-textiles.com?subject=${encodeURIComponent('hithobe order enquiry')}&body=${encodeURIComponent(body)}`;
     setIsOrderPlaced(true);
-    clearCart();
   };
 
   if (isOrderPlaced) {
@@ -152,7 +158,7 @@ export const CheckoutPage: React.FC = () => {
                         const fabric = MOCK_FABRICS.find(f => f.id === item.fabricId);
                         if (!fabric) return null;
                         return (
-                        <div key={item.fabricId} className="flex items-center justify-between pt-4 first:pt-0">
+                        <div key={cartLineKey(item)} className="flex items-center justify-between pt-4 first:pt-0">
                             <div className="flex items-center">
                             <div className="w-16 h-16 mr-4 flex-shrink-0 rounded-lg border-2 border-muted-gold/50 shadow-sm transition-all duration-300 ease-in-out hover:shadow-md hover:shadow-muted-gold/30 hover:-translate-y-0.5 overflow-hidden">
                                 <ManagedImage 
@@ -164,11 +170,11 @@ export const CheckoutPage: React.FC = () => {
                                 />
                             </div>
                             <div>
-                                <p className="font-semibold text-stone-700">{translate(fabric.nameKey)}</p>
-                                <p className="text-sm text-stone-500">{item.quantity} {translate('rolls')} x ${fabric.pricePerRoll.toFixed(2)}</p>
+                                <p className="font-semibold text-stone-700">{translate(fabric.nameKey)} · {translate(COLOR_PALETTE[item.color ?? 'white']?.nameKey)}</p>
+                                <p className="text-sm text-stone-500">{item.quantity} {translate('rolls')} x ${cartUnitPrice(fabric, item.color, COLOR_MARKUPS).toFixed(2)}</p>
                             </div>
                             </div>
-                            <p className="font-semibold text-stone-800">${(item.quantity * fabric.pricePerRoll).toFixed(2)}</p>
+                            <p className="font-semibold text-stone-800">${(item.quantity * cartUnitPrice(fabric, item.color, COLOR_MARKUPS)).toFixed(2)}</p>
                         </div>
                         );
                     })}

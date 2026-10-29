@@ -46,7 +46,7 @@ const languageOptions: { code: LangCode; flag: string; name: string }[] = [
 ];
 
 export const DevelopmentBanner: React.FC = () => {
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
     const [selectedLang, setSelectedLang] = useState<LangCode>('en');
     
     useEffect(() => {
