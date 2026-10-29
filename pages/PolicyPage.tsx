@@ -20,6 +20,6 @@ const content = {
 export const PolicyPage: React.FC<{ kind: keyof typeof content }> = ({ kind }) => {
  const { language } = useLanguage();
  const [title, text] = content[kind][language === 'ar' ? 'ar' : 'en'];
- return <ContentBlock isHero><h1 className="font-serif-display text-4xl mb-8">{title}</h1><p className="text-start leading-relaxed whitespace-pre-line">{text}</p><Link to="/contact" className="inline-block mt-8 underline">{language === 'ar' ? 'تواصل معنا' : 'Contact us'}</Link></ContentBlock>;
+ return <><title>{title} | hithobe</title><meta name="description" content={text} /><link rel="canonical" href={`https://www.hithobe.com${language === 'ar' ? '/ar' : ''}/${kind === 'privacy' ? 'privacy' : kind === 'terms' ? 'terms' : 'shipping'}`} /><ContentBlock isHero><h1 className="font-serif-display text-4xl mb-8">{title}</h1><p className="text-start leading-relaxed whitespace-pre-line">{text}</p><Link to="/contact" className="inline-block mt-8 underline">{language === 'ar' ? 'تواصل معنا' : 'Contact us'}</Link></ContentBlock></>;
 };
-export const NotFoundPage = () => <ContentBlock isHero><h1 className="text-3xl mb-6">404</h1><Link to="/collections">Browse collections / تصفح المجموعة</Link></ContentBlock>;
+export const NotFoundPage = () => <><title>Page not found | hithobe</title><meta name="robots" content="noindex" /><ContentBlock isHero><h1 className="text-3xl mb-6">404</h1><Link to="/collections">Browse collections / تصفح المجموعة</Link></ContentBlock></>;
