@@ -1,3 +1,4 @@
+import { localeFromPath, localizedPath } from '../lib/language';
 import React, { createContext, useState, useCallback, ReactNode, useEffect } from 'react';
 import { LanguageCode, LanguageContextType, Translations } from '../types';
 import { translations } from '../locales';
@@ -11,7 +12,7 @@ interface LanguageProviderProps {
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const [language, setLanguageState] = useState<LanguageCode>(() => {
-    return window.location.pathname === '/ar' || window.location.pathname.startsWith('/ar/') ? LanguageCode.AR : LanguageCode.EN;
+    return localeFromPath(window.location.pathname) as LanguageCode;
   });
 
   useEffect(() => {
@@ -54,8 +55,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 
   const setLanguage = (newLanguage: LanguageCode) => {
     if (newLanguage === language) return;
-    const route = window.location.pathname.replace(/^\/ar(?=\/|$)/, '') || '/';
-    window.location.assign((newLanguage === LanguageCode.AR ? '/ar' : '') + route + window.location.search + window.location.hash);
+    window.location.assign(localizedPath(window.location.pathname, newLanguage) + window.location.search + window.location.hash);
   };
 
   return (

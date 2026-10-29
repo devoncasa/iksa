@@ -22,9 +22,9 @@ export const Footer: React.FC = () => {
   ];
 
   const legalLinks = [
-    { path: '/privacy', label: 'Privacy Policy' },
-    { path: '/terms', label: 'Terms of Service' },
-    { path: '/shipping', label: 'Shipping Policy' },
+    { path: '/privacy', label: translate('privacyLabel') },
+    { path: '/terms', label: translate('termsLabel') },
+    { path: '/shipping', label: translate('shippingLabel') },
   ];
 
   const renderLinkColumn = (title: string, links: { path: string; label?: string; labelKey?: string }[]) => (
@@ -49,8 +49,8 @@ export const Footer: React.FC = () => {
     <footer className="bg-stone-900/40 backdrop-blur-xl border-t border-stone-700/50 text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mb-8 md:mb-10 text-sm">
-          {renderLinkColumn('Sitemap', sitemapLinks)}
-          {renderLinkColumn('Legal & Policies', legalLinks)}
+          {renderLinkColumn(translate('footer_sitemapTitle'), sitemapLinks)}
+          {renderLinkColumn(translate('legalTitle'), legalLinks)}
           
           {/* Contact & Socials Section */}
           <div>

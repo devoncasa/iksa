@@ -111,7 +111,7 @@ export const CheckoutPage: React.FC = () => {
         <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-warm-terracotta">
           {translate('checkout')}
         </h1>
-        <p className="mt-4 text-lg text-stone-700">Please provide your details to complete your professional order.</p>
+        <p className="mt-4 text-lg text-stone-700">{translate('checkout_intro')}</p>
       </ContentBlock>
       
       <section className="relative w-full pb-12 md:pb-16 -mt-20">

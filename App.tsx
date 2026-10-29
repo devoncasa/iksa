@@ -1,3 +1,4 @@
+import { localeFromPath, localePrefix } from './lib/language';
 
 
 import React, { createContext, useContext, useState, useEffect, useMemo, useRef, useCallback, ReactNode } from 'react';
@@ -137,7 +138,7 @@ export const AppContent = () => <>
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter basename={window.location.pathname === "/ar" || window.location.pathname.startsWith("/ar/") ? "/ar" : "/"}>
+    <BrowserRouter basename={localePrefix(localeFromPath(window.location.pathname)) || '/'}>
       <AppContent />
     </BrowserRouter>
   );

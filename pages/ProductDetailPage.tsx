@@ -49,7 +49,7 @@ const YieldEstimator: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
                 </div>
             </div>
             <div className="text-center bg-white/80 p-4 rounded-md">
-                <p className="text-stone-700">Estimated Yield From This Roll:</p>
+                <p className="text-stone-700">{translate('estimatedRollYield')}</p>
                 <p className="text-3xl font-bold text-brandAccent-800">{yieldValue} <span className="text-xl font-normal">{translate('pieces')}</span></p>
                 <p className="text-xs text-stone-500 mt-1">({translate('calculatorDisclaimer')})</p>
             </div>
@@ -167,9 +167,9 @@ export const ProductDetailPage: React.FC = () => {
   if (!fabric) {
     return (
         <ContentBlock isHero>
-            <h1 className="text-2xl text-stone-700">Fabric not found.</h1>
+            <h1 className="text-2xl text-stone-700">{translate('fabricNotFound')}</h1>
             <Link to="/collections" className="mt-4">
-                <Button>Back to Collections</Button>
+                <Button>{translate('backToCollections')}</Button>
             </Link>
         </ContentBlock>
     );
@@ -233,7 +233,7 @@ export const ProductDetailPage: React.FC = () => {
 
                         {fabric.availableColors && fabric.availableColors.length > 1 && (
                             <div className="mb-8">
-                            <h3 className="text-md font-semibold text-stone-700 mb-3">Color</h3>
+                            <h3 className="text-md font-semibold text-stone-700 mb-3">{translate('colourLabel')}</h3>
                             <div className="flex flex-wrap gap-3">
                                 {fabric.availableColors.map(colorKey => (
                                 <button
@@ -256,7 +256,7 @@ export const ProductDetailPage: React.FC = () => {
                             </div>
                         )}
                         
-                        <p className="text-sm text-stone-600 mb-6" role="note">{language === 'ar' ? 'يرجى تأكيد المواصفات والتوفر واللون بعينة فعلية قبل الدفع. معاينة اللون تقريبية، وتبقى صور المعرض الأصلية متاحة أسفل المعاينة.' : 'Confirm specifications, availability and colour with a physical swatch before payment. Colour previews are illustrative; additional illustrative model photographs remain available below the preview.'}</p>
+                        <p className="text-sm text-stone-600 mb-6" role="note">{translate('productSwatchNote')}</p>
                         <YieldEstimator fabric={fabric} />
 
                         <div className="flex items-center gap-4 mt-8">

@@ -47,7 +47,7 @@ export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
           <button
             onClick={onClose}
             className="p-2 rounded-full text-stone-600 hover:bg-stone-200/50 focus:outline-none focus:ring-2 focus:ring-brandAccent-700"
-            aria-label="Close cart"
+            aria-label={translate('closeCart')}
           >
             <CloseIcon className="w-6 h-6" />
           </button>
@@ -77,7 +77,7 @@ export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                     </div>
                     <div className="flex-grow">
                       <h3 className="font-semibold text-stone-700">{translate(fabric.nameKey)}</h3>
-                      <p className="text-sm text-stone-500">{fabric.rollLengthInMeters}m / Roll · {translate(COLOR_PALETTE[item.color ?? 'white']?.nameKey)}</p>
+                      <p className="text-sm text-stone-500">{fabric.rollLengthInMeters} {translate('perRollUnit')} · {translate(COLOR_PALETTE[item.color ?? 'white']?.nameKey)}</p>
                       <p className="text-sm font-semibold text-brandAccent-700">${cartUnitPrice(fabric, item.color, COLOR_MARKUPS).toFixed(2)}</p>
                     </div>
                     <div className="flex flex-col items-end justify-between ml-4">
@@ -91,7 +91,7 @@ export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                           aria-label={`Quantity for ${translate(fabric.nameKey)}`}
                         />
                       </div>
-                       <button onClick={() => removeFromCart(item.fabricId, item.color)} className="text-stone-500 hover:text-red-600 transition-colors" aria-label={`Remove ${translate(fabric.nameKey)} — ${translate(COLOR_PALETTE[item.color ?? 'white']?.nameKey)}`}>
+                       <button onClick={() => removeFromCart(item.fabricId, item.color)} className="text-stone-500 hover:text-red-600 transition-colors" aria-label={`${translate('removeItem')} ${translate(fabric.nameKey)} — ${translate(COLOR_PALETTE[item.color ?? 'white']?.nameKey)}`}>
                           <TrashIcon className="w-5 h-5" />
                        </button>
                     </div>

@@ -2,6 +2,29 @@ import {
  Translations } from '../types';
 
 export const ar: Translations = {
+estimatedRollYield:"الإنتاج المقدر من هذه اللفة:",
+fabricNotFound:"لم يتم العثور على القماش.",
+backToCollections:"العودة للمجموعات",
+colourLabel:"اللون",
+notFoundTitle:"الصفحة غير موجودة",
+browseCollections:"تصفح المجموعات",
+
+    selectLanguage: "اختر اللغة",
+    openCart: "افتح سلة التسوق",
+    closeCart: "إغلاق السلة",
+    removeItem: "إزالة",
+    perRollUnit: "م / لفة",
+    checkout_intro: "يرجى تقديم بياناتك لإعداد استفسار الطلب.",
+    legalTitle: "الشروط والسياسات",
+    privacyLabel: "الخصوصية",
+    termsLabel: "شروط الطلب",
+    shippingLabel: "الشحن",
+    modelMen: "رجال",
+    modelWomen: "نساء",
+    chooseModel: "اختر العارض",
+    colourIllustration: "تصوّر للون؛ اطلب عينة فعلية",
+    productSwatchNote: "يرجى تأكيد المواصفات والتوفر واللون بعينة فعلية قبل الدفع. الصور توضيحية، وتوجد صور إضافية أسفل المعاينة.",
+
     atelier_title: "المختارات — ست حكايات أزياء | هيثوب",
     atelier_description: "استكشف ست حكايات للثوب والعباية وصور الألوان ولفات أقمشة هيثوب ذات الصلة.",
     "fabric-library_title": "مكتبة مراجع الأقمشة — بحث ومقارنة | هيثوب",

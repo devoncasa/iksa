@@ -95,7 +95,7 @@ export const Header: React.FC = () => {
               <button
                 onClick={() => setIsCartOpen(true)}
                 className="relative p-2 rounded-full text-stone-300 lg:text-deep-chocolate hover:text-white hover:bg-stone-700/50 lg:hover:bg-brandAccent-600/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-stone-800 lg:focus:ring-offset-brandAccent-100 focus:ring-white transition-colors"
-                aria-label="Open shopping cart"
+                aria-label={translate('openCart')}
               >
                 <ShoppingCartIcon className="w-6 h-6" />
                 {totalItems > 0 && (

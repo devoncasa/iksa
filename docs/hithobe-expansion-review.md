@@ -49,3 +49,11 @@ TypeScript, production build and ten tests pass. Tests cover cart migration, col
 5. Replace Tailwind's runtime CDN with a compiled stylesheet and split the large JS bundle in a dedicated performance pass; these affect existing styling and warrant broader regression coverage.
 6. Complete real-device mobile, keyboard, screen-reader and field performance checks.
 7. Do not claim to be the region's largest supplier or promise search rankings without evidence.
+
+## Thai localisation and raw-research supplement
+
+Added Thai as the third language, with `/th` routing, locale-safe navigation, preserved query/hash state when switching language, Thai metadata and reciprocal sitemap alternates. English and Arabic retain their existing routes. All primary English dictionary keys have Thai entries; brand names, article codes, source names and source catalogue specification values remain identifiable in their original form. Thai layouts use relaxed heading spacing and line height.
+
+The user then provided a raw Thai research document. Useful material was incorporated as six expandable supplier-verification notes: fibre vs trade names; yarn construction; drape vocabulary; GSM/width/opacity; finish durability; and lot traceability. Added a GSM filter and a sourcing enquiry-format selector (swatch, cut length, roll, carton). These selections describe requests, not newly promised inventory or services.
+
+Did not publish the complete raw document or adopt its unsourced market forecasts, market shares, universal test thresholds, authenticity-by-sound claims, exact OEM minimums or free-sample promises. The Thai pricing copy explicitly identifies legacy tax/threshold figures as historical inputs requiring confirmation instead of presenting them as current legal guidance. Pricing calculation logic and existing English/Arabic commercial content were not changed in this language pass.

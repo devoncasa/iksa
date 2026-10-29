@@ -5,21 +5,24 @@ import { useLanguage } from '../hooks/useLanguage';
 
 const content = {
  privacy: {
+  th: ['ความเป็นส่วนตัว', 'ตะกร้าและภาษาที่เลือกเก็บในเบราว์เซอร์และลบได้ด้วยการล้างข้อมูลเว็บไซต์ เว็บไซต์ใช้ Google Analytics และทรัพยากรภาพ แบบอักษร และแผนที่จากภายนอก เมื่อเปิดอีเมลสอบถาม ข้อมูลจะถูกส่งต่อไปยังแอปอีเมลของคุณ โดยคุณเป็นผู้เลือกกดส่ง สอบถามเรื่องข้อมูลส่วนบุคคลได้ที่ sales@iksa-textiles.com'],
   en: ['Privacy', 'Your cart and language preference are stored in your browser. You can remove them by clearing site data. The website uses Google Analytics and loads resources from external image, font and map providers. When you choose to open an enquiry in email, the details you enter are passed to your email application; you control whether to send them. For privacy questions, contact sales@iksa-textiles.com.'],
   ar: ['الخصوصية', 'تُحفظ سلة التسوق واللغة في متصفحك ويمكن حذفهما بمسح بيانات الموقع. يستخدم الموقع Google Analytics وموارد خارجية للصور والخطوط والخرائط. عند فتح استفسار بالبريد، تُنقل البيانات إلى تطبيق بريدك وتختار أنت إرسالها. للاستفسارات: sales@iksa-textiles.com.']
  },
  terms: {
+  th: ['การสอบถามและสั่งซื้อ', 'ใช้แคตตาล็อกและเครื่องคำนวณเพื่อเตรียมคำขอ ผลคำนวณเป็นค่าประมาณซึ่งขึ้นอยู่กับการวางแพตเทิร์น การหดตัว และขนาดชุด การเปิดร่างอีเมลยังไม่ยืนยันคำสั่งซื้อหรือชำระเงิน กรุณาขอยืนยันสเปก สี สินค้าที่มี ราคาสุทธิ และการจัดส่งเป็นลายลักษณ์อักษรก่อนชำระเงิน ภาพแฟชั่นเป็นแรงบันดาลใจ ควรขอตัวอย่างจริงเพื่อตรวจเนื้อผ้าและสี'],
   en: ['Enquiries and ordering', 'Use the catalogue and calculators to prepare an enquiry. Calculator results are estimates; cutting layout, shrinkage and garment measurements affect actual yield. Opening an email draft does not place a confirmed order or process payment. Request written confirmation of fabric specification, colour, availability, final price and delivery before making payment. Editorial garment images show styling inspiration; request a physical swatch to assess the actual fabric and colour.'],
   ar: ['الاستفسارات والطلبات', 'استخدم الكتالوج والحاسبات لإعداد استفسار. نتائج الحاسبات تقديرية؛ يتأثر الإنتاج بالتخطيط والانكماش والمقاسات. فتح مسودة بريد لا يؤكد طلباً ولا ينفذ دفعاً. اطلب تأكيد المواصفات واللون والتوفر والسعر النهائي والتوصيل كتابةً قبل الدفع. صور الأزياء للإلهام؛ اطلب عينة لتقييم القماش واللون الفعليين.']
  },
  shipping: {
+  th: ['การสอบถามการจัดส่ง', 'ค่าขนส่งและกำหนดส่งต้องยืนยันตามปลายทาง จำนวน และผ้าที่มี เครื่องคำนวณราคาเป็นค่าประมาณ ไม่ใช่การจองขนส่งหรือการประเมินศุลกากร กรุณาขอใบเสนอราคาที่ระบุค่าขนส่ง กำหนดส่ง การติดตาม และผู้รับผิดชอบอากรกับภาษีนำเข้า พร้อมยืนยันเงื่อนไขคืนสินค้าและยกเลิกก่อนชำระเงิน'],
   en: ['Shipping enquiries', 'Delivery cost and dispatch timing require confirmation for your destination, quantity and available fabric. The pricing calculator provides an estimate, not a carrier booking or a customs assessment. Ask for a written quotation showing delivery charges, the dispatch estimate, tracking arrangements and responsibility for import duties and taxes. Returns and cancellation terms must be confirmed with your quotation before payment.'],
   ar: ['استفسارات الشحن', 'تتطلب تكلفة التوصيل وموعد الإرسال تأكيد الوجهة والكمية وتوفر القماش. حاسبة الأسعار تقديرية وليست حجز شحن أو تقديراً جمركياً معتمداً. اطلب عرضاً مكتوباً يوضح التكاليف وموعد الإرسال والتتبع والمسؤولية عن الرسوم والضرائب. يجب تأكيد شروط الإرجاع والإلغاء مع العرض قبل الدفع.']
  }
 };
 export const PolicyPage: React.FC<{ kind: keyof typeof content }> = ({ kind }) => {
  const { language } = useLanguage();
- const [title, text] = content[kind][language === 'ar' ? 'ar' : 'en'];
- return <><title>{`${title} | hithobe`}</title><meta name="description" content={text} /><link rel="canonical" href={`https://www.hithobe.com${language === 'ar' ? '/ar' : ''}/${kind === 'privacy' ? 'privacy' : kind === 'terms' ? 'terms' : 'shipping'}`} /><ContentBlock isHero><h1 className="font-serif-display text-4xl mb-8">{title}</h1><p className="text-start leading-relaxed whitespace-pre-line">{text}</p><Link to="/contact" className="inline-block mt-8 underline">{language === 'ar' ? 'تواصل معنا' : 'Contact us'}</Link></ContentBlock></>;
+ const [title, text] = content[kind][language];
+ return <><title>{`${title} | hithobe`}</title><meta name="description" content={text} /><link rel="canonical" href={`https://www.hithobe.com${language === 'en' ? '' : `/${language}`}/${kind === 'privacy' ? 'privacy' : kind === 'terms' ? 'terms' : 'shipping'}`} /><ContentBlock isHero><h1 className="font-serif-display text-4xl mb-8">{title}</h1><p className="text-start leading-relaxed whitespace-pre-line">{text}</p><Link to="/contact" className="inline-block mt-8 underline">{language === 'th' ? 'ติดต่อเรา' : language === 'ar' ? 'تواصل معنا' : 'Contact us'}</Link></ContentBlock></>;
 };
-export const NotFoundPage = () => <><title>Page not found | hithobe</title><meta name="robots" content="noindex" /><ContentBlock isHero><h1 className="text-3xl mb-6">404</h1><Link to="/collections">Browse collections / تصفح المجموعة</Link></ContentBlock></>;
+export const NotFoundPage = () => { const {translate}=useLanguage();return <><title>{`${translate('notFoundTitle')} | hithobe`}</title><meta name="robots" content="noindex" /><ContentBlock isHero><h1 className="text-3xl mb-6">404</h1><Link to="/collections">{translate('browseCollections')}</Link></ContentBlock></>;};

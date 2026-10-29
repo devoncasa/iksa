@@ -1,3 +1,4 @@
+import { localePrefix } from '../lib/language';
 
 
 
@@ -54,7 +55,7 @@ export const SEOMetadata: React.FC<SEOMetadataProps> = ({
     metaDescription.setAttribute('content', finalDescription);
 
     // Canonical URL
-    const canonicalUrl = `${ORG_URL}${language === 'ar' ? '/ar' : ''}${pagePath}`;
+    const canonicalUrl = `${ORG_URL}${localePrefix(language)}${pagePath}`;
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (!canonicalLink) {
         canonicalLink = document.createElement('link');
@@ -69,7 +70,7 @@ export const SEOMetadata: React.FC<SEOMetadataProps> = ({
         const link = document.createElement('link');
         link.rel = 'alternate';
         link.hreflang = lang.code;
-        link.href = `${ORG_URL}${lang.code === 'ar' ? '/ar' : ''}${pagePath}`;
+        link.href = `${ORG_URL}${localePrefix(lang.code)}${pagePath}`;
         document.head.appendChild(link);
     });
     
@@ -110,8 +111,8 @@ export const SEOMetadata: React.FC<SEOMetadataProps> = ({
   if (typeof document === 'undefined') {
     const title = translate(titleKey).replace('{fabricName}', item ? translate(item.nameKey) : '').replace('{rollLength}', String(item?.rollLengthInMeters ?? ''));
     const description = item ? translate(item.detailDescriptionKey) : translate(descriptionKey);
-    const url = `${ORG_URL}${language === 'ar' ? '/ar' : ''}${pagePath}`;
-    return <><title>{title}</title><meta name="description" content={description} /><link rel="canonical" href={url} /><link rel="alternate" hrefLang="en" href={`${ORG_URL}${pagePath}`} /><link rel="alternate" hrefLang="ar" href={`${ORG_URL}/ar${pagePath}`} /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={url} /><meta property="og:image" content={`${ORG_URL}/images/hithobe/kandura-courtyard-1120.webp`} />{schemas.map((schema,index) => <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g, '\\u003c')}} />)}</>;
+    const url = `${ORG_URL}${localePrefix(language)}${pagePath}`;
+    return <><title>{title}</title><meta name="description" content={description} /><link rel="canonical" href={url} /><link rel="alternate" hrefLang="en" href={`${ORG_URL}${pagePath}`} /><link rel="alternate" hrefLang="ar" href={`${ORG_URL}/ar${pagePath}`} /><link rel="alternate" hrefLang="th" href={`${ORG_URL}/th${pagePath}`} /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={url} /><meta property="og:image" content={`${ORG_URL}/images/hithobe/kandura-courtyard-1120.webp`} />{schemas.map((schema,index) => <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g, '\\u003c')}} />)}</>;
   }
   return null; 
 };

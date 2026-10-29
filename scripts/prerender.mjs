@@ -11,11 +11,12 @@ try {
  const paths = [...xml.matchAll(/<loc>https:\/\/www.hithobe.com([^<]*)<\/loc>/g)].map(m=>m[1]);
  for (const path of paths) {
   globalThis.window = { location: { pathname: path }, localStorage: { getItem:()=>null } };
-  const ar = path === '/ar' || path.startsWith('/ar/');
+  const locale = path.match(/^\/(ar|th)(?=\/|$)/)?.[1] || 'en';
+  const ar = locale === 'ar';
   let body = render(path);
   let head = '';
   body = body.replace(/<title>[\s\S]*?<\/title>|<meta\b[^>]*>|<link\b[^>]*>|<script type="application\/ld\+json">[\s\S]*?<\/script>/g, match=>{head+=match;return '';});
-  let html = template.replace(/<title>[\s\S]*?<\/title>/,'').replace(/<meta name="description"[^>]*>/,'').replace('</head>',head+'</head>').replace('<div id="root"></div>',`<div id="root">${body}</div>`).replace('<html lang="en">',`<html lang="${ar?'ar':'en'}" dir="${ar?'rtl':'ltr'}">`);
+  let html = template.replace(/<title>[\s\S]*?<\/title>/,'').replace(/<meta name="description"[^>]*>/,'').replace('</head>',head+'</head>').replace('<div id="root"></div>',`<div id="root">${body}</div>`).replace('<html lang="en">',`<html lang="${locale}" dir="${ar?'rtl':'ltr'}">`);
   const dir = 'dist'+(path==='/'?'':path.replace(/\/$/,''));
   await mkdir(dir,{recursive:true});await writeFile(dir+'/index.html',html);
  }

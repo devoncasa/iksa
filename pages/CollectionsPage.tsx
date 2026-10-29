@@ -60,7 +60,7 @@ const FabricCard: React.FC<{ fabric: Fabric; }> = ({ fabric }) => {
         <div className="flex-grow mb-4">
           <h3 className="text-xl md:text-2xl font-serif-display font-semibold text-brandAccent-800 mb-2">{translate(fabric.nameKey)}</h3> 
           <div className="text-stone-600 text-sm mb-3 space-x-2">
-              <span>{fabric.rollLengthInMeters}m / Roll</span>
+              <span>{fabric.rollLengthInMeters} {translate('perRollUnit')}</span>
               <span className="text-stone-300">|</span>
               <span className="font-semibold text-brandAccent-800">{translate('yieldsApprox')} {estimatedYield} {translate('pieces')}</span>
           </div>

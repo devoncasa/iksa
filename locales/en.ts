@@ -4,6 +4,29 @@ import {
  LanguageCode, Translations } from '../types';
 
 export const en: Translations = {
+estimatedRollYield:"Estimated Yield From This Roll:",
+fabricNotFound:"Fabric not found.",
+backToCollections:"Back to Collections",
+colourLabel:"Color",
+notFoundTitle:"Page not found",
+browseCollections:"Browse collections",
+
+    selectLanguage: "Select language",
+    openCart: "Open shopping cart",
+    closeCart: "Close cart",
+    removeItem: "Remove",
+    perRollUnit: "m / Roll",
+    checkout_intro: "Please provide your details to prepare your order enquiry.",
+    legalTitle: "Legal & Policies",
+    privacyLabel: "Privacy Policy",
+    termsLabel: "Terms of Service",
+    shippingLabel: "Shipping Policy",
+    modelMen: "Men",
+    modelWomen: "Women",
+    chooseModel: "Choose model",
+    colourIllustration: "Colour illustration · request a physical swatch",
+    productSwatchNote: "Confirm specifications, availability and colour with a physical swatch before payment. Colour previews are illustrative; additional illustrative model photographs remain available below the preview.",
+
     atelier_title: "The Edit — Six Fashion Stories | hithobe",
     atelier_description: "Explore six thobe and abaya styling stories, model colour photographs and related hithobe fabric rolls.",
     "fabric-library_title": "Fabric Reference Library — Search & Compare 52 Entries | hithobe",
