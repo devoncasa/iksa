@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { useCart } from '../hooks/useCart';
 import { MOCK_FABRICS, GARMENT_STYLES_ADVANCED, GARMENT_SIZES_ADVANCED, FEATURE_ICONS, COLOR_PALETTE, COLOR_MARKUPS } from '../constants';
@@ -8,6 +8,7 @@ import { Button } from '../components/Button';
 import { SEOMetadata } from '../components/SEOMetadata';
 import { ContentBlock } from '../components/ContentBlock';
 import { generateOrganizationSchema, generateWebsiteSchema, generateBreadcrumbSchema, generateProductSchema } from '../components/Schema';
+import { FabricColorPreview } from '../components/FabricColorPreview';
 import { ManagedImage } from '../components/ManagedImage';
 import { cartUnitPrice } from '../lib/cart';
 
@@ -127,6 +128,8 @@ export const ProductDetailPage: React.FC = () => {
   const fabric = MOCK_FABRICS.find(f => f.id === fabricId);
   const { translate, language } = useLanguage();
   const { addToCart } = useCart();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [showColorPreview, setShowColorPreview] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState(fabric?.imageUrl || '');
   const [selectedColor, setSelectedColor] = useState('white');
@@ -155,9 +158,11 @@ export const ProductDetailPage: React.FC = () => {
     window.scrollTo(0, 0);
     if (fabric) {
         setMainImage(fabric.imageUrl);
-        setSelectedColor('white'); // Reset color on fabric change
+        const requested = searchParams.get('color') ?? 'white';
+        setSelectedColor(fabric.availableColors?.includes(requested) ? requested : 'white');
+        setShowColorPreview(true);
     }
-  }, [fabric]);
+  }, [fabric, searchParams]);
 
   if (!fabric) {
     return (
@@ -195,19 +200,19 @@ export const ProductDetailPage: React.FC = () => {
                     <div className="bg-white/50 backdrop-blur-xl p-4 rounded-lg">
                         <div className="mb-4">
                             <div className="aspect-square bg-stone-100/90 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg border-2 border-muted-gold/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-muted-gold/30 hover:-translate-y-1">
-                                <ManagedImage 
+                                {showColorPreview ? <FabricColorPreview women={fabric.useCases.includes('luxuryAbaya')} color={selectedColor} name={translate(fabric.nameKey)} /> : <ManagedImage 
                                     src={mainImage} 
                                     alt={`${translate(fabric.nameKey)} - Main View`} 
                                     pageName={pageName}
                                     sectionTitle="Main Gallery Image"
                                     className="w-full h-full object-cover rounded-md" 
-                                />
+                                />}
                             </div>
                         </div>
 
                         <div className="grid grid-cols-4 gap-2">
                         {fabric.galleryImages.map((img, idx) => (
-                            <button key={idx} onClick={() => setMainImage(img)} className={`aspect-square bg-stone-100/90 backdrop-blur-sm rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-brandAccent-700 border-2 transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-muted-gold/30 hover:-translate-y-0.5 ${mainImage === img ? 'ring-2 ring-brandAccent-700 border-brandAccent-700' : 'border-muted-gold/50'}`}>
+                            <button key={idx} onClick={() => {setMainImage(img);setShowColorPreview(false);}} className={`aspect-square bg-stone-100/90 backdrop-blur-sm rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-brandAccent-700 border-2 transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-muted-gold/30 hover:-translate-y-0.5 ${mainImage === img ? 'ring-2 ring-brandAccent-700 border-brandAccent-700' : 'border-muted-gold/50'}`}>
                                 <ManagedImage 
                                     src={img} 
                                     alt={`${translate(fabric.nameKey)} view ${idx + 1}`} 
@@ -233,7 +238,7 @@ export const ProductDetailPage: React.FC = () => {
                                 {fabric.availableColors.map(colorKey => (
                                 <button
                                     key={colorKey}
-                                    onClick={() => setSelectedColor(colorKey)}
+                                    onClick={() => {setSelectedColor(colorKey);setShowColorPreview(true);const next = new URLSearchParams(searchParams);next.set('color', colorKey);setSearchParams(next, {replace:true});}}
                                     aria-pressed={selectedColor === colorKey}
                                     className={`w-10 h-10 rounded-full focus:outline-none ring-offset-2 ring-offset-white/80 transition-all duration-150 ${selectedColor === colorKey ? 'ring-2 ring-brandAccent-700' : 'ring-1 ring-transparent hover:ring-1 hover:ring-stone-400'}`}
                                     title={translate(COLOR_PALETTE[colorKey]?.nameKey)}
@@ -251,7 +256,7 @@ export const ProductDetailPage: React.FC = () => {
                             </div>
                         )}
                         
-                        <p className="text-sm text-stone-600 mb-6" role="note">{language === 'ar' ? 'يرجى تأكيد المواصفات والتوفر واللون بعينة فعلية قبل الدفع. صور المعرض لا تتغير لتطابق اللون المحدد.' : 'Confirm specifications, availability and colour with a physical swatch before payment. Gallery photos do not change to represent the selected colour.'}</p>
+                        <p className="text-sm text-stone-600 mb-6" role="note">{language === 'ar' ? 'يرجى تأكيد المواصفات والتوفر واللون بعينة فعلية قبل الدفع. معاينة اللون تقريبية، وتبقى صور المعرض الأصلية متاحة أسفل المعاينة.' : 'Confirm specifications, availability and colour with a physical swatch before payment. Colour previews are illustrative; original gallery photographs remain available below the preview.'}</p>
                         <YieldEstimator fabric={fabric} />
 
                         <div className="flex items-center gap-4 mt-8">

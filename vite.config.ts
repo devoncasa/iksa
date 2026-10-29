@@ -5,7 +5,6 @@ export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
       ssr: { resolve: { conditions: ['module', 'import'] } },
-      optimizeDeps: { noDiscovery: true },
       server: { allowedHosts: ['terminal.local'] },
       define: {
         'process.env.API_KEY': 'undefined',

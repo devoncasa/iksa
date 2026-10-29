@@ -3,11 +3,13 @@ import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
 import { Button } from '../components/Button';
-import { MOCK_FABRICS, FABRIC_FILTERS, FEATURE_ICONS, COLOR_MARKUPS } from '../constants';
+import { MOCK_FABRICS, FABRIC_FILTERS, FEATURE_ICONS, COLOR_MARKUPS, COLOR_PALETTE } from '../constants';
 import { Fabric, Breadcrumb } from '../types';
 import { SEOMetadata } from '../components/SEOMetadata';
 import { ContentBlock } from '../components/ContentBlock';
 import { generateOrganizationSchema, generateWebsiteSchema, generateBreadcrumbSchema } from '../components/Schema';
+import { FabricColorPreview } from '../components/FabricColorPreview';
+import { cartUnitPrice } from '../lib/cart';
 import { ManagedImage } from '../components/ManagedImage';
 
 interface FabricFiltersState {
@@ -20,6 +22,8 @@ interface FabricFiltersState {
 const FabricCard: React.FC<{ fabric: Fabric; }> = ({ fabric }) => {
   const { translate } = useLanguage();
   
+  const [color, setColor] = useState('white');
+  const [preview, setPreview] = useState(true);
   const defaultThobeMeters = 2.9;
   const estimatedYield = Math.floor(fabric.rollLengthInMeters / defaultThobeMeters);
 
@@ -39,15 +43,18 @@ const FabricCard: React.FC<{ fabric: Fabric; }> = ({ fabric }) => {
       id={fabric.id} 
     >
       <div className="relative overflow-hidden rounded-lg border-2 border-muted-gold/50 shadow-sm transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-muted-gold/30 hover:-translate-y-1">
-        <ManagedImage 
+        {preview ? <div className="aspect-[4/3]"><FabricColorPreview women={fabric.useCases.includes('luxuryAbaya')} color={color} name={translate(fabric.nameKey)} /></div> : <ManagedImage 
             src={fabric.imageUrl} 
             alt={translate(fabric.nameKey)}
             pageName="Collections"
             sectionTitle={`Fabric Card: ${translate(fabric.nameKey)}`}
             className="w-full aspect-[4/3] object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 rounded-md"
-        />
+        />}
       </div>
       <div className="p-5 md:p-6 flex flex-col flex-grow">
+        <div className="flex flex-wrap gap-3 mb-4" role="group" aria-label={translate(fabric.nameKey)}>
+          {(fabric.availableColors ?? ['white']).map(key => <button type="button" key={key} aria-label={`${translate(fabric.nameKey)} — ${translate(COLOR_PALETTE[key]?.nameKey)}`} aria-pressed={color === key} title={translate(COLOR_PALETTE[key]?.nameKey)} onClick={() => {setColor(key);setPreview(true);}} className={`w-9 h-9 rounded-full border-2 ${color === key ? 'border-brandAccent-800 ring-2 ring-muted-gold' : 'border-stone-300'} ${COLOR_PALETTE[key]?.className}`} />)}
+        </div>
         <div className="flex-grow mb-4">
           <h3 className="text-xl md:text-2xl font-serif-display font-semibold text-brandAccent-800 mb-2">{translate(fabric.nameKey)}</h3> 
           <div className="text-stone-600 text-sm mb-3 space-x-2">
@@ -67,7 +74,7 @@ const FabricCard: React.FC<{ fabric: Fabric; }> = ({ fabric }) => {
               ) : null;
             })}
           </div>
-          {priceRange.min === priceRange.max ? (
+          {preview ? <p className="text-xl font-semibold text-brandAccent-800" aria-live="polite">${cartUnitPrice(fabric, color, COLOR_MARKUPS).toFixed(2)} <span className="text-sm">{translate('pricePerRoll')}</span></p> : priceRange.min === priceRange.max ? (
             <p className="text-xl md:text-2xl font-semibold text-brandAccent-800">${fabric.pricePerRoll.toFixed(2)} <span className="text-lg text-stone-600 font-normal">{translate('pricePerRoll')}</span></p> 
           ) : (
             <p className="text-xl md:text-2xl font-semibold text-brandAccent-800">
@@ -78,7 +85,7 @@ const FabricCard: React.FC<{ fabric: Fabric; }> = ({ fabric }) => {
         </div>
         
         <div className="mt-auto"> 
-          <Link to={`/collections/${fabric.id}`} className="block">
+          <Link to={`/collections/${fabric.id}?color=${color}`} className="block">
               <Button 
                 variant="primary" 
                 size="sm" 
