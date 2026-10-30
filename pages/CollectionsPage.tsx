@@ -1,3 +1,6 @@
+import {CustomerGuidance} from '../components/CustomerGuidance';
+import {customerGuidance} from '../locales/customerGuidance';
+import {interactionCopy} from '../locales/interactions';
 import { DiscoveryNav } from '../components/DiscoveryNav';
 import '../discovery.css';
 
@@ -87,16 +90,8 @@ const FabricCard: React.FC<{ fabric: Fabric; }> = ({ fabric }) => {
         </div>
         
         <div className="mt-auto"> 
-          <Link to={`/collections/${fabric.id}?color=${color}`} className="block">
-              <Button 
-                variant="primary" 
-                size="sm" 
-                fullWidth
-                aria-label={`${translate('viewDetails')} for ${translate(fabric.nameKey)}`}
-                className="focus:ring-offset-white py-2.5" 
-              >
-                {translate('viewDetails')}
-              </Button>
+          <Link to={`/collections/${fabric.id}?color=${color}`} className="block rounded-md bg-brandAccent-500 px-3 py-2.5 text-center text-sm font-semibold hover:bg-brandAccent-600" aria-label={`${translate('viewDetails')} — ${translate(fabric.nameKey)}`}>
+              {translate('viewDetails')}
           </Link>
         </div>
       </div>
@@ -144,7 +139,7 @@ const FabricFilter: React.FC<{
 
 
 export const CollectionsPage: React.FC = () => {
-  const { translate } = useLanguage();
+  const { translate, language } = useLanguage();
   const [filters, setFilters] = useState<FabricFiltersState>({
     useCase: 'all',
     feel: 'all',
@@ -184,6 +179,7 @@ export const CollectionsPage: React.FC = () => {
       <SEOMetadata
         titleKey="page_collections_title"
         descriptionKey="page_collections_description"
+        titleText={`${translate('nav','collections')} | hithobe`} descriptionText={customerGuidance[language].questions[1][1]}
         pagePath="/collections"
         schemas={schemas}
       />
@@ -195,20 +191,21 @@ export const CollectionsPage: React.FC = () => {
         heroSectionTitle="Collections Hero"
       >
           <h1 className="text-4xl sm:text-5xl font-serif-display font-bold text-warm-terracotta mb-4">{translate('collections_heroTitle')}</h1>
-          <p className="text-lg text-stone-700">{translate('collections_heroSubtitle')}</p>
-          <div className="mt-6 text-center md:text-left">
-            <Link to="/price-structure">
-                <Button variant="outline">{translate('collections_viewPricing')}</Button>
+          <p className="text-lg text-stone-700">{customerGuidance[language].aboutIntro}</p>
+          <div className="mt-6 text-center md:text-start">
+            <Link to="/price-structure" className="inline-block rounded-md border border-muted-gold px-5 py-2.5 hover:bg-stone-100">{translate('collections_viewPricing')}
             </Link>
           </div>
       </ContentBlock>
 
       <section className="discovery-launch"><h2>{translate('discovery_heading')}</h2><p>{translate('discovery_intro')}</p><DiscoveryNav /></section>
       <ContentBlock>
+        <p className="mb-4 text-sm">{customerGuidance[language].evidence}</p>
         <FabricFilter filters={filters} onFilterChange={handleFilterChange} />
+        <div className="filter-summary"><p role="status">{interactionCopy[language].results}: {filteredFabrics.length} / {MOCK_FABRICS.length}</p><button type="button" disabled={Object.values(filters).every(value=>value==='all')} onClick={()=>setFilters({useCase:'all',feel:'all',performance:'all',rollLength:'all'})}>{interactionCopy[language].reset}</button></div>
       </ContentBlock>
 
-      <section className="relative w-full py-12 md:py-16">
+      <section className="relative w-full py-4 md:py-6">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             {filteredFabrics.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"> 
@@ -226,7 +223,7 @@ export const CollectionsPage: React.FC = () => {
             )}
         </div>
       </section>
-      
+      <CustomerGuidance indices={[0,2]} cards/>
     </>
   );
 };

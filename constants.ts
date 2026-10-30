@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { NavLink, Fabric, LanguageCode, GarmentStyleAdvanced, GarmentSizeAdvanced } from './types';
+import { Fabric, LanguageCode, GarmentStyleAdvanced, GarmentSizeAdvanced } from './types';
 import {
   BreathableIcon, UVProtectionIcon, AntiYellowingIcon, CrispIcon, SoftDrapeIcon, SilkShineIcon, LightweightIcon, CoolTouchIcon, AntiStaticIcon, CreaseResistantIcon, EasyCareIcon,
 } from './components/icons';
@@ -8,32 +8,19 @@ import {
 export const DEFAULT_LANGUAGE: LanguageCode = LanguageCode.EN;
 
 export const LANGUAGES = [
+  { code: LanguageCode.TH, name: 'ไทย' },
   { code: LanguageCode.EN, name: 'English' },
   { code: LanguageCode.AR, name: 'العربية' },
-  { code: LanguageCode.TH, name: 'ไทย' },
+  { code: LanguageCode.FR, name: 'Français' },
+  { code: LanguageCode.BN, name: 'বাংলা' },
+  { code: LanguageCode.HA, name: 'Hausa' },
+  { code: LanguageCode.SW, name: 'Kiswahili' },
+  { code: LanguageCode.SO, name: 'Soomaali' },
+  { code: LanguageCode.UR, name: 'اردو' },
 ];
 
-export const NAV_LINKS: NavLink[] = [
-  { path: '/', labelKey: 'main' },
-  { path: '/about-us', labelKey: 'aboutUs' },
-  { path: '/collections', labelKey: 'collections' },
-  { path: '/price-structure', labelKey: 'pricing' },
-  { path: '/thobe-guide', labelKey: 'thobeGuide' },
-  { path: '/for-artisans', labelKey: 'forArtisans' },
-  { path: '/artisans-tool', labelKey: 'artisansTool' },
-  { path: '/contact', labelKey: 'contact' },
-  { path: '/checkout', labelKey: 'checkout'},
-];
 
-export const SOCIAL_MEDIA_LINKS = [
-    { name: 'Facebook', icon: 'https://i.postimg.cc/YCMfNbVb/facebook.webp', url: `https://facebook.com/iksatextile` },
-    { name: 'Instagram', icon: 'https://i.postimg.cc/P5ybS1nh/instagram.webp', url: `https://instagram.com/iksatextile` },
-    { name: 'TikTok', icon: 'https://i.postimg.cc/cJJR26d3/tiktok.webp', url: `https://tiktok.com/@iksatextile` },
-    { name: 'YouTube', icon: 'https://i.postimg.cc/hG3LBgG5/youtube.webp', url: `https://youtube.com/@iksatextile` },
-    { name: 'LinkedIn', icon: 'https://i.postimg.cc/bNXRrzRX/linkedin.webp', url: `https://linkedin.com/company/iksatextile` },
-    { name: 'Twitter', icon: 'https://i.postimg.cc/632d6S25/twitter.webp', url: `https://twitter.com/iksatextile` },
-    { name: 'Pinterest', icon: 'https://i.postimg.cc/JnfjsqZ3/pinterest.webp', url: `https://pinterest.com/iksatextile` },
-];
+export const SOCIAL_MEDIA_LINKS: {name:string;icon:string;url:string}[] = [];
 
 export const COLOR_PALETTE: Record<string, { nameKey: string, className: string }> = {
   white: { nameKey: 'colorWhite', className: 'bg-white border-stone-300' },
@@ -281,68 +268,68 @@ export const FEATURE_ICONS: Record<string, React.FC<any>> = {
 };
 
 export const SECTION_BACKGROUND_IMAGES: string[] = [
-  "https://i.postimg.cc/FK3XkcH5/IKSA-section-background-0011.webp",
-  "https://i.postimg.cc/T35ZBmmL/IKSA-section-background-00110.webp",
-  "https://i.postimg.cc/SNvBZVXb/IKSA-section-background-00111.webp",
-  "https://i.postimg.cc/TP8Zxwqk/IKSA-section-background-00112.webp",
-  "https://i.postimg.cc/yNF28HL7/IKSA-section-background-00113.webp",
-  "https://i.postimg.cc/4dPMp1CM/IKSA-section-background-00114.webp",
-  "https://i.postimg.cc/B64k8VzH/IKSA-section-background-00115.webp",
-  "https://i.postimg.cc/gj07s6m0/IKSA-section-background-00116.webp",
-  "https://i.postimg.cc/XqDzz7Yk/IKSA-section-background-00117.webp",
-  "https://i.postimg.cc/vHkK7BjQ/IKSA-section-background-00118.webp",
-  "https://i.postimg.cc/y8RbLK40/IKSA-section-background-00119.webp",
-  "https://i.postimg.cc/kgVm9Lr5/IKSA-section-background-0012.webp",
-  "https://i.postimg.cc/sDv8ZST6/IKSA-section-background-00120.webp",
-  "https://i.postimg.cc/KYysVWxw/IKSA-section-background-00121.webp",
-  "https://i.postimg.cc/3NWLm5F4/IKSA-section-background-00122.webp",
-  "https://i.postimg.cc/GpJS1jp2/IKSA-section-background-00123.webp",
-  "https://i.postimg.cc/vBY2861v/IKSA-section-background-00124.webp",
-  "https://i.postimg.cc/MT9PnKVJ/IKSA-section-background-00125.webp",
-  "https://i.postimg.cc/tJfBzSBr/IKSA-section-background-00126.webp",
-  "https://i.postimg.cc/4N7L3G3j/IKSA-section-background-00127.webp",
-  "https://i.postimg.cc/pXw0hShr/IKSA-section-background-00128.webp",
-  "https://i.postimg.cc/fRY8xvmK/IKSA-section-background-00129.webp",
-  "https://i.postimg.cc/nz180Jm3/IKSA-section-background-0013.webp",
-  "https://i.postimg.cc/JhmPKBQW/IKSA-section-background-00130.webp",
-  "https://i.postimg.cc/YS38PqXL/IKSA-section-background-00131.webp",
-  "https://i.postimg.cc/tJLz61gw/IKSA-section-background-00132.webp",
-  "https://i.postimg.cc/k4gwP3Z1/IKSA-section-background-00133.webp",
-  "https://i.postimg.cc/vB2hQ2wQ/IKSA-section-background-00134.webp",
-  "https://i.postimg.cc/T1y9hjTn/IKSA-section-background-00135.webp",
-  "https://i.postimg.cc/xj75hZP5/IKSA-section-background-00136.webp",
-  "https://i.postimg.cc/qvHLMCSC/IKSA-section-background-00137.webp",
-  "https://i.postimg.cc/bNtghRCh/IKSA-section-background-00138.webp",
-  "https://i.postimg.cc/DwQcWw3p/IKSA-section-background-00139.webp",
-  "https://i.postimg.cc/RZjz0G9L/IKSA-section-background-0014.webp",
-  "https://i.postimg.cc/LsH3jFH9/IKSA-section-background-00140.webp",
-  "https://i.postimg.cc/g0NqDtJv/IKSA-section-background-00141.webp",
-  "https://i.postimg.cc/4dyvFv7j/IKSA-section-background-00142.webp",
-  "https://i.postimg.cc/FzJyh9xZ/IKSA-section-background-00143.webp",
-  "https://i.postimg.cc/wvr5KtDM/IKSA-section-background-00144.webp",
-  "https://i.postimg.cc/SjFWswTp/IKSA-section-background-00145.webp",
-  "https://i.postimg.cc/RCj8Kh2v/IKSA-section-background-00146.webp",
-  "https://i.postimg.cc/y8Kbp5V5/IKSA-section-background-00147.webp",
-  "https://i.postimg.cc/BQHzgsGH/IKSA-section-background-00148.webp",
-  "https://i.postimg.cc/sgJ0kcx2/IKSA-section-background-00149.webp",
-  "https://i.postimg.cc/Jn8VNnsy/IKSA-section-background-0015.webp",
-  "https://i.postimg.cc/wBTbgmRQ/IKSA-section-background-00150.webp",
-  "https://i.postimg.cc/d0HN1V8P/IKSA-section-background-00151.webp",
-  "https://i.postimg.cc/wvnWX4fw/IKSA-section-background-00152.webp",
-  "https://i.postimg.cc/x8H6tGBn/IKSA-section-background-00153.webp",
-  "https://i.postimg.cc/LXJCZFTq/IKSA-section-background-00154.webp",
-  "https://i.postimg.cc/tJRKcMtp/IKSA-section-background-0016.webp",
-  "https://i.postimg.cc/T1kzvJCm/IKSA-section-background-0017.webp",
-  "https://i.postimg.cc/XNQS5n4J/IKSA-section-background-0018.webp",
-  "https://i.postimg.cc/HsnG4Fkt/IKSA-section-background-0019.webp"
+  "/images/hithobe/editorial/plain-weave-ivory-1280.webp",
+  "/images/hithobe/editorial/twill-sand-1280.webp",
+  "/images/hithobe/editorial/linen-natural-1280.webp",
+  "/images/hithobe/editorial/cotton-white-1280.webp",
+  "/images/hithobe/editorial/satin-pearl-1280.webp",
+  "/images/hithobe/editorial/wool-grey-1280.webp",
+  "/images/hithobe/editorial/crepe-black-1280.webp",
+  "/images/hithobe/editorial/weave-blue-1280.webp",
+  "/images/hithobe/editorial/drape-ivory-1280.webp",
+  "/images/hithobe/editorial/drape-charcoal-1280.webp",
+  "/images/hithobe/editorial/drape-taupe-1280.webp",
+  "/images/hithobe/editorial/drape-white-1280.webp",
+  "/images/hithobe/editorial/drape-sage-1280.webp",
+  "/images/hithobe/editorial/drape-blue-1280.webp",
+  "/images/hithobe/editorial/thobe-saudi-1280.webp",
+  "/images/hithobe/editorial/kandura-emirati-1280.webp",
+  "/images/hithobe/editorial/dishdasha-omani-1280.webp",
+  "/images/hithobe/editorial/thobe-navy-1280.webp",
+  "/images/hithobe/editorial/abaya-sand-1280.webp",
+  "/images/hithobe/editorial/abaya-charcoal-1280.webp",
+  "/images/hithobe/editorial/palette-warm-1280.webp",
+  "/images/hithobe/editorial/palette-cool-1280.webp",
+  "/images/hithobe/editorial/palette-earth-1280.webp",
+  "/images/hithobe/editorial/palette-evening-1280.webp",
+  "/images/hithobe/editorial/care-washing-1280.webp",
+  "/images/hithobe/editorial/care-ironing-1280.webp",
+  "/images/hithobe/editorial/care-storage-1280.webp",
+  "/images/hithobe/editorial/sample-inspection-1280.webp",
+  "/images/hithobe/editorial/sample-measuring-1280.webp",
+  "/images/hithobe/editorial/sample-shade-1280.webp",
+  "/images/hithobe/editorial/plain-weave-ivory-1280.webp",
+  "/images/hithobe/editorial/twill-sand-1280.webp",
+  "/images/hithobe/editorial/linen-natural-1280.webp",
+  "/images/hithobe/editorial/cotton-white-1280.webp",
+  "/images/hithobe/editorial/satin-pearl-1280.webp",
+  "/images/hithobe/editorial/wool-grey-1280.webp",
+  "/images/hithobe/editorial/crepe-black-1280.webp",
+  "/images/hithobe/editorial/weave-blue-1280.webp",
+  "/images/hithobe/editorial/drape-ivory-1280.webp",
+  "/images/hithobe/editorial/drape-charcoal-1280.webp",
+  "/images/hithobe/editorial/drape-taupe-1280.webp",
+  "/images/hithobe/editorial/drape-white-1280.webp",
+  "/images/hithobe/editorial/drape-sage-1280.webp",
+  "/images/hithobe/editorial/drape-blue-1280.webp",
+  "/images/hithobe/editorial/thobe-saudi-1280.webp",
+  "/images/hithobe/editorial/kandura-emirati-1280.webp",
+  "/images/hithobe/editorial/dishdasha-omani-1280.webp",
+  "/images/hithobe/editorial/thobe-navy-1280.webp",
+  "/images/hithobe/editorial/abaya-sand-1280.webp",
+  "/images/hithobe/editorial/abaya-charcoal-1280.webp",
+  "/images/hithobe/editorial/palette-warm-1280.webp",
+  "/images/hithobe/editorial/palette-cool-1280.webp",
+  "/images/hithobe/editorial/palette-earth-1280.webp",
+  "/images/hithobe/editorial/palette-evening-1280.webp"
 ];
 
 export const THOBE_GUIDE_BACKGROUND_IMAGES: string[] = [
-  'https://i.postimg.cc/q7x2D1rD/article-regional-styles.webp',
-  'https://i.postimg.cc/5N18qDML/article-sundus-casa.webp',
-  'https://i.postimg.cc/9Q2w0h1G/article-fabric-science.webp',
-  'https://i.postimg.cc/2j5T00Fw/inspiration-kandura.webp',
-  'https://i.postimg.cc/k4GkYyv0/inspiration-abaya.webp'
+  '/images/hithobe/editorial/thobe-saudi-1280.webp',
+  '/images/hithobe/editorial/palette-warm-1280.webp',
+  '/images/hithobe/editorial/plain-weave-ivory-1280.webp',
+  '/images/hithobe/editorial/kandura-emirati-1280.webp',
+  '/images/hithobe/editorial/abaya-charcoal-1280.webp'
 ];
 
 export const getRandomImage = (imageArray: string[], currentImage?: string): string => {

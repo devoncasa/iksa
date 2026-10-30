@@ -122,7 +122,7 @@ export const ImageReport: React.FC = () => {
       const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data, null, 2))}`;
       const link = document.createElement("a");
       link.href = jsonString;
-      link.download = "iksa_image_report.json";
+      link.download = "hithobe_image_report.json";
       link.click();
     } else { // CSV
         const header = Object.keys(data[0]).join(',');
@@ -130,7 +130,7 @@ export const ImageReport: React.FC = () => {
         const csvString = `data:text/csv;charset=utf-8,${encodeURIComponent([header, ...rows].join('\n'))}`;
         const link = document.createElement("a");
         link.href = csvString;
-        link.download = "iksa_image_report.csv";
+        link.download = "hithobe_image_report.csv";
         link.click();
     }
   };

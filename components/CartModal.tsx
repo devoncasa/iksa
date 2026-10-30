@@ -1,10 +1,11 @@
 
-import React from 'react';
+import React,{useRef,useEffect} from 'react';
+import {interactionCopy} from '../locales/interactions';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import { useLanguage } from '../hooks/useLanguage';
 import { MOCK_FABRICS, COLOR_MARKUPS, COLOR_PALETTE } from '../constants';
-import { cartLineKey, cartUnitPrice } from '../lib/cart';
+import { cartLineKey, cartUnitPrice, validQuantity, MAX_ROLLS } from '../lib/cart';
 import { Button } from './Button';
 import { CloseIcon, TrashIcon } from './icons';
 import { ManagedImage } from './ManagedImage';
@@ -16,7 +17,15 @@ interface CartModalProps {
 
 export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
   const { cart, updateQuantity, removeFromCart, getCartTotal } = useCart();
-  const { translate } = useLanguage();
+  const { translate,language } = useLanguage();
+  const dialog=useRef<HTMLDialogElement>(null);
+  useEffect(()=>{
+    if(!isOpen)return;
+    const opener=document.activeElement as HTMLElement|null;
+    const element=dialog.current;
+    element?.showModal();
+    return()=>{element?.close();if(opener?.isConnected)opener.focus();};
+  },[isOpen]);
   const navigate = useNavigate();
 
   const { totalPrice } = getCartTotal();
@@ -29,15 +38,15 @@ export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] transition-opacity duration-300 ease-in-out"
-      onClick={onClose}
-      role="dialog"
+    <dialog ref={dialog}
+      className="cart-dialog"
+      onClick={e=>{if(e.target===e.currentTarget)onClose();}}
+      onCancel={e=>{e.preventDefault();onClose();}}
       aria-modal="true"
       aria-labelledby="cartModalTitle"
     >
       <div
-        className="fixed top-0 right-0 h-full w-full max-w-md bg-stone-50/60 backdrop-blur-xl shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out"
+        className="absolute top-0 end-0 h-full w-full max-w-md bg-stone-50/60 backdrop-blur-xl shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between p-6 border-b border-stone-200/50">
@@ -66,7 +75,7 @@ export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
 
                 return (
                   <li key={cartLineKey(item)} className="py-4 flex">
-                    <div className="h-20 w-20 mr-4 flex-shrink-0">
+                    <div className="h-20 w-20 me-4 flex-shrink-0">
                       <ManagedImage 
                           src={fabric.imageUrl} 
                           alt={translate(fabric.nameKey)} 
@@ -80,15 +89,15 @@ export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
                       <p className="text-sm text-stone-500">{fabric.rollLengthInMeters} {translate('perRollUnit')} · {translate(COLOR_PALETTE[item.color ?? 'white']?.nameKey)}</p>
                       <p className="text-sm font-semibold text-brandAccent-700">${cartUnitPrice(fabric, item.color, COLOR_MARKUPS).toFixed(2)}</p>
                     </div>
-                    <div className="flex flex-col items-end justify-between ml-4">
+                    <div className="flex flex-col items-end justify-between ms-4">
                       <div className="flex items-center border border-stone-300 rounded-md bg-white/50">
                         <input
-                          type="number"
-                          min="1"
+                          type="number" dir="ltr"
+                          min="1" max={MAX_ROLLS} step={1}
                           value={item.quantity}
-                          onChange={(e) => updateQuantity(item.fabricId, parseInt(e.target.value, 10), item.color)}
+                          onChange={e=>{const quantity=e.target.valueAsNumber;if(validQuantity(quantity))updateQuantity(item.fabricId,quantity,item.color);}}
                           className="w-12 text-center bg-transparent border-none focus:ring-0 text-sm"
-                          aria-label={`Quantity for ${translate(fabric.nameKey)}`}
+                          aria-label={`${interactionCopy[language].quantity} — ${translate(fabric.nameKey)} — ${translate(COLOR_PALETTE[item.color ?? 'white']?.nameKey)}`}
                         />
                       </div>
                        <button onClick={() => removeFromCart(item.fabricId, item.color)} className="text-stone-500 hover:text-red-600 transition-colors" aria-label={`${translate('removeItem')} ${translate(fabric.nameKey)} — ${translate(COLOR_PALETTE[item.color ?? 'white']?.nameKey)}`}>
@@ -114,6 +123,6 @@ export const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
           </div>
         )}
       </div>
-    </div>
+    </dialog>
   );
 };

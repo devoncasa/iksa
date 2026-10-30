@@ -18,10 +18,10 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   useEffect(() => {
     // Set document attributes for language and direction
     document.documentElement.lang = language;
-    document.documentElement.dir = language === LanguageCode.AR ? 'rtl' : 'ltr';
-    document.body.dir = language === LanguageCode.AR ? 'rtl' : 'ltr'; // Also set on body
+    document.documentElement.dir = [LanguageCode.AR,LanguageCode.UR].includes(language) ? 'rtl' : 'ltr';
+    document.body.dir = [LanguageCode.AR,LanguageCode.UR].includes(language) ? 'rtl' : 'ltr'; // Also set on body
     // Save language preference
-    localStorage.setItem('iksa-language', language);
+    try { localStorage.setItem('hithobe-language', language); } catch { /* Storage may be disabled. */ }
   }, [language]);
 
   const translate = useCallback((key: string, subKey?: string): string => {
@@ -55,6 +55,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 
   const setLanguage = (newLanguage: LanguageCode) => {
     if (newLanguage === language) return;
+    try {localStorage.setItem('hithobe-language',newLanguage);} catch {}
     window.location.assign(localizedPath(window.location.pathname, newLanguage) + window.location.search + window.location.hash);
   };
 

@@ -1,0 +1,152 @@
+[
+  {
+    "id": "plain-weave-ivory",
+    "category": "Texture",
+    "scene": "Ivory plain-weave cloth in raking window light"
+  },
+  {
+    "id": "twill-sand",
+    "category": "Texture",
+    "scene": "Macro sand twill cloth over wooden edge"
+  },
+  {
+    "id": "linen-natural",
+    "category": "Texture",
+    "scene": "Natural slub linen folded on stone"
+  },
+  {
+    "id": "cotton-white",
+    "category": "Texture",
+    "scene": "Crisp white cotton poplin folds on pale stone"
+  },
+  {
+    "id": "satin-pearl",
+    "category": "Texture",
+    "scene": "Pearl satin subtle sheen sweeping folds"
+  },
+  {
+    "id": "wool-grey",
+    "category": "Texture",
+    "scene": "Grey fine wool weave beside tailor chalk macro"
+  },
+  {
+    "id": "crepe-black",
+    "category": "Texture",
+    "scene": "Black crepe granular texture macro"
+  },
+  {
+    "id": "weave-blue",
+    "category": "Texture",
+    "scene": "Navy cloth fine warp and weft macro"
+  },
+  {
+    "id": "drape-ivory",
+    "category": "Drape",
+    "scene": "Ivory cloth hanging in long folds from brass rail"
+  },
+  {
+    "id": "drape-charcoal",
+    "category": "Drape",
+    "scene": "Charcoal cloth cascading from oak worktable"
+  },
+  {
+    "id": "drape-taupe",
+    "category": "Drape",
+    "scene": "Taupe cloth billowing by atelier window"
+  },
+  {
+    "id": "drape-white",
+    "category": "Drape",
+    "scene": "White thobe cloth against diffuse window light"
+  },
+  {
+    "id": "drape-sage",
+    "category": "Drape",
+    "scene": "Sage cloth gathered in spiral on limestone"
+  },
+  {
+    "id": "drape-blue",
+    "category": "Drape",
+    "scene": "Muted blue cloth folded over tailor stool"
+  },
+  {
+    "id": "thobe-saudi",
+    "category": "Styling",
+    "scene": "Adult man crisp white Saudi thobe stand collar pale corridor full length"
+  },
+  {
+    "id": "kandura-emirati",
+    "category": "Styling",
+    "scene": "Adult man ivory collarless Emirati kandura long tassel limestone courtyard full length"
+  },
+  {
+    "id": "dishdasha-omani",
+    "category": "Styling",
+    "scene": "Adult man ivory Omani dishdasha short tassel kumma cap doorway portrait"
+  },
+  {
+    "id": "thobe-navy",
+    "category": "Styling",
+    "scene": "Adult man navy thobe subtle collar by sunlit window"
+  },
+  {
+    "id": "abaya-sand",
+    "category": "Styling",
+    "scene": "Adult woman loose sand abaya matching shayla shaded courtyard full length"
+  },
+  {
+    "id": "abaya-charcoal",
+    "category": "Styling",
+    "scene": "Adult woman charcoal abaya matching shayla minimal stone arcade full length"
+  },
+  {
+    "id": "palette-warm",
+    "category": "Coordination",
+    "scene": "Ivory sand taupe chestnut fabric swatches overhead"
+  },
+  {
+    "id": "palette-cool",
+    "category": "Coordination",
+    "scene": "Pearl slate navy grey fabric swatches on pale timber overhead"
+  },
+  {
+    "id": "palette-earth",
+    "category": "Coordination",
+    "scene": "Olive clay cream chocolate fabric rolls on shelf"
+  },
+  {
+    "id": "palette-evening",
+    "category": "Coordination",
+    "scene": "Black navy pearl cloth silver cufflinks elegant still life"
+  },
+  {
+    "id": "care-washing",
+    "category": "Care",
+    "scene": "Hands rinsing ivory fabric swatch in porcelain basin"
+  },
+  {
+    "id": "care-ironing",
+    "category": "Care",
+    "scene": "Unbranded steam iron beside folded white shirt on ironing board"
+  },
+  {
+    "id": "care-storage",
+    "category": "Care",
+    "scene": "Garment bags folded neutral cloth on cedar shelves"
+  },
+  {
+    "id": "sample-inspection",
+    "category": "Sourcing",
+    "scene": "Hands inspecting plain swatch against window light"
+  },
+  {
+    "id": "sample-measuring",
+    "category": "Sourcing",
+    "scene": "Metric tape across fabric width on tailor workbench"
+  },
+  {
+    "id": "sample-shade",
+    "category": "Sourcing",
+    "scene": "Unlabelled neutral shade cards folded fabrics notebook overhead"
+  }
+]

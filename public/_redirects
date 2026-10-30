@@ -1,7 +1,11 @@
+# Canonical host rules for a future authorized production release.
+http://hithobe.com/* https://www.hithobe.com/:splat 301!
+http://www.hithobe.com/* https://www.hithobe.com/:splat 301!
+https://hithobe.com/* https://www.hithobe.com/:splat 301!
+/en / 301
+/en/* /:splat 301
 /our-collections.html /collections 301
 /thobe-guide.html /thobe-guide 301
 /sourcing-partnerships.html /for-artisans 301
-/checkout /index.html 200
-/ar/checkout /index.html 200
-/th/checkout /index.html 200
+# Prerendered routes are served before this non-forced missing-page fallback.
 /* /404.html 404

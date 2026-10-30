@@ -1,3 +1,6 @@
+import {interfaceCopy} from '../locales/interface';
+import {CustomerGuidance} from '../components/CustomerGuidance';
+import {editorialShot} from '../lib/editorial';
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
@@ -12,6 +15,7 @@ import { ManagedImage } from '../components/ManagedImage';
 
 
 const GuideTable: React.FC<{ caption: string; headersJSON: string; rowsJSON:string }> = ({ caption, headersJSON, rowsJSON }) => {
+    const {language}=useLanguage();
     try {
         const headers = JSON.parse(headersJSON);
         const rows = JSON.parse(rowsJSON);
@@ -28,7 +32,7 @@ const GuideTable: React.FC<{ caption: string; headersJSON: string; rowsJSON:stri
                         <thead className="bg-creamy-beige/30">
                             <tr>
                                 {headers.map((header: string, index: number) => (
-                                    <th key={index} scope="col" className="px-6 py-4 text-left text-xs font-semibold text-warm-terracotta uppercase tracking-wider">
+                                    <th key={index} scope="col" className="px-6 py-4 text-start text-xs font-semibold text-warm-terracotta uppercase tracking-wider">
                                         {header}
                                     </th>
                                 ))}
@@ -51,7 +55,7 @@ const GuideTable: React.FC<{ caption: string; headersJSON: string; rowsJSON:stri
         );
     } catch (error) {
         console.error("Failed to parse table JSON:", error);
-        return <p className="text-red-500">Error rendering table.</p>;
+        return <p className="text-red-500">{interfaceCopy[language].tableError}</p>;
     }
 };
 
@@ -85,7 +89,7 @@ const useScrollSpy = (ids: string[], options?: IntersectionObserverInit): string
 
 const ArticleCard: React.FC<{id: string; children: React.ReactNode;}> = ({ id, children }) => {
     return (
-         <section id={id} className="scroll-mt-28 p-8 md:p-12 rounded-lg">
+         <section id={id} className="scroll-mt-28 p-6 md:p-8 rounded-lg">
             <article className="prose prose-stone lg:prose-lg max-w-none 
                 text-deep-chocolate 
                 prose-headings:text-warm-terracotta prose-h1:text-muted-gold 
@@ -107,7 +111,7 @@ const ImageWithInfo: React.FC<{ src: string, alt: string, className?: string }> 
                 alt={alt} 
                 pageName="Thobe Guide"
                 sectionTitle={`Article Image: ${alt}`}
-                className="rounded-lg shadow-xl w-full object-cover aspect-[4/3]"
+                className={`rounded-lg shadow-xl w-full ${editorialShot(src)?.category==='Styling'?'object-contain max-h-[36rem]':'object-cover aspect-[4/3]'}`}
             />
         </figure>
     );
@@ -195,7 +199,7 @@ export const ThobeGuidePage: React.FC = () => {
 
             <ContentBlock 
                 isHero
-                heroImageSrc="https://i.postimg.cc/2j5T00Fw/inspiration-kandura.webp"
+                heroImageSrc="/images/hithobe/editorial/kandura-emirati-1280.webp"
                 heroImageAlt={translate('thobeGuide_hero_alt')}
                 heroPageName="Thobe Guide"
                 heroSectionTitle="Thobe Guide Hero"
@@ -208,7 +212,7 @@ export const ThobeGuidePage: React.FC = () => {
                 </div>
             </ContentBlock>
 
-            <section id="guide-content-start" className="relative w-full py-12 md:py-16 scroll-mt-24">
+            <section id="guide-content-start" className="relative w-full py-4 md:py-6 scroll-mt-24">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Mobile Navigation */}
                     <div className="lg:hidden mb-8">
@@ -270,7 +274,7 @@ export const ThobeGuidePage: React.FC = () => {
                             </nav>
                         </aside>
 
-                        <main className="lg:col-span-9 space-y-16 bg-[rgba(255,255,255,0.70)] backdrop-blur-sm rounded-2xl shadow-2xl p-4 md:p-0">
+                        <article className="lg:col-span-9 space-y-6 md:space-y-8 bg-[rgba(255,255,255,0.70)] backdrop-blur-sm rounded-2xl shadow-2xl p-4 md:p-0">
                             <ArticleCard id="colors">
                                 <h2>{translate('thobeGuide_full', 'color_title')}</h2>
                                 <StyledText text={translate('thobeGuide_full', 'color_intro')} />
@@ -279,7 +283,7 @@ export const ThobeGuidePage: React.FC = () => {
                                 <StyledText text={translate('thobeGuide_full', 'color_white_content')} />
                                 <h4>{translate('thobeGuide_full', 'color_black_title')}</h4>
                                 <StyledText text={translate('thobeGuide_full', 'color_black_content')} />
-                                <ImageWithInfo src="https://i.postimg.cc/5N18qDML/article-sundus-casa.webp" alt={translate('thobeGuide_colors_alt')} />
+                                <ImageWithInfo src="/images/hithobe/editorial/palette-warm-1280.webp" alt={translate('thobeGuide_colors_alt')} />
                                 <h3>{translate('thobeGuide_full', 'color_expressive_title')}</h3>
                                 <h4>{translate('thobeGuide_full', 'color_brown_title')}</h4>
                                 <StyledText text={translate('thobeGuide_full', 'color_brown_content')} />
@@ -299,7 +303,7 @@ export const ThobeGuidePage: React.FC = () => {
                                 <StyledText text={translate('thobeGuide_full', 'artistry_intro')} />
                                 <h3>{translate('thobeGuide_full', 'artistry_minimalism_title')}</h3>
                                 <StyledText text={translate('thobeGuide_full', 'artistry_minimalism_content')} />
-                                <ImageWithInfo src="https://i.postimg.cc/q7x2D1rD/article-regional-styles.webp" alt={translate('thobeGuide_minimalism_alt')} />
+                                <ImageWithInfo src="/images/hithobe/editorial/thobe-saudi-1280.webp" alt={translate('thobeGuide_minimalism_alt')} />
                                 <h3>{translate('thobeGuide_full', 'artistry_embroidery_title')}</h3>
                                 <StyledText text={translate('thobeGuide_full', 'artistry_embroidery_content')} />
                                 <h4>{translate('thobeGuide_full', 'artistry_tatreez_title')}</h4>
@@ -314,7 +318,7 @@ export const ThobeGuidePage: React.FC = () => {
                                 <StyledText text={translate('thobeGuide_full', 'trends_slimfit_content')} />
                                 <h3>{translate('thobeGuide_full', 'trends_fabric_title')}</h3>
                                 <StyledText text={translate('thobeGuide_full', 'trends_fabric_content')} />
-                                <ImageWithInfo src="https://i.postimg.cc/9Q2w0h1G/article-fabric-science.webp" alt={translate('thobeGuide_fabric_alt')} />
+                                <ImageWithInfo src="/images/hithobe/editorial/plain-weave-ivory-1280.webp" alt={translate('thobeGuide_fabric_alt')} />
                                 <h3>{translate('thobeGuide_full', 'trends_fusion_title')}</h3>
                                 <StyledText text={translate('thobeGuide_full', 'trends_fusion_content')} />
                                 <h3>{translate('thobeGuide_full', 'trends_custom_title')}</h3>
@@ -331,7 +335,7 @@ export const ThobeGuidePage: React.FC = () => {
                                 <h2>{translate('thobeGuide_full', 'visuals_title')}</h2>
                                 <StyledText text={translate('thobeGuide_full', 'visuals_content')} />
                             </ArticleCard>
-                        </main>
+                        </article>
                     </div>
                 </div>
             </section>
@@ -340,13 +344,13 @@ export const ThobeGuidePage: React.FC = () => {
                 <button
                     onClick={scrollToGuideStart}
                     title={translate('thobeGuide_backToTopics') || 'View Topics'}
-                    aria-label="Scroll back to topics menu"
-                    className="flex fixed bottom-4 right-4 z-50 w-12 h-12 rounded-full bg-creamy-beige/70 backdrop-blur-sm text-deep-chocolate items-center justify-center shadow-lg transition-all duration-300 ease-in-out hover:bg-creamy-beige hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-brandAccent-700 focus:ring-offset-2"
+                    aria-label={translate('thobeGuide_backToTopics')}
+                    className="flex fixed bottom-4 end-4 z-50 w-12 h-12 rounded-full bg-creamy-beige/70 backdrop-blur-sm text-deep-chocolate items-center justify-center shadow-lg transition-all duration-300 ease-in-out hover:bg-creamy-beige hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-brandAccent-700 focus:ring-offset-2"
                 >
                     <ArrowUpIcon className="w-6 h-6" />
                 </button>
             )}
-        <EditorialGallery />
+        <CustomerGuidance showSources/><EditorialGallery compact />
 </>
     );
 };

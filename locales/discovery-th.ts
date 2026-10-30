@@ -116,3 +116,10 @@ export const discoveryThai: Record<string,string> = {
   "Net kg = length (m) × width (m) × GSM ÷ 1000 × rolls. Gross kg = net kg + your total packing weight.": "น้ำหนักสุทธิ (กก.) = ความยาว (ม.) × หน้ากว้าง (ม.) × GSM ÷ 1000 × จำนวนม้วน น้ำหนักรวม = น้ำหนักสุทธิ + น้ำหนักบรรจุภัณฑ์รวม",
   "Length utilisation is not cutting-marker area efficiency. This tool does not model pattern nesting, shrinkage tests, volumetric freight weight, tariffs or shipping charges.": "สัดส่วนการใช้ความยาวไม่ใช่ประสิทธิภาพพื้นที่มาร์กเกอร์ เครื่องมือนี้ไม่ได้จำลองการวางแพตเทิร์น ผลทดสอบการหด น้ำหนักปริมาตร อากร หรือค่าขนส่ง"
 };
+
+Object.assign(discoveryThai,{
+'Open enquiry draft in email':'ไปยังแบบฟอร์มสอบถาม',
+'Continue to enquiry form':'ไปยังแบบฟอร์มสอบถาม',
+'Review your brief on the contact page before submitting. This is an enquiry, not an order.':'ตรวจรายละเอียดในหน้าติดต่อก่อนส่ง แบบฟอร์มนี้เป็นคำสอบถาม ยังไม่ใช่คำสั่งซื้อ',
+'All':'ทั้งหมด','Texture':'พื้นผิว','Drape':'การทิ้งตัว','Styling':'สไตล์','Coordination':'การจับคู่สี','Care':'การดูแล','Sourcing':'เลือกตัวอย่าง'
+});

@@ -2,6 +2,7 @@ import React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
+  as?:'button'|'span';
   variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
@@ -9,13 +10,14 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button: React.FC<ButtonProps> = ({
   children,
+  as:Tag='button',
   variant = 'primary',
   size = 'md',
   fullWidth = false,
   className = '',
   ...props
 }) => {
-  const baseStyles = 'font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-150 ease-in-out transform hover:-translate-y-px active:scale-95 active:translate-y-0';
+  const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-150 ease-in-out transform hover:-translate-y-px active:scale-95 active:translate-y-0';
   
   let variantStyles = '';
   switch (variant) {
@@ -49,11 +51,11 @@ export const Button: React.FC<ButtonProps> = ({
   const widthStyles = fullWidth ? 'w-full' : '';
 
   return (
-    <button
+    <Tag
       className={`${baseStyles} ${variantStyles} ${sizeStyles} ${widthStyles} ${className}`}
       {...props}
     >
       {children}
-    </button>
+    </Tag>
   );
 };

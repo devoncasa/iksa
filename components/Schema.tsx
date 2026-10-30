@@ -13,26 +13,16 @@ export const generateOrganizationSchema = (translate: (key: string, subKey?: str
     '@type': 'ContactPoint',
     'telephone': '+66-81-851-9922',
     'contactType': 'Customer Service',
-    'areaServed': 'WW',
-    'availableLanguage': ['en', 'ar'],
   },
   'address': {
     '@type': 'PostalAddress',
+    'name': 'HiThobe Textiles',
     'streetAddress': translate('contact_addressLine2'),
     'addressLocality': 'Bangkok',
     'addressRegion': 'Bangrak',
     'postalCode': '10500',
     'addressCountry': 'TH'
-  },
-  'sameAs': [
-    "https://facebook.com/iksatextile",
-    "https://instagram.com/iksatextile",
-    "https://tiktok.com/@iksatextile",
-    "https://youtube.com/@iksatextile",
-    "https://linkedin.com/company/iksatextile",
-    "https://twitter.com/iksatextile",
-    "https://pinterest.com/iksatextile"
-  ]
+  }
 });
 
 export const generateWebsiteSchema = () => ({
@@ -57,9 +47,9 @@ export const generateBreadcrumbSchema = (crumbs: Breadcrumb[]) => {
     };
 };
 
-export const generateProductSchema = (fabric: Fabric, translate: (key: string, subKey?: string) => string) => {
+export const generateProductSchema = (fabric: Fabric, translate: (key: string, subKey?: string) => string, descriptionText?:string) => {
     const name = translate(fabric.nameKey);
-    const description = translate(fabric.detailDescriptionKey);
+    const description = descriptionText ?? translate(fabric.detailDescriptionKey);
 
     return {
         '@context': 'https://schema.org',
@@ -72,22 +62,7 @@ export const generateProductSchema = (fabric: Fabric, translate: (key: string, s
             '@type': 'Brand',
             'name': 'hithobe'
         },
-        'offers': {
-            '@type': 'Offer',
-            'price': fabric.pricePerRoll,
-            'priceCurrency': 'USD',
-            'url': `${ORG_URL}/collections/${fabric.id}`,
-            'seller': {
-                '@type': 'Organization',
-                'name': 'hithobe'
-            }
-        },
-        'additionalProperty': [
-            { '@type': 'PropertyValue', 'name': 'Roll Length', 'value': `${fabric.rollLengthInMeters} meters` },
-            { '@type': 'PropertyValue', 'name': 'Width', 'value': `${fabric.widthInMeters} meters` },
-            { '@type': 'PropertyValue', 'name': 'Finish', 'value': translate(`finish${fabric.finishKey.charAt(0).toUpperCase() + fabric.finishKey.slice(1)}`) },
-            { '@type': 'PropertyValue', 'name': 'Weight', 'value': translate(`filterWeight${fabric.weightKey.charAt(0).toUpperCase() + fabric.weightKey.slice(1)}`) }
-        ]
+
     };
 };
 
@@ -108,7 +83,7 @@ export const generateArticleSchema = (translate: (key: string, subKey?: string) 
                 'url': ORG_LOGO_URL
             }
         },
-        'image': "https://i.postimg.cc/2j5T00Fw/inspiration-kandura.webp",
+        'image': "/images/hithobe/editorial/kandura-emirati-1280.webp",
         'mainEntityOfPage': `${ORG_URL}/thobe-guide`
     };
 };

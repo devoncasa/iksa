@@ -1,3 +1,7 @@
+import {track} from '../lib/analytics';
+import {interfaceCopy} from '../locales/interface';
+import {CustomerGuidance,ProductSampleTip} from '../components/CustomerGuidance';
+import {customerGuidance,referenceTipIndex} from '../locales/customerGuidance';
 import React, { useState, useMemo, useEffect } from 'react';
 import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { useLanguage } from '../hooks/useLanguage';
@@ -21,7 +25,7 @@ const YieldEstimator: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
     const { yieldValue } = useMemo(() => {
         const garmentStyle = GARMENT_STYLES_ADVANCED.find(g => g.id === selectedGarmentId);
         const size = GARMENT_SIZES_ADVANCED.find(s => s.key === selectedSizeKey);
-        
+
         if (!garmentStyle || !size) return { yieldValue: 0 };
 
         const fabricPerGarment = garmentStyle.baseRequirement * size.multiplier;
@@ -37,7 +41,7 @@ const YieldEstimator: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label htmlFor="garment-style" className="block text-sm font-medium text-stone-600 mb-1.5">{translate('chooseGarmentStyle')}</label>
-                    <select id="garment-style" value={selectedGarmentId} onChange={e => setSelectedGarmentId(e.target.value)} className="w-full bg-white/80 border border-stone-300 text-stone-800 rounded-md py-2 px-3 focus:ring-brandAccent-700 focus:border-brandAccent-700 transition-colors duration-150 ease-in-out text-base text-left">
+                    <select id="garment-style" value={selectedGarmentId} onChange={e => setSelectedGarmentId(e.target.value)} className="w-full bg-white/80 border border-stone-300 text-stone-800 rounded-md py-2 px-3 focus:ring-brandAccent-700 focus:border-brandAccent-700 transition-colors duration-150 ease-in-out text-base text-start">
                         {GARMENT_STYLES_ADVANCED.map(style => <option key={style.id} value={style.id} className="bg-white text-stone-800 font-medium">{translate(style.nameKey)}</option>)}
                     </select>
                 </div>
@@ -58,9 +62,9 @@ const YieldEstimator: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
 };
 
 const DeepDiveTabs: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
-    const { translate } = useLanguage();
+    const { translate,language } = useLanguage();
     const [activeTab, setActiveTab] = useState('briefing');
-    
+
     const tabs = [
         { id: 'briefing', labelKey: 'product_tabProBriefing' },
         { id: 'notes', labelKey: 'product_tabEngineersNotes' },
@@ -73,13 +77,13 @@ const DeepDiveTabs: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
         // Check if translation exists, otherwise use fallback (like the key itself)
         return translatedValue.startsWith(prefix) ? (fallback || key) : translatedValue;
     }
-    
+
     const renderContent = () => {
         switch (activeTab) {
             case 'briefing':
-                return <p className="whitespace-pre-line leading-relaxed">{translate(fabric.professionalBriefingKey)}</p>;
+                return <p className="whitespace-pre-line leading-relaxed">{customerGuidance[language].questions[2][1]}</p>;
             case 'notes':
-                return <p className="whitespace-pre-line leading-relaxed">{translate(fabric.detailDescriptionKey)}</p>;
+                return <p className="whitespace-pre-line leading-relaxed">{customerGuidance[language].questions[1][1]}</p>;
             case 'specs':
                 const collectionsText = fabric.useCases.map(key => translate(`filterUseCase${key.charAt(0).toUpperCase() + key.slice(1)}`)).join(', ');
                 return (
@@ -95,7 +99,7 @@ const DeepDiveTabs: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
                                     const IconComponent = FEATURE_ICONS[featureKey];
                                     const featureText = getTranslationWithFallback('feature_', featureKey, featureKey);
                                     return IconComponent ? (
-                                      <div key={featureKey} className="flex items-center"><IconComponent className="w-5 h-5 mr-2 text-brandAccent-700" /><span>{featureText}</span></div>
+                                      <div key={featureKey} className="flex items-center"><IconComponent className="w-5 h-5 me-2 text-brandAccent-700" /><span>{featureText}</span></div>
                                     ) : null;
                                 })}
                             </div>
@@ -109,7 +113,7 @@ const DeepDiveTabs: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
     return (
         <div>
             <div className="border-b border-stone-300 mb-6">
-                <nav className="-mb-px flex space-x-6" aria-label="Tabs">
+                <nav className="-mb-px flex gap-6" aria-label={interfaceCopy[language].details}>
                     {tabs.map(tab => (
                         <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm transition-colors ${activeTab === tab.id ? 'border-brandAccent-700 text-brandAccent-700' : 'border-transparent text-stone-500 hover:text-stone-700 hover:border-stone-400'}`}>
                             {translate(tab.labelKey)}
@@ -117,7 +121,7 @@ const DeepDiveTabs: React.FC<{ fabric: Fabric }> = ({ fabric }) => {
                     ))}
                 </nav>
             </div>
-            <div className="text-stone-700">{renderContent()}</div>
+            <p className="guidance-scope mb-4">{customerGuidance[language].evidence}</p><div className="text-stone-700">{renderContent()}</div>
         </div>
     );
 };
@@ -133,12 +137,14 @@ export const ProductDetailPage: React.FC = () => {
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState(fabric?.imageUrl || '');
   const [selectedColor, setSelectedColor] = useState('white');
-  
+  const trackedReference=React.useRef('');
+  useEffect(()=>{if(fabric&&trackedReference.current!==fabric.id){trackedReference.current=fabric.id;track('product_view',{fabric:fabric.id});}},[fabric]);
+
   const displayedPrice = useMemo(() => {
     if (!fabric) return 0;
     return cartUnitPrice(fabric, selectedColor, COLOR_MARKUPS);
   }, [fabric, selectedColor]);
-  
+
   const schemas = useMemo(() => {
     if (!fabric) return [];
     const breadcrumbs: Breadcrumb[] = [
@@ -150,7 +156,7 @@ export const ProductDetailPage: React.FC = () => {
         generateOrganizationSchema(translate),
         generateWebsiteSchema(),
         generateBreadcrumbSchema(breadcrumbs),
-        generateProductSchema(fabric, translate)
+        generateProductSchema(fabric, translate, customerGuidance[language].tips[referenceTipIndex[fabric.id]])
     ];
   }, [fabric, translate]);
 
@@ -169,12 +175,12 @@ export const ProductDetailPage: React.FC = () => {
         <ContentBlock isHero>
             <h1 className="text-2xl text-stone-700">{translate('fabricNotFound')}</h1>
             <Link to="/collections" className="mt-4">
-                <Button>{translate('backToCollections')}</Button>
+                <Button as="span">{translate('backToCollections')}</Button>
             </Link>
         </ContentBlock>
     );
   }
-  
+
   const handleAddToCart = () => {
     if (quantity > 0) {
         addToCart(fabric.id, quantity, selectedColor);
@@ -188,11 +194,12 @@ export const ProductDetailPage: React.FC = () => {
       <SEOMetadata
         titleKey="page_product_detail_title"
         descriptionKey="page_product_detail_description"
+        descriptionText={customerGuidance[language].tips[referenceTipIndex[fabric.id]]}
         pagePath={`/collections/${fabric.id}`}
         item={fabric}
         schemas={schemas}
       />
-      <section className="pt-24 md:pt-32">
+      <section className="pt-24 md:pt-28">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-[rgba(255,255,255,0.70)] backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-12 lg:p-16">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
@@ -200,12 +207,12 @@ export const ProductDetailPage: React.FC = () => {
                     <div className="bg-white/50 backdrop-blur-xl p-4 rounded-lg">
                         <div className="mb-4">
                             <div className="aspect-square bg-stone-100/90 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg border-2 border-muted-gold/50 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-muted-gold/30 hover:-translate-y-1">
-                                {showColorPreview ? <FabricColorPreview women={fabric.useCases.includes('luxuryAbaya')} color={selectedColor} name={translate(fabric.nameKey)} /> : <ManagedImage 
-                                    src={mainImage} 
-                                    alt={`${translate(fabric.nameKey)} - Main View`} 
+                                {showColorPreview ? <FabricColorPreview women={fabric.useCases.includes('luxuryAbaya')} color={selectedColor} name={translate(fabric.nameKey)} /> : <ManagedImage
+                                    src={mainImage}
+                                    alt={`${translate(fabric.nameKey)} — ${interfaceCopy[language].image} 1`}
                                     pageName={pageName}
                                     sectionTitle="Main Gallery Image"
-                                    className="w-full h-full object-cover rounded-md" 
+                                    className="w-full h-full object-cover rounded-md"
                                 />}
                             </div>
                         </div>
@@ -213,12 +220,12 @@ export const ProductDetailPage: React.FC = () => {
                         <div className="grid grid-cols-4 gap-2">
                         {fabric.galleryImages.map((img, idx) => (
                             <button key={idx} onClick={() => {setMainImage(img);setShowColorPreview(false);}} className={`aspect-square bg-stone-100/90 backdrop-blur-sm rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-brandAccent-700 border-2 transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-muted-gold/30 hover:-translate-y-0.5 ${mainImage === img ? 'ring-2 ring-brandAccent-700 border-brandAccent-700' : 'border-muted-gold/50'}`}>
-                                <ManagedImage 
-                                    src={img} 
-                                    alt={`${translate(fabric.nameKey)} view ${idx + 1}`} 
+                                <ManagedImage
+                                    src={img}
+                                    alt={`${translate(fabric.nameKey)} — ${interfaceCopy[language].image} ${idx + 1}`}
                                     pageName={pageName}
                                     sectionTitle={`Gallery Thumbnail ${idx + 1}`}
-                                    className="w-full h-full object-cover rounded-md" 
+                                    className="w-full h-full object-cover rounded-md"
                                 />
                             </button>
                         ))}
@@ -227,7 +234,7 @@ export const ProductDetailPage: React.FC = () => {
 
                     {/* Product Info, Estimator, and Purchase */}
                     <div className="flex flex-col">
-                        <h1 className="text-3xl sm:text-4xl font-serif-display font-bold text-stone-800 mb-2">{translate(fabric.nameKey)}</h1>
+                        <h1 className="text-3xl sm:text-4xl font-serif-display font-bold text-stone-800 mb-2">{translate(fabric.nameKey)}</h1><p className="guidance-scope">{customerGuidance[language].evidence}</p>
                         <p className="text-lg text-stone-600 mb-4">{fabric.rollLengthInMeters}m {translate('pricePerRoll')}</p>
                         <p className="text-4xl font-bold text-brandAccent-800 mb-4">${displayedPrice.toFixed(2)}</p>
 
@@ -242,7 +249,7 @@ export const ProductDetailPage: React.FC = () => {
                                     aria-pressed={selectedColor === colorKey}
                                     className={`w-10 h-10 rounded-full focus:outline-none ring-offset-2 ring-offset-white/80 transition-all duration-150 ${selectedColor === colorKey ? 'ring-2 ring-brandAccent-700' : 'ring-1 ring-transparent hover:ring-1 hover:ring-stone-400'}`}
                                     title={translate(COLOR_PALETTE[colorKey]?.nameKey)}
-                                    aria-label={`Select color ${translate(COLOR_PALETTE[colorKey]?.nameKey)}`}
+                                    aria-label={`${interfaceCopy[language].selectColour} — ${translate(COLOR_PALETTE[colorKey]?.nameKey)}`}
                                 >
                                     <div className={`w-full h-full rounded-full ${COLOR_PALETTE[colorKey]?.className} border border-black/10`}></div>
                                 </button>
@@ -255,14 +262,14 @@ export const ProductDetailPage: React.FC = () => {
                             )}
                             </div>
                         )}
-                        
+
                         <p className="text-sm text-stone-600 mb-6" role="note">{translate('productSwatchNote')}</p>
                         <YieldEstimator fabric={fabric} />
 
                         <div className="flex items-center gap-4 mt-8">
                             <div className="flex items-center border border-stone-300 rounded-md">
                                 <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="px-3 py-2 text-lg font-semibold text-stone-600 hover:bg-stone-100/90 rounded-l-md">-</button>
-                                <input type="number" value={quantity} onChange={e => setQuantity(Math.max(1, parseInt(e.target.value) || 1))} className="w-16 text-center text-lg font-semibold border-y-0 border-x text-stone-800 focus:ring-0 bg-transparent" />
+                                <input type="number" dir="ltr" value={quantity} onChange={e => setQuantity(Math.max(1, parseInt(e.target.value) || 1))} className="w-16 text-center text-lg font-semibold border-y-0 border-x text-stone-800 focus:ring-0 bg-transparent" />
                                 <button onClick={() => setQuantity(q => q + 1)} className="px-3 py-2 text-lg font-semibold text-stone-600 hover:bg-stone-100/90 rounded-r-md">+</button>
                             </div>
                             <Button variant="primary" size="lg" onClick={handleAddToCart} className="flex-grow">
@@ -275,6 +282,7 @@ export const ProductDetailPage: React.FC = () => {
         </div>
       </section>
 
+        <section className="customer-guidance"><ProductSampleTip fabricId={fabric.id}/></section>
         {/* Deep Dive Section */}
         <ContentBlock>
             <h2 className="text-3xl font-serif-display font-semibold text-center text-stone-800 mb-10 section-title-underline">{translate('product_deepDiveTitle')}</h2>
@@ -287,30 +295,31 @@ export const ProductDetailPage: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div className="text-center">
                     <div className="mb-4 rounded-lg border-2 border-muted-gold/50 shadow-sm transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-muted-gold/30 hover:-translate-y-1 overflow-hidden">
-                        <ManagedImage 
-                            src="https://i.postimg.cc/2j5T00Fw/inspiration-kandura.webp" 
-                            alt={translate('product_inspiration_kandura_alt')} 
+                        <ManagedImage
+                            src="/images/hithobe/editorial/kandura-emirati-1280.webp"
+                            alt={translate('product_inspiration_kandura_alt')}
                             pageName={pageName}
                             sectionTitle="Inspiration Image: Kandura"
-                            className="rounded-md aspect-[4/3] object-cover w-full" 
+                            className="rounded-md aspect-[4/3] object-contain w-full"
                         />
                     </div>
-                    <p className="text-stone-600 italic">{translate('product_inspirationCaption').replace('{garment}', 'Emirati Kandura').replace('{fabricName}', translate(fabric.nameKey))}</p>
+                    <p className="text-stone-600 italic">{customerGuidance[language].questions[2][1]}</p>
                 </div>
                 <div className="text-center">
                     <div className="mb-4 rounded-lg border-2 border-muted-gold/50 shadow-sm transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-muted-gold/30 hover:-translate-y-1 overflow-hidden">
-                        <ManagedImage 
-                            src="https://i.postimg.cc/k4GkYyv0/inspiration-abaya.webp" 
-                            alt={translate('product_inspiration_abaya_alt')} 
+                        <ManagedImage
+                            src="/images/hithobe/editorial/abaya-charcoal-1280.webp"
+                            alt={translate('product_inspiration_abaya_alt')}
                             pageName={pageName}
                             sectionTitle="Inspiration Image: Abaya"
-                            className="rounded-md aspect-[4/3] object-cover w-full" 
+                            className="rounded-md aspect-[4/3] object-contain w-full"
                         />
                     </div>
-                    <p className="text-stone-600 italic">{translate('product_inspirationCaption').replace('{garment}', 'Luxury Abaya').replace('{fabricName}', translate(fabric.nameKey))}</p>
+                    <p className="text-stone-600 italic">{customerGuidance[language].scope}</p>
                 </div>
             </div>
         </ContentBlock>
+    <CustomerGuidance indices={[3,4]} showSources/>
     </>
   );
 };

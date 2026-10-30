@@ -1,0 +1,573 @@
+{
+  "/images/hithobe/abaya-courtyard-1120.webp": {
+    "width": 1120,
+    "height": 1400,
+    "srcSet": "/images/hithobe/abaya-courtyard-480.webp 480w, /images/hithobe/abaya-courtyard-800.webp 800w, /images/hithobe/abaya-courtyard-1120.webp 1120w"
+  },
+  "/images/hithobe/abaya-courtyard-480.webp": {
+    "width": 480,
+    "height": 600,
+    "srcSet": "/images/hithobe/abaya-courtyard-480.webp 480w, /images/hithobe/abaya-courtyard-800.webp 800w, /images/hithobe/abaya-courtyard-1120.webp 1120w"
+  },
+  "/images/hithobe/abaya-courtyard-800.webp": {
+    "width": 800,
+    "height": 1000,
+    "srcSet": "/images/hithobe/abaya-courtyard-480.webp 480w, /images/hithobe/abaya-courtyard-800.webp 800w, /images/hithobe/abaya-courtyard-1120.webp 1120w"
+  },
+  "/images/hithobe/atelier-editorial-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/atelier-editorial-640.webp 640w, /images/hithobe/atelier-editorial-1280.webp 1280w"
+  },
+  "/images/hithobe/atelier-editorial-640.webp": {
+    "width": 640,
+    "height": 427,
+    "srcSet": "/images/hithobe/atelier-editorial-640.webp 640w, /images/hithobe/atelier-editorial-1280.webp 1280w"
+  },
+  "/images/hithobe/courtyard-editorial-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/courtyard-editorial-640.webp 640w, /images/hithobe/courtyard-editorial-1280.webp 1280w"
+  },
+  "/images/hithobe/courtyard-editorial-640.webp": {
+    "width": 640,
+    "height": 427,
+    "srcSet": "/images/hithobe/courtyard-editorial-640.webp 640w, /images/hithobe/courtyard-editorial-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/abaya-charcoal-1280.webp": {
+    "width": 1280,
+    "height": 1067,
+    "srcSet": "/images/hithobe/editorial/abaya-charcoal-480.webp 480w, /images/hithobe/editorial/abaya-charcoal-800.webp 800w, /images/hithobe/editorial/abaya-charcoal-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/abaya-charcoal-480.webp": {
+    "width": 480,
+    "height": 400,
+    "srcSet": "/images/hithobe/editorial/abaya-charcoal-480.webp 480w, /images/hithobe/editorial/abaya-charcoal-800.webp 800w, /images/hithobe/editorial/abaya-charcoal-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/abaya-charcoal-800.webp": {
+    "width": 800,
+    "height": 667,
+    "srcSet": "/images/hithobe/editorial/abaya-charcoal-480.webp 480w, /images/hithobe/editorial/abaya-charcoal-800.webp 800w, /images/hithobe/editorial/abaya-charcoal-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/abaya-sand-1280.webp": {
+    "width": 853,
+    "height": 1280,
+    "srcSet": "/images/hithobe/editorial/abaya-sand-480.webp 320w, /images/hithobe/editorial/abaya-sand-800.webp 533w, /images/hithobe/editorial/abaya-sand-1280.webp 853w"
+  },
+  "/images/hithobe/editorial/abaya-sand-480.webp": {
+    "width": 320,
+    "height": 480,
+    "srcSet": "/images/hithobe/editorial/abaya-sand-480.webp 320w, /images/hithobe/editorial/abaya-sand-800.webp 533w, /images/hithobe/editorial/abaya-sand-1280.webp 853w"
+  },
+  "/images/hithobe/editorial/abaya-sand-800.webp": {
+    "width": 533,
+    "height": 800,
+    "srcSet": "/images/hithobe/editorial/abaya-sand-480.webp 320w, /images/hithobe/editorial/abaya-sand-800.webp 533w, /images/hithobe/editorial/abaya-sand-1280.webp 853w"
+  },
+  "/images/hithobe/editorial/care-ironing-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/care-ironing-480.webp 480w, /images/hithobe/editorial/care-ironing-800.webp 800w, /images/hithobe/editorial/care-ironing-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/care-ironing-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/care-ironing-480.webp 480w, /images/hithobe/editorial/care-ironing-800.webp 800w, /images/hithobe/editorial/care-ironing-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/care-ironing-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/care-ironing-480.webp 480w, /images/hithobe/editorial/care-ironing-800.webp 800w, /images/hithobe/editorial/care-ironing-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/care-storage-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/care-storage-480.webp 480w, /images/hithobe/editorial/care-storage-800.webp 800w, /images/hithobe/editorial/care-storage-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/care-storage-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/care-storage-480.webp 480w, /images/hithobe/editorial/care-storage-800.webp 800w, /images/hithobe/editorial/care-storage-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/care-storage-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/care-storage-480.webp 480w, /images/hithobe/editorial/care-storage-800.webp 800w, /images/hithobe/editorial/care-storage-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/care-washing-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/care-washing-480.webp 480w, /images/hithobe/editorial/care-washing-800.webp 800w, /images/hithobe/editorial/care-washing-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/care-washing-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/care-washing-480.webp 480w, /images/hithobe/editorial/care-washing-800.webp 800w, /images/hithobe/editorial/care-washing-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/care-washing-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/care-washing-480.webp 480w, /images/hithobe/editorial/care-washing-800.webp 800w, /images/hithobe/editorial/care-washing-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/cotton-white-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/cotton-white-480.webp 480w, /images/hithobe/editorial/cotton-white-800.webp 800w, /images/hithobe/editorial/cotton-white-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/cotton-white-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/cotton-white-480.webp 480w, /images/hithobe/editorial/cotton-white-800.webp 800w, /images/hithobe/editorial/cotton-white-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/cotton-white-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/cotton-white-480.webp 480w, /images/hithobe/editorial/cotton-white-800.webp 800w, /images/hithobe/editorial/cotton-white-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/crepe-black-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/crepe-black-480.webp 480w, /images/hithobe/editorial/crepe-black-800.webp 800w, /images/hithobe/editorial/crepe-black-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/crepe-black-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/crepe-black-480.webp 480w, /images/hithobe/editorial/crepe-black-800.webp 800w, /images/hithobe/editorial/crepe-black-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/crepe-black-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/crepe-black-480.webp 480w, /images/hithobe/editorial/crepe-black-800.webp 800w, /images/hithobe/editorial/crepe-black-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/dishdasha-omani-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/dishdasha-omani-480.webp 480w, /images/hithobe/editorial/dishdasha-omani-800.webp 800w, /images/hithobe/editorial/dishdasha-omani-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/dishdasha-omani-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/dishdasha-omani-480.webp 480w, /images/hithobe/editorial/dishdasha-omani-800.webp 800w, /images/hithobe/editorial/dishdasha-omani-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/dishdasha-omani-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/dishdasha-omani-480.webp 480w, /images/hithobe/editorial/dishdasha-omani-800.webp 800w, /images/hithobe/editorial/dishdasha-omani-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-blue-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/drape-blue-480.webp 480w, /images/hithobe/editorial/drape-blue-800.webp 800w, /images/hithobe/editorial/drape-blue-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-blue-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/drape-blue-480.webp 480w, /images/hithobe/editorial/drape-blue-800.webp 800w, /images/hithobe/editorial/drape-blue-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-blue-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/drape-blue-480.webp 480w, /images/hithobe/editorial/drape-blue-800.webp 800w, /images/hithobe/editorial/drape-blue-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-charcoal-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/drape-charcoal-480.webp 480w, /images/hithobe/editorial/drape-charcoal-800.webp 800w, /images/hithobe/editorial/drape-charcoal-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-charcoal-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/drape-charcoal-480.webp 480w, /images/hithobe/editorial/drape-charcoal-800.webp 800w, /images/hithobe/editorial/drape-charcoal-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-charcoal-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/drape-charcoal-480.webp 480w, /images/hithobe/editorial/drape-charcoal-800.webp 800w, /images/hithobe/editorial/drape-charcoal-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-ivory-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/drape-ivory-480.webp 480w, /images/hithobe/editorial/drape-ivory-800.webp 800w, /images/hithobe/editorial/drape-ivory-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-ivory-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/drape-ivory-480.webp 480w, /images/hithobe/editorial/drape-ivory-800.webp 800w, /images/hithobe/editorial/drape-ivory-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-ivory-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/drape-ivory-480.webp 480w, /images/hithobe/editorial/drape-ivory-800.webp 800w, /images/hithobe/editorial/drape-ivory-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-sage-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/drape-sage-480.webp 480w, /images/hithobe/editorial/drape-sage-800.webp 800w, /images/hithobe/editorial/drape-sage-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-sage-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/drape-sage-480.webp 480w, /images/hithobe/editorial/drape-sage-800.webp 800w, /images/hithobe/editorial/drape-sage-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-sage-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/drape-sage-480.webp 480w, /images/hithobe/editorial/drape-sage-800.webp 800w, /images/hithobe/editorial/drape-sage-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-taupe-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/drape-taupe-480.webp 480w, /images/hithobe/editorial/drape-taupe-800.webp 800w, /images/hithobe/editorial/drape-taupe-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-taupe-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/drape-taupe-480.webp 480w, /images/hithobe/editorial/drape-taupe-800.webp 800w, /images/hithobe/editorial/drape-taupe-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-taupe-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/drape-taupe-480.webp 480w, /images/hithobe/editorial/drape-taupe-800.webp 800w, /images/hithobe/editorial/drape-taupe-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-white-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/drape-white-480.webp 480w, /images/hithobe/editorial/drape-white-800.webp 800w, /images/hithobe/editorial/drape-white-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-white-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/drape-white-480.webp 480w, /images/hithobe/editorial/drape-white-800.webp 800w, /images/hithobe/editorial/drape-white-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/drape-white-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/drape-white-480.webp 480w, /images/hithobe/editorial/drape-white-800.webp 800w, /images/hithobe/editorial/drape-white-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/kandura-emirati-1280.webp": {
+    "width": 1280,
+    "height": 1067,
+    "srcSet": "/images/hithobe/editorial/kandura-emirati-480.webp 480w, /images/hithobe/editorial/kandura-emirati-800.webp 800w, /images/hithobe/editorial/kandura-emirati-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/kandura-emirati-480.webp": {
+    "width": 480,
+    "height": 400,
+    "srcSet": "/images/hithobe/editorial/kandura-emirati-480.webp 480w, /images/hithobe/editorial/kandura-emirati-800.webp 800w, /images/hithobe/editorial/kandura-emirati-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/kandura-emirati-800.webp": {
+    "width": 800,
+    "height": 667,
+    "srcSet": "/images/hithobe/editorial/kandura-emirati-480.webp 480w, /images/hithobe/editorial/kandura-emirati-800.webp 800w, /images/hithobe/editorial/kandura-emirati-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/linen-natural-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/linen-natural-480.webp 480w, /images/hithobe/editorial/linen-natural-800.webp 800w, /images/hithobe/editorial/linen-natural-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/linen-natural-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/linen-natural-480.webp 480w, /images/hithobe/editorial/linen-natural-800.webp 800w, /images/hithobe/editorial/linen-natural-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/linen-natural-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/linen-natural-480.webp 480w, /images/hithobe/editorial/linen-natural-800.webp 800w, /images/hithobe/editorial/linen-natural-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/palette-cool-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/palette-cool-480.webp 480w, /images/hithobe/editorial/palette-cool-800.webp 800w, /images/hithobe/editorial/palette-cool-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/palette-cool-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/palette-cool-480.webp 480w, /images/hithobe/editorial/palette-cool-800.webp 800w, /images/hithobe/editorial/palette-cool-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/palette-cool-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/palette-cool-480.webp 480w, /images/hithobe/editorial/palette-cool-800.webp 800w, /images/hithobe/editorial/palette-cool-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/palette-earth-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/palette-earth-480.webp 480w, /images/hithobe/editorial/palette-earth-800.webp 800w, /images/hithobe/editorial/palette-earth-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/palette-earth-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/palette-earth-480.webp 480w, /images/hithobe/editorial/palette-earth-800.webp 800w, /images/hithobe/editorial/palette-earth-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/palette-earth-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/palette-earth-480.webp 480w, /images/hithobe/editorial/palette-earth-800.webp 800w, /images/hithobe/editorial/palette-earth-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/palette-evening-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/palette-evening-480.webp 480w, /images/hithobe/editorial/palette-evening-800.webp 800w, /images/hithobe/editorial/palette-evening-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/palette-evening-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/palette-evening-480.webp 480w, /images/hithobe/editorial/palette-evening-800.webp 800w, /images/hithobe/editorial/palette-evening-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/palette-evening-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/palette-evening-480.webp 480w, /images/hithobe/editorial/palette-evening-800.webp 800w, /images/hithobe/editorial/palette-evening-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/palette-warm-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/palette-warm-480.webp 480w, /images/hithobe/editorial/palette-warm-800.webp 800w, /images/hithobe/editorial/palette-warm-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/palette-warm-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/palette-warm-480.webp 480w, /images/hithobe/editorial/palette-warm-800.webp 800w, /images/hithobe/editorial/palette-warm-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/palette-warm-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/palette-warm-480.webp 480w, /images/hithobe/editorial/palette-warm-800.webp 800w, /images/hithobe/editorial/palette-warm-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/plain-weave-ivory-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/plain-weave-ivory-480.webp 480w, /images/hithobe/editorial/plain-weave-ivory-800.webp 800w, /images/hithobe/editorial/plain-weave-ivory-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/plain-weave-ivory-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/plain-weave-ivory-480.webp 480w, /images/hithobe/editorial/plain-weave-ivory-800.webp 800w, /images/hithobe/editorial/plain-weave-ivory-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/plain-weave-ivory-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/plain-weave-ivory-480.webp 480w, /images/hithobe/editorial/plain-weave-ivory-800.webp 800w, /images/hithobe/editorial/plain-weave-ivory-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/sample-inspection-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/sample-inspection-480.webp 480w, /images/hithobe/editorial/sample-inspection-800.webp 800w, /images/hithobe/editorial/sample-inspection-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/sample-inspection-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/sample-inspection-480.webp 480w, /images/hithobe/editorial/sample-inspection-800.webp 800w, /images/hithobe/editorial/sample-inspection-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/sample-inspection-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/sample-inspection-480.webp 480w, /images/hithobe/editorial/sample-inspection-800.webp 800w, /images/hithobe/editorial/sample-inspection-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/sample-measuring-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/sample-measuring-480.webp 480w, /images/hithobe/editorial/sample-measuring-800.webp 800w, /images/hithobe/editorial/sample-measuring-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/sample-measuring-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/sample-measuring-480.webp 480w, /images/hithobe/editorial/sample-measuring-800.webp 800w, /images/hithobe/editorial/sample-measuring-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/sample-measuring-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/sample-measuring-480.webp 480w, /images/hithobe/editorial/sample-measuring-800.webp 800w, /images/hithobe/editorial/sample-measuring-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/sample-shade-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/sample-shade-480.webp 480w, /images/hithobe/editorial/sample-shade-800.webp 800w, /images/hithobe/editorial/sample-shade-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/sample-shade-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/sample-shade-480.webp 480w, /images/hithobe/editorial/sample-shade-800.webp 800w, /images/hithobe/editorial/sample-shade-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/sample-shade-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/sample-shade-480.webp 480w, /images/hithobe/editorial/sample-shade-800.webp 800w, /images/hithobe/editorial/sample-shade-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/satin-pearl-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/satin-pearl-480.webp 480w, /images/hithobe/editorial/satin-pearl-800.webp 800w, /images/hithobe/editorial/satin-pearl-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/satin-pearl-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/satin-pearl-480.webp 480w, /images/hithobe/editorial/satin-pearl-800.webp 800w, /images/hithobe/editorial/satin-pearl-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/satin-pearl-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/satin-pearl-480.webp 480w, /images/hithobe/editorial/satin-pearl-800.webp 800w, /images/hithobe/editorial/satin-pearl-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/thobe-navy-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/thobe-navy-480.webp 480w, /images/hithobe/editorial/thobe-navy-800.webp 800w, /images/hithobe/editorial/thobe-navy-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/thobe-navy-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/thobe-navy-480.webp 480w, /images/hithobe/editorial/thobe-navy-800.webp 800w, /images/hithobe/editorial/thobe-navy-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/thobe-navy-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/thobe-navy-480.webp 480w, /images/hithobe/editorial/thobe-navy-800.webp 800w, /images/hithobe/editorial/thobe-navy-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/thobe-saudi-1280.webp": {
+    "width": 853,
+    "height": 1280,
+    "srcSet": "/images/hithobe/editorial/thobe-saudi-480.webp 320w, /images/hithobe/editorial/thobe-saudi-800.webp 533w, /images/hithobe/editorial/thobe-saudi-1280.webp 853w"
+  },
+  "/images/hithobe/editorial/thobe-saudi-480.webp": {
+    "width": 320,
+    "height": 480,
+    "srcSet": "/images/hithobe/editorial/thobe-saudi-480.webp 320w, /images/hithobe/editorial/thobe-saudi-800.webp 533w, /images/hithobe/editorial/thobe-saudi-1280.webp 853w"
+  },
+  "/images/hithobe/editorial/thobe-saudi-800.webp": {
+    "width": 533,
+    "height": 800,
+    "srcSet": "/images/hithobe/editorial/thobe-saudi-480.webp 320w, /images/hithobe/editorial/thobe-saudi-800.webp 533w, /images/hithobe/editorial/thobe-saudi-1280.webp 853w"
+  },
+  "/images/hithobe/editorial/twill-sand-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/twill-sand-480.webp 480w, /images/hithobe/editorial/twill-sand-800.webp 800w, /images/hithobe/editorial/twill-sand-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/twill-sand-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/twill-sand-480.webp 480w, /images/hithobe/editorial/twill-sand-800.webp 800w, /images/hithobe/editorial/twill-sand-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/twill-sand-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/twill-sand-480.webp 480w, /images/hithobe/editorial/twill-sand-800.webp 800w, /images/hithobe/editorial/twill-sand-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/weave-blue-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/weave-blue-480.webp 480w, /images/hithobe/editorial/weave-blue-800.webp 800w, /images/hithobe/editorial/weave-blue-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/weave-blue-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/weave-blue-480.webp 480w, /images/hithobe/editorial/weave-blue-800.webp 800w, /images/hithobe/editorial/weave-blue-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/weave-blue-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/weave-blue-480.webp 480w, /images/hithobe/editorial/weave-blue-800.webp 800w, /images/hithobe/editorial/weave-blue-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/wool-grey-1280.webp": {
+    "width": 1280,
+    "height": 853,
+    "srcSet": "/images/hithobe/editorial/wool-grey-480.webp 480w, /images/hithobe/editorial/wool-grey-800.webp 800w, /images/hithobe/editorial/wool-grey-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/wool-grey-480.webp": {
+    "width": 480,
+    "height": 320,
+    "srcSet": "/images/hithobe/editorial/wool-grey-480.webp 480w, /images/hithobe/editorial/wool-grey-800.webp 800w, /images/hithobe/editorial/wool-grey-1280.webp 1280w"
+  },
+  "/images/hithobe/editorial/wool-grey-800.webp": {
+    "width": 800,
+    "height": 533,
+    "srcSet": "/images/hithobe/editorial/wool-grey-480.webp 480w, /images/hithobe/editorial/wool-grey-800.webp 800w, /images/hithobe/editorial/wool-grey-1280.webp 1280w"
+  },
+  "/images/hithobe/kandura-courtyard-1120.webp": {
+    "width": 1120,
+    "height": 1400,
+    "srcSet": "/images/hithobe/kandura-courtyard-480.webp 480w, /images/hithobe/kandura-courtyard-800.webp 800w, /images/hithobe/kandura-courtyard-1120.webp 1120w"
+  },
+  "/images/hithobe/kandura-courtyard-480.webp": {
+    "width": 480,
+    "height": 600,
+    "srcSet": "/images/hithobe/kandura-courtyard-480.webp 480w, /images/hithobe/kandura-courtyard-800.webp 800w, /images/hithobe/kandura-courtyard-1120.webp 1120w"
+  },
+  "/images/hithobe/kandura-courtyard-800.webp": {
+    "width": 800,
+    "height": 1000,
+    "srcSet": "/images/hithobe/kandura-courtyard-480.webp 480w, /images/hithobe/kandura-courtyard-800.webp 800w, /images/hithobe/kandura-courtyard-1120.webp 1120w"
+  },
+  "/images/hithobe/kandura-window-portrait-1120.webp": {
+    "width": 1120,
+    "height": 1400,
+    "srcSet": "/images/hithobe/kandura-window-portrait-480.webp 480w, /images/hithobe/kandura-window-portrait-800.webp 800w, /images/hithobe/kandura-window-portrait-1120.webp 1120w"
+  },
+  "/images/hithobe/kandura-window-portrait-480.webp": {
+    "width": 480,
+    "height": 600,
+    "srcSet": "/images/hithobe/kandura-window-portrait-480.webp 480w, /images/hithobe/kandura-window-portrait-800.webp 800w, /images/hithobe/kandura-window-portrait-1120.webp 1120w"
+  },
+  "/images/hithobe/kandura-window-portrait-800.webp": {
+    "width": 800,
+    "height": 1000,
+    "srcSet": "/images/hithobe/kandura-window-portrait-480.webp 480w, /images/hithobe/kandura-window-portrait-800.webp 800w, /images/hithobe/kandura-window-portrait-1120.webp 1120w"
+  },
+  "/images/hithobe/models/female-black.webp": {
+    "width": 800,
+    "height": 1000
+  },
+  "/images/hithobe/models/female-blue.webp": {
+    "width": 800,
+    "height": 1000
+  },
+  "/images/hithobe/models/female-earthTones.webp": {
+    "width": 533,
+    "height": 800
+  },
+  "/images/hithobe/models/female-green.webp": {
+    "width": 800,
+    "height": 1000
+  },
+  "/images/hithobe/models/female-grey.webp": {
+    "width": 800,
+    "height": 1000
+  },
+  "/images/hithobe/models/female-redMaroon.webp": {
+    "width": 800,
+    "height": 1000
+  },
+  "/images/hithobe/models/female-white.webp": {
+    "width": 800,
+    "height": 1000
+  },
+  "/images/hithobe/models/male-black.webp": {
+    "width": 800,
+    "height": 1000
+  },
+  "/images/hithobe/models/male-blue.webp": {
+    "width": 800,
+    "height": 1000
+  },
+  "/images/hithobe/models/male-earthTones.webp": {
+    "width": 800,
+    "height": 1000
+  },
+  "/images/hithobe/models/male-green.webp": {
+    "width": 800,
+    "height": 1000
+  },
+  "/images/hithobe/models/male-grey.webp": {
+    "width": 800,
+    "height": 1000
+  },
+  "/images/hithobe/models/male-redMaroon.webp": {
+    "width": 800,
+    "height": 1000
+  },
+  "/images/hithobe/models/male-white.webp": {
+    "width": 800,
+    "height": 1000
+  }
+}

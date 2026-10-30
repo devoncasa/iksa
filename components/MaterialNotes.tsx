@@ -1,3 +1,5 @@
+import {interfaceCopy} from '../locales/interface';
+import {useCopy} from '../lib/copy';
 import React from 'react';
 import {useLanguage} from '../hooks/useLanguage';
 const terms=[
@@ -26,4 +28,4 @@ const terms=[
  'เทียบรหัสรุ่น ล็อตย้อม ใบแจ้งหนี้ และผลทดสอบให้ตรงกัน ตัวอักษรบนริมผ้า เสียงสัมผัส หรือภาพถ่ายเพียงอย่างเดียวไม่ใช่หลักฐานแหล่งผลิตหรือใบรับรอง',
  'طابق رقم الصنف ودفعة الصباغة والفاتورة وتقرير الاختبار. الكتابة على الحاشية أو صوت القماش أو الصورة وحدها لا تثبت المنشأ أو الاعتماد.']
 ];
-export function MaterialNotes(){const {language}=useLanguage();const i=language==='th'?1:language==='ar'?2:0;return <section className="material-notes"><span className="eyebrow">hithobe / MATERIAL NOTES</span><h2>{['Read beyond the fabric name.','อ่านผ้าให้ลึกกว่าชื่อรุ่น','اقرأ ما وراء اسم القماش.'][i]}</h2><p>{['Questions adapted from the supplied raw research to help you verify a supplier’s specification.','ประเด็นจากข้อมูลดิบที่ได้รับ ปรับเป็นคำถามเพื่อช่วยตรวจสอบสเปกกับผู้ผลิต','أسئلة مستمدة من البحث المقدم لمساعدتك في التحقق من مواصفات المورد.'][i]}</p>{terms.map(row=><details key={row[0]} className="guide-detail"><summary>{row[i]}</summary><p>{row[3+i]}</p></details>)}</section>}
+export function MaterialNotes(){const c=useCopy();const {language}=useLanguage();const i=language==='th'?1:language==='ar'?2:0;return <section className="material-notes"><span className="eyebrow">hithobe / {interfaceCopy[language].materialNotes}</span><h2>{c('Read beyond the fabric name.','اقرأ ما وراء اسم القماش.','อ่านผ้าให้ลึกกว่าชื่อรุ่น')}</h2><p>{c('Questions adapted from the supplied raw research to help you verify a supplier’s specification.','أسئلة مستمدة من البحث المقدم لمساعدتك في التحقق من مواصفات المورد.','ประเด็นจากข้อมูลดิบที่ได้รับ ปรับเป็นคำถามเพื่อช่วยตรวจสอบสเปกกับผู้ผลิต')}</p>{terms.map(row=><details key={row[0]} className="guide-detail"><summary>{i?row[i]:c(row[0])}</summary><p>{i?row[3+i]:c(row[3])}</p></details>)}</section>}

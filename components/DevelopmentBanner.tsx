@@ -82,7 +82,7 @@ export const DevelopmentBanner: React.FC = () => {
                 role="document"
                 dir={currentTranslation.dir}
             >
-                <div className="flex justify-end mb-2 -mt-2 -mr-2">
+                <div className="flex justify-end mb-2 -mt-2 -me-2">
                      <div className="relative">
                         <select 
                             value={selectedLang}

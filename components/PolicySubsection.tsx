@@ -18,7 +18,7 @@ export const PolicySubsection = forwardRef<HTMLDetailsElement, PolicySubsectionP
           <ChevronRightIcon className="w-5 h-5 me-3 rtl-flip text-brandAccent-600 transition-transform duration-300 ease-in-out group-open:rotate-90" />
           <span className="text-center">{translate(titleKey)}</span>
         </summary>
-        <div className="pt-3 pb-2 px-4 text-left">
+        <div className="pt-3 pb-2 px-4 text-start">
           {children}
         </div>
       </details>

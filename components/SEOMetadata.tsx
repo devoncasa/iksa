@@ -1,118 +1,34 @@
-import { localePrefix } from '../lib/language';
-
-
-
-import React, { useEffect } from 'react';
-import { useLanguage } from '../hooks/useLanguage';
-import { Fabric } from '../types';
-import { LANGUAGES } from '../constants';
-
-const ORG_URL = "https://www.hithobe.com";
-
-interface SEOMetadataProps {
-  titleKey: string;
-  descriptionKey: string;
-  pagePath: string;
-  item?: Fabric;
-  schemas?: any[];
-}
-
-export const SEOMetadata: React.FC<SEOMetadataProps> = ({
-  titleKey,
-  descriptionKey,
-  pagePath,
-  item,
-  schemas = [],
-}) => {
-  const { translate, language } = useLanguage();
-
-  useEffect(() => {
-    // Title
-    let finalTitle = translate(titleKey);
-    if (item) {
-      finalTitle = finalTitle
-        .replace('{fabricName}', translate(item.nameKey))
-        .replace('{rollLength}', String(item.rollLengthInMeters));
-    }
-    document.title = finalTitle;
-
-    // Description
-    let finalDescription = translate(descriptionKey);
-    if (item) {
-        finalDescription = finalDescription
-        .replace('{fabricName}', translate(item.nameKey))
-        .replace('{rollLength}', String(item.rollLengthInMeters))
-        .replace('{fabricFeel}', translate(`filterFeel${item.feel[0].charAt(0).toUpperCase() + item.feel[0].slice(1)}`))
-        .replace('{fabricPerformance}', translate(`filterPerformance${item.performance[0].charAt(0).toUpperCase() + item.performance[0].slice(1)}`));
-    }
-    
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-        metaDescription = document.createElement('meta');
-        metaDescription.setAttribute('name', 'description');
-        document.head.appendChild(metaDescription);
-    }
-    metaDescription.setAttribute('content', finalDescription);
-
-    // Canonical URL
-    const canonicalUrl = `${ORG_URL}${localePrefix(language)}${pagePath}`;
-    let canonicalLink = document.querySelector('link[rel="canonical"]');
-    if (!canonicalLink) {
-        canonicalLink = document.createElement('link');
-        canonicalLink.setAttribute('rel', 'canonical');
-        document.head.appendChild(canonicalLink);
-    }
-    canonicalLink.setAttribute('href', canonicalUrl);
-    
-    // Hreflang tags
-    document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(e => e.remove());
-    LANGUAGES.forEach(lang => {
-        const link = document.createElement('link');
-        link.rel = 'alternate';
-        link.hreflang = lang.code;
-        link.href = `${ORG_URL}${localePrefix(lang.code)}${pagePath}`;
-        document.head.appendChild(link);
-    });
-    
-    const socialImage = `${ORG_URL}/images/hithobe/kandura-courtyard-1120.webp`;
-    for (const [name, content] of Object.entries({ 'og:title': finalTitle, 'og:description': finalDescription, 'og:url': canonicalUrl, 'og:type': item ? 'product' : 'website', 'og:image': socialImage, 'og:site_name': 'hithobe', 'twitter:card': 'summary_large_image', 'twitter:title': finalTitle, 'twitter:description': finalDescription, 'twitter:image': socialImage })) {
-      const attr = name.startsWith('og:') ? 'property' : 'name';
-      let tag = document.querySelector(`meta[${attr}="${name}"]`);
-      if (!tag) { tag = document.createElement('meta'); tag.setAttribute(attr, name); document.head.appendChild(tag); }
-      tag.setAttribute('content', content);
-    }
-    let robots = document.querySelector('meta[name="robots"]');
-    if (!robots) { robots = document.createElement('meta'); robots.setAttribute('name', 'robots'); document.head.appendChild(robots); }
-    robots.setAttribute('content', pagePath === '/checkout' || pagePath === '/admin' ? 'noindex,follow' : 'index,follow,max-image-preview:large');
-
-    // Schema
-    document.querySelectorAll('script[type="application/ld+json"]').forEach(e => e.remove());
-    schemas.forEach((schema, index) => {
-        if (schema) {
-            const script = document.createElement('script');
-            script.type = 'application/ld+json';
-            script.id = `schema-ld-${index}`;
-            try {
-                script.innerHTML = JSON.stringify(schema, null, 2);
-                document.head.appendChild(script);
-            } catch (e) {
-                console.error("Failed to stringify schema", e);
-            }
-        }
-    });
-
-    return () => {
-        document.querySelectorAll('script[id^="schema-ld-"]').forEach(e => e.remove());
-        document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(e => e.remove());
-    };
-
-  }, [translate, language, titleKey, descriptionKey, pagePath, item, schemas]);
-
-  if (typeof document === 'undefined') {
-    const title = translate(titleKey).replace('{fabricName}', item ? translate(item.nameKey) : '').replace('{rollLength}', String(item?.rollLengthInMeters ?? ''));
-    const description = item ? translate(item.detailDescriptionKey) : translate(descriptionKey);
-    const url = `${ORG_URL}${localePrefix(language)}${pagePath}`;
-    return <><title>{title}</title><meta name="description" content={description} /><link rel="canonical" href={url} /><link rel="alternate" hrefLang="en" href={`${ORG_URL}${pagePath}`} /><link rel="alternate" hrefLang="ar" href={`${ORG_URL}/ar${pagePath}`} /><link rel="alternate" hrefLang="th" href={`${ORG_URL}/th${pagePath}`} /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={url} /><meta property="og:image" content={`${ORG_URL}/images/hithobe/kandura-courtyard-1120.webp`} />{schemas.map((schema,index) => <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g, '\\u003c')}} />)}</>;
+import {editorialShot,useEditorialCaption} from '../lib/editorial';
+import React,{useEffect} from 'react';
+import {useLanguage} from '../hooks/useLanguage';
+import {localizeSchema} from '../lib/schema';
+import {pageSearchCopy,pageAlternates,robotsContent} from '../lib/seo';
+import {imageMetadata} from '../lib/imageMetadata';
+import {Fabric} from '../types';
+interface SEOMetadataProps{titleKey:string;titleText?:string;descriptionText?:string;descriptionKey:string;pagePath:string;item?:Fabric;schemas?:any[];}
+const ogLocales:Record<string,string>={th:'th_TH',en:'en_US',ar:'ar_AR',fr:'fr_FR',bn:'bn_BD',ha:'ha_NG',sw:'sw_KE',so:'so_SO',ur:'ur_PK'};
+export const SEOMetadata=({titleKey,titleText,descriptionText,descriptionKey,pagePath,item,schemas=[]}:SEOMetadataProps)=>{
+ const {translate,language}=useLanguage();
+ const fallbackTitle=(titleText??translate(titleKey)).replace('{fabricName}',item?translate(item.nameKey):'').replace('{rollLength}',String(item?.rollLengthInMeters??''));
+ const fallbackDescription=descriptionText??(item?translate(item.detailDescriptionKey):translate(descriptionKey));
+ const data=pageSearchCopy(pagePath,language,translate,item,{title:fallbackTitle,description:fallbackDescription});
+ const caption=useEditorialCaption();const shot=editorialShot(new URL(data.image).pathname);const imageAlt=shot?caption(shot):data.title;
+ const alternates=pageAlternates(pagePath);const size=imageMetadata(new URL(data.image).pathname);
+ const robots=robotsContent(pagePath,typeof document==='undefined'?undefined:window.location.hostname);
+ const tags:Record<string,string>={description:data.description,robots,'og:title':data.title,'og:description':data.description,'og:url':data.url,'og:type':item?'product':'website','og:image':data.image,'og:image:alt':imageAlt,'og:image:width':String(size?.width||1280),'og:image:height':String(size?.height||853),'og:site_name':'hithobe','og:locale':ogLocales[language],'twitter:card':'summary_large_image','twitter:title':data.title,'twitter:description':data.description,'twitter:image':data.image,'twitter:image:alt':imageAlt};
+ const contentSchemas=[...schemas.filter(s=>s&&!['HowTo','WebPage','AboutPage','ContactPage'].includes(s['@type'])),{'@context':'https://schema.org','@type':pagePath==='/contact'?'ContactPage':pagePath==='/about-us'?'AboutPage':'WebPage','@id':data.url+'#webpage',url:data.url,name:data.title,description:data.description,inLanguage:language,isPartOf:{'@type':'WebSite','@id':'https://www.hithobe.com/#website',url:'https://www.hithobe.com',name:'hithobe'}}].map(s=>localizeSchema(s,language));
+ useEffect(()=>{
+  document.title=data.title;
+  for(const [key,value] of Object.entries(tags)){
+   const attr=key.startsWith('og:')?'property':'name';let tag=document.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+   if(!tag){tag=document.createElement('meta');tag.setAttribute(attr,key);document.head.appendChild(tag);}tag.content=value;
   }
-  return null; 
+  let canonical=document.querySelector<HTMLLinkElement>('link[rel="canonical"]');if(!canonical){canonical=document.createElement('link');canonical.rel='canonical';document.head.appendChild(canonical);}canonical.href=data.url;
+  document.querySelectorAll('link[hreflang]').forEach(tag=>tag.remove());
+  for(const alternate of alternates){const link=document.createElement('link');link.rel='alternate';link.hreflang=alternate.locale;link.href=alternate.url;document.head.appendChild(link);}
+  document.querySelectorAll('script[type="application/ld+json"]').forEach(tag=>tag.remove());
+  contentSchemas.forEach((schema,index)=>{const script=document.createElement('script');script.type='application/ld+json';script.id=`schema-ld-${index}`;script.textContent=JSON.stringify(schema).replace(/</g,'\\u003c');document.head.appendChild(script);});
+ },[data.title,data.description,data.url,data.image,robots,language,pagePath]);
+ if(typeof document!=='undefined')return null;
+ return <><title>{data.title}</title>{Object.entries(tags).map(([key,value])=>key.startsWith('og:')?<meta key={key} property={key} content={value}/>:<meta key={key} name={key} content={value}/>)}<link rel="canonical" href={data.url}/>{alternates.map(alt=><link key={alt.locale} rel="alternate" hrefLang={alt.locale} href={alt.url}/>)}{contentSchemas.map((schema,index)=><script key={index} type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g,'\\u003c')}}/>)}</>;
 };

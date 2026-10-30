@@ -44,9 +44,9 @@ export const ArtisanToolPage: React.FC = () => {
   const { translate } = useLanguage();
   
   const proTipsData = [
-      { titleKey: 'tip1_title', contentKey: 'tip1_content', altKey: 'artisansTool_tip_alt_1', imageUrl: 'https://i.postimg.cc/JhmPKBQW/IKSA-section-background-00130.webp' },
-      { titleKey: 'tip2_title', contentKey: 'tip2_content', altKey: 'artisansTool_tip_alt_2', imageUrl: 'https://i.postimg.cc/YS38PqXL/IKSA-section-background-00131.webp' },
-      { titleKey: 'tip3_title', contentKey: 'tip3_content', altKey: 'artisansTool_tip_alt_3', imageUrl: 'https://i.postimg.cc/tJLz61gw/IKSA-section-background-00132.webp' },
+      { titleKey: 'tip1_title', contentKey: 'tip1_content', altKey: 'artisansTool_tip_alt_1', imageUrl: '/images/hithobe/editorial/care-ironing-1280.webp' },
+      { titleKey: 'tip2_title', contentKey: 'tip2_content', altKey: 'artisansTool_tip_alt_2', imageUrl: '/images/hithobe/editorial/care-storage-1280.webp' },
+      { titleKey: 'tip3_title', contentKey: 'tip3_content', altKey: 'artisansTool_tip_alt_3', imageUrl: '/images/hithobe/editorial/sample-inspection-1280.webp' },
   ];
 
   const schemas = useMemo(() => {
@@ -67,7 +67,7 @@ export const ArtisanToolPage: React.FC = () => {
       />
       <ContentBlock 
         isHero
-        heroImageSrc="https://i.postimg.cc/JhmPKBQW/IKSA-section-background-00130.webp"
+        heroImageSrc="/images/hithobe/editorial/sample-measuring-1280.webp"
         heroImageAlt={translate('artisansTool_hero_alt')}
         heroPageName="Artisan's Tool"
         heroSectionTitle="Artisan's Tool Hero"
@@ -84,7 +84,7 @@ export const ArtisanToolPage: React.FC = () => {
 
       <ContentBlock>
             <h2 className="text-3xl md:text-4xl font-serif-display font-semibold text-stone-800 mb-10 text-center section-title-underline flex items-center justify-center">
-                <LightbulbIcon className="w-8 h-8 mr-4 text-brandAccent-700" />
+                <LightbulbIcon className="w-8 h-8 me-4 text-brandAccent-700" />
                 {translate('artisansTool_proTipsTitle')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">

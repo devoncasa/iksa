@@ -1,3 +1,7 @@
+import {imageMetadata} from './lib/imageMetadata';
+import {PageWayfinding,JourneyLinks} from './components/PageNavigation';
+import {EditorialGallery} from './components/EditorialGallery';
+import {SEOMetadata} from './components/SEOMetadata';
 import { localeFromPath, localePrefix } from './lib/language';
 
 
@@ -22,9 +26,9 @@ import { ArtisanToolPage } from './pages/ArtisanToolPage';
 import { AcquirePage } from './pages/AcquirePage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { PriceStructurePage } from './pages/PriceStructurePage';
-import { AdminPage } from './pages/admin/AdminPage';
 import { SECTION_BACKGROUND_IMAGES, getRandomImage } from './constants';
 
+const backgroundSource=(src:string)=>imageMetadata(src)?.srcSet?.split(', ')[0]?.split(' ')[0]||src;
 // --- Dynamic Background System ---
 const DynamicBackground: React.FC = () => {
     const location = useLocation();
@@ -61,7 +65,7 @@ const DynamicBackground: React.FC = () => {
                     key={previousUrl}
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
                     style={{
-                        backgroundImage: `url(${previousUrl})`,
+                        backgroundImage: `url(${backgroundSource(previousUrl)})`,
                         filter: 'blur(8px)',
                         transform: 'scale(1.15)',
                         animation: 'fadeOut 1.5s ease-in-out forwards'
@@ -73,7 +77,7 @@ const DynamicBackground: React.FC = () => {
                 key={currentUrl}
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
                 style={{
-                    backgroundImage: `url(${currentUrl})`,
+                    backgroundImage: `url(${backgroundSource(currentUrl)})`,
                     filter: 'blur(8px)',
                     transform: 'scale(1.15)',
                     animation: 'fadeIn 1.5s ease-in-out forwards'
@@ -89,14 +93,17 @@ const DynamicBackground: React.FC = () => {
 // --- App Structure ---
 
 const MainLayout: React.FC = () => {
+  const {pathname}=useLocation();
   return (
     <>
       <div className="flex flex-col min-h-screen text-stone-700 font-sans selection:bg-brandAccent-700 selection:text-white overflow-x-hidden isolate">
         <DynamicBackground />
         <Header />
-        <main className="flex-grow">
+        <main id="main-content" tabIndex={-1} className="flex-grow" data-wayfinding={pathname!=='/'?'true':undefined}>
+          <PageWayfinding/>
           <Routes>
             <Route path="/" element={<MainPage />} />
+            <Route path="/gallery" element={<><SEOMetadata titleKey="galleryTitle" descriptionKey="galleryDescription" pagePath="/gallery"/><EditorialGallery/></>} />
             <Route path="/atelier" element={<AtelierPage />} />
             <Route path="/fabric-library" element={<FabricLibraryPage />} />
             <Route path="/trade-studio" element={<TradeStudioPage />} />
@@ -116,6 +123,7 @@ const MainLayout: React.FC = () => {
             <Route path="*" element={<NotFoundPage />} />
             <Route path="/admin" element={<NotFoundPage />} />
           </Routes>
+          <JourneyLinks/>
         </main>
         <Footer />
       </div>

@@ -53,8 +53,8 @@ const initialPricingSettings: PricingSettings = {
 };
 
 const products: Product[] = [
-    { id: 'product1', nameKey: 'priceStructure_premiumThobe', basePriceUSD: 50.00, weightKg: 0.5, image: 'https://i.postimg.cc/SNvBZVXb/IKSA-section-background-00111.webp', hsCode: '6211.33.10', category: 'apparel' },
-    { id: 'product2', nameKey: 'priceStructure_deluxeFabric', basePriceUSD: 120.00, weightKg: 1.2, image: 'https://i.postimg.cc/TP8Zxwqk/IKSA-section-background-00112.webp', hsCode: '5407.52', category: 'textile' }
+    { id: 'product1', nameKey: 'priceStructure_premiumThobe', basePriceUSD: 50.00, weightKg: 0.5, image: '/images/hithobe/editorial/crepe-black-1280.webp', hsCode: '6211.33.10', category: 'apparel' },
+    { id: 'product2', nameKey: 'priceStructure_deluxeFabric', basePriceUSD: 120.00, weightKg: 1.2, image: '/images/hithobe/editorial/weave-blue-1280.webp', hsCode: '5407.52', category: 'textile' }
 ];
 
 const StaticPriceTable: React.FC = () => {
@@ -67,10 +67,10 @@ const StaticPriceTable: React.FC = () => {
                 <table className="min-w-full divide-y divide-stone-300">
                     <thead className="bg-stone-100/70">
                         <tr>
-                            <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-stone-900 sm:pl-6">{translate('priceStructure_fabric')}</th>
-                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-stone-900 hidden md:table-cell">{translate('priceStructure_composition')}</th>
-                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">{translate('priceStructure_roll_size')}</th>
-                            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-stone-900">{translate('priceStructure_wholesale_meter')}</th>
+                            <th scope="col" className="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-stone-900 sm:pl-6">{translate('priceStructure_fabric')}</th>
+                            <th scope="col" className="px-3 py-3.5 text-start text-sm font-semibold text-stone-900 hidden md:table-cell">{translate('priceStructure_composition')}</th>
+                            <th scope="col" className="px-3 py-3.5 text-start text-sm font-semibold text-stone-900">{translate('priceStructure_roll_size')}</th>
+                            <th scope="col" className="px-3 py-3.5 text-start text-sm font-semibold text-stone-900">{translate('priceStructure_wholesale_meter')}</th>
                             <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">{translate('priceStructure_wholesale_roll')}</th>
                         </tr>
                     </thead>
@@ -227,24 +227,8 @@ export const PriceStructurePage: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const handleLogin = () => {
-        if (import.meta.env.DEV && password === '0007') {
-            setIsAdmin(true);
-            setShowLogin(false);
-            setTempSettings({
-                baseDeliveryChargeTH: settings.countries.TH.shipping.base,
-                perKgDeliveryChargeTH: settings.countries.TH.shipping.perKg,
-                currencyExchangeRateTHB_USD: settings.currencyExchangeRateTHB_USD,
-                internationalSurchargePercentageDefault: settings.internationalSurchargePercentageDefault
-            });
-            setTempSurcharge((settings.internationalSurchargePercentageDefault * 100).toFixed(1));
-            setPassword('');
-        } else {
-            setMessage({ show: true, text: translate('admin_incorrectPassword') });
-            setPassword('');
-        }
-    };
-    
+    const handleLogin = () => { setShowLogin(false); };
+
     const handleSave = () => {
         const newBaseDelivery = tempSettings.baseDeliveryChargeTH;
         const newPerKgDelivery = tempSettings.perKgDeliveryChargeTH;
@@ -292,10 +276,11 @@ export const PriceStructurePage: React.FC = () => {
     
     const renderUserView = () => (
         <ContentBlock>
+            <p className="mb-6 p-4 border border-muted-gold/50 rounded-lg text-sm">{translate('pricingPlanningNotice')}</p>
             <StaticPriceTable />
             <details ref={mainPolicyRef} className="group mt-12 transition-all duration-500 ease-in-out">
                 <summary className="list-none flex items-center justify-center cursor-pointer text-3xl font-serif-display font-semibold text-brandAccent-700 mb-6 transition-all duration-300 p-4 rounded-lg bg-stone-50/70 hover:bg-stone-100/80 border border-stone-200/50 shadow-sm hover:shadow-md">
-                     <ChevronDownIcon className="w-8 h-8 mr-4 transition-transform duration-300 group-open:rotate-180" />
+                     <ChevronDownIcon className="w-8 h-8 me-4 transition-transform duration-300 group-open:rotate-180" />
                     <span>{translate('priceStructure_collapsibleTitle')}</span>
                 </summary>
                 <div className="transition-[grid-template-rows] duration-500 ease-in-out grid grid-rows-[0fr] group-open:grid-rows-[1fr]">
@@ -351,12 +336,12 @@ export const PriceStructurePage: React.FC = () => {
                                 <PolicySubsection ref={el => { subsectionRefs.current[5] = el; }} titleKey="priceStructure_deminimisTitle">
                                     <p className="mb-4 text-stone-700 text-sm">{translate('priceStructure_deminimisIntro')}</p>
                                     <div className="overflow-x-auto mt-4 bg-white/50 backdrop-blur-xl rounded-lg shadow-md border border-soft-sand">
-                                        <table className="w-full text-left text-sm divide-y divide-soft-sand">
+                                        <table className="w-full text-start text-sm divide-y divide-soft-sand">
                                             <thead className="bg-creamy-beige/30"><tr>
-                                                <th className="px-3 py-3 text-left text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_country')}</th>
-                                                <th className="px-3 py-3 text-left text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_duty')}</th>
-                                                <th className="px-3 py-3 text-left text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_tax')}</th>
-                                                <th className="px-3 py-3 text-left text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_notes')}</th>
+                                                <th className="px-3 py-3 text-start text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_country')}</th>
+                                                <th className="px-3 py-3 text-start text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_duty')}</th>
+                                                <th className="px-3 py-3 text-start text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_tax')}</th>
+                                                <th className="px-3 py-3 text-start text-xs font-semibold text-warm-terracotta uppercase tracking-wider">{translate('priceStructure_table_notes')}</th>
                                             </tr></thead>
                                             <tbody className="bg-white/80 divide-y divide-soft-sand">
                                                 {deminimisData.map(item => (<tr key={item.c}><td className="px-3 py-3 align-top font-semibold text-deep-chocolate">{countryOptions.find(opt => opt.code.toLowerCase().startsWith(item.c.substring(0,2)))?.name}</td><td className="px-3 py-3 align-top text-stone-700">{translate(item.duty)}</td><td className="px-3 py-3 align-top text-stone-700">{translate(item.tax)}</td><td className="px-3 py-3 align-top text-stone-700">{translate(item.notes)}</td></tr>))}
@@ -370,7 +355,6 @@ export const PriceStructurePage: React.FC = () => {
                     </div>
                 </div>
             </details>
-            <div className="text-center mt-8"><button onClick={() => setShowLogin(true)} className="text-sm text-stone-500 hover:text-brandAccent-700 transition-colors">{translate('admin_access')}</button></div>
         </ContentBlock>
     );
 
@@ -382,16 +366,16 @@ export const PriceStructurePage: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                      <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="baseDeliveryChargeTH">{translate('admin_baseDeliveryTH')}</label>
-                        <input type="number" id="baseDeliveryChargeTH" value={tempSettings.baseDeliveryChargeTH} onChange={handleTempSettingChange} min="0" step="0.01" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brandAccent-500 focus:border-brandAccent-500 sm:text-sm" />
+                        <input type="number" dir="ltr" id="baseDeliveryChargeTH" value={tempSettings.baseDeliveryChargeTH} onChange={handleTempSettingChange} min="0" step="0.01" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brandAccent-500 focus:border-brandAccent-500 sm:text-sm" />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="perKgDeliveryChargeTH">{translate('admin_perKgDeliveryTH')}</label>
-                        <input type="number" id="perKgDeliveryChargeTH" value={tempSettings.perKgDeliveryChargeTH} onChange={handleTempSettingChange} min="0" step="0.01" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brandAccent-500 focus:border-brandAccent-500 sm:text-sm" />
+                        <input type="number" dir="ltr" id="perKgDeliveryChargeTH" value={tempSettings.perKgDeliveryChargeTH} onChange={handleTempSettingChange} min="0" step="0.01" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brandAccent-500 focus:border-brandAccent-500 sm:text-sm" />
                     </div>
                     <div className="md:col-span-2 mt-2">
                         <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="internationalSurchargePercentageDefault">{translate('admin_internationalSurcharge')}</label>
                         <input 
-                            type="number" 
+                            type="number" dir="ltr" 
                             id="internationalSurchargePercentageDefault" 
                             value={tempSurcharge}
                             onChange={(e) => setTempSurcharge(e.target.value)} 
@@ -423,7 +407,7 @@ export const PriceStructurePage: React.FC = () => {
             {!isAdmin && (
                 <ContentBlock 
                     isHero
-                    heroImageSrc="https://i.postimg.cc/yNF28HL7/IKSA-section-background-00113.webp"
+                    heroImageSrc="/images/hithobe/editorial/drape-ivory-1280.webp"
                     heroImageAlt={translate('priceStructure_pageTitle_dynamic')}
                     heroPageName="Price Structure"
                     heroSectionTitle="Price Structure Hero"
@@ -437,7 +421,7 @@ export const PriceStructurePage: React.FC = () => {
                 </ContentBlock>
             )}
 
-            {isAdmin ? renderAdminView() : renderUserView()}
+            {renderUserView()}
 
             {showLogin && (
                 <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">

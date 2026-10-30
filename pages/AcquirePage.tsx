@@ -1,5 +1,11 @@
+import {CustomerGuidance} from '../components/CustomerGuidance';
+import {canSubmitEnquiry,enquiryErrors,submitEnquiry,parseEnquiryDraft} from '../lib/enquiry';
+import {interactionCopy} from '../locales/interactions';
+import {MOCK_FABRICS} from '../constants';
+import {navigationCopy} from '../locales/navigation';
+import {track} from '../lib/analytics';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useLanguage } from '../hooks/useLanguage';
 import { Button } from '../components/Button';
 import { BuildingIcon, PhoneIcon, EmailIcon, ClockIcon, IconProps } from '../components/icons';
@@ -24,13 +30,13 @@ const ContactInfoItem: React.FC<ContactInfoItemProps> = ({ IconComponent, label,
   const displayValue = valueKey ? translate(valueKey) : value;
   
   return (
-  <div className="flex items-start text-left">
-    <IconComponent className="w-5 h-5 mr-3 mt-1 text-brandAccent-700 flex-shrink-0" /> 
+  <div className="flex items-start text-start">
+    <IconComponent className="w-5 h-5 me-3 mt-1 text-brandAccent-700 flex-shrink-0" /> 
     <div>
       {displayLabel && <p className="font-semibold text-stone-700 mb-0.5">{displayLabel}</p>} 
       {href ? (
         <a href={href} className="text-stone-600 hover:text-brandAccent-700 hover:underline transition-colors duration-150 ease-in-out block break-words text-sm md:text-base"> 
-          {displayValue}
+          {href?.startsWith('tel:')?<bdi dir="ltr">{displayValue}</bdi>:displayValue}
         </a>
       ) : (
         <p className="text-stone-600 whitespace-pre-line break-words text-sm md:text-base">{displayValue}</p> 
@@ -48,10 +54,28 @@ interface FormData {
 }
 
 export const AcquirePage: React.FC = () => {
-  const { translate } = useLanguage();
-  const [formData, setFormData] = useState<FormData>({ name: '', email: '', subject: '', message: ''});
+  const { translate,language } = useLanguage();
+  const [formData,setFormData]=useState<FormData>(()=>{
+    let draft:Partial<FormData>={},brief='';
+    try{draft=parseEnquiryDraft(sessionStorage.getItem('hithobe-enquiry-draft'));brief=sessionStorage.getItem('hithobe-enquiry-brief')||'';}catch{}
+    const id=new URLSearchParams(window.location.search||'').get('fabric');
+    const fabric=MOCK_FABRICS.find(item=>item.id===id);
+    let message=draft.message||'';
+    if(brief&&!message.includes(brief))message=[message,brief].filter(Boolean).join('\n\n');
+    if(fabric&&!message.includes(fabric.id))message=[message,`${navigationCopy[language].reference}: ${fabric.id} — ${translate(fabric.nameKey)}`].filter(Boolean).join('\n\n');
+    return {name:draft.name||'',email:draft.email||'',subject:draft.subject||'',message};
+  });
+  const copy=interactionCopy[language];
+  const formRef=useRef<HTMLFormElement>(null);
+  const statusRef=useRef<HTMLDivElement>(null);
+  const [submissionAllowed,setSubmissionAllowed]=useState(false);
+  useEffect(()=>{setSubmissionAllowed(canSubmitEnquiry(window.location.hostname));},[]);
   const [errors, setErrors] = useState<Partial<FormData>>({});
+  const hasStarted=useRef(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
+  useEffect(()=>{if(!isSubmitted)try{sessionStorage.setItem('hithobe-enquiry-draft',JSON.stringify(formData));}catch{}},[formData,isSubmitted]);
 
   const googleMapsEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.836222623386!2d100.5191733!3d13.7285517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e298d280a52033%3A0x2967174e3049b161!2sJewelry%20Trade%20Center!5e0!3m2!1sen!2sth!4v1716382946571!5m2!1sen!2sth";
 
@@ -63,32 +87,15 @@ export const AcquirePage: React.FC = () => {
   }, [translate]);
 
   const validate = (): boolean => {
-    const newErrors: Partial<FormData> = {};
-    let isValid = true;
-    
-    if (!formData.name.trim()) {
-      newErrors.name = translate('form_error_required');
-      isValid = false;
-    }
-    if (!formData.email.trim()) {
-      newErrors.email = translate('form_error_required');
-      isValid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = translate('form_error_email');
-      isValid = false;
-    }
-    if (!formData.subject.trim()) {
-      newErrors.subject = translate('form_error_required');
-      isValid = false;
-    }
-    if (!formData.message.trim()) {
-      newErrors.message = translate('form_error_required');
-      isValid = false;
-    }
-    
+    const failures=enquiryErrors(formData);
+    const newErrors:Partial<FormData>={};
+    for(const key of Object.keys(failures) as (keyof FormData)[])newErrors[key]=translate(failures[key]==='email'?'form_error_email':'form_error_required');
     setErrors(newErrors);
-    return isValid;
+    const first=Object.keys(failures)[0];
+    if(first)requestAnimationFrame(()=>formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus());
+    return !first;
   };
+  useEffect(()=>{if(isSubmitted||submitError)statusRef.current?.focus();},[isSubmitted,submitError]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -98,12 +105,15 @@ export const AcquirePage: React.FC = () => {
     }
   };
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (isSubmitting || !submissionAllowed) return;
     if (validate()) {
-        const body = `Name: ${formData.name}\nReply email: ${formData.email}\n\n${formData.message}`;
-        window.location.href = `mailto:sales@iksa-textiles.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(body)}`;
-        setIsSubmitted(true);
+        setIsSubmitting(true); setSubmitError(false);
+        try {
+          await submitEnquiry(formData,String(new FormData(event.currentTarget).get('bot-field')||''),window.location.hostname);
+          setIsSubmitted(true);track('enquiry_success');try{sessionStorage.removeItem('hithobe-enquiry-brief');sessionStorage.removeItem('hithobe-enquiry-draft')}catch{}
+        } catch { setSubmitError(true); } finally { setIsSubmitting(false); }
     }
   };
 
@@ -122,7 +132,7 @@ export const AcquirePage: React.FC = () => {
       />
       <ContentBlock 
         isHero
-        heroImageSrc="https://i.postimg.cc/LsH3jFH9/IKSA-section-background-00140.webp"
+        heroImageSrc="/images/hithobe/editorial/sample-shade-1280.webp"
         heroImageAlt={translate('contact_hero_alt')}
         heroPageName="Contact"
         heroSectionTitle="Contact Hero"
@@ -148,31 +158,12 @@ export const AcquirePage: React.FC = () => {
                     labelKey="contact_addressTitle" 
                     value={`${translate('contact_addressLine1')}\n${translate('contact_addressLine2')}`} 
                 />
-                <ContactInfoItem IconComponent={PhoneIcon} href="https://wa.me/66818519922" valueKey="contact_whatsapp" />
-                <ContactInfoItem IconComponent={EmailIcon} href="mailto:sales@iksa-textiles.com" value="sales@iksa-textiles.com" />
+                <ContactInfoItem IconComponent={PhoneIcon} href="tel:+66818519922" value="+66 81 851 9922" />
                 <ContactInfoItem 
                     IconComponent={ClockIcon} 
                     labelKey="contact_hoursTitle" 
                     value={`${translate('contact_hoursLine1')}\n${translate('contact_hoursLine2')}\n${translate('contact_hoursLine3')}`} 
                 />
-                </div>
-                <div className="mt-8 md:mt-10">
-                    <h3 className="text-lg font-semibold text-brandAccent-700 mb-4">{translate('footer_followUsTitle')}</h3>
-                    <div className="flex flex-wrap gap-4">
-                        {SOCIAL_MEDIA_LINKS.map(social => (
-                            <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer"
-                            className="text-stone-400 hover:text-brandAccent-500 transition-transform duration-200 ease-in-out hover:scale-110"
-                            aria-label={`Follow us on ${social.name}`}>
-                                <ManagedImage 
-                                    src={social.icon} 
-                                    alt={`${social.name} logo`} 
-                                    pageName="Contact"
-                                    sectionTitle={`Social Link: ${social.name}`}
-                                    className="w-8 h-8" 
-                                />
-                            </a>
-                        ))}
-                    </div>
                 </div>
             </div>
 
@@ -182,34 +173,38 @@ export const AcquirePage: React.FC = () => {
                 {translate('contact_formTitle')}
                 </h2>
                 {isSubmitted ? (
-                    <div className="text-center p-4 bg-brandAccent-100/80 text-brandAccent-700 rounded-md">
+                    <div ref={statusRef} tabIndex={-1} role="status" className="text-center p-4 bg-brandAccent-100/80 text-brandAccent-700 rounded-md">
                         {translate('contact_form_success')}
                     </div>
                 ) : (
-                <form onSubmit={handleFormSubmit} className="space-y-5 md:space-y-6" noValidate>
+                <form ref={formRef} aria-busy={isSubmitting} name="hithobe-enquiry" method="POST" onSubmit={handleFormSubmit} onFocus={()=>{if(!hasStarted.current){hasStarted.current=true;track('enquiry_start')}}} className="space-y-5 md:space-y-6" noValidate>
+<input type="hidden" name="form-name" value="hithobe-enquiry"/><input name="bot-field" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true"/>
+{!submissionAllowed && <p className="enquiry-preview-notice" role="note">{copy.previewNotice} <a href="tel:+66818519922" dir="ltr">+66 81 851 9922</a></p>}
+{Object.values(errors).some(Boolean)&&<p role="alert">{copy.errorSummary}</p>}
+{submitError && <div ref={statusRef} tabIndex={-1} role="alert">{translate('formSubmitError')} <a href="tel:+66818519922" dir="ltr">+66 81 851 9922</a></div>}
                 <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-stone-600 mb-1.5 text-left">{translate('yourName')}</label>
-                    <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} required className={inputClass('name')} />
-                    {errors.name && <p className="text-red-600 text-xs mt-1 text-left">{errors.name}</p>}
+                    <label htmlFor="name" className="block text-sm font-medium text-stone-600 mb-1.5 text-start">{translate('yourName')}</label>
+                    <input type="text" name="name" id="name" aria-invalid={Boolean(errors.name)} aria-describedby={errors.name?'name-error':undefined} autoComplete="name" maxLength={150} value={formData.name} onChange={handleInputChange} required className={inputClass('name')} />
+                    {errors.name && <p id="name-error" className="text-red-600 text-xs mt-1 text-start">{errors.name}</p>}
                 </div>
                 <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-stone-600 mb-1.5 text-left">{translate('yourEmail')}</label>
-                    <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} required className={inputClass('email')} />
-                    {errors.email && <p className="text-red-600 text-xs mt-1 text-left">{errors.email}</p>}
+                    <label htmlFor="email" className="block text-sm font-medium text-stone-600 mb-1.5 text-start">{translate('yourEmail')}</label>
+                    <input type="email" name="email" id="email" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email?'email-error':undefined} autoComplete="email" inputMode="email" dir="ltr" maxLength={254} value={formData.email} onChange={handleInputChange} required className={inputClass('email')} />
+                    {errors.email && <p id="email-error" className="text-red-600 text-xs mt-1 text-start">{errors.email}</p>}
                 </div>
                 <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-stone-600 mb-1.5 text-left">{translate('subject')}</label>
-                    <input type="text" name="subject" id="subject" value={formData.subject} onChange={handleInputChange} required className={inputClass('subject')} />
-                    {errors.subject && <p className="text-red-600 text-xs mt-1 text-left">{errors.subject}</p>}
+                    <label htmlFor="subject" className="block text-sm font-medium text-stone-600 mb-1.5 text-start">{translate('subject')}</label>
+                    <input type="text" name="subject" id="subject" aria-invalid={Boolean(errors.subject)} aria-describedby={errors.subject?'subject-error':undefined} maxLength={200} value={formData.subject} onChange={handleInputChange} required className={inputClass('subject')} />
+                    {errors.subject && <p id="subject-error" className="text-red-600 text-xs mt-1 text-start">{errors.subject}</p>}
                 </div>
                 <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-stone-600 mb-1.5 text-left">{translate('yourMessage')}</label>
-                    <textarea name="message" id="message" rows={5} value={formData.message} onChange={handleInputChange} required className={inputClass('message')}></textarea>
-                    {errors.message && <p className="text-red-600 text-xs mt-1 text-left">{errors.message}</p>}
+                    <label htmlFor="message" className="block text-sm font-medium text-stone-600 mb-1.5 text-start">{translate('yourMessage')}</label>
+                    <textarea name="message" id="message" rows={5} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message?'message-error':undefined} maxLength={12000} value={formData.message} onChange={handleInputChange} required className={inputClass('message')}></textarea>
+                    {errors.message && <p id="message-error" className="text-red-600 text-xs mt-1 text-start">{errors.message}</p>}
                 </div>
                 <div>
-                    <Button type="submit" variant="primary" size="lg" fullWidth className="focus:ring-offset-white py-3.5">
-                    {translate('sendMessage')}
+                    <Button disabled={isSubmitting||!submissionAllowed} type="submit" variant="primary" size="lg" fullWidth className="focus:ring-offset-white py-3.5">
+                    {isSubmitting?copy.sending:translate('sendMessage')}
                     </Button>
                 </div>
                 </form>
@@ -218,6 +213,7 @@ export const AcquirePage: React.FC = () => {
             </div>
       </ContentBlock>
 
+        <CustomerGuidance indices={[5]} cards/>
         {/* Google Maps Section */}
         <ContentBlock>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif-display font-semibold text-stone-800 mb-6 md:mb-8 text-center section-title-underline">
@@ -236,14 +232,13 @@ export const AcquirePage: React.FC = () => {
             ></iframe>
             </div>
             <div className="mt-6 text-center">
-                <a 
+                <a className="inline-block rounded-md border border-muted-gold px-5 py-2.5 hover:bg-stone-100"
                     href="https://maps.app.goo.gl/uLd8hxpGg3eUv2w1A" 
                     target="_blank" 
                     rel="noopener noreferrer"
                 >
-                    <Button variant="outline" size="md" className="focus:ring-offset-white">
+                    
                         {translate('getDirections')}
-                    </Button>
                 </a>
             </div>
         </ContentBlock>

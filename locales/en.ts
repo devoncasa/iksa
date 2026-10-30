@@ -1,9 +1,17 @@
 
 
 import {
+
  LanguageCode, Translations } from '../types';
 
 export const en: Translations = {
+pricingPlanningNotice:"Planning illustration only. These legacy shipping, exchange-rate and tax inputs are not current quotations or customs advice. Confirm the applicable charges and final written quotation before ordering.",
+
+galleryTitle: "Editorial gallery | Fabric texture, drape & styling | hithobe",
+galleryDescription: "Explore 30 textile photographs, from weave details and fabric drape to thobe styling, colour coordination, care and sample selection.",
+
+formSubmitError: "Your enquiry could not be submitted. Please retry or call us.",
+
 estimatedRollYield:"Estimated Yield From This Roll:",
 fabricNotFound:"Fabric not found.",
 backToCollections:"Back to Collections",
@@ -77,9 +85,9 @@ browseCollections:"Browse collections",
     country: "Country",
     postalCode: "Postal Code",
     orderSummary: "Order Summary",
-    placeOrder: "Open Order Enquiry in Email",
-    thankYouForYourOrder: "Your enquiry draft is ready",
-    orderConfirmationMsg: "Complete sending in your email app. No order or payment has been confirmed. Your cart is saved. If no email app opened, contact sales@iksa-textiles.com or use our WhatsApp link.",
+    placeOrder: "Continue to enquiry form",
+    thankYouForYourOrder: "Your enquiry",
+    orderConfirmationMsg: "Your enquiry has been submitted. No order or payment is confirmed.",
     continueShopping: "Continue Shopping",
     item: "Item",
     quantity: "Qty",
@@ -110,6 +118,7 @@ browseCollections:"Browse collections",
 
     // Nav
     nav: {
+gallery:"Gallery",
       main: "Main",
       aboutUs: "About Us",
       collections: "Collections",
@@ -364,7 +373,7 @@ browseCollections:"Browse collections",
     contact_pageTitle: "Contact Us",
     contact_intro: "We're here to assist with inquiries, sample requests, and partnership opportunities. Reach out to discover the hithobe difference.",
     contact_addressTitle: "Our Office",
-    contact_addressLine1: "IKSA Textiles Co., Ltd.",
+    contact_addressLine1: "HiThobe Textiles",
     contact_addressLine2: "919/1 JTC Tower, B1-BB038, Silom Road, Silom, Bangrak, Bangkok 10500, THAILAND",
     contact_whatsapp: "WhatsApp (English/Arabic): +66 81 851 9922",
     contact_hoursTitle: "Business Hours",
@@ -374,7 +383,7 @@ browseCollections:"Browse collections",
     contact_mapTitle: "Find Us Here",
     contact_getDirections: "Get Directions",
     contact_formTitle: "Send Us a Message",
-    contact_form_success: "Your email app has been opened with your enquiry. Please send it there. Your message has not been sent by this website.",
+    contact_form_success: "Your enquiry has been submitted. No order or payment is confirmed.",
     form_error_email: "Please enter a valid email address.",
     form_error_required: "This field is required.",
     contact_hero_alt: "A close-up of a hand using a vintage telephone, symbolizing professional communication.",

@@ -1,7 +1,15 @@
 import {
+
  Translations } from '../types';
 
 export const ar: Translations = {
+pricingPlanningNotice:"للتخطيط الأولي فقط. بيانات الشحن والصرف والضرائب القديمة ليست عرض أسعار حاليًا أو إرشادًا جمركيًا. أكّد التكاليف والعرض المكتوب النهائي قبل الطلب.",
+
+galleryTitle: "معرض الأقمشة والانسدال وتنسيق الثوب | hithobe",
+galleryDescription: "استكشف 30 صورة توضيحية للنسيج والانسدال وتنسيق الثوب والألوان والعناية واختيار العينات قبل الاستفسار عن القماش المناسب.",
+
+formSubmitError: "تعذر إرسال الاستفسار. حاول مجدداً أو اتصل بنا.",
+
 estimatedRollYield:"الإنتاج المقدر من هذه اللفة:",
 fabricNotFound:"لم يتم العثور على القماش.",
 backToCollections:"العودة للمجموعات",
@@ -75,9 +83,9 @@ browseCollections:"تصفح المجموعات",
     country: "الدولة",
     postalCode: "الرمز البريدي",
     orderSummary: "ملخص الطلب",
-    placeOrder: "فتح استفسار الطلب في البريد",
-    thankYouForYourOrder: "مسودة استفسارك جاهزة",
-    orderConfirmationMsg: "يرجى إتمام الإرسال في تطبيق البريد. لم يتم تأكيد طلب أو دفع. سلة التسوق محفوظة. إذا لم يفتح البريد، تواصل معنا عبر واتساب أو sales@iksa-textiles.com.",
+    placeOrder: "المتابعة إلى نموذج الاستفسار",
+    thankYouForYourOrder: "استفسارك",
+    orderConfirmationMsg: "تم إرسال استفسارك. لم يتم تأكيد طلب أو دفع.",
     continueShopping: "متابعة التسوق",
     item: "المنتج",
     quantity: "الكمية",
@@ -107,6 +115,7 @@ browseCollections:"تصفح المجموعات",
     
     // Nav
     nav: {
+gallery:"المعرض",
         main: "الرئيسية",
         aboutUs: "من نحن",
         collections: "المجموعات",
@@ -360,7 +369,7 @@ browseCollections:"تصفح المجموعات",
     contact_pageTitle: "اتصل بنا",
     contact_intro: "نحن هنا للمساعدة في الاستفسارات وطلبات العينات وفرص الشراكة. تواصل معنا لاكتشاف فرق هاي ثوب.",
     contact_addressTitle: "مكتبنا",
-    contact_addressLine1: "IKSA Textiles Co., Ltd.",
+    contact_addressLine1: "HiThobe Textiles",
     contact_addressLine2: "919/1 برج JTC، B1-BB038، طريق سيلوم، سيلوم، بانكراك، بانكوك 10500، تايلاند",
     contact_whatsapp: "واتساب (إنجليزي/عربي): +66 81 851 9922",
     contact_hoursTitle: "ساعات العمل",
@@ -370,7 +379,7 @@ browseCollections:"تصفح المجموعات",
     contact_mapTitle: "تجدنا هنا",
     contact_getDirections: "احصل على الاتجاهات",
     contact_formTitle: "أرسل لنا رسالة",
-    contact_form_success: "تم فتح تطبيق البريد بمسودة استفسارك. يرجى إرسالها من هناك؛ لم يرسل الموقع الرسالة.",
+    contact_form_success: "تم إرسال استفسارك. لم يتم تأكيد طلب أو دفع.",
     form_error_email: "الرجاء إدخال عنوان بريد إلكتروني صالح.",
     form_error_required: "هذا الحقل مطلوب.",
     contact_hero_alt: "لقطة مقربة ليد تستخدم هاتفًا قديمًا، ترمز إلى التواصل المهني.",

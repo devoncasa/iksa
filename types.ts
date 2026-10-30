@@ -3,6 +3,7 @@ export enum LanguageCode {
   EN = 'en',
   AR = 'ar',
   TH = 'th',
+  FR = 'fr', BN = 'bn', HA = 'ha', SW = 'sw', SO = 'so', UR = 'ur',
 }
 
 export interface Translations {

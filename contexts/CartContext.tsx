@@ -9,7 +9,7 @@ export const CartContext = createContext<CartContextType | undefined>(undefined)
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
-      const localData = window.localStorage.getItem('iksaCart');
+      const localData = (window.localStorage.getItem('hithobeCart') || window.localStorage.getItem('iksaCart'));
       return normalizeCart(localData ? JSON.parse(localData) : [], MOCK_FABRICS);
     } catch (error) {
       console.error("Error reading cart from localStorage", error);
@@ -19,7 +19,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   useEffect(() => {
     try {
-      window.localStorage.setItem('iksaCart', JSON.stringify(cart));
+      window.localStorage.setItem('hithobeCart', JSON.stringify(cart));
     } catch (error) {
       console.error("Error saving cart to localStorage", error);
     }

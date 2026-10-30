@@ -1,148 +1,26 @@
-
-import React, { useState, useEffect } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
-import { useLanguage } from '../hooks/useLanguage';
-import { useCart } from '../hooks/useCart';
-import { NAV_LINKS } from '../constants';
-import { CloseIcon, MenuIcon, ShoppingCartIcon } from './icons'; 
-import { CartModal } from './CartModal';
-import { ManagedImage } from './ManagedImage';
-import { LanguageSwitcher } from './LanguageSwitcher';
-
-export const Header: React.FC = () => {
-  const { translate } = useLanguage();
-  const { getCartTotal } = useCart();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
-
-  const { totalItems } = getCartTotal();
-
-  // Handle scroll effect for header background
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-  
-  // Close menus on route change
-  useEffect(() => {
-    setIsMobileMenuOpen(false); 
-    setIsCartOpen(false);
-  }, [location.pathname]);
-
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isMobileMenuOpen]);
-
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  
-  const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-    `relative py-2 px-1 text-sm font-medium transition-colors duration-300 ease-in-out focus:outline-none
-     after:content-[""] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:transition-all after:duration-300 after:ease-in-out
-     after:bg-brandAccent-500 lg:after:bg-brandAccent-600
-     ${isActive
-        ? 'text-white lg:text-white after:w-full focus:after:h-1'
-        : 'text-stone-300 lg:text-deep-chocolate after:w-0 hover:text-white hover:after:w-full focus:text-white focus:after:w-full'
-     }`;
-
-  const mobileNavLinkClasses = ({ isActive }: { isActive: boolean }) =>
-    `block py-3 px-4 rounded-md text-base font-medium transition-colors duration-200
-     ${isActive
-        ? 'bg-brandAccent-700 text-white'
-        : 'text-stone-200 hover:bg-stone-700 hover:text-white'
-     }`;
-
-  return (
-    <>
-      <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out lg:bg-brandAccent-500/90 lg:backdrop-blur-lg ${
-          isScrolled || isMobileMenuOpen
-            ? 'bg-stone-800/80 backdrop-blur-lg shadow-lg lg:bg-brandAccent-500/90'
-            : 'bg-transparent'
-        }`}
-      >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <div className="flex-shrink-0">
-              <Link to="/" className="flex items-center space-x-3 bg-white/[.95] p-2.5 rounded-xl backdrop-blur-sm shadow-sm transition-all duration-300 hover:bg-white hover:shadow-md" aria-label="hithobe home">
-                <span className="font-serif-display text-2xl tracking-tight text-deep-chocolate" aria-label="hithobe"><span className="italic text-muted-gold">hi</span><span>thobe</span></span>
-              </Link>
-            </div>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex lg:space-x-4 xl:space-x-6 items-center">
-              {NAV_LINKS.map(link => (
-                <NavLink key={link.path} to={link.path} className={navLinkClasses}>
-                  {translate('nav', link.labelKey)}
-                </NavLink>
-              ))}
-            </nav>
-
-            {/* Icons and Mobile Menu Button */}
-            <div className="flex items-center space-x-2 sm:space-x-4">
-              <div className="hidden lg:block">
-                <LanguageSwitcher />
-              </div>
-              <button
-                onClick={() => setIsCartOpen(true)}
-                className="relative p-2 rounded-full text-stone-300 lg:text-deep-chocolate hover:text-white hover:bg-stone-700/50 lg:hover:bg-brandAccent-600/50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-stone-800 lg:focus:ring-offset-brandAccent-100 focus:ring-white transition-colors"
-                aria-label={translate('openCart')}
-              >
-                <ShoppingCartIcon className="w-6 h-6" />
-                {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-brandAccent-600 text-white text-xs font-bold">
-                    {totalItems}
-                  </span>
-                )}
-              </button>
-              
-              <div className="lg:hidden">
-                <button
-                  onClick={toggleMobileMenu}
-                  className="p-2 rounded-md text-stone-300 hover:text-white hover:bg-stone-700/50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                  aria-controls="mobile-menu"
-                  aria-expanded={isMobileMenuOpen}
-                >
-                  <span className="sr-only">Open main menu</span>
-                  {isMobileMenuOpen ? <CloseIcon className="block h-6 w-6" /> : <MenuIcon className="block h-6 w-6" />}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-stone-800/95 backdrop-blur-lg" id="mobile-menu">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 max-h-[calc(100vh-5rem)] overflow-y-auto">
-              {NAV_LINKS.map(link => (
-                <NavLink
-                  key={link.path}
-                  to={link.path}
-                  className={mobileNavLinkClasses}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {translate('nav', link.labelKey)}
-                </NavLink>
-              ))}
-               <div className="border-t border-stone-700 pt-4 mt-4 px-2">
-                 <LanguageSwitcher />
-               </div>
-            </div>
-          </div>
-        )}
-      </header>
-
-      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-    </>
-  );
+import React,{useEffect,useRef,useState} from 'react';
+import {Link,NavLink,useLocation} from 'react-router-dom';
+import {useLanguage} from '../hooks/useLanguage';
+import {useNavigation} from '../hooks/useNavigation';
+import {useCart} from '../hooks/useCart';
+import {NAV_GROUPS,COMPANY_LINKS} from '../lib/navigation';
+import {CloseIcon,MenuIcon,ShoppingCartIcon} from './icons';
+import {CartModal} from './CartModal';
+import {LanguageSwitcher} from './LanguageSwitcher';
+export const Header=()=>{
+ const {translate}=useLanguage();const {copy,label}=useNavigation();const {getCartTotal}=useCart();const {totalItems}=getCartTotal();const location=useLocation();
+ const [mobile,setMobile]=useState(false);const [cart,setCart]=useState(false);const [scrolled,setScrolled]=useState(false);const [group,setGroup]=useState<string|null>(null);
+ const header=useRef<HTMLElement>(null);const menu=useRef<HTMLDivElement>(null);const toggle=useRef<HTMLButtonElement>(null);
+ useEffect(()=>{const onScroll=()=>setScrolled(window.scrollY>10);onScroll();window.addEventListener('scroll',onScroll,{passive:true});return()=>window.removeEventListener('scroll',onScroll)},[]);
+ useEffect(()=>{setMobile(false);setCart(false);setGroup(null)},[location.pathname]);
+ useEffect(()=>{const media=window.matchMedia('(min-width:1024px)');const change=()=>{setGroup(null);if(media.matches)setMobile(false)};media.addEventListener('change',change);return()=>media.removeEventListener('change',change)},[]);
+ useEffect(()=>{const previous=document.body.style.overflow;if(mobile||cart){document.body.style.overflow='hidden';if(mobile)menu.current?.querySelector<HTMLElement>('a')?.focus()}return()=>{document.body.style.overflow=previous}},[mobile,cart]);
+ useEffect(()=>{const close=(e:PointerEvent)=>{if(header.current&&!header.current.contains(e.target as Node))setGroup(null)};document.addEventListener('pointerdown',close);return()=>document.removeEventListener('pointerdown',close)},[]);
+ const closeMenu=()=>{setMobile(false);toggle.current?.focus()};
+ return <><a className="skip-link" href="#main-content">{copy.skip}</a><header ref={header} className={`site-header ${scrolled||mobile||group?'is-solid':''}`} onKeyDown={e=>{if(e.key==='Escape'){if(group)header.current?.querySelector<HTMLButtonElement>(`[aria-controls=nav-${group}]`)?.focus();setGroup(null);if(mobile)closeMenu()}if(mobile&&e.key==='Tab'&&e.target===toggle.current){e.preventDefault();const links=menu.current?.querySelectorAll<HTMLElement>('a');if(links?.length)(e.shiftKey?links[links.length-1]:links[0]).focus()}}}>
+ <div className="site-header-inner"><Link to="/" className="site-wordmark" aria-label="hithobe"><span className="font-serif-display"><i>hi</i>thobe</span></Link>
+ <nav className="site-primary" aria-label={copy.primary}>{NAV_GROUPS.map(g=><div className="nav-group" key={g.id}><button aria-expanded={group===g.id} aria-controls={`nav-${g.id}`} onClick={()=>setGroup(group===g.id?null:g.id)}>{copy[g.id]} <span aria-hidden="true">⌄</span></button><ul id={`nav-${g.id}`} hidden={group!==g.id}>{g.links.map(entry=><li key={entry.path}><NavLink end={entry.path==='/'} to={entry.path}>{label(entry)}</NavLink></li>)}</ul></div>)}{COMPANY_LINKS.map(entry=><NavLink key={entry.path} to={entry.path}>{label(entry)}</NavLink>)}</nav>
+ <div className="site-controls"><LanguageSwitcher/><button className="site-icon-button" aria-label={translate('openCart')} onClick={()=>{setMobile(false);setCart(true)}}><ShoppingCartIcon className="w-5 h-5"/>{totalItems>0&&<span className="cart-count">{totalItems}</span>}</button><button ref={toggle} className="site-menu-toggle site-icon-button" aria-label={mobile?copy.menuClose:copy.menuOpen} aria-expanded={mobile} aria-controls="mobile-menu" onClick={()=>setMobile(!mobile)}>{mobile?<CloseIcon className="w-5 h-5"/>:<MenuIcon className="w-5 h-5"/>}</button></div></div>
+ {mobile&&<div ref={menu} id="mobile-menu" className="site-mobile-menu" onKeyDown={e=>{if(e.key!=='Tab')return;const nodes=menu.current?.querySelectorAll<HTMLElement>('a,button');if(!nodes?.length)return;const first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();toggle.current?.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();toggle.current?.focus()}}}><nav aria-label={copy.primary}>{NAV_GROUPS.map(g=><section key={g.id}><h2>{copy[g.id]}</h2>{g.links.map(entry=><NavLink end={entry.path==='/'} to={entry.path} key={entry.path} onClick={()=>setMobile(false)}>{label(entry)}</NavLink>)}</section>)}<section>{COMPANY_LINKS.map(entry=><NavLink key={entry.path} to={entry.path} onClick={()=>setMobile(false)}>{label(entry)}</NavLink>)}</section></nav></div>}
+ </header><CartModal isOpen={cart} onClose={()=>setCart(false)}/></>;
 };

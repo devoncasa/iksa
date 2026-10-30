@@ -1,113 +1,15 @@
-
-
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useLanguage } from '../hooks/useLanguage';
-import { SOCIAL_MEDIA_LINKS } from '../constants';
-import { PhoneIcon, EmailIcon, BuildingIcon } from './icons';
-import { ManagedImage } from './ManagedImage';
-
-export const Footer: React.FC = () => {
-  const { translate } = useLanguage();
-
-  const sitemapLinks = [
-    { path: '/', labelKey: 'nav.main' },
-    { path: '/about-us', labelKey: 'nav.aboutUs' },
-    { path: '/collections', labelKey: 'nav.collections' },
-    { path: '/price-structure', labelKey: 'nav.pricing' },
-    { path: '/thobe-guide', labelKey: 'nav.thobeGuide' },
-    { path: '/for-artisans', labelKey: 'nav.forArtisans' },
-    { path: '/artisans-tool', labelKey: 'nav.artisansTool' },
-    { path: '/contact', labelKey: 'nav.contact' },
-  ];
-
-  const legalLinks = [
-    { path: '/privacy', label: translate('privacyLabel') },
-    { path: '/terms', label: translate('termsLabel') },
-    { path: '/shipping', label: translate('shippingLabel') },
-  ];
-
-  const renderLinkColumn = (title: string, links: { path: string; label?: string; labelKey?: string }[]) => (
-    <div>
-      <h5 className="font-semibold text-base text-white mb-4 uppercase tracking-wider">{title}</h5>
-      <ul className="space-y-2.5">
-        {links.map((link, index) => (
-          <li key={index}>
-            <Link 
-              to={link.path} 
-              className="text-white hover:text-brandAccent-500 hover:underline transition-colors"
-            >
-              {link.label || (link.labelKey ? translate('nav', link.labelKey.split('.').pop()) : '')}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-
-  return (
-    <footer className="bg-stone-900/40 backdrop-blur-xl border-t border-stone-700/50 text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mb-8 md:mb-10 text-sm">
-          {renderLinkColumn(translate('footer_sitemapTitle'), sitemapLinks)}
-          {renderLinkColumn(translate('legalTitle'), legalLinks)}
-          
-          {/* Contact & Socials Section */}
-          <div>
-            <h5 className="font-semibold text-base text-white mb-4 uppercase tracking-wider">{translate('footer_contactTitle')}</h5>
-            <ul className="space-y-3 mb-6">
-              <li>
-                <div className="flex items-start">
-                  <BuildingIcon className="w-4 h-4 me-2.5 mt-0.5 text-brandAccent-500 flex-shrink-0" />
-                  <address className="not-italic leading-relaxed">
-                    {translate('contact_addressLine1')}<br />
-                    {translate('contact_addressLine2')}
-                  </address>
-                </div>
-              </li>
-              <li>
-                <a href="https://wa.me/66818519922" target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-brandAccent-500 hover:underline transition-colors">
-                  <PhoneIcon className="w-4 h-4 me-2.5 text-brandAccent-500 flex-shrink-0" />
-                  <span>{translate('contact_whatsapp')}</span>
-                </a>
-              </li>
-              <li>
-                <a href="mailto:sales@iksa-textiles.com" className="flex items-center hover:text-brandAccent-500 hover:underline transition-colors">
-                  <EmailIcon className="w-4 h-4 me-2.5 text-brandAccent-500 flex-shrink-0" />
-                  <span>sales@iksa-textiles.com</span>
-                </a>
-              </li>
-            </ul>
-            <div className="flex flex-wrap gap-3">
-              {SOCIAL_MEDIA_LINKS.map(social => (
-                <a 
-                  key={social.name} 
-                  href={social.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="group transition-transform duration-200 ease-in-out hover:scale-110"
-                  aria-label={`Follow us on ${social.name}`}
-                >
-                  <ManagedImage 
-                      src={social.icon} 
-                      alt={`${social.name} logo`}
-                      pageName="Global"
-                      sectionTitle={`Footer Social: ${social.name}`}
-                      className="w-7 h-7 social-icon-filter"
-                  />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="text-center text-sm pt-8 md:pt-10 border-t border-stone-700/50">
-          <div className="flex items-center justify-center gap-3">
-            <span className="font-serif-display text-2xl" aria-label="hithobe"><i className="text-muted-gold">hi</i>thobe</span>
-            <p>{translate('footerRights')}</p>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
+import {Link} from 'react-router-dom';
+import {useLanguage} from '../hooks/useLanguage';
+import {useNavigation} from '../hooks/useNavigation';
+import {NAV_GROUPS,COMPANY_LINKS,POLICY_LINKS} from '../lib/navigation';
+import {PhoneIcon,BuildingIcon} from './icons';
+export const Footer=()=>{
+ const {translate}=useLanguage();const {copy,label}=useNavigation();
+ return <footer className="bg-stone-900/60 backdrop-blur-xl border-t border-stone-700/50 text-white"><div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+ <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6 text-sm">{NAV_GROUPS.map(g=><nav key={g.id} aria-label={copy[g.id]}><h2 className="font-semibold mb-3">{copy[g.id]}</h2><ul className="space-y-2">{g.links.map(entry=><li key={entry.path}><Link to={entry.path} className="hover:underline">{label(entry)}</Link></li>)}</ul></nav>)}
+ <div className="col-span-2 lg:col-span-1"><h2 className="font-semibold mb-3"><Link to="/contact" className="hover:underline">{translate('footer_contactTitle')}</Link></h2><div className="flex items-start gap-2"><BuildingIcon className="w-4 h-4 mt-1 shrink-0"/><address className="not-italic leading-relaxed">{translate('contact_addressLine1')}<br/>{translate('contact_addressLine2')}</address></div><a href="tel:+66818519922" className="flex items-center gap-2 mt-3 hover:underline"><PhoneIcon className="w-4 h-4"/><span dir="ltr">+66 81 851 9922</span></a></div></div>
+ <nav aria-label={translate('legalTitle')} className="flex flex-wrap gap-x-6 gap-y-2 text-sm border-t border-stone-600/50 mt-6 pt-5">{[COMPANY_LINKS[0],...POLICY_LINKS].map(entry=><Link to={entry.path} key={entry.path} className="hover:underline">{label(entry)}</Link>)}</nav>
+ <div className="text-center text-sm pt-5"><span className="font-serif-display text-2xl" aria-label="hithobe"><i className="text-muted-gold">hi</i>thobe</span><p className="mt-2">{translate('footerRights')}</p></div>
+ </div></footer>;
 };

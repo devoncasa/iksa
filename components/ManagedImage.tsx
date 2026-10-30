@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { imageMetadata } from '../lib/imageMetadata';
+import { editorialShot, useEditorialCaption } from '../lib/editorial';
 import { useAdminAuth } from '../hooks/useAdminAuth';
 import { useImageRegistry } from '../hooks/useImageRegistry';
 
@@ -9,12 +11,15 @@ interface ManagedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 }
 
 export const ManagedImage: React.FC<ManagedImageProps> = ({ src, alt, pageName, sectionTitle, priority = false, ...props }) => {
+  const caption=useEditorialCaption();
+  const shot=typeof src==='string'?editorialShot(src):undefined;
+  const accessibleAlt=alt===''?'':shot?caption(shot):alt;
   const { isAdmin } = useAdminAuth();
   const { registerImage, isImageRegistered } = useImageRegistry();
   const [aspectRatio, setAspectRatio] = useState('N/A');
   const [showInfo, setShowInfo] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
-  const [displaySrc, setDisplaySrc] = useState<string | undefined>();
+  const [displaySrc, setDisplaySrc] = useState<string | undefined>(typeof src === 'string' ? src : undefined);
 
   useEffect(() => {
     if (typeof src === 'string') {
@@ -93,17 +98,19 @@ export const ManagedImage: React.FC<ManagedImageProps> = ({ src, alt, pageName, 
     ...props,
     src: displaySrc ?? (typeof src === 'string' ? src : undefined),
     decoding: 'async',
-    alt: alt || '',
-    onLoad: handleLoad,
+    alt: accessibleAlt || '',
+    onLoad: e=>{handleLoad();props.onLoad?.(e);},
   };
 
-  if (typeof src === 'string' && /\/images\/hithobe\/.+-1120\.webp$/.test(src)) {
-    imgProps.srcSet = [480, 800, 1120].map(width => `${src.replace('-1120.webp', `-${width}.webp`)} ${width}w`).join(', ');
-    imgProps.sizes = props.sizes ?? '(max-width: 767px) 90vw, 45vw';
-    imgProps.width = 1120;
-    imgProps.height = 1400;
+  if (typeof src === 'string') {
+    const metadata=imageMetadata(src);
+    if(metadata){
+      imgProps.width=props.width ?? metadata.width;
+      imgProps.height=props.height ?? metadata.height;
+      imgProps.srcSet=props.srcSet ?? metadata.srcSet;
+      imgProps.sizes=props.sizes ?? '(max-width:767px) 90vw, 45vw';
+    }
   }
-
   if (priority) {
     imgProps.fetchPriority = 'high';
     imgProps.loading = 'eager';
@@ -121,7 +128,7 @@ export const ManagedImage: React.FC<ManagedImageProps> = ({ src, alt, pageName, 
       <img ref={imgRef} {...imgProps} />
       {isAdmin && showInfo && (
         <div
-            className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-[10px] p-1 z-10 pointer-events-none"
+            className="absolute bottom-0 start-0 end-0 bg-black/70 text-white text-[10px] p-1 z-10 pointer-events-none"
             style={{ userSelect: 'text', lineHeight: '1.2' }}
         >
           <p className="whitespace-nowrap overflow-hidden text-ellipsis font-mono">{getFileName(displaySrc)}</p>

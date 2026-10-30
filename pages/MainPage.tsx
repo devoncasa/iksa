@@ -1,3 +1,6 @@
+import {interfaceCopy} from '../locales/interface';
+import {CustomerGuidance} from '../components/CustomerGuidance';
+import {customerGuidance} from '../locales/customerGuidance';
 import { DiscoveryNav } from '../components/DiscoveryNav';
 import '../discovery.css';
 import React, { useMemo } from 'react';
@@ -14,59 +17,37 @@ import { DevelopmentBanner } from '../components/DevelopmentBanner';
 
 
 const HeroSection: React.FC = () => {
-    const { translate } = useLanguage();
+    const { translate,language } = useLanguage();
     return (
         <ContentBlock
             isHero
             heroImageSrc="/images/hithobe/kandura-window-portrait-1120.webp"
-            heroImageAlt="Man wearing an ivory collarless kandura in natural window light"
+            heroImageAlt={interfaceCopy[language].window}
             heroPageName="Main Page"
             heroSectionTitle="Main Hero"
             heroImagePriority={true}
         >
             <h1 className="font-serif-display text-4xl sm:text-5xl font-bold mb-6 md:mb-8 leading-tight text-warm-terracotta animate-fadeInUp">
-              {translate('main_heroTitle')}
+              {customerGuidance[language].title}
             </h1>
             <StyledText
-              text={translate('main_heroSubtitle')}
+              text={customerGuidance[language].aboutIntro}
               className="text-lg text-stone-700 mb-10 md:mb-12 leading-relaxed animate-fadeInUp"
               style={{ animationDelay: '0.2s' }}
             />
             <div className="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4 sm:gap-6 animate-fadeInUp" style={{ animationDelay: '0.4s' }}>
                 <Link to="/collections">
-                    <Button variant="primary" size="lg" className="w-full sm:w-auto">{translate('main_cta_explore_collections')}</Button>
+                    <Button as="span" variant="primary" size="lg" className="w-full sm:w-auto">{translate('main_cta_explore_collections')}</Button>
                 </Link>
                 <Link to="/contact">
-                    <Button variant="outline" size="lg" className="w-full sm:w-auto">{translate('contactUs')}</Button>
+                    <Button as="span" variant="outline" size="lg" className="w-full sm:w-auto">{translate('contactUs')}</Button>
                 </Link>
             </div>
         </ContentBlock>
     );
 };
 
-const MarketInsightsSection: React.FC = () => {
-    const { translate } = useLanguage();
-    const insights = [
-        { titleKey: 'main_marketInsights_card1_title', textKey: 'main_marketInsights_card1_text' },
-        { titleKey: 'main_marketInsights_card2_title', textKey: 'main_marketInsights_card2_text' },
-        { titleKey: 'main_marketInsights_card3_title', textKey: 'main_marketInsights_card3_text' },
-    ];
-    return (
-        <ContentBlock>
-            <h2 className={`text-3xl md:text-4xl font-serif-display font-semibold text-center mb-12 text-stone-800 section-title-underline`}>
-                {translate('main_marketInsights_title')}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {insights.map((insight, index) => (
-                    <div key={index} className={`bg-brandAccent-50/80 rounded-lg shadow-md p-6 text-center border border-brandAccent-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}>
-                        <h3 className="text-2xl font-bold text-brandAccent-800 mb-3">{translate(insight.titleKey)}</h3>
-                        <p className="text-stone-600 text-sm">{translate(insight.textKey)}</p>
-                    </div>
-                ))}
-            </div>
-        </ContentBlock>
-    );
-};
+const MarketInsightsSection=()=> <CustomerGuidance indices={[0,1,2]} cards/>;
 
 interface InfoSectionProps {
   titleKey: string;
@@ -80,15 +61,15 @@ interface InfoSectionProps {
 }
 
 const InfoSection: React.FC<InfoSectionProps> = ({ titleKey, contentKey, ctaKey, linkTo, imageSrc, imageAltKey, reverseLayout = false, titleColor = 'text-stone-800' }) => {
-  const { translate } = useLanguage();
+  const { translate,language } = useLanguage();
 
   const textContent = (
-    <div className={`md:w-1/2 flex flex-col justify-center text-center md:text-left`}>
-      <h2 className={`text-3xl lg:text-4xl font-serif-display font-semibold ${titleColor} mb-5 md:mb-6 section-title-underline`}>{translate(titleKey)}</h2>
-      <p className={`text-stone-700 text-base md:text-lg leading-relaxed mb-6 md:mb-8`}>{translate(contentKey)}</p>
+    <div className={`md:w-1/2 flex flex-col justify-center text-center md:text-start`}>
+      <h2 className={`text-3xl lg:text-4xl font-serif-display font-semibold ${titleColor} mb-5 md:mb-6 section-title-underline`}>{contentKey==='main_section_about_content'?customerGuidance[language].aboutTitle:contentKey==='main_section_forArtisans_content'?customerGuidance[language].artisanTitle:translate(titleKey)}</h2>
+      <p className={`text-stone-700 text-base md:text-lg leading-relaxed mb-6 md:mb-8`}>{contentKey==='main_section_about_content'?customerGuidance[language].aboutIntro:contentKey==='main_section_forArtisans_content'?customerGuidance[language].artisanIntro:contentKey==='main_section_collections_content'?customerGuidance[language].questions[1][1]:customerGuidance[language].questions[0][1]}</p>
       <div className={`self-center md:self-start`}>
         <Link to={linkTo}>
-          <Button variant="primary" size="md" className="group">
+          <Button as="span" variant="primary" size="md" className="group">
             {translate(ctaKey)}
             <ChevronRightIcon className="w-5 h-5 ms-2.5 rtl-flip inline-block group-hover:translate-x-1 group-hover:dir-rtl:-translate-x-1 transition-transform duration-300 ease-in-out" />
           </Button>
@@ -122,13 +103,13 @@ const InfoSection: React.FC<InfoSectionProps> = ({ titleKey, contentKey, ctaKey,
 };
 
 const FinalCTASection: React.FC = () => {
-    const { translate } = useLanguage();
+    const { translate,language } = useLanguage();
     return (
       <ContentBlock className="!bg-brandAccent-800/80 text-white">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif-display font-semibold mb-6 md:mb-8 section-title-underline">{translate('main_final_cta_title')}</h2>
             <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed">{translate('main_final_cta_content')}</p>
             <Link to="/contact">
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-brandAccent-800 focus:ring-offset-brandAccent-800">
+            <Button as="span" variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-brandAccent-800 focus:ring-offset-brandAccent-800">
                 {translate('contactUs')}
             </Button>
             </Link>
@@ -138,7 +119,7 @@ const FinalCTASection: React.FC = () => {
 
 
 export const MainPage: React.FC = () => {
-  const { translate } = useLanguage();
+  const { translate,language } = useLanguage();
   const schemas = useMemo(() => {
     return [
         generateOrganizationSchema(translate),
@@ -152,6 +133,7 @@ export const MainPage: React.FC = () => {
       <SEOMetadata
         titleKey="page_main_title"
         descriptionKey="page_main_description"
+        titleText={`${customerGuidance[language].title} | hithobe`} descriptionText={customerGuidance[language].aboutIntro}
         pagePath="/"
         schemas={schemas}
       />
@@ -163,7 +145,7 @@ export const MainPage: React.FC = () => {
           contentKey="main_section_about_content"
           ctaKey="main_cta_learn_more"
           linkTo="/about-us"
-          imageSrc="https://i.postimg.cc/nrY3WbnL/iksa-about-us-summary.webp"
+          imageSrc="/images/hithobe/editorial/sample-inspection-1280.webp"
           imageAltKey="main_alt_about_us_summary"
           reverseLayout={false}
           titleColor="text-stone-800"
@@ -176,7 +158,7 @@ export const MainPage: React.FC = () => {
           contentKey="main_section_collections_content"
           ctaKey="main_cta_explore_collections"
           linkTo="/collections"
-          imageSrc="https://i.postimg.cc/BvW4fV2v/fabric-roll-collection-showcase-1.webp"
+          imageSrc="/images/hithobe/editorial/palette-earth-1280.webp"
           imageAltKey="main_alt_collections_summary"
           reverseLayout={true}
           titleColor="text-brandAccent-800"
@@ -197,7 +179,7 @@ export const MainPage: React.FC = () => {
           contentKey="main_section_forArtisans_content"
           ctaKey="main_cta_explore_partnership"
           linkTo="/for-artisans"
-          imageSrc="https://i.postimg.cc/50v2f5fK/artisans-tool-summary.webp"
+          imageSrc="/images/hithobe/editorial/sample-measuring-1280.webp"
           imageAltKey="main_alt_for_artisans_summary"
           reverseLayout={true}
           titleColor="text-brandAccent-800"
