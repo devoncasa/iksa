@@ -1,7 +1,7 @@
-# Static route visibility correction
+# Resolve initial layout shift and remove homepage CSS round trips
 
-Fix the saved streaming Suspense shell that painted the footer before the real homepage. Await the resolved tree and serialize completed HTML, then wait for the active page module before hydration. Reject pending reveal templates and scripts in all 225 generated pages.
+Static documents contain the resolved route before the footer. Initial client hydration waits for the active route. Homepage CSS is embedded in cascade order; print-only route links prevent redundant Vite stylesheet insertion. Interior stylesheets remain cacheable.
 
-Validation: 62 tests and 9 audits pass. User-supplied PSI baseline: mobile 60, LCP 4.4s, CLS 0.499. No claimed new score until the deployed build is measured.
+Validation: 62 tests, 9 audits, 225 routes. Root-fix PSI mobile runs 92/82/99, median 92 and LCP 2.120s, CLS 0 throughout; desktop 100 twice. These runs precede the additional CSS delivery change. Further live measurements required; no guaranteed score.
 
-Source: ab79d6141f6755e9b01c58cf1953799e79713e85. Output: reviewed static artifacts only. Rollback: forward commit restoring previous manifest/artifact.
+Private source: 9551c1bb87d6f1a2f03a91c168fc1ece8806b794. Static artifacts only. Rollback through a forward commit restoring the previous release manifest and archive parts.
