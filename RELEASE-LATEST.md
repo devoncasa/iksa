@@ -1,7 +1,7 @@
-# Resolve initial layout shift and remove homepage CSS round trips
+# Owner-approved public contact channels
 
-Static documents contain the resolved route before the footer. Initial client hydration waits for the active route. Homepage CSS is embedded in cascade order; print-only route links prevent redundant Vite stylesheet insertion. Interior stylesheets remain cacheable.
+Add clickable telephone and WhatsApp +66 81 851 9922, LINE kris.bkk and email info.vkamber@gmail.com to all localized contact pages and shared footers, with email below LINE. Retain the static-render and critical CSS performance corrections.
 
-Validation: 62 tests, 9 audits, 225 routes. Root-fix PSI mobile runs 92/82/99, median 92 and LCP 2.120s, CLS 0 throughout; desktop 100 twice. These runs precede the additional CSS delivery change. Further live measurements required; no guaranteed score.
+Validation: 62 tests, 9 audits; 225 routes have all four approved links. Form registration is present and enabled. Email notification setup remains blocked by Netlify's requirement that recipients be active team members; info.vkamber@gmail.com was rejected and no notification was saved. Do not claim inbox delivery.
 
-Private source: 9551c1bb87d6f1a2f03a91c168fc1ece8806b794. Static artifacts only. Rollback through a forward commit restoring the previous release manifest and archive parts.
+Source b1bb60c08620db49f1adf5e484caff886c34994b. Only reviewed static artifacts published. Rollback via forward revert of the release manifest and patch parts.
