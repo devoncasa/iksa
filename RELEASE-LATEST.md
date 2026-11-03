@@ -1,11 +1,7 @@
-# hithobe performance batches 1–5
+# Static route visibility correction
 
-Authorized live release, 3 November 2026. Private editable source checkpoint: b136b6250718878320c2f17860f0f11ce24948f2. The exact extraction workflow and all 530 final file checksums were tested before updating main.
+Fix the saved streaming Suspense shell that painted the footer before the real homepage. Await the resolved tree and serialize completed HTML, then wait for the active page module before hydration. Reject pending reveal templates and scripts in all 225 generated pages.
 
-Mobile hero space is reserved before image loading; every active page receives its route/shared styles in the initial HTML. Original font families and subsets are self-hosted with optional display and OFL notices. Main product images are eager/high priority. Responsive home hero preload hints are gated by viewport; favicon no longer uses high priority. Homepage code and irrelevant home/interior locale dictionaries are split; runtime image metadata is compact with exhaustive parity coverage. Analytics queues remain but its remote library waits for load/idle or user interaction. Existing cart behavior, written enquiries, nine-language content, social artwork and white photo frames remain.
+Validation: 62 tests and 9 audits pass. User-supplied PSI baseline: mobile 60, LCP 4.4s, CLS 0.499. No claimed new score until the deployed build is measured.
 
-Main JavaScript: 433,062 to 388,988 raw bytes (~10.2% reduction); this is not a 10% measured page-speed gain. Initial home external CSS is 85,292 versus 85,011 raw bytes; the optimization removes the blocking external font stylesheet chain and supplies page CSS before hydration. Fonts are WOFF2 subsets requested only when used.
-
-TypeScript, 62 tests, build and nine static audits pass for all 225 routes. Owner's prior mobile lab result: 62 / FCP 2.8s / LCP 3.7s / TBT 80ms / CLS 0.499 / SI 4.2s. PageSpeed API currently returns HTTP 429. No new Lighthouse score, three-run median, LCP/CLS gain, browser/device visual result or field INP result is claimed. Re-test identical cold-cache mobile/desktop profiles three times when available. No field CrUX data is available in the supplied report.
-
-This public repository deploys compiled artifacts only; confidential source, pricing rules, fixtures, credentials and original generated images remain private. Existing verified-pricing service configuration is still absent, and written enquiry mode remains unchanged. Recovery uses a forward revert through Git/CI, without DNS changes or publishing/restoring an old Netlify deploy.
+Source: ab79d6141f6755e9b01c58cf1953799e79713e85. Output: reviewed static artifacts only. Rollback: forward commit restoring previous manifest/artifact.
