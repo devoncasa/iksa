@@ -1,5 +1,5 @@
 [build]
-command = "npm run build"
+command = "node scripts/prepare-reviewed-release.mjs"
 publish = "dist"
 [build.environment]
 NODE_VERSION = "22"
