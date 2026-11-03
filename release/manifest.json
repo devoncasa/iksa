@@ -299,5 +299,9 @@
       "sha256": "7748c05798aa3dcc69cb3b30960f183285a9134e32dbee6deb1e58d2b5c6f560"
     }
   ],
-  "source_commit": "49cee72af7aa8a5d88858d829f4773a5b776072c"
+  "source_commit": "28a132c9f9522106d074961aa5e4b2783d6e9a0a",
+  "brand_stylesheet": {
+    "file": "brand-finishing-v1.css",
+    "sha256": "fee47e885e3bba167a70ad90e5670552a64ee414f6317ef4cb5b8900c720c5dc"
+  }
 }
